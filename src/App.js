@@ -25,10 +25,15 @@ import isPlainObject from 'lodash/isPlainObject'
 import CookieConsent from 'react-cookie-consent'
 import CustomChartLoader from './components/CustomChartLoader'
 import CustomChartWarnModal from './components/CustomChartWarnModal'
+import { useTranslation } from 'react-i18next';
 
-// #TODO: i18n
+const lngs = {
+  en: {nativeName: 'English'},
+  es: {nativeName: 'Spanish'}
+}
 
 function App() {
+  const { t, i18n} = useTranslation();
   const [
     customCharts,
     {
@@ -260,17 +265,24 @@ function App() {
   return (
     <div className="App">
       <Header menuItems={HeaderItems} />
+      <div>
+          {Object.keys(lngs).map((lng) => (
+            <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
+              {lngs[lng].nativeName}
+            </button>
+          ))}
+        </div>
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}
         abortCustomChartLoad={abortCustomChartLoad}
       />
       <div className="app-sections">
-        <Section title={`1. Load your data`} loading={loading}>
+        <Section title= {t('global.section.loaddata.tittle')} loading={loading}>
           <DataLoader {...dataLoader} hydrateFromProject={importProject} />
         </Section>
         {data && (
-          <Section title="2. Choose a chart">
+          <Section title={t('global.section.chartselection.tittle')}>
             <CustomChartLoader
               isOpen={isModalCustomChartOpen}
               onClose={toggleModalCustomChart}
@@ -288,7 +300,7 @@ function App() {
           </Section>
         )}
         {data && currentChart && (
-          <Section title={`3. Mapping`} loading={mappingLoading}>
+          <Section title={t('global.section.mapping.tittle')} loading={mappingLoading}>
             <DataMapping
               ref={dataMappingRef}
               dimensions={currentChart.dimensions}
@@ -299,7 +311,7 @@ function App() {
           </Section>
         )}
         {data && currentChart && (
-          <Section title="4. Customize">
+          <Section title={t('global.section.customize.tittle')}>
             <ChartPreviewWithOptions
               chart={currentChart}
               dataset={data.dataset}
@@ -313,7 +325,7 @@ function App() {
           </Section>
         )}
         {data && currentChart && rawViz && (
-          <Section title="5. Export">
+          <Section title={t('global.section.export.tittle')}>
             <Exporter rawViz={rawViz} exportProject={exportProject} />
           </Section>
         )}

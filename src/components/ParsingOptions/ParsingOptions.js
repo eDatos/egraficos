@@ -11,6 +11,8 @@ import { BsArrowRepeat } from 'react-icons/bs'
 import { get } from 'lodash'
 import { fetchData as fetchDataFromUrl } from '../DataLoader/loaders/UrlFetch'
 import { fetchData as fetchDataFromSparql } from '../DataLoader/loaders/SparqlFetch'
+import { useTranslation } from 'react-i18next';
+
 
 const dataRefreshWorkers = {
   "url": fetchDataFromUrl,
@@ -23,6 +25,7 @@ const dataRefreshCaptions = {
 }
 
 export default function ParsingOptions(props) {
+  const { t } = useTranslation(['dataloader']);
   const refreshData = async () => {
     const dataRefreshImpl = dataRefreshWorkers[get(props.dataSource, "type", "")]
     const data = await dataRefreshImpl(props.dataSource)
@@ -32,24 +35,23 @@ export default function ParsingOptions(props) {
   return (
     <Row>
       <Col className={styles.parsingOptions}>
-        <b>DATA PARSING OPTIONS</b>
-
+        <b>{t('separator.tittle')}</b>
         {props.userDataType === 'csv' && (
           <SeparatorSelector
-            title="Column separator"
+            title={t('separator.column.name')}
             value={props.separator}
             onChange={(nextSeparator) => props.setSeparator(nextSeparator)}
           />
         )}
         <ThousandsSeparatorSelector
-          title="Thousands separator"
+          title={t('separator.thousands.name')}
           value={props.thousandsSeparator}
           onChange={(nextSeparator) =>
             props.setThousandsSeparator(nextSeparator)
           }
         />
         <DecimalsSeparatorSelector
-          title="Decimals separator"
+          title={t('separator.decimals.name')}
           value={props.decimalsSeparator}
           onChange={(nextSeparator) =>
             props.setDecimalsSeparator(nextSeparator)
@@ -57,7 +59,7 @@ export default function ParsingOptions(props) {
         />
 
         <DateLocaleSelector
-          title="Date Locale"
+          title={t('datelocale')}
           value={props.locale}
           onChange={(nextLocale) => props.setLocale(nextLocale)}
         />
@@ -74,11 +76,11 @@ export default function ParsingOptions(props) {
         )}
 
         <div className="divider mb-3 mt-0" />
-
+        <b>{t('datatransform.tittle')}</b>
         <b>DATA TRANSFORMATION</b>
 
         <StackSelector
-          title="Stack on"
+          title={t('datatransform.stack')}
           value={props.stackDimension}
           list={props.dimensions}
           onChange={(nextStackDimension) =>

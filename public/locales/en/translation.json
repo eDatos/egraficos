@@ -1,0 +1,66 @@
+{
+    "global": {
+        "section": {
+            "loaddata": {
+                "tittle": "1. Load your data",
+                "paste": {
+                    "name": "Paste your data",
+                    "message": "Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data."
+                },
+                "upload": {
+                    "name": "Upload your data",
+                    "message": "You can load tabular (TSV, CSV, DSV) or JSON data."
+                },
+                "sample": {
+                    "name": "Try our data samples"
+                },
+                "sparql": {
+                    "name" : "SPARQL query"
+                },
+                "url": {
+                    "name": "From URL",
+                    "message": "Enter a web address (URL) pointing to the data (e.g. a public Dropbox file, a public API, ...). Please, be sure the server is CORS-enabled."
+                },
+                "project": {
+                    "name": "Open your project",
+                    "messagge": "Load a .rawgraphs project."
+                }
+            },
+            "chartselection": {
+                "tittle": "2. Choose a chart"
+            },
+            "mapping": {
+                "tittle": "3. Mapping",
+                "chartvariables":{
+                    "dimensions": "DIMENSIONS",
+                    "variables": "CHART VARIABLES",
+                    "dropdimension" : "Drop dimension here",
+                    "dropanotherdimen": "Drop another dimension here"
+                }
+            },
+            "customize": {
+                "tittle": "4. Customize"
+            },
+            "export": {
+                "tittle": "5. Export"
+            }
+        },
+        "reset": "Reset",
+        "changedata": "Change data",
+        "column": "Column",
+        "copyclipboard": "Copy to clipboard",
+        "copiedclipboard": "Copied to clipboard",
+        "message": {
+            "loadrows": {
+                "succes": "<p><strong>{{rowsnumber}} rows </strong>({{cellsnumber}} cells) have been successfully parsed, now you can choose a chart!</p>"
+            }
+        }
+
+    },
+    "separator" : {
+        "Tab":"Tab",
+        "Semicolon":"Semicolon",
+        "Comma":"Comma",
+        "Pipe":"Pipe"
+    }
+} 

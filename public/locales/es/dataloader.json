@@ -1,0 +1,19 @@
+{
+    "separator": {
+        "tittle" : "OPCIONES ANÁLISIS DE DATOS",
+        "column" :  {
+            "name": "Separador columna"
+        },
+        "thousands": {
+            "name": "Separador miles"
+        },
+        "decimals": {
+            "name": "Separador decimales"
+        }   
+    },
+    "datelocale":"Local Fecha",
+    "datatransform": {
+        "tittle": "TRANSFORMACIÓN DATOS",
+        "stack": "Agrupar"
+    }    
+}

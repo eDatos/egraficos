@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import { separatorsLabels } from '../../constants'
+import { useTranslation } from 'react-i18next';
+
 
 import styles from './ParsingOptions.module.scss'
 
@@ -10,6 +12,8 @@ export default function SeparatorSelector({
   onChange,
   ...props
 }) {
+  const { t } = useTranslation();
+
   const inputValue = value
     .replace(/\r/g, '\\r')
     .replace(/\n/g, '\\n')
@@ -31,7 +35,7 @@ export default function SeparatorSelector({
   const formatValue = (value)=>{
     return (
       <>
-        <span className={['small',styles['separator-preview']].join(' ')}>{value}</span> <span>{separatorsLabels[value]}</span>
+        <span className={['small',styles['separator-preview']].join(' ')}>{value}</span> <span>{t(separatorsLabels[value])}</span>
       </>
     )
   }

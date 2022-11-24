@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react'
 import { Dropdown } from 'react-bootstrap'
+import { Trans } from 'react-i18next';
+
 
 export default function StackSelector({
   title,
@@ -26,7 +28,7 @@ export default function StackSelector({
           className="truncate-160px"
           disabled={list.length === 0}
         >
-          {value ? value : 'Column'}
+          {value ? value : <Trans i18nKey="global.column"></Trans>}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {value && (

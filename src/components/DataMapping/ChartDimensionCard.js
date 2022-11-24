@@ -8,6 +8,8 @@ import uniqueId from 'lodash/uniqueId'
 import classnames from 'classnames'
 import arrayMove from 'array-move'
 import arrayInsert from 'array-insert'
+import { useTranslation } from 'react-i18next';
+
 
 // import { DATATYPE_ICONS } from "../../constants"
 import { dataTypeIcons } from '../../constants'
@@ -34,6 +36,7 @@ const ChartDimensionCard = ({
   replaceDimension,
   localMappding,
 }) => {
+  const { t } = useTranslation();
   const [{ isOver }, drop] = useDrop({
     accept: ['column', 'card'],
     collect: (monitor) => ({
@@ -76,6 +79,7 @@ const ChartDimensionCard = ({
       }
     },
   })
+  
 
   // const [collectedProps, drag] = useDrag({
   //   item: {
@@ -272,13 +276,11 @@ const ChartDimensionCard = ({
             })}
             ref={drop}
           >
-            {!dimension.multiple && 'Drop dimension here'}
-            {dimension.multiple &&
-              columnsMappedHere.length === 0 &&
-              'Drop dimensions here'}
+            {!dimension.multiple && t('global.section.mapping.chartvariables.dropdimension')}
+            {dimension.multiple && columnsMappedHere.length === 0 && t('global.section.mapping.chartvariables.dropdimension')}
             {dimension.multiple &&
               columnsMappedHere.length > 0 &&
-              'Drop another dimension here'}
+              t('global.section.mapping.chartvariables.dropanotherdimen')}
           </div>
         )}
       </div>
