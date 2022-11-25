@@ -4,7 +4,6 @@ import {
   getDefaultOptionsValues,
   deserializeProject,
 } from '@rawgraphs/rawgraphs-core'
-import HeaderItems from './HeaderItems'
 import Header from './components/Header'
 import Section from './components/Section'
 import Footer from './components/Footer'
@@ -264,7 +263,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header menuItems={HeaderItems} />
+      <Header />
       <div>
           {Object.keys(lngs).map((lng) => (
             <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
