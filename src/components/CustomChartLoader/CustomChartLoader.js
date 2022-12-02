@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone'
 import { BsCloud, BsUpload } from 'react-icons/bs'
 import styles from './CustomChartLoader.module.scss'
 
+//TODO ELIMINAR CLASE
 function LoadFromFile({ loading, load }) {
   function onDrop(acceptedFiles) {
     if (acceptedFiles.length) {

@@ -22,16 +22,25 @@ import useSafeCustomCharts from './hooks/useSafeCustomCharts'
 import useDataLoader from './hooks/useDataLoader'
 import isPlainObject from 'lodash/isPlainObject'
 import CookieConsent from 'react-cookie-consent'
-import CustomChartLoader from './components/CustomChartLoader'
 import CustomChartWarnModal from './components/CustomChartWarnModal'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
+import { useCookies } from "react-cookie"
+import ReactEcharts from "echarts-for-react"
 
 const lngs = {
   en: {nativeName: 'English'},
   es: {nativeName: 'Spanish'}
 }
 
+// function TranslateCookie() {
+//   const [cookies, setCookie] = useCookies();
+//   const {i18n } = useTranslation();
+//   return (i18n.changeLanguage(cookies.chosenLocale)
+//   );
+// }
+
 function App() {
+  const [cookies, setCookie] = useCookies();
   const { t, i18n} = useTranslation();
   const [
     customCharts,
@@ -39,15 +48,11 @@ function App() {
       toConfirmCustomChart,
       confirmCustomChartLoad,
       abortCustomChartLoad,
-      uploadCustomCharts,
-      loadCustomChartsFromUrl,
-      loadCustomChartsFromNpm,
       importCustomChartFromProject,
-      removeCustomChart,
       exportCustomChart,
     },
   ] = useSafeCustomCharts()
-  const charts = useMemo(() => baseCharts.concat(customCharts), [customCharts])
+  const charts = useMemo(() => baseCharts, [])
 
   const dataLoader = useDataLoader()
   const {
@@ -255,12 +260,10 @@ function App() {
     [hydrateFromSavedProject, importCustomChartFromProject]
   )
 
-  const [isModalCustomChartOpen, setModalCustomChartOpen] = useState(false)
-  const toggleModalCustomChart = useCallback(
-    () => setModalCustomChartOpen((o) => !o),
-    []
-  )
-
+  useEffect(() => {
+    setCookie();
+    i18n.changeLanguage(cookies.chosenLocale);
+  }, []);
   return (
     <div className="App">
       <Header />
@@ -270,7 +273,7 @@ function App() {
               {lngs[lng].nativeName}
             </button>
           ))}
-        </div>
+      </div>
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}
@@ -282,16 +285,7 @@ function App() {
         </Section>
         {data && (
           <Section title={t('global.section.chartselection.tittle')}>
-            <CustomChartLoader
-              isOpen={isModalCustomChartOpen}
-              onClose={toggleModalCustomChart}
-              loadCustomChartsFromNpm={loadCustomChartsFromNpm}
-              loadCustomChartsFromUrl={loadCustomChartsFromUrl}
-              uploadCustomCharts={uploadCustomCharts}
-            />
             <ChartSelector
-              onAddChartClick={toggleModalCustomChart}
-              onRemoveCustomChart={removeCustomChart}
               availableCharts={charts}
               currentChart={currentChart}
               setCurrentChart={handleChartChange}
@@ -311,7 +305,22 @@ function App() {
         )}
         {data && currentChart && (
           <Section title={t('global.section.customize.tittle')}>
-            <ChartPreviewWithOptions
+                  <ReactEcharts
+        option={{
+          xAxis: {
+            type: "category",
+            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+          },
+          yAxis: {
+            type: "value"
+          },
+          series: [{ 
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: "line"
+          }]
+        }}
+      />
+            {/* <ChartPreviewWithOptions
               chart={currentChart}
               dataset={data.dataset}
               dataTypes={data.dataTypes}
@@ -320,7 +329,7 @@ function App() {
               setVisualOptions={setVisualOptions}
               setRawViz={setRawViz}
               setMappingLoading={setMappingLoading}
-            />
+            /> */}
           </Section>
         )}
         {data && currentChart && rawViz && (

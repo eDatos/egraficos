@@ -4,12 +4,15 @@ import './styles/index.scss'
 import App from './App'
 import './i18n';
 import * as serviceWorker from './serviceWorker'
+import { CookiesProvider } from "react-cookie";
 
 ReactDOM.render(
   <React.StrictMode>
+    <CookiesProvider>
     <React.Suspense fallback ="loading">
     <App />
     </React.Suspense>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
