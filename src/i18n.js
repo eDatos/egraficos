@@ -21,7 +21,7 @@ i18n
     debug: true,
     detection: options,
     fallbackLng: 'es',
-    supportedLngs: ['en', 'es'],
+    supportedLngs: ['en', 'es','ca'],
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },

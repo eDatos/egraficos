@@ -25,11 +25,12 @@ import CookieConsent from 'react-cookie-consent'
 import CustomChartWarnModal from './components/CustomChartWarnModal'
 import { useTranslation } from 'react-i18next'
 import { useCookies } from "react-cookie"
-import ReactEcharts from "echarts-for-react"
+
 
 const lngs = {
   en: {nativeName: 'English'},
-  es: {nativeName: 'Spanish'}
+  es: {nativeName: 'Spanish'},
+  ca: {nativeName: 'Catala'}
 }
 
 // function TranslateCookie() {
@@ -305,22 +306,7 @@ function App() {
         )}
         {data && currentChart && (
           <Section title={t('global.section.customize.tittle')}>
-                  <ReactEcharts
-        option={{
-          xAxis: {
-            type: "category",
-            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-          },
-          yAxis: {
-            type: "value"
-          },
-          series: [{ 
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: "line"
-          }]
-        }}
-      />
-            {/* <ChartPreviewWithOptions
+            <ChartPreviewWithOptions
               chart={currentChart}
               dataset={data.dataset}
               dataTypes={data.dataTypes}
@@ -329,7 +315,7 @@ function App() {
               setVisualOptions={setVisualOptions}
               setRawViz={setRawViz}
               setMappingLoading={setMappingLoading}
-            /> */}
+            />
           </Section>
         )}
         {data && currentChart && rawViz && (

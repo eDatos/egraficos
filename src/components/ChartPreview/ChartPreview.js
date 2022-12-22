@@ -3,6 +3,9 @@ import { chart as rawChart } from '@rawgraphs/rawgraphs-core'
 import useDebounce from '../../hooks/useDebounce'
 import WarningMessage from '../WarningMessage'
 import { onChartRendered } from '../../gaEvents'
+import ReactEcharts from "echarts-for-react"
+import { getChartOptions } from '../../charts/utils/echartsOptions';
+
 
 const ChartPreview = ({
   chart,
@@ -18,7 +21,10 @@ const ChartPreview = ({
   const domRef = useRef(null)
 
   const vizOptionsDebounced = useDebounce(visualOptions, 200)
-
+  console.log('data', data);
+  console.log('chart', chart);
+  console.log('mapping', mapping);
+  console.log('visualOptions', visualOptions);
   useEffect(() => {
     setError(null)
 
@@ -82,7 +88,7 @@ const ChartPreview = ({
       }
       return
     }
-
+    console.log('recorremos mapping');
     // control data-types mismatches
     for (let variable in mapping) {
       if (
@@ -100,8 +106,9 @@ const ChartPreview = ({
         return
       }
     }
-
+    console.log('currentlyMapped', currentlyMapped);
     if (!mappedData) {
+
       // console.info('Clearing viz')
       setRawViz(null)
       while (domRef.current.firstChild) {
@@ -110,45 +117,58 @@ const ChartPreview = ({
       return
     }
     // console.info('Updating viz')
-    try {
-      const viz = rawChart(chart, {
-        data,
-        mapping: mapping,
-        dataTypes,
-        visualOptions: vizOptionsDebounced,
-      })
-      try {
-        const rawViz = viz.renderToDOM(domRef.current, mappedData)
-        setRawViz(rawViz)
-        setError(null)
-        onChartRendered(chart.metadata)
-      } catch (e) {
-        console.log("chart error", e)
-        setError({ variant: 'danger', message: 'Chart error. ' + e.message })
-        setRawViz(null)
-      }
-    } catch (e) {
-      while (domRef.current.firstChild) {
-        domRef.current.removeChild(domRef.current.firstChild)
-      }
-      console.log({ e })
-      setError({ variant: 'danger', message: 'Chart error. ' + e.message })
-      setRawViz(null)
-    }
+    // try {
+    //   const viz = rawChart(chart, {
+    //     data,
+    //     mapping: mapping,
+    //     dataTypes,
+    //     visualOptions: vizOptionsDebounced,
+    //   })
+    //   try {
+    //     const rawViz = viz.renderToDOM(domRef.current, mappedData)
+    //     //domRef.current.innerHTML = "";
+    //     //domRef.current.appendChild(container);
+    //     setRawViz(rawViz)
+    //     setError(null)
+    //     onChartRendered(chart.metadata)
+    //   } catch (e) {
+    //     console.log("chart error", e)
+    //     setError({ variant: 'danger', message: 'Chart error. ' + e.message })
+    //     setRawViz(null)
+    //   }
+    // } catch (e) {
+    //   while (domRef.current.firstChild) {
+    //     domRef.current.removeChild(domRef.current.firstChild)
+    //   }
+    //   console.log({ e })
+    //   setError({ variant: 'danger', message: 'Chart error. ' + e.message })
+    //   setRawViz(null)
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setError, vizOptionsDebounced, setRawViz, mappedData, chart, mapping])
+    // getHumanAgeGroupChartData(data);
 
+  }, [setError, vizOptionsDebounced, setRawViz, mappedData, chart, mapping])
+  console.log('errorgg', error)
+  console.log('chart', chart)
+
+  var options = error === null ? getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {}
+  console.log('chart.metadata.id', chart.metadata.id)
+  if (domRef && domRef.current)
+  domRef.current?.getEchartsInstance().setOption(options);
   return (
     <div className={'col-8 col-xl-9'}>
       <div
-        className={['overflow-auto', 'position-sticky'].join(' ')}
-        style={{ top: 'calc(15px + var(--header-height))' }}
+        // className={['overflow-auto', 'position-sticky'].join(' ')}
+        // style={{ top: 'calc(15px + var(--header-height))' }}
       >
         {error && (
           <WarningMessage variant={error.variant} message={error.message} />
         )}
         <div ref={domRef}>{/* Don't put content in this <div /> */}</div>
       </div>
+      <ReactEcharts 
+    option={options} className='echarts-for-echarts' ref={domRef}
+  />
     </div>
   )
 }

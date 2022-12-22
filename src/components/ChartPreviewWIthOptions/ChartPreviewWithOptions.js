@@ -6,6 +6,7 @@ import { chart as rawChart } from '@rawgraphs/rawgraphs-core'
 import { mapDataInWorker } from '../../worker'
 import { WEBWORKER_ACTIVE } from '../../constants'
 
+
 const ChartPreviewWithOptions = ({
   chart,
   dataset,
@@ -75,7 +76,7 @@ const ChartPreviewWithOptions = ({
           setVisualOptions={setVisualOptions}
           error={error}
           mappedData={mappedData}
-        />
+        /> 
         <ChartPreview
           chart={chart}
           dataset={dataset}
