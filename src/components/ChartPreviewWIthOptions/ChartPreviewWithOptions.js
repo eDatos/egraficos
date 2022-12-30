@@ -21,7 +21,6 @@ const ChartPreviewWithOptions = ({
   const [mappedData, setMappedData] = useState(null)
 
   useEffect(() => {
-    // console.info('Updating mapped dataset')
     try {
       setMappingLoading(true)
 
@@ -75,7 +74,7 @@ const ChartPreviewWithOptions = ({
           visualOptions={visualOptions}
           setVisualOptions={setVisualOptions}
           error={error}
-          mappedData={mappedData}
+          mappedData={mappedData}//no se esta utilizando
         /> 
         <ChartPreview
           chart={chart}
@@ -86,7 +85,7 @@ const ChartPreviewWithOptions = ({
           error={error}
           setError={setError}
           setRawViz={setRawViz}
-          mappedData={mappedData}
+          mappedData={mappedData}//no se esta utilizando
         />
     </Row>
   )

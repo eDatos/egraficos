@@ -4,7 +4,7 @@ import useDebounce from '../../hooks/useDebounce'
 import WarningMessage from '../WarningMessage'
 import { onChartRendered } from '../../gaEvents'
 import ReactEcharts from "echarts-for-react"
-import { getChartOptions } from '../../charts/utils/echartsOptions';
+//import { getChartOptions } from '../../charts/utils/echartsOptions';
 
 
 const ChartPreview = ({
@@ -144,22 +144,17 @@ const ChartPreview = ({
     //   setError({ variant: 'danger', message: 'Chart error. ' + e.message })
     //   setRawViz(null)
     // }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    // getHumanAgeGroupChartData(data);
 
   }, [setError, vizOptionsDebounced, setRawViz, mappedData, chart, mapping])
-  console.log('errorgg', error)
-  console.log('chart', chart)
-
-  var options = error === null ? getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {}
+  var options = error === null ? chart.getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {}
   console.log('chart.metadata.id', chart.metadata.id)
   if (domRef && domRef.current)
   domRef.current?.getEchartsInstance().setOption(options);
   return (
     <div className={'col-8 col-xl-9'}>
       <div
-        // className={['overflow-auto', 'position-sticky'].join(' ')}
-        // style={{ top: 'calc(15px + var(--header-height))' }}
+         className={['overflow-auto', 'position-sticky'].join(' ')}
+         style={{ top: 'calc(15px + var(--header-height))' }}
       >
         {error && (
           <WarningMessage variant={error.variant} message={error.message} />
@@ -168,6 +163,14 @@ const ChartPreview = ({
       </div>
       <ReactEcharts 
     option={options} className='echarts-for-echarts' ref={domRef}
+    style={{width:visualOptions.width,
+            height:visualOptions.height,
+            marginTop:visualOptions.marginTop,
+            marginLeft:visualOptions.marginLeft,
+            marginBottom:visualOptions.marginBottom,
+            backgroundColor:visualOptions.background,
+            marginRight:visualOptions.marginRight}}
+            opts={{renderer: 'svg'}}
   />
     </div>
   )

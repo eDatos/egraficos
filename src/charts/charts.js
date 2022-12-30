@@ -212,7 +212,6 @@ const metadata$2 = {
     }, d => d[mapping.series.value], // series grouping
     d => d[mapping.bars.value].toString() // bars grouping. toString() to enable grouping on dates
     );
-    console.log('results', results)
     return results;
   };
   function render$2(svgNode, data, visualOptions, mapping, originalData, styles) {
@@ -371,6 +370,7 @@ const metadata$2 = {
 export const barchart = {
     metadata: metadata$2,
     dimensions: dimensions$2,
+    getChartOptions: getChartOptions$2,
     mapData: mapData$2,
     render: render$2,
     visualOptions: visualOptions$2,
@@ -553,9 +553,147 @@ function colorDomain$2(data, mapping) {
 export const piechart = {
   metadata: metadata$l,
   dimensions: dimensions$l,
-  //mapData: mapData$l,
-  //render: render$l,
+  getChartOptions: getChartOptions$3,
   visualOptions: visualOptions$l,
   styles: styles$1,
   colorDomain: colorDomain$2
 };
+const getxAxis = (visualOptions, datachart, resultMap) => {
+  return {
+      type: 'category',
+       data: resultMap.map(res =>res.bars),
+  }
+}
+const getyAxis = (visualOptions, datachart, resultMap) => {
+return {
+type: 'value'
+}
+}
+const barsSortings = {
+totalDescending: function (a, b) {
+return descending(a[1], b[1]);
+},
+totalAscending: function (a, b) {
+return ascending(a[1], b[1]);
+},
+name: function (a, b) {
+return ascending(a[0], b[0]);
+},
+original: function (a, b) {
+return true;
+}
+}; // bars domain
+const getMappedData = (data, mapping, dataTypes, dimensions) => {
+const colorAggregator = getDimensionAggregator('color', mapping, dataTypes, dimensions);
+const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions); // add the non-compulsory dimensions.
+mapping.color = {
+value: undefined
+};
+mapping.series = {
+  value: undefined
+};
+mapping.size = {
+value: undefined
+};
+let results = [];
+rollups(data, v => {
+const item = {
+series: v[0][mapping.series.value],
+// get the first one since it's grouped
+bars: v[0][mapping.bars.value],
+// get the first one since it's grouped
+size: mapping.size.value ? sizeAggregator(v.map(d => d[mapping.size.value])) : v.length,
+// aggregate. If not mapped, give 1 as size
+color: mapping.color.value ? colorAggregator(v.map(d => d[mapping.color.value])) : 'default' // aggregate, by default single color.
+
+};
+results.push(item);
+return item;
+}, d => d[mapping.series.value], // series grouping
+d => d[mapping.bars.value] // bars grouping. toString() to enable grouping on dates
+);
+return results;
+}
+function getChartOptions$3 (visualOptions, datachart, mapping, dataTypes, dimensions){
+  return {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: '5%',
+      left: 'center'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: 'bold'
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: [
+          { value: 1048, name: 'Search Engine' },
+          { value: 735, name: 'Direct' },
+          { value: 580, name: 'Email' },
+          { value: 484, name: 'Union Ads' },
+          { value: 300, name: 'Video Ads' }
+        ]
+      }
+    ]
+  }
+}
+function getChartOptions$2 (visualOptions, datachart, mapping, dataTypes, dimensions){
+console.log('getChartOptionsvisualOptions', visualOptions)
+console.log('getChartOptionsdatachart', datachart)
+console.log('getChartOptionsmapping', mapping)
+const resultMap = getMappedData(datachart,mapping, dataTypes,dimensions)
+console.log('getMappedDataresultMap', resultMap)
+const barsDomain = rollups(resultMap, v => sum(v, d => d.size), d => d.bars, d => d.colors).sort(barsSortings[visualOptions.totalAscending]); // add grid
+console.log('getChartOptionsbarsDomain', barsDomain)
+
+return {
+  legend: {
+      show:visualOptions.showLegend
+  },
+  tooltip: {},//añadir a las opciones
+  toolbox: {//añadir a las opciones
+    feature: {
+        saveAsImage: {},
+        dataView: {
+          show: true,
+          title: 'Data View'
+      },
+    }
+},
+  xAxis:getxAxis(visualOptions,datachart, resultMap),
+  yAxis:getyAxis(visualOptions,datachart, resultMap),
+   series: [{
+      name: mapping.bars.value[0],
+      type: 'bar',
+      data: resultMap.map(res =>res.size),
+      //añadir a las opciones
+      //showBackground: true,
+      // backgroundStyle: {
+      //     color: visualOptions.background
+      //   }
+   }],
+   color: visualOptions.colorScale.defaultColor
+};
+}
