@@ -306,6 +306,7 @@ const visualOptions$l = {
   legendOrient: {
     type: 'text',
     label: 'Legend orient',
+    default: 'horizontal',
     group: 'artboard',
     options: [{
       label: 'Vertical',
@@ -314,7 +315,6 @@ const visualOptions$l = {
       label: 'Horizontal',
       value: 'horizontal'
     }],
-    default: 'horizontal',
     disabled: {
       showLegend: false
     }
@@ -359,6 +359,29 @@ const visualOptions$l = {
       drawDonut: false
     }
   },
+  nightingaleChart: {
+    type: 'boolean',
+    label: 'Draw as Nightingale Chart',
+    default: false,
+    group: 'chart'
+  },
+  nightingaleChartOption: {
+    type: 'text',
+    label: 'Nightingale',
+    group: 'chart',
+    disabled: {
+      nightingaleChartOption: false
+    },
+    options: [{
+      label: 'Radius',
+      value: 'radius'
+    }, {
+      label: 'Area',
+      value: 'area'
+    }],
+    default: 'area',
+
+  },
   sortArcsBy: {
     type: 'text',
     label: 'Sort arcs by',
@@ -396,11 +419,30 @@ const visualOptions$l = {
     default: true,
     group: 'labels'
   },
-  showArcValues: {
-    type: 'boolean',
-    label: 'Show values on arcs',
-    default: false,
-    group: 'labels'
+  showSeriesLabelsPosition: {
+    type: 'text',
+    label: 'Label position',
+    group: 'labels',
+    disabled: {
+      showSeriesLabels: false
+    },
+    options: [{
+      label: 'Outside',
+      value: 'outside'
+    }, 
+    {
+      label: 'Inside',
+      value: 'inside'
+    }, 
+    {
+      label: 'Inner',
+      value: 'inner'
+    },
+    {
+    label: 'Center',
+    value: 'center'
+    }],
+    default: 'inner',
   },
   // series
   // sortPiesBy: {
@@ -563,8 +605,19 @@ function calculoradio(radius) {
     return radius + '%'
   }
 }
+
+function roseType() {
+  console.log('roseType', visualOptions.nightingaleChart)
+  if (visualOptions.nightingaleChart) {
+    return visualOptions.nightingaleChartOption
+  } else {
+    return ''
+  }
+}
 const pieSeries = resultMap.map(function (item, index) {
   console.log('pieSeriesitem', item)
+  console.log('pieSeriesitemroseType', roseType)
+
   countreg= countreg +1;
   console.log('countreg', countreg)
   const map2 = new Map(Object.entries(item))
@@ -575,7 +628,6 @@ const pieSeries = resultMap.map(function (item, index) {
 
   var total = resultMap.length
   var radius = spam
-  var filastop = 50/filas;
   //left = (countreg <= regforraw) ? left + spam : 10
   if (countreg <= regforraw) {
     top = spamfilas
@@ -604,12 +656,11 @@ const pieSeries = resultMap.map(function (item, index) {
     },
     radius: calculoradio(radius),
     center: [left + '%', top + '%'],
-    // label: {
-    //   show: false
-    // },
-    // labelLine: {
-    //   show: false
-    // },
+    roseType: roseType(),
+    label: {
+      show: visualOptions.showSeriesLabels,
+      position: visualOptions.showSeriesLabelsPosition
+    },
     emphasis: {
       focus: 'series',
       blurScope: 'coordinateSystem'
@@ -647,11 +698,7 @@ console.log('pieSeries', pieSeries)
 };
 }  
 function getChartOptions$2 (visualOptions, datachart, mapping, dataTypes, dimensions){
-console.log('getChartOptionsvisualOptions', visualOptions)
-console.log('getChartOptionsdatachart', datachart)
-console.log('getChartOptionsmapping', mapping)
 const resultMap = getMappedDataBarChar(datachart,mapping, dataTypes,dimensions)
-console.log('getMappedDataBarCharresultMap', resultMap)
 const barsDomain = rollups(resultMap, v => sum(v, d => d.size), d => d.bars, d => d.colors).sort(barsSortings[visualOptions.totalAscending]); // add grid
 console.log('getChartOptionsbarsDomain', barsDomain)
 
