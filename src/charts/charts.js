@@ -94,6 +94,46 @@ const metadata$2 = {
         showLegend: true
       }
     },
+    legendOrient: {
+      type: 'text',
+      label: 'Legend orient',
+      group: 'artboard',
+      options: [{
+        label: 'Vertical',
+        value: 'vertical'
+      }, {
+        label: 'Horizontal',
+        value: 'horizontal'
+      }],
+      default: 'horizontal',
+      disabled: {
+        showLegend: false
+      }
+    },
+    legendMarginRight: {
+      type: 'number',
+      label: 'Legend Margin(Right)',
+      default: 'auto',
+      group: 'artboard',
+      disabled: {
+        showLegend: false
+      }
+    },
+    legendMarginTop: {
+      type: 'number',
+      label: 'Legend Margin(Right)',
+      default: 'auto',
+      group: 'artboard',
+      disabled: {
+        showLegend: false
+      }
+    },
+    showToolbox: {
+      type: 'boolean',
+      label: 'Show Toolbox',
+      default: false,
+      group: 'artboard'
+    },
     padding: {
       type: 'number',
       label: 'Padding',
@@ -181,198 +221,10 @@ const metadata$2 = {
     }
   };
   var styles$1 = {"axisLabel":{"fontFamily":"Arial, sans-serif","fontSize":"12px","fill":"#7b7b7b","fontWeight":"bold"},"axisLine":{"stroke":"#ccc"},"labelPrimary":{"fontFamily":"Arial, sans-serif","fontSize":"10px","fill":"black","fontWeight":"bold"},"labelSecondary":{"fontFamily":"Arial, sans-serif","fontSize":"10px","fill":"black","fontWeight":"normal"},"labelItalic":{"fontFamily":"Arial, sans-serif","fontSize":"10px","fill":"black","fontWeight":"normal","fontStyle":"italic"},"seriesLabel":{"fontFamily":"Arial, sans-serif","fontSize":"12px","fill":"black","fontWeight":"bold","dominantBaseline":"hanging"},"labelOutline":{"strokeWidth":"2px","paintOrder":"stroke","stroke":"white","strokeLinecap":"round","strokeLinejoin":"round"}};
-  
-  const mapData$2 = function (data, mapping, dataTypes, dimensions) {
-    // define aggregators
-    const colorAggregator = getDimensionAggregator('color', mapping, dataTypes, dimensions);
-    const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions); // add the non-compulsory dimensions.
-    // 'color' in mapping ? null : mapping.color = {
-    //   value: undefined
-    // };
-    // 'series' in mapping ? null : mapping.series = {
-    //   value: undefined
-    // };
-    // 'size' in mapping ? null : mapping.size = {
-    //   value: undefined
-    // };
-    let results = [];
-    rollups(data, v => {
-      const item = {
-        series: v[0][mapping.series.value],
-        // get the first one since it's grouped
-        bars: v[0][mapping.bars.value],
-        // get the first one since it's grouped
-        size: mapping.size.value ? sizeAggregator(v.map(d => d[mapping.size.value])) : v.length,
-        // aggregate. If not mapped, give 1 as size
-        color: mapping.color.value ? colorAggregator(v.map(d => d[mapping.color.value])) : 'default' // aggregate, by default single color.
-  
-      };
-      results.push(item);
-      return item;
-    }, d => d[mapping.series.value], // series grouping
-    d => d[mapping.bars.value].toString() // bars grouping. toString() to enable grouping on dates
-    );
-    return results;
-  };
-  function render$2(svgNode, data, visualOptions, mapping, originalData, styles) {
-    const {
-      // artboard options
-      width,
-      height,
-      background,
-      marginTop,
-      marginRight,
-      marginBottom,
-      marginLeft,
-      // chart options
-      padding,
-      barsOrientation,
-      sortBarsBy,
-      // series options
-      columnsNumber,
-      useSameScale,
-      sortSeriesBy,
-      showSeriesLabels,
-      repeatAxesLabels,
-      showGrid,
-      // color options
-      colorScale,
-      // legend
-      showLegend,
-      legendWidth
-    } = visualOptions;
-    const margin = {
-      top: marginTop,
-      right: marginRight,
-      bottom: marginBottom,
-      left: marginLeft
-    };
-    const horizontalBars = {
-      horizontal: true,
-      vertical: false
-    }[barsOrientation];
-  
-    if (mapping.bars.dataType.type === 'date') {
-      // set date format  from input data
-      const timeFormat$1 = timeFormat(dateFormats$1[mapping.bars.dataType.dateFormat]); // use it to format date
-  
-      data.forEach(d => d.bars = timeFormat$1(d.bars));
-      console.log(data);
-    } // create nest structure
-  
-  
-    const nestedData = groups(data, d => d.series).map(d => ({
-      data: d,
-      totalSize: sum(d[1], d => d.size)
-    }));
-    console.log(nestedData); // series sorting functions
-  
-    const seriesSortings = {
-      totalDescending: function (a, b) {
-        return descending(a.totalSize, b.totalSize);
-      },
-      totalAscending: function (a, b) {
-        return ascending(a.totalSize, b.totalSize);
-      },
-      name: function (a, b) {
-        return ascending(a.data[0], b.data[0]);
-      }
-    }; // sort series
-  
-    nestedData.sort(seriesSortings[sortSeriesBy]); // add background
-  
-    select(svgNode).append('rect').attr('width', showLegend ? width + legendWidth : width).attr('height', height).attr('x', 0).attr('y', 0).attr('fill', background).attr('id', 'backgorund'); // set up grid
-  
-    const gridding$1 = gridding().size([width, height]).mode('grid').padding(0) // no padding, margins will be applied inside
-    .cols(mapping.series.value ? columnsNumber : 1);
-    const griddingData = gridding$1(nestedData);
-    const svg = select(svgNode).append('g').attr('id', 'viz');
-    const series = svg.selectAll('g').data(griddingData).join('g').attr('id', d => d.data[0]).attr('transform', d => 'translate(' + d.x + ',' + d.y + ')'); // value domain
-  
-    let originalDomain = extent(data, d => d.size);
-    let sizeDomain = originalDomain[0] > 0 ? [0, originalDomain[1]] : originalDomain; // bars sorting functions
-  
-    const barsSortings = {
-      totalDescending: function (a, b) {
-        return descending(a[1], b[1]);
-      },
-      totalAscending: function (a, b) {
-        return ascending(a[1], b[1]);
-      },
-      name: function (a, b) {
-        return ascending(a[0], b[0]);
-      },
-      original: function (a, b) {
-        return true;
-      }
-    }; // bars domain
-  
-    const barsDomain = rollups(data, v => sum(v, d => d.size), d => d.bars).sort(barsSortings[sortBarsBy]).map(d => d[0]); // add grid
-  
-    if (showGrid) {
-      svg.append('g').attr('id', 'grid').selectAll('rect').data(griddingData).enter().append('rect').attr('x', d => d.x).attr('y', d => d.y).attr('width', d => d.width).attr('height', d => d.height).attr('fill', 'none').attr('stroke', '#ccc');
-    }
-  
-    series.each(function (d, seriesIndex) {
-      // make a local selection for each serie
-      const selection = select(this).append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')'); // compute each serie width and height
-  
-      const seriesWidth = d.width - margin.right - margin.left;
-      const seriesHeight = d.height - margin.top - margin.bottom; // check if padding is too high and leave no space for bars
-  
-      if (padding * barsDomain.length > (horizontalBars ? seriesHeight : seriesWidth)) {
-        throw new Error('Padding is too high, decrase it in the panel "chart" > "Padding"');
-      } // scales
-  
-  
-      const barScale = scaleBand().range([0, horizontalBars ? seriesHeight : seriesWidth]).domain(barsDomain) //convert padding from px to percentage
-      .padding(padding / (horizontalBars ? seriesHeight : seriesWidth / barsDomain.length));
-      const seriesDomain = extent(d.data[1], d => d.size);
-      const sizeScale = scaleLinear().domain(useSameScale ? sizeDomain : seriesDomain).nice().range(horizontalBars ? [0, seriesWidth] : [seriesHeight, 0]);
-      selection.append('g').attr('class', 'bars').selectAll('rect').data(d => d.data[1]).join('rect').attr('id', d => d.series + ' - ' + d.bars).attr('x', d => {
-        return horizontalBars ? sizeScale(Math.min(0, d.size)) : barScale(d.bars);
-      }).attr('y', d => {
-        return horizontalBars ? barScale(d.bars) : sizeScale(Math.max(0, d.size));
-      }).attr('height', d => {
-        return horizontalBars ? barScale.bandwidth() : Math.abs(sizeScale(d.size) - sizeScale(0));
-      }).attr('width', d => {
-        return horizontalBars ? Math.abs(sizeScale(d.size) - sizeScale(0)) : barScale.bandwidth();
-      }).attr('fill', d => colorScale(d.color));
-  
-      if (horizontalBars) {
-        selection.append('g').attr('id', 'xAxis').attr('transform', 'translate(0,' + seriesHeight + ')').call(axisBottom(sizeScale)).call(g => g.append('text').attr('font-family', 'Arial, sans-serif').attr('font-size', 10).attr('x', seriesWidth).attr('dy', -5).attr('fill', 'black').attr('font-weight', 'bold').attr('text-anchor', 'end').attr('display', seriesIndex === 0 || repeatAxesLabels ? null : 'none').text(d => {
-          return mapping['size'].value ? `${mapping['size'].value} [${mapping.size.config.aggregation}]` : '';
-        }));
-        selection.append('g').attr('id', 'yAxis').attr('transform', 'translate(' + sizeScale(0) + ',0)').call(axisLeft(barScale).tickSizeOuter(0)).call(g => g.append('text').attr('font-family', 'Arial, sans-serif').attr('font-size', 10).attr('x', 4).attr('fill', 'black').attr('font-weight', 'bold').attr('text-anchor', 'start').attr('dominant-baseline', 'hanging').attr('display', seriesIndex === 0 || repeatAxesLabels ? null : 'none').text(mapping['bars'].value));
-      } else {
-        selection.append('g').attr('id', 'xAxis').attr('transform', 'translate(0,' + sizeScale(0) + ')').call(axisBottom(barScale).tickSizeOuter(0)).call(g => g.append('text').attr('x', seriesWidth).attr('y', -4).attr('text-anchor', 'end').attr('display', seriesIndex === 0 || repeatAxesLabels ? null : 'none').text(mapping['bars'].value).styles(styles.axisLabel));
-        selection.append('g').attr('id', 'yAxis').call(axisLeft(sizeScale)).call(g => g.append('text').attr('x', 4).attr('text-anchor', 'start').attr('dominant-baseline', 'hanging').attr('display', seriesIndex === 0 || repeatAxesLabels ? null : 'none').text(d => {
-          return mapping['size'].value ? `${mapping['size'].value} [${mapping.size.config.aggregation}]` : '';
-        }).styles(styles.axisLabel));
-      }
-  
-      if (showSeriesLabels) {
-        select(this).append('text').text(d => d.data[0]).attr('y', 4).attr('x', 4).styles(styles.seriesLabel);
-      }
-    }); // add legend
-  
-    if (showLegend) {
-      const legendLayer = select(svgNode).append('g').attr('id', 'legend').attr('transform', `translate(${width},${marginTop})`);
-      const chartLegend = legend().legendWidth(legendWidth);
-  
-      if (mapping.color.value) {
-        chartLegend.addColor(mapping.color.value, colorScale);
-      }
-  
-      legendLayer.call(chartLegend);
-    }
-  } // auto format time scale if used as axis:
 export const barchart = {
     metadata: metadata$2,
     dimensions: dimensions$2,
     getChartOptions: getChartOptions$2,
-    mapData: mapData$2,
-    render: render$2,
     visualOptions: visualOptions$2,
     styles: styles$1
   };
@@ -445,11 +297,51 @@ const visualOptions$l = {
   legendWidth: {
     type: 'number',
     label: 'Legend width',
-    default: 200,
+    default: 500,
     group: 'artboard',
     disabled: {
       showLegend: false
     }
+  },
+  legendOrient: {
+    type: 'text',
+    label: 'Legend orient',
+    group: 'artboard',
+    options: [{
+      label: 'Vertical',
+      value: 'vertical'
+    }, {
+      label: 'Horizontal',
+      value: 'horizontal'
+    }],
+    default: 'horizontal',
+    disabled: {
+      showLegend: false
+    }
+  },
+  legendMarginRight: {
+    type: 'number',
+    label: 'Legend Margin(Right)',
+    default: 'auto',
+    group: 'artboard',
+    disabled: {
+      showLegend: false
+    }
+  },
+  legendMarginTop: {
+    type: 'number',
+    label: 'Legend Margin(Right)',
+    default: 'auto',
+    group: 'artboard',
+    disabled: {
+      showLegend: false
+    }
+  },
+  showToolbox: {
+    type: 'boolean',
+    label: 'Show Toolbox',
+    default: false,
+    group: 'artboard'
   },
   // chart
   drawDonut: {
@@ -511,37 +403,31 @@ const visualOptions$l = {
     group: 'labels'
   },
   // series
-  sortPiesBy: {
-    type: 'text',
-    label: 'Sort pies by',
-    group: 'series',
-    options: [{
-      label: 'Size (descending)',
-      value: 'totalDescending'
-    }, {
-      label: 'Size (ascending)',
-      value: 'totalAscending'
-    }, {
-      label: 'Name',
-      value: 'name'
-    }, {
-      label: 'Original',
-      value: 'original'
-    }],
-    default: 'name'
-  },
-  columnsNumber: {
+  // sortPiesBy: {
+  //   type: 'text',
+  //   label: 'Sort pies by',
+  //   group: 'series',
+  //   options: [{
+  //     label: 'Size (descending)',
+  //     value: 'totalDescending'
+  //   }, {
+  //     label: 'Size (ascending)',
+  //     value: 'totalAscending'
+  //   }, {
+  //     label: 'Name',
+  //     value: 'name'
+  //   }, {
+  //     label: 'Original',
+  //     value: 'original'
+  //   }],
+  //   default: 'name'
+  // },
+  rowsNumber: {
     type: 'number',
-    label: 'Grid columns',
-    default: 0,
+    label: 'Grid rows',
+    default: 1,
     group: 'series'
   },
-  showGrid: {
-    type: 'boolean',
-    label: 'Show grid',
-    default: false,
-    group: 'series'
-  }
 };
 function colorDomain$2(data, mapping) {
   const domain = mapping.arcs.value;
@@ -561,7 +447,11 @@ export const piechart = {
 const getxAxis = (visualOptions, datachart, resultMap) => {
   return {
       type: 'category',
-       data: resultMap.map(res =>res.bars),
+      data: resultMap.map(res =>res.bars),
+      axisLabel: {
+        //rotate: 90
+        fontSize:10
+    },
   }
 }
 const getyAxis = (visualOptions, datachart, resultMap) => {
@@ -583,7 +473,34 @@ original: function (a, b) {
 return true;
 }
 }; // bars domain
-const getMappedData = (data, mapping, dataTypes, dimensions) => {
+const getMappedDataPieChar = (data, mapping, dataTypes, dimensions) => {
+  // define aggregators
+  // as we are working on a multiple dimension (bars), `getDimensionAggregator` will return an array of aggregator functions
+  // the order of aggregators is the same as the value of the mapping
+  const arcsAggregators = getDimensionAggregator('arcs', mapping, dataTypes, dimensions); // we will use rollup to populate a flat array of objects
+  // that will be passed to the render
+  if (mapping.series === undefined) {
+    mapping.series = {
+      value: undefined
+    };
+  }
+  let results = [];
+  rollups(data, v => {
+    let item = {
+      series: v[0][mapping.series.value]
+    };
+    mapping.arcs.value.forEach((arcName, i) => {
+      // getting i-th aggregator
+      const aggregator = arcsAggregators[i]; // use it
+
+      item[arcName] = aggregator(v.map(d => d[arcName]));
+    });
+    results.push(item);
+  }, d => d[mapping.series.value] // series grouping
+  );
+  return results;
+};
+const getMappedDataBarChar = (data, mapping, dataTypes, dimensions) => {
 const colorAggregator = getDimensionAggregator('color', mapping, dataTypes, dimensions);
 const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions); // add the non-compulsory dimensions.
 mapping.color = {
@@ -610,75 +527,151 @@ color: mapping.color.value ? colorAggregator(v.map(d => d[mapping.color.value]))
 results.push(item);
 return item;
 }, d => d[mapping.series.value], // series grouping
-d => d[mapping.bars.value] // bars grouping. toString() to enable grouping on dates
+d => d[mapping.bars.value].toString() // bars grouping. toString() to enable grouping on dates
 );
 return results;
 }
 function getChartOptions$3 (visualOptions, datachart, mapping, dataTypes, dimensions){
-  return {
-    tooltip: {
-      trigger: 'item'
-    },
-    legend: {
-      top: '5%',
-      left: 'center'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
-        },
-        label: {
-          show: false,
-          position: 'center'
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: 'bold'
-          }
-        },
-        labelLine: {
-          show: false
-        },
-        data: [
-          { value: 1048, name: 'Search Engine' },
-          { value: 735, name: 'Direct' },
-          { value: 580, name: 'Email' },
-          { value: 484, name: 'Union Ads' },
-          { value: 300, name: 'Video Ads' }
-        ]
-      }
-    ]
+  console.log('getChartOptionsvisualOptions', visualOptions)
+console.log('getChartOptionsdatachart', datachart)
+console.log('getChartOptionsmapping', mapping)
+const resultMap = getMappedDataPieChar(datachart,mapping, dataTypes,dimensions)
+resultMap.forEach(d => {
+  // compute the total value for each pie
+  d.totalValue = sum(mapping.arcs.value.map(arc => d[arc]));
+});
+console.log('getChartOptionsresultMap', resultMap)
+// const arcsSize = mapping.arcs.value.map(arc => ({
+//   name: arc,
+//   value: sum(resultMap.map(d => d[arc]))
+// })); // sort it, will be used later
+const filas = visualOptions.rowsNumber;
+const spam = Math.max((Math.floor(100 / Math.ceil(resultMap.length/filas))-10),6)
+console.log('spam', spam)
+const regforraw = Math.ceil(resultMap.length/filas)
+console.log('regforraw', regforraw)
+var spamfilas = 100/filas-10;
+console.log('calculo spamfilas', spamfilas)
+
+var countreg = 0
+var left = 0;
+var top = 0;
+function calculoradio(radius) {
+  if (visualOptions.drawDonut) {
+    return [radius - visualOptions.arcTichkness + '%', visualOptions.arcTichkness + '%']
+  } else {
+    return radius + '%'
   }
 }
+const pieSeries = resultMap.map(function (item, index) {
+  console.log('pieSeriesitem', item)
+  countreg= countreg +1;
+  console.log('countreg', countreg)
+  const map2 = new Map(Object.entries(item))
+  const valuedentro = mapping.arcs.value.map(arc => ({
+    name: arc,
+    value: map2.get(arc)
+  }));
+
+  var total = resultMap.length
+  var radius = spam
+  var filastop = 50/filas;
+  //left = (countreg <= regforraw) ? left + spam : 10
+  if (countreg <= regforraw) {
+    top = spamfilas
+    left = left + spam
+  } else {
+    top = top + spamfilas
+    spamfilas = top
+    countreg = 0
+    left = spam
+  }
+  //top = (index < regforraw) ? spamfilas: top+spamfilas
+  left = total === 1 ? 50 : left
+  top = (total === 1 || filas===1) ? 50 : top
+  radius = total === 1 ? 95 : radius
+  console.log('pieSeriesitemvaluedentroscountreg', countreg)
+  console.log('pieSeriesitemvaluedentroindex', index)
+  console.log('pieSeriesitemvaluedentrotop', top)
+  console.log('pieSeriesitemvaluedentroleft', left)
+  return {
+    name: item.series,
+    type: 'pie',
+    id: item.series,
+    title: {
+      text: item.series,
+      show: true
+    },
+    radius: calculoradio(radius),
+    center: [left + '%', top + '%'],
+    // label: {
+    //   show: false
+    // },
+    // labelLine: {
+    //   show: false
+    // },
+    emphasis: {
+      focus: 'series',
+      blurScope: 'coordinateSystem'
+  },
+    data: valuedentro,
+    top: visualOptions.marginTop,
+    left: visualOptions.marginLeft,
+    right:visualOptions.marginRight,
+    color: visualOptions.colorScale.userScaleValues.map(res =>res.range),
+  };
+});
+console.log('pieSeries', pieSeries)
+  return {
+    legend: {
+      show:visualOptions.showLegend,
+      width:visualOptions.legendWidth, 
+      orient:visualOptions.legendOrient,
+      right:visualOptions.legendMarginRight,
+      top:visualOptions.legendMarginTop
+
+  },
+  tooltip: {},//añadir a las opciones
+  toolbox: {//añadir a las opciones
+    show: visualOptions.showToolbox,
+    feature: {
+        saveAsImage: {},
+        dataView: {
+          title: 'Vista de datos'
+      },
+    }
+  },
+   series: [
+    ...pieSeries,
+  ],
+};
+}  
 function getChartOptions$2 (visualOptions, datachart, mapping, dataTypes, dimensions){
 console.log('getChartOptionsvisualOptions', visualOptions)
 console.log('getChartOptionsdatachart', datachart)
 console.log('getChartOptionsmapping', mapping)
-const resultMap = getMappedData(datachart,mapping, dataTypes,dimensions)
-console.log('getMappedDataresultMap', resultMap)
+const resultMap = getMappedDataBarChar(datachart,mapping, dataTypes,dimensions)
+console.log('getMappedDataBarCharresultMap', resultMap)
 const barsDomain = rollups(resultMap, v => sum(v, d => d.size), d => d.bars, d => d.colors).sort(barsSortings[visualOptions.totalAscending]); // add grid
 console.log('getChartOptionsbarsDomain', barsDomain)
 
 return {
   legend: {
-      show:visualOptions.showLegend
+      show:visualOptions.showLegend,
+      width:visualOptions.legendWidth, 
+      orient:visualOptions.legendOrient,
+      right:visualOptions.legendMarginRight,
+      top:visualOptions.legendMarginTop
+
+
   },
   tooltip: {},//añadir a las opciones
   toolbox: {//añadir a las opciones
+    show: visualOptions.showToolbox,
     feature: {
         saveAsImage: {},
         dataView: {
-          show: true,
-          title: 'Data View'
+          title: 'Vista de datos'
       },
     }
 },

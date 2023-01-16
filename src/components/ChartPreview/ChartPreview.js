@@ -1,10 +1,7 @@
 import React, { useRef, useEffect } from 'react'
-import { chart as rawChart } from '@rawgraphs/rawgraphs-core'
 import useDebounce from '../../hooks/useDebounce'
 import WarningMessage from '../WarningMessage'
-import { onChartRendered } from '../../gaEvents'
 import ReactEcharts from "echarts-for-react"
-//import { getChartOptions } from '../../charts/utils/echartsOptions';
 
 
 const ChartPreview = ({
@@ -19,7 +16,6 @@ const ChartPreview = ({
   mappedData,
 }) => {
   const domRef = useRef(null)
-
   const vizOptionsDebounced = useDebounce(visualOptions, 200)
   console.log('data', data);
   console.log('chart', chart);
@@ -116,40 +112,20 @@ const ChartPreview = ({
       }
       return
     }
-    // console.info('Updating viz')
-    // try {
-    //   const viz = rawChart(chart, {
-    //     data,
-    //     mapping: mapping,
-    //     dataTypes,
-    //     visualOptions: vizOptionsDebounced,
-    //   })
-    //   try {
-    //     const rawViz = viz.renderToDOM(domRef.current, mappedData)
-    //     //domRef.current.innerHTML = "";
-    //     //domRef.current.appendChild(container);
-    //     setRawViz(rawViz)
-    //     setError(null)
-    //     onChartRendered(chart.metadata)
-    //   } catch (e) {
-    //     console.log("chart error", e)
-    //     setError({ variant: 'danger', message: 'Chart error. ' + e.message })
-    //     setRawViz(null)
-    //   }
-    // } catch (e) {
-    //   while (domRef.current.firstChild) {
-    //     domRef.current.removeChild(domRef.current.firstChild)
-    //   }
-    //   console.log({ e })
-    //   setError({ variant: 'danger', message: 'Chart error. ' + e.message })
-    //   setRawViz(null)
-    // }
-
   }, [setError, vizOptionsDebounced, setRawViz, mappedData, chart, mapping])
-  var options = error === null ? chart.getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {}
-  console.log('chart.metadata.id', chart.metadata.id)
-  if (domRef && domRef.current)
-  domRef.current?.getEchartsInstance().setOption(options);
+  var options =  {}
+  try {
+    console.log('options', options);
+    console.log('error', error);
+    options = error === null ? chart.getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {}
+    if (domRef && domRef.current)
+    console.log('actual', domRef.current);
+    domRef.current?.getEchartsInstance().setOption(options,true);
+  } catch (e) {
+         console.log("chart error", e)
+         setError({ variant: 'danger', message: 'Chart error. ' + e.message })
+         setRawViz(null)
+   }
   return (
     <div className={'col-8 col-xl-9'}>
       <div
@@ -165,11 +141,11 @@ const ChartPreview = ({
     option={options} className='echarts-for-echarts' ref={domRef}
     style={{width:visualOptions.width,
             height:visualOptions.height,
-            marginTop:visualOptions.marginTop,
-            marginLeft:visualOptions.marginLeft,
-            marginBottom:visualOptions.marginBottom,
-            backgroundColor:visualOptions.background,
-            marginRight:visualOptions.marginRight}}
+            //marginTop:visualOptions.marginTop,
+            //marginLeft:visualOptions.marginLeft,
+            //marginBottom:visualOptions.marginBottom,
+            backgroundColor:visualOptions.background}}
+            //marginRight:visualOptions.marginRight}}
             opts={{renderer: 'svg'}}
   />
     </div>

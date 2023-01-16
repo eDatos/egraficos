@@ -12,7 +12,15 @@ const samplesList = [
     sourceName: 'M. Schroyer via Data World',
     sourceURL: 'https://data.world/mattschroyer/netflix-original-series',
   },
-
+  {
+    name: 'GDP sector composition',
+    category: 'Pie chart, Stacked barchart',
+    url: './sample-datasets/Stacked barchart - GDP sector composition.tsv',
+    delimiter: '\t',
+    sourceName: 'Wikipedia',
+    sourceURL:
+      'https://en.wikipedia.org/w/index.php?title=List_of_countries_by_GDP_sector_composition&oldid=1022131842',
+  },
   // {
   //   name: '',
   //   category: '',
