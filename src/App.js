@@ -318,7 +318,7 @@ function App() {
             />
           </Section>
         )}
-        {data && currentChart && rawViz && (
+        {data && currentChart && (//&& rawViz && (
           <Section title={t('global.section.export.tittle')}>
             <Exporter rawViz={rawViz} exportProject={exportProject} />
           </Section>

@@ -3,6 +3,7 @@ import { rollups, select, ascending, descending, scaleBand, groups, sum, scaleLi
 import { gridding } from 'd3-gridding';
 
 
+
 var img$4 = "data:image/svg+xml,%3csvg id='rawgraphs-icons' xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3e %3cdefs%3e %3cstyle%3e .cls-1 %7b fill: %2395e5c0%3b %7d .cls-2 %7b fill: %2306c26c%3b %7d %3c/style%3e %3c/defs%3e %3cg id='secundary'%3e %3crect class='cls-1' x='21' y='29' width='7' height='19'/%3e %3crect class='cls-1' x='41' y='34' width='7' height='14'/%3e %3c/g%3e %3cg id='primary'%3e %3cpolygon class='cls-2' points='9.185 9.685 7.5 8 5.815 9.685 5.815 11.115 7.003 9.927 7.003 48 7.997 48 7.997 9.927 9.185 11.115 9.185 9.685'/%3e %3crect class='cls-2' x='31' y='22.9517' width='7' height='25.0483'/%3e %3crect class='cls-2' x='11' y='36' width='7' height='12'/%3e %3c/g%3e%3c/svg%3e";
 
 var img$5 = "data:image/svg+xml,%3csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='320' height='160' viewBox='0 0 320 160'%3e %3cdefs%3e %3cstyle%3e .cls-1 %7b fill: white%3b %7d .cls-2 %7b fill: %23bee5a0%3b %7d .cls-3 %7b fill: %235e4fa2%3b %7d .cls-4 %7b fill: %23fdbe70%3b %7d .cls-5 %7b fill: %239e0142%3b %7d .cls-6 %7b fill: none%3b stroke: black%3b %7d .cls-7%2c .cls-8 %7b isolation: isolate%3b font-family: Helvetica%3b %7d .cls-7 %7b font-size: 12px%3b %7d .cls-8 %7b font-size: 10px%3b %7d %3c/style%3e %3c/defs%3e %3crect id='backgorund' class='cls-1' width='320' height='160'/%3e %3cg id='viz'%3e %3cg%3e %3cg%3e %3crect id='undefined_-_a' data-name='undefined - a' class='cls-2' x='28.9863' y='18.3333' width='46.1826' height='70'/%3e %3crect id='undefined_-_b' data-name='undefined - b' class='cls-3' x='77.1553' y='78.3333' width='46.1826' height='10'/%3e %3crect id='undefined_-_c' data-name='undefined - c' class='cls-4' x='125.3242' y='88.3333' width='46.1826' height='10'/%3e %3crect id='undefined_-_d' data-name='undefined - d' class='cls-5' x='173.4932' y='88.3333' width='46.1826' height='56.6667'/%3e %3crect id='undefined_-_e' data-name='undefined - e' class='cls-4' x='221.6621' y='88.3333' width='46.1826' height='40'/%3e %3crect id='undefined_-_f' data-name='undefined - f' class='cls-3' x='269.8311' y='58.3333' width='46.1826' height='30'/%3e %3c/g%3e %3cg id='xAxis'%3e %3cpath class='cls-6' d='M27.5%2c88.8333h291'/%3e %3cg%3e %3cline class='cls-6' x1='52.0776' y1='88.3333' x2='52.0776' y2='94.3333'/%3e %3ctext class='cls-7' transform='translate(49.2969 104.4333)'%3ea%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='100.2466' y1='88.3333' x2='100.2466' y2='94.3333'/%3e %3ctext class='cls-7' transform='translate(97.4658 104.4333)'%3eb%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='148.4155' y1='88.3333' x2='148.4155' y2='94.3333'/%3e %3ctext class='cls-7' transform='translate(145.9155 104.4333)'%3ec%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='196.5845' y1='88.3333' x2='196.5845' y2='94.3333'/%3e %3ctext class='cls-7' transform='translate(193.8037 104.4333)'%3ed%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='244.7534' y1='88.3333' x2='244.7534' y2='94.3333'/%3e %3ctext class='cls-7' transform='translate(241.9727 104.4333)'%3ee%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='292.9224' y1='88.3333' x2='292.9224' y2='94.3333'/%3e %3ctext class='cls-7' transform='translate(291.5332 104.4333)'%3ef%3c/text%3e %3c/g%3e %3c/g%3e %3cg id='yAxis'%3e %3cpath class='cls-6' d='M27.5%2c155.5V5.5'/%3e %3cg%3e %3cline class='cls-6' x1='27' y1='155.5' x2='21' y2='155.5'/%3e %3ctext class='cls-8' transform='translate(1.0371 158.7)'%3e%e2%88%9220%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='138.8333' x2='21' y2='138.8333'/%3e %3ctext class='cls-8' transform='translate(1.0371 142.0333)'%3e%e2%88%9215%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='122.1667' x2='21' y2='122.1667'/%3e %3ctext class='cls-8' transform='translate(1.0371 125.3667)'%3e%e2%88%9210%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='105.5' x2='21' y2='105.5'/%3e %3ctext class='cls-8' transform='translate(6.5986 108.7)'%3e%e2%88%925%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='88.8333' x2='21' y2='88.8333'/%3e %3ctext class='cls-8' transform='translate(12.4385 92.0333)'%3e0%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='72.1667' x2='21' y2='72.1667'/%3e %3ctext class='cls-8' transform='translate(12.4385 75.3667)'%3e5%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='55.5' x2='21' y2='55.5'/%3e %3ctext class='cls-8' transform='translate(6.877 58.7)'%3e10%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='38.8333' x2='21' y2='38.8333'/%3e %3ctext class='cls-8' transform='translate(6.877 42.0333)'%3e15%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='22.1667' x2='21' y2='22.1667'/%3e %3ctext class='cls-8' transform='translate(6.877 25.3666)'%3e20%3c/text%3e %3c/g%3e %3cg%3e %3cline class='cls-6' x1='27' y1='5.5' x2='21' y2='5.5'/%3e %3ctext class='cls-8' transform='translate(6.877 8.7)'%3e25%3c/text%3e %3c/g%3e %3c/g%3e %3c/g%3e %3c/g%3e%3c/svg%3e";
@@ -86,14 +87,10 @@ const metadata$2 = {
     legendWidth: {
       type: 'number',
       label: 'Legend width',
-      default: 200,
+      default: 500,
       group: 'artboard',
       disabled: {
         showLegend: false
-      },
-      container: 'width',
-      containerCondition: {
-        showLegend: true
       }
     },
     legendOrient: {
@@ -140,7 +137,8 @@ const metadata$2 = {
       type: 'number',
       label: 'Padding',
       default: 1,
-      group: 'chart'
+      group: 'chart',
+      disabled: true//TODO VER SI SE METE ESTA PROPIEDAD
     },
     barsOrientation: {
       type: 'text',
@@ -153,7 +151,9 @@ const metadata$2 = {
         label: 'Horizontally',
         value: 'horizontal'
       }],
-      default: 'vertical'
+      default: 'vertical',
+      disabled: true//TODO VER SI SE METE ESTA PROPIEDAD
+
     },
     sortBarsBy: {
       type: 'text',
@@ -172,45 +172,47 @@ const metadata$2 = {
         label: 'Original',
         value: 'original'
       }],
-      default: 'name'
+      default: 'name',
+      disabled: true//TODO VER SI SE METE ESTA PROPIEDAD.SI SE AÑADIRA SEGURO
+
     },
-    useSameScale: {
-      type: 'boolean',
-      label: 'Use same scale',
-      default: true,
-      group: 'series'
-    },
-    columnsNumber: {
-      type: 'number',
-      label: 'Number of columns',
-      default: 0,
-      group: 'series'
-    },
-    sortSeriesBy: {
-      type: 'text',
-      label: 'Sort series by',
-      group: 'series',
-      options: ['Total value (descending)', 'Total value (ascending)', 'Name', 'Original'],
-      default: 'Total value (descending)'
-    },
-    showSeriesLabels: {
-      type: 'boolean',
-      label: 'Show series titles',
-      default: true,
-      group: 'series'
-    },
-    repeatAxesLabels: {
-      type: 'boolean',
-      label: 'Repeat axis labels for each series',
-      default: false,
-      group: 'series'
-    },
-    showGrid: {
-      type: 'boolean',
-      label: 'Show series grid',
-      default: false,
-      group: 'series'
-    },
+    // useSameScale: {
+    //   type: 'boolean',
+    //   label: 'Use same scale',
+    //   default: true,
+    //   group: 'series'
+    // },
+    // columnsNumber: {
+    //   type: 'number',
+    //   label: 'Number of columns',
+    //   default: 0,
+    //   group: 'series'
+    // },
+    // sortSeriesBy: {
+    //   type: 'text',
+    //   label: 'Sort series by',
+    //   group: 'series',
+    //   options: ['Total value (descending)', 'Total value (ascending)', 'Name', 'Original'],
+    //   default: 'Total value (descending)'
+    // },
+    // showSeriesLabels: {
+    //   type: 'boolean',
+    //   label: 'Show series titles',
+    //   default: true,
+    //   group: 'series'
+    // },
+    // repeatAxesLabels: {
+    //   type: 'boolean',
+    //   label: 'Repeat axis labels for each series',
+    //   default: false,
+    //   group: 'series'
+    // },
+    // showGrid: {
+    //   type: 'boolean',
+    //   label: 'Show series grid',
+    //   default: false,
+    //   group: 'series'
+    // },
     colorScale: {
       type: 'colorScale',
       label: 'Color scale',
@@ -572,10 +574,8 @@ const getMappedDataPieChar = (data, mapping, dataTypes, dimensions) => {
 };
 const getMappedDataBarChar = (data, mapping, dataTypes, dimensions) => {
 //const colorAggregator = getDimensionAggregator('color', mapping, dataTypes, dimensions);
-var _sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions); // add the non-compulsory dimensions.
-console.log('sizeAggregator', _sizeAggregator)
-console.log('mapping.size', mapping.size)
-console.log('mapping.size.value', mapping.size.value)
+const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions); // add the non-compulsory dimensions.
+console.log('sizeAggregator', sizeAggregator)
 if (mapping.series === undefined) {
   mapping.series = {
     value: undefined
@@ -593,12 +593,13 @@ if (mapping.size === undefined) {
 }
 let results = [];
 rollups(data, v => {
+  console.log('sizeAggregatorv.map', v.map(d => d[mapping.size.value]))
 const item = {
 series: v[0][mapping.series.value],
 // get the first one since it's grouped
 bars: v[0][mapping.bars.value],
 // get the first one since it's grouped
-size: mapping.size.value ? _sizeAggregator(v.map(d => d[mapping.size.value])) : v.length
+size: mapping.size.value ? sizeAggregator(v.map(d => d[mapping.size.value])) : v.length
 // aggregate. If not mapped, give 1 as size
 //color: mapping.color.value ? colorAggregator(v.map(d => d[mapping.color.value])) : 'default' // aggregate, by default single color.
 
