@@ -31,19 +31,21 @@ const metadata$2 = {
     required: false,
     aggregation: true,
     aggregationDefault: 'sum'
-  }, {
-    id: 'color',
-    name: 'Color',
-    operation: 'get',
-    validTypes: ['number', 'string', 'date'],
-    required: false,
-    aggregation: true,
-    aggregationDefault: {
-      number: 'sum',
-      string: 'csvDistinct',
-      date: 'csvDistinct'
-    }
-  }, {
+  }, 
+  // {
+  //   id: 'color',
+  //   name: 'Color',
+  //   operation: 'get',
+  //   validTypes: ['number', 'string', 'date'],
+  //   required: false,
+  //   aggregation: true,
+  //   aggregationDefault: {
+  //     number: 'sum',
+  //     string: 'csvDistinct',
+  //     date: 'csvDistinct'
+  //   }
+  // }, 
+  {
     id: 'series',
     name: 'Series',
     validTypes: ['number', 'string', 'date'],
@@ -218,7 +220,32 @@ const metadata$2 = {
         interpolator: 'interpolateSpectral'
       },
       group: 'colors'
-    }
+    },
+  // labels
+  showXaxisLabels: {
+    type: 'boolean',
+    label: 'Show x-axis Label',
+    default: true,
+    group: 'labels'
+  },
+  showXaxisLabelsRotate: {
+    type: 'number',
+    label: 'Label position',
+    group: 'labels',
+    disabled: {
+      showXaxisLabels: false
+    },
+    default: 0,
+  },
+  showXaxisLabelsFontSize: {
+    type: 'number',
+    label: 'Label size',
+    group: 'labels',
+    disabled: {
+      showXaxisLabels: false
+    },
+    default: 12,
+  },
   };
   var styles$1 = {"axisLabel":{"fontFamily":"Arial, sans-serif","fontSize":"12px","fill":"#7b7b7b","fontWeight":"bold"},"axisLine":{"stroke":"#ccc"},"labelPrimary":{"fontFamily":"Arial, sans-serif","fontSize":"10px","fill":"black","fontWeight":"bold"},"labelSecondary":{"fontFamily":"Arial, sans-serif","fontSize":"10px","fill":"black","fontWeight":"normal"},"labelItalic":{"fontFamily":"Arial, sans-serif","fontSize":"10px","fill":"black","fontWeight":"normal","fontStyle":"italic"},"seriesLabel":{"fontFamily":"Arial, sans-serif","fontSize":"12px","fill":"black","fontWeight":"bold","dominantBaseline":"hanging"},"labelOutline":{"strokeWidth":"2px","paintOrder":"stroke","stroke":"white","strokeLinecap":"round","strokeLinejoin":"round"}};
 export const barchart = {
@@ -330,7 +357,7 @@ const visualOptions$l = {
   },
   legendMarginTop: {
     type: 'number',
-    label: 'Legend Margin(Right)',
+    label: 'Legend Margin(Top)',
     default: 'auto',
     group: 'artboard',
     disabled: {
@@ -491,8 +518,9 @@ const getxAxis = (visualOptions, datachart, resultMap) => {
       type: 'category',
       data: resultMap.map(res =>res.bars),
       axisLabel: {
-        //rotate: 90
-        fontSize:10
+        show:visualOptions.showXaxisLabels,
+        rotate: visualOptions.showXaxisLabelsRotate,
+        fontSize:visualOptions.showXaxisLabelsFontSize
     },
   }
 }
@@ -543,17 +571,26 @@ const getMappedDataPieChar = (data, mapping, dataTypes, dimensions) => {
   return results;
 };
 const getMappedDataBarChar = (data, mapping, dataTypes, dimensions) => {
-const colorAggregator = getDimensionAggregator('color', mapping, dataTypes, dimensions);
-const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions); // add the non-compulsory dimensions.
-mapping.color = {
-value: undefined
-};
-mapping.series = {
-  value: undefined
-};
-mapping.size = {
-value: undefined
-};
+//const colorAggregator = getDimensionAggregator('color', mapping, dataTypes, dimensions);
+var _sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions); // add the non-compulsory dimensions.
+console.log('sizeAggregator', _sizeAggregator)
+console.log('mapping.size', mapping.size)
+console.log('mapping.size.value', mapping.size.value)
+if (mapping.series === undefined) {
+  mapping.series = {
+    value: undefined
+  };
+}
+if (mapping.color === undefined) {
+  mapping.color = {
+    value: undefined
+  };
+}
+if (mapping.size === undefined) {
+  mapping.size = {
+    value: undefined
+  };
+}
 let results = [];
 rollups(data, v => {
 const item = {
@@ -561,9 +598,9 @@ series: v[0][mapping.series.value],
 // get the first one since it's grouped
 bars: v[0][mapping.bars.value],
 // get the first one since it's grouped
-size: mapping.size.value ? sizeAggregator(v.map(d => d[mapping.size.value])) : v.length,
+size: mapping.size.value ? _sizeAggregator(v.map(d => d[mapping.size.value])) : v.length
 // aggregate. If not mapped, give 1 as size
-color: mapping.color.value ? colorAggregator(v.map(d => d[mapping.color.value])) : 'default' // aggregate, by default single color.
+//color: mapping.color.value ? colorAggregator(v.map(d => d[mapping.color.value])) : 'default' // aggregate, by default single color.
 
 };
 results.push(item);
@@ -699,9 +736,9 @@ console.log('pieSeries', pieSeries)
 }  
 function getChartOptions$2 (visualOptions, datachart, mapping, dataTypes, dimensions){
 const resultMap = getMappedDataBarChar(datachart,mapping, dataTypes,dimensions)
+console.log('getChartOptionsresultMap', resultMap)
 const barsDomain = rollups(resultMap, v => sum(v, d => d.size), d => d.bars, d => d.colors).sort(barsSortings[visualOptions.totalAscending]); // add grid
 console.log('getChartOptionsbarsDomain', barsDomain)
-
 return {
   legend: {
       show:visualOptions.showLegend,
@@ -709,8 +746,6 @@ return {
       orient:visualOptions.legendOrient,
       right:visualOptions.legendMarginRight,
       top:visualOptions.legendMarginTop
-
-
   },
   tooltip: {},//añadir a las opciones
   toolbox: {//añadir a las opciones
@@ -721,6 +756,13 @@ return {
           title: 'Vista de datos'
       },
     }
+},
+grid: {
+  left:  visualOptions.marginLeft,
+  right: visualOptions.marginRight,
+  bottom: visualOptions.marginBottom,
+  top: visualOptions.marginTop,
+  containLabel: true
 },
   xAxis:getxAxis(visualOptions,datachart, resultMap),
   yAxis:getyAxis(visualOptions,datachart, resultMap),
@@ -733,7 +775,7 @@ return {
       // backgroundStyle: {
       //     color: visualOptions.background
       //   }
+      color: visualOptions.colorScale.defaultColor
    }],
-   color: visualOptions.colorScale.defaultColor
 };
 }
