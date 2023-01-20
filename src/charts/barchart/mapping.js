@@ -17,7 +17,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     dataTypes,
     dimensions
   )
-
+console.log('sizeAggregator',sizeAggregator)
   if (mapping.series === undefined) {
     mapping.series = {
       value: undefined
@@ -36,14 +36,14 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 
   let results = []
 
-  const result = d3.rollups(
+  d3.rollups(
     data,
     (v) => {
       const item = {
         series: v[0][mapping.series.value], // get the first one since it's grouped
         bars: v[0][mapping.bars.value], // get the first one since it's grouped
         size: mapping.size.value
-          ? sizeAggregator(v.map((d) => d[mapping.size.value]))
+          ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
           : v.length, // aggregate. If not mapped, give 1 as size
         // color: mapping.color.value
         //   ? colorAggregator(v.map((d) => d[mapping.color.value]))
@@ -61,7 +61,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 const getxAxis = (visualOptions, datachart, resultMap) => {
     return {
         type: 'category',
-        data: resultMap.map(res =>res.bars),
         axisLabel: {
           show:visualOptions.showXaxisLabels,
           rotate: visualOptions.showXaxisLabelsRotate,
@@ -69,16 +68,68 @@ const getxAxis = (visualOptions, datachart, resultMap) => {
       },
     }
   }
-  const getyAxis = (visualOptions, datachart, resultMap) => {
-  return {
-  type: 'value'
+  function getDimensions(resultMap, mapping) {
+    console.log('getDimensions mapping.series',mapping.series)
+
+    if (mapping.series.value === undefined || mapping.series.value === 0) {
+        return ['bars', 'size']
+      } else {
+        var dimensions = resultMap.map(res =>res.series).filter((value, index, self) => self.indexOf(value) === index).sort();
+        dimensions.unshift('bars')
+        console.log('getDimensions series',dimensions)
+        return dimensions
+      }
   }
+
+  function getSorterConfig(resultMap, mapping, visualOptions) {
+    if ("name" === visualOptions.sortBarsBy) {
+      return {
+        transform: { 
+          type: 'sort',
+          config: {dimension: 'bars', order: 'asc'}
+        }
+      }
+    }
+    if ("totalDescending" === visualOptions.sortBarsBy) {
+      return {
+        transform: { 
+          type: 'sort',
+          config: {dimension: 'size', order: 'desc'}
+        }
+      }
+    }
+    if ("totalAscending" === visualOptions.sortBarsBy) {
+      return {
+        transform: { 
+          type: 'sort',
+          config: {dimension: 'size', order: 'asc'}
+        }
+      }
+    }
   }
+  function getDataset(resultMap, mapping, visualOptions) {
+return [{
+  dimensions: getDimensions(resultMap, mapping),
+  source: resultMap,
+},
+  getSorterConfig(resultMap, mapping, visualOptions)
+]
+}
+
+const getSeries = (visualOptions, mapping, resultMap) => {
+  return [
+    { 
+      type: 'bar',
+    datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0
+}]
+}
 export const getChartOptions = function (visualOptions, datachart, mapping, dataTypes, dimensions){
     const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
     console.log('getChartOptionsresultMap', resultMap)
-    //const barsDomain = rollups(resultMap, v => sum(v, d => d.size), d => d.bars, d => d.colors).sort(barsSortings[visualOptions.totalAscending]); // add grid
-    //console.log('getChartOptionsbarsDomain', barsDomain)
+     resultMap.forEach(d => {
+     });
+    console.log('getChartOptionsresultMap2', resultMap)
+
     return {
       legend: {
           show:visualOptions.showLegend,
@@ -97,25 +148,16 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
           },
         }
     },
+    dataset:getDataset(resultMap, mapping, visualOptions),
     grid: {
-      left:  visualOptions.marginLeft,
-      right: visualOptions.marginRight,
-      bottom: visualOptions.marginBottom,
-      top: visualOptions.marginTop,
+       left:  visualOptions.marginLeft,
+       right: visualOptions.marginRight,
+       bottom: visualOptions.marginBottom,
+       top: visualOptions.marginTop,
       containLabel: true
     },
       xAxis:getxAxis(visualOptions,datachart, resultMap),
-      yAxis:getyAxis(visualOptions,datachart, resultMap),
-       series: [{
-          name: mapping.bars.value[0],
-          type: 'bar',
-          data: resultMap.map(res =>res.size),
-          //añadir a las opciones
-          //showBackground: true,
-          // backgroundStyle: {
-          //     color: visualOptions.background
-          //   }
-          color: visualOptions.colorScale.defaultColor
-       }],
+      yAxis: {},
+      series: getSeries(visualOptions,mapping, resultMap)
     };
     }

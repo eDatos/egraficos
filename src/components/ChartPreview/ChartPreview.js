@@ -118,6 +118,7 @@ const ChartPreview = ({
     console.log('options', options);
     console.log('error', error);
     options = error === null ? chart.getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {}
+    console.log('optionsfinal', options);
     if (domRef && domRef.current)
     console.log('actual', domRef.current);
     domRef.current?.getEchartsInstance().setOption(options,true);
