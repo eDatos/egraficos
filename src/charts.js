@@ -1,11 +1,13 @@
 import {
   barchart,
   piechart,
+  linechart
 } from './charts/index.js'
 
 let charts = [
   barchart,
-  piechart
+  piechart,
+  linechart
 ]
 
 export default charts
