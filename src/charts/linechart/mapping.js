@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
+import _ from 'lodash';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   
@@ -62,7 +63,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 function getDimensions(resultMap, mapping) {
   console.log('getDimensions mapping.series',mapping.series)
 
-  if (mapping.lines.value === undefined || mapping.lines.value === 0) {
+  if (mapping.lines.value === undefined || mapping.lines.value.length === 0) {
       return ['x', 'y']
     } else {
       var dimensions = resultMap.map(res =>res.lines).filter((value, index, self) => self.indexOf(value) === index).sort();
@@ -88,20 +89,27 @@ function getDataset(resultMap, mapping, visualOptions) {
       // },
     }
   }
-  const getSeries = (visualOptions, mapping, resultMap) => {
-    return [
-      { 
-        type: 'line',
-        smooth: true,
-        seriesLayoutBy: 'row',
-        emphasis: { focus: 'series' }
-  }]
-  }
 export function getChartOptions (visualOptions, datachart, mapping, dataTypes, dimensions){
   const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
   console.log('getChartOptionsresultMap', resultMap)
   resultMap.sort((a, b) => d3.ascending(a.x, b.x))
-  resultMap.sort((a, b) => d3.ascending(a.lines, b.lines))
+  var grouped = _.groupBy(resultMap, 'lines');
+
+  for (var lines in grouped) {
+    _.sortBy(grouped[lines], 'x');
+  }
+  console.log('getChartOptionsresultgrouped', grouped)
+
+  //resultMap.sort((a, b) => d3.ascending(a.x, b.x))
+  //resultMap.sort((a, b) => d3.ascending(a.lines, b.lines))
+  const lineSeries = getDimensions(resultMap, mapping).map(function (item, index) {
+    return { 
+      type: 'line',
+      smooth: true,
+      seriesLayoutBy: 'row',
+      emphasis: { focus: 'series' }
+  }
+  });
   console.log('getChartOptionsresultnestedData', resultMap)
   return {
     legend: {
@@ -121,7 +129,7 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
         },
       }
   },
-  dataset:getDataset(resultMap, mapping, visualOptions),
+  dataset:getDataset(grouped, mapping, visualOptions),
   grid: {
      left:  visualOptions.marginLeft,
      right: visualOptions.marginRight,
@@ -131,6 +139,8 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
   },
     xAxis:getxAxis(visualOptions,datachart, resultMap),
     yAxis: {},
-    series: getSeries(visualOptions,mapping, resultMap)
+    series: [
+      ...lineSeries,
+    ],
   };
   }

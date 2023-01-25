@@ -21,6 +21,14 @@ const samplesList = [
     sourceURL:
       'https://en.wikipedia.org/w/index.php?title=List_of_countries_by_GDP_sector_composition&oldid=1022131842',
   },
+  {
+    name: 'Revenues per Music format',
+    category: 'Line chart',
+    url: './sample-datasets/Line chart - RIAA Music format revenues.tsv',
+    delimiter: '\t',
+    sourceName: 'RIAA',
+    sourceURL: 'https://www.riaa.com/u-s-sales-database/',
+  },
   // {
   //   name: '',
   //   category: '',

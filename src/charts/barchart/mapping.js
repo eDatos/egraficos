@@ -45,6 +45,10 @@ console.log('sizeAggregator',sizeAggregator)
         size: mapping.size.value
           ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
           : v.length, // aggregate. If not mapped, give 1 as size
+        [v[0][mapping.series.value]]: mapping.size.value
+        ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
+        : v.length
+
         // color: mapping.color.value
         //   ? colorAggregator(v.map((d) => d[mapping.color.value]))
         //   : 'default', // aggregate, by default single color.
@@ -71,7 +75,7 @@ const getxAxis = (visualOptions, datachart, resultMap) => {
   function getDimensions(resultMap, mapping) {
     console.log('getDimensions mapping.series',mapping.series)
 
-    if (mapping.series.value === undefined || mapping.series.value === 0) {
+    if (mapping.series.value === undefined || mapping.series.value.length === 0) {
         return ['bars', 'size']
       } else {
         var dimensions = resultMap.map(res =>res.series).filter((value, index, self) => self.indexOf(value) === index).sort();
@@ -115,20 +119,22 @@ return [{
   getSorterConfig(resultMap, mapping, visualOptions)
 ]
 }
-
-const getSeries = (visualOptions, mapping, resultMap) => {
-  return [
-    { 
-      type: 'bar',
-    datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0
-}]
-}
 export const getChartOptions = function (visualOptions, datachart, mapping, dataTypes, dimensions){
     const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
     console.log('getChartOptionsresultMap', resultMap)
-     resultMap.forEach(d => {
-     });
-    console.log('getChartOptionsresultMap2', resultMap)
+    let dimensiones = getDimensions(resultMap, mapping)
+    console.log('getChartOptionsdimensiones', dimensiones)
+    const seriesSize = dimensiones.length-1;
+    const barSeries = dimensiones.map(function (item, index) {
+      console.log('getDimensionsseriesSize', seriesSize)
+      console.log('getDimensionsindex', index)
+      if (index <seriesSize) {
+        return { 
+          type: 'bar',
+          datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0
+      }
+      }
+    });
 
     return {
       legend: {
@@ -158,6 +164,8 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
     },
       xAxis:getxAxis(visualOptions,datachart, resultMap),
       yAxis: {},
-      series: getSeries(visualOptions,mapping, resultMap)
+      series: [
+        ...barSeries,
+      ],
     };
     }
