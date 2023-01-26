@@ -129,7 +129,7 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
         },
       }
   },
-  dataset:getDataset(grouped, mapping, visualOptions),
+  dataset:getDataset(resultMap, mapping, visualOptions),
   grid: {
      left:  visualOptions.marginLeft,
      right: visualOptions.marginRight,

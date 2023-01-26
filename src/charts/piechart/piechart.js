@@ -3,7 +3,6 @@ import { dimensions } from './dimensions'
 import { getChartOptions } from './mapping'
 import { colorDomain  } from './render'
 import { visualOptions } from './visualOptions'
-import styles from '../styles/base.raw.css'
 
 export const piechart = {
   metadata,
@@ -12,5 +11,4 @@ export const piechart = {
   //mapData,
   colorDomain,
   visualOptions,
-  styles,
 }
