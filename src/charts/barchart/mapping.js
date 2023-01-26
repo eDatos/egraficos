@@ -2,8 +2,8 @@ import * as d3 from 'd3'
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
-  // define aggregators
 
+  //TODO EDATOS DESCARTADO DE MOMENTO. MIRAR SI ES NECESARIO
 //   const colorAggregator = getDimensionAggregator(
 //     'color',
 //     mapping,
@@ -73,14 +73,11 @@ const getxAxis = (visualOptions, datachart, resultMap) => {
     }
   }
   function getDimensions(resultMap, mapping) {
-    console.log('getDimensions mapping.series',mapping.series)
-
     if (mapping.series.value === undefined || mapping.series.value.length === 0) {
         return ['bars', 'size']
       } else {
         var dimensions = resultMap.map(res =>res.series).filter((value, index, self) => self.indexOf(value) === index).sort();
         dimensions.unshift('bars')
-        console.log('getDimensions series',dimensions)
         return dimensions
       }
   }
@@ -121,13 +118,10 @@ return [{
 }
 export const getChartOptions = function (visualOptions, datachart, mapping, dataTypes, dimensions){
     const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
-    console.log('getChartOptionsresultMap', resultMap)
     let dimensiones = getDimensions(resultMap, mapping)
-    console.log('getChartOptionsdimensiones', dimensiones)
     const seriesSize = dimensiones.length-1;
+    //TODO EDATOS CAMBIAR COMO SE ITERA?
     const barSeries = dimensiones.map(function (item, index) {
-      console.log('getDimensionsseriesSize', seriesSize)
-      console.log('getDimensionsindex', index)
       if (index <seriesSize) {
         return { 
           type: 'bar',

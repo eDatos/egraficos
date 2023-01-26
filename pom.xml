@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.gobcan.istac.edatos-graphs</groupId>
 	<artifactId>edatos-graphs</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>Edatos Graphs</name>
 	<description>Sistema producción visualizaciones</description>
@@ -51,7 +51,7 @@
 						</goals>
 						<configuration>
 							<executable>yarn</executable>
-							<arguments>run build release</arguments>
+							<arguments>run build</arguments>
 						</configuration>
 					</execution>
 				</executions>
@@ -72,10 +72,10 @@
 						</goals>
 						<configuration>
 							<encoding>UTF-8</encoding>
-							<outputDirectory>${basedir}/factory-production-service/target/classes/static</outputDirectory>
+							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${basedir}/factory-production-front-end/build</directory>
+									<directory>${basedir}/build</directory>
 									<filtering>false</filtering>
 								</resource>
 							</resources>
@@ -83,6 +83,15 @@
 					</execution>
 				</executions>
 			</plugin>
+							<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+					<configuration>
+						<useReleaseProfile>false</useReleaseProfile>
+						<tagNameFormat>${maven.build.timestamp}-v@{project.version}</tagNameFormat>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>

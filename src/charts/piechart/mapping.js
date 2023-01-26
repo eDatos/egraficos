@@ -45,15 +45,11 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   }
 
   export function getChartOptions (visualOptions, datachart, mapping, dataTypes, dimensions){
-    console.log('getChartOptionsvisualOptions', visualOptions)
-  console.log('getChartOptionsdatachart', datachart)
-  console.log('getChartOptionsmapping', mapping)
   const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
   resultMap.forEach(d => {
     // compute the total value for each pie
     d.totalValue = d3.sum(mapping.arcs.value.map(arc => d[arc]));
   });
-  console.log('getChartOptionsresultMap', resultMap)
   // const arcsSize = mapping.arcs.value.map(arc => ({
   //   name: arc,
   //   value: sum(resultMap.map(d => d[arc]))
@@ -63,9 +59,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   console.log('spam', spam)
   const regforraw = Math.ceil(resultMap.length/filas)
   console.log('regforraw', regforraw)
-  var spamfilas = 100/filas-10;
-  console.log('calculo spamfilas', spamfilas)
-  
+  var spamfilas = 100/filas-10;  
   var countreg = 0
   var left = 0;
   var top = 0;
@@ -78,28 +72,27 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   }
   
   function roseType() {
-    console.log('roseType', visualOptions.nightingaleChart)
     if (visualOptions.nightingaleChart) {
       return visualOptions.nightingaleChartOption
     } else {
       return ''
     }
   }
+  //TODO EDATOS EL CALCULO DE LA SERIE ESTA MAL PARA DIVIDIR LOS DISTRIBUIR LOS DIFERENTES GRAFICOS
+  //HAY QUE CALCULAR BIEN Y DEMOMENTAR LA DIMIENSIÓN PARA PODER USARLO
   const pieSeries = resultMap.map(function (item, index) {
     console.log('pieSeriesitem', item)
-    console.log('pieSeriesitemroseType', roseType)
   
     countreg= countreg +1;
-    console.log('countreg', countreg)
     const map2 = new Map(Object.entries(item))
     const valuedentro = mapping.arcs.value.map(arc => ({
       name: arc,
       value: map2.get(arc)
     }));
+
   
     var total = resultMap.length
     var radius = spam
-    //left = (countreg <= regforraw) ? left + spam : 10
     if (countreg <= regforraw) {
       top = spamfilas
       left = left + spam
@@ -109,14 +102,9 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
       countreg = 0
       left = spam
     }
-    //top = (index < regforraw) ? spamfilas: top+spamfilas
     left = total === 1 ? 50 : left
     top = (total === 1 || filas===1) ? 50 : top
     radius = total === 1 ? 95 : radius
-    console.log('pieSeriesitemvaluedentroscountreg', countreg)
-    console.log('pieSeriesitemvaluedentroindex', index)
-    console.log('pieSeriesitemvaluedentrotop', top)
-    console.log('pieSeriesitemvaluedentroleft', left)
     return {
       name: item.series,
       type: 'pie',

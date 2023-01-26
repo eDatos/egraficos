@@ -26,13 +26,14 @@ import CustomChartWarnModal from './components/CustomChartWarnModal'
 import { useTranslation } from 'react-i18next'
 import { useCookies } from "react-cookie"
 
-
+//TODO EDATOS TEMPORAL VERFICAR I18N
 const lngs = {
   en: {nativeName: 'English'},
   es: {nativeName: 'Spanish'},
   ca: {nativeName: 'Catala'}
 }
 
+//TODO EDATOS ELIMINAR
 // function TranslateCookie() {
 //   const [cookies, setCookie] = useCookies();
 //   const {i18n } = useTranslation();
@@ -268,13 +269,13 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div>
+      {/* <div> //TODO EDATOS TEMPORAL PARA VERIFICAR EL CAMBIO DE IDIOMAS
           {Object.keys(lngs).map((lng) => (
             <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
               {lngs[lng].nativeName}
             </button>
           ))}
-      </div>
+      </div> */}
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}

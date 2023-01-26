@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   
+  //TODO EDATOS DESCARTADO DE MOMENTO ¿NECESARIO?
   // const colorAggregator = getDimensionAggregator(
   //   'color',
   //   mapping,
@@ -61,14 +62,11 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   return results
 }
 function getDimensions(resultMap, mapping) {
-  console.log('getDimensions mapping.series',mapping.series)
-
   if (mapping.lines.value === undefined || mapping.lines.value.length === 0) {
       return ['x', 'y']
     } else {
       var dimensions = resultMap.map(res =>res.lines).filter((value, index, self) => self.indexOf(value) === index).sort();
       dimensions.unshift('x')
-      console.log('getDimensions series',dimensions)
       return dimensions
     }
 }
@@ -82,17 +80,20 @@ function getDataset(resultMap, mapping, visualOptions) {
   const getxAxis = (visualOptions, datachart, resultMap) => {
     return {
         type: 'category',
-      //   axisLabel: {
-      //     show:visualOptions.showXaxisLabels,
-      //     rotate: visualOptions.showXaxisLabelsRotate,
-      //     fontSize:visualOptions.showXaxisLabelsFontSize
-      // },
+         axisLabel: {
+           show:visualOptions.showXaxisLabels,
+           rotate: visualOptions.showXaxisLabelsRotate,
+           fontSize:visualOptions.showXaxisLabelsFontSize
+       },
     }
   }
 export function getChartOptions (visualOptions, datachart, mapping, dataTypes, dimensions){
   const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
   console.log('getChartOptionsresultMap', resultMap)
   resultMap.sort((a, b) => d3.ascending(a.x, b.x))
+  resultMap.sort((a, b) => d3.ascending(a.lines, b.lines))
+  //TODO EDATOS HAY QUE REVISAR PQ DEBERÍAN DE ESTAR AGRUPADOS POR LINES Y DENTRO DE CADA GRUPO ORDENADOS POR EL VALOR DE LA X(MENOS A MAYOR)
+  //FALTA DARLE UNA VUELTA PARA QUE LOS GRUPOS ENTRE SI TB ESTEN ORDENADOS POR EL MENOR VALOR DE LA X
   var grouped = _.groupBy(resultMap, 'lines');
 
   for (var lines in grouped) {
@@ -100,8 +101,6 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
   }
   console.log('getChartOptionsresultgrouped', grouped)
 
-  //resultMap.sort((a, b) => d3.ascending(a.x, b.x))
-  //resultMap.sort((a, b) => d3.ascending(a.lines, b.lines))
   const lineSeries = getDimensions(resultMap, mapping).map(function (item, index) {
     return { 
       type: 'line',

@@ -38,7 +38,7 @@ export const dimensions = [
     //     date: 'csvDistinct',
     //   },
     // },
-  
+  // TODO EDATOS NO CONTROLADO DE MOMENTO. SERA NECESARIO?
     {
       id: 'series',
       name: 'Series',

@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 
-// #TODO add commit hash
-// const commitHash = process.env.REACT_APP_VERSION || 'dev'
 
 export default function Footer(props) {
   let[htmlFileString, setHtmlFileString] = useState();
   const divRef = useRef(null)
 
   async function fetchHtml() {
+        //TODO EDATOS HAY QUE PARAMETRIZAR LA URL
+
     setHtmlFileString(await (await fetch(`https://estadisticas.arte-consultores.com/apps/organisations/istac/common/footer/footer.html`)).text());
   }
   useEffect(() => {
