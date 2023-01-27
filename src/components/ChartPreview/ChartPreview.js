@@ -84,7 +84,6 @@ const ChartPreview = ({
       }
       return
     }
-    console.log('recorremos mapping');
     // control data-types mismatches
     for (let variable in mapping) {
       if (
@@ -115,12 +114,9 @@ const ChartPreview = ({
   }, [setError, vizOptionsDebounced, setRawViz, mappedData, chart, mapping])
   var options =  {}
   try {
-    console.log('options', options);
-    console.log('error', error);
     options = error === null ? chart.getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {}
     console.log('optionsfinal', options);
     if (domRef && domRef.current)
-    console.log('actual', domRef.current);
     domRef.current?.getEchartsInstance().setOption(options,true);
   } catch (e) {
          console.log("chart error", e)

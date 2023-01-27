@@ -39,11 +39,11 @@ export const dimensions = [
     //   },
     // },
   // TODO EDATOS NO CONTROLADO DE MOMENTO. SERA NECESARIO?
-    {
-      id: 'series',
-      name: 'Series',
-      validTypes: ['number', 'string', 'date'],
-      required: false,
-      operation: 'get',
-    },
+    // {
+    //   id: 'series',
+    //   name: 'Series',
+    //   validTypes: ['number', 'string', 'date'],
+    //   required: false,
+    //   operation: 'get',
+    // },
   ]

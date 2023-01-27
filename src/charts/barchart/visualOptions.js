@@ -65,7 +65,7 @@ export const visualOptions = {
     },
     legendMarginTop: {
       type: 'number',
-      label: 'Legend Margin(Right)',
+      label: 'Legend Margin(Top)',
       default: 'auto',
       group: 'artboard',
       disabled: {
@@ -164,20 +164,21 @@ export const visualOptions = {
       dimension: 'color',
       default: {
         scaleType: 'ordinal',
-        interpolator: 'interpolateSpectral'
+        interpolator: 'interpolateBlues',
+        defaultColor: '#385ad4'
       },
       group: 'colors'
     },
   // labels
   showXaxisLabels: {
     type: 'boolean',
-    label: 'Show x-axis Label',
+    label: 'Show axis Label',
     default: true,
     group: 'labels'
   },
   showXaxisLabelsRotate: {
     type: 'number',
-    label: 'Label position',
+    label: 'Label rotation',
     group: 'labels',
     disabled: {
       showXaxisLabels: false

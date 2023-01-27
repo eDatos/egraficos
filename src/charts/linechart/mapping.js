@@ -41,7 +41,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
       d3.rollups(
         v,
         (vv) => {
-          console.log('yagregator', yAggregator[0](vv.map((d) => d[mapping.y.value])))
           const item = {
             x: vv[0][mapping.x.value], //get the first one since it's grouped
             y: yAggregator[0](vv.map((d) => d[mapping.y.value])), // aggregate
@@ -50,7 +49,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
             lines: vv[0][mapping.lines.value], //get the first one since it's grouped
             [vv[0][mapping.lines.value]]: yAggregator[0](vv.map((d) => d[mapping.y.value]))
           }
-          console.log('item dentro', item)
           results.push(item)
         },
         (d) => d[mapping.x.value].toString() // sub-group functions. toString() to enable grouping on dates
@@ -99,17 +97,20 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
   for (var lines in grouped) {
     _.sortBy(grouped[lines], 'x');
   }
-  console.log('getChartOptionsresultgrouped', grouped)
-
+  let dimensiones = getDimensions(resultMap, mapping)
+  const seriesSize = dimensiones.length-1;
   const lineSeries = getDimensions(resultMap, mapping).map(function (item, index) {
-    return { 
-      type: 'line',
-      smooth: true,
-      seriesLayoutBy: 'row',
-      emphasis: { focus: 'series' }
-  }
+    if (index <seriesSize) {
+      return { 
+        type: 'line',
+        smooth: true,
+        step: visualOptions.stepCurve ? visualOptions.stepType: false,
+        emphasis: { focus: 'series' },
+        showSymbol: visualOptions.showPoints,
+        symbolSize: visualOptions.dotsDiameter
+    }
+    }
   });
-  console.log('getChartOptionsresultnestedData', resultMap)
   return {
     legend: {
         show:visualOptions.showLegend,
@@ -126,6 +127,9 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
           dataView: {
             title: 'Vista de datos'
         },
+        dataZoom: {
+        },
+        restore: {}
       }
   },
   dataset:getDataset(resultMap, mapping, visualOptions),

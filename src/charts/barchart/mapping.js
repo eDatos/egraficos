@@ -63,13 +63,35 @@ console.log('sizeAggregator',sizeAggregator)
   return results
 }
 const getxAxis = (visualOptions, datachart, resultMap) => {
-    return {
+    if ("vertical" === visualOptions.barsOrientation){
+      return {
         type: 'category',
         axisLabel: {
           show:visualOptions.showXaxisLabels,
           rotate: visualOptions.showXaxisLabelsRotate,
           fontSize:visualOptions.showXaxisLabelsFontSize
       },
+    }
+    } else {
+      return {
+        type: 'value',
+      }
+    }
+  }
+  const getyAxis = (visualOptions, datachart, resultMap) => {
+    if ("horizontal" === visualOptions.barsOrientation){
+      return {
+        type: 'category',
+        axisLabel: {
+          show:visualOptions.showXaxisLabels,
+          rotate: visualOptions.showXaxisLabelsRotate,
+          fontSize:visualOptions.showXaxisLabelsFontSize
+      },
+    }
+    } else {
+      return {
+        type: 'value',
+      }
     }
   }
   function getDimensions(resultMap, mapping) {
@@ -125,7 +147,7 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
       if (index <seriesSize) {
         return { 
           type: 'bar',
-          datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0
+          datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0,
       }
       }
     });
@@ -146,6 +168,9 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
             dataView: {
               title: 'Vista de datos'
           },
+          dataZoom: {
+          },
+          restore: {}
         }
     },
     dataset:getDataset(resultMap, mapping, visualOptions),
@@ -157,9 +182,10 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
       containLabel: true
     },
       xAxis:getxAxis(visualOptions,datachart, resultMap),
-      yAxis: {},
+      yAxis: getyAxis(visualOptions,datachart, resultMap),
       series: [
         ...barSeries,
       ],
+      color: visualOptions.colorScale.defaultColor
     };
     }
