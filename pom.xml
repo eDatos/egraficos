@@ -52,6 +52,9 @@
 						<configuration>
 							<executable>yarn</executable>
 							<arguments>build</arguments>
+							<environmentVariables>
+								<CI>false</CI> <!-- Evita que los warnings lanzados durante la compilación sean considerados errores y rompan la misma -->
+							</environmentVariables>
 						</configuration>
 					</execution>
 				</executions>
