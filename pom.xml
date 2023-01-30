@@ -29,15 +29,15 @@
 				<version>${frontend-maven-plugin.version}</version>
 				<executions>
 					<execution>
-                        <id>install node and yarn</id>
-                        <goals>
-                            <goal>install-node-and-yarn</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>${node.version}</nodeVersion>
-                            <yarnVersion>${yarn.version}</yarnVersion>
-                        </configuration>
-                    </execution>
+						<id>install node and yarn</id>
+						<goals>
+							<goal>install-node-and-yarn</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>${node.version}</nodeVersion>
+							<yarnVersion>${yarn.version}</yarnVersion>
+						</configuration>
+					</execution>
 					<execution>
 						<id>yarn install</id>
 						<goals>
@@ -60,30 +60,30 @@
 
 		<pluginManagement>
 			<plugins>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.2.0</version>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<encoding>UTF-8</encoding>
-							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/build</directory>
-									<filtering>false</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-							<plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.2.0</version>
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<phase>generate-resources</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<encoding>UTF-8</encoding>
+								<outputDirectory>${basedir}/target/classes/static</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${basedir}/build</directory>
+										<filtering>false</filtering>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.5.3</version>
@@ -95,7 +95,12 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
+	<scm>
+		<connection>scm:git:http://git.arte-consultores.com/istac/edatos-graphs</connection>
+		<developerConnection>scm:git:http://git.arte-consultores.com/istac/edatos-graphs</developerConnection>
+		<url>http://git.arte-consultores.com/istac/edatos-graphs</url>
+		<tag>HEAD</tag>
+	</scm>
 	<distributionManagement>
 		<repository>
 			<id>arte.releases.http</id>
