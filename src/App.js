@@ -265,7 +265,7 @@ function App() {
   useEffect(() => {
     setCookie();
     i18n.changeLanguage(cookies.chosenLocale);
-  }, []);
+  }, [setCookie,i18n,cookies.chosenLocale]);
   return (
     <div className="App">
       <Header />

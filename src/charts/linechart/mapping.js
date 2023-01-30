@@ -109,6 +109,8 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
         showSymbol: visualOptions.showPoints,
         symbolSize: visualOptions.dotsDiameter
     }
+    } else {
+      return {}
     }
   });
   return {
