@@ -27,11 +27,11 @@ import { useTranslation } from 'react-i18next'
 import { useCookies } from "react-cookie"
 
 //TODO EDATOS TEMPORAL VERFICAR I18N
-const lngs = {
-  en: {nativeName: 'English'},
-  es: {nativeName: 'Spanish'},
-  ca: {nativeName: 'Catala'}
-}
+// const lngs = {
+//   en: {nativeName: 'English'},
+//   es: {nativeName: 'Spanish'},
+//   ca: {nativeName: 'Catala'}
+// }
 
 //TODO EDATOS ELIMINAR
 // function TranslateCookie() {

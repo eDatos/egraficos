@@ -19,17 +19,15 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
       }
     // we will use rollup to populate a flat array of objects
     // that will be passed to the render
-    let results = []
-    let index = 0
-  
-    const result = d3.rollups(
+    let results = []  
+    d3.rollups(
       data,
       (v) => {
         let item = {
           series: v[0][mapping.series.value],
         }
   
-        let arcs = mapping.arcs.value.forEach((arcName, i) => {
+        mapping.arcs.value.forEach((arcName, i) => {
           // getting i-th aggregator
           const aggregator = arcsAggregators[i]
           // use it
