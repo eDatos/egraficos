@@ -1,0 +1,67 @@
+{
+    "global": {
+        "section": {
+            "loaddata": {
+                "tittle": "1. Cargar datos",
+                "paste": {
+                    "name": "Pegar datos",
+                    "message": "Copie y pegue sus datos de otras aplicaciones o sitios web. Puede usar datos tabulares (TSV, CSV, DSV) o JSON."
+                },
+                "upload": {
+                    "name": "Subir datos",
+                    "message": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON."
+                },
+                "sample": {
+                    "name": "Probar ejemplos datos",
+                    "message": ""
+                },
+                "sparql": {
+                    "name" : "Consulta SPARQL",
+                    "message": ""
+                },
+                "url": {
+                    "name": "Desde URL",
+                    "message": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...). Por favor, asegúrese de que el servidor tiene CORS habilitado."
+                },
+                "project": {
+                    "name": "Abrir proyecto",
+                    "messagge": "Cargar .rawgraphs project."
+                }
+            },
+            "chartselection": {
+                "tittle": "2. Seleccione gráfico"
+            },
+            "mapping": {
+                "tittle": "3. Mapping",
+                "chartvariables":{
+                    "dimensions": "DIMENSIONES",
+                    "variables": "VARIABLES GRÁFICO",
+                    "dropdimension" : "Arrastre dimensión aquí",
+                    "dropanotherdimen": "Arrastre otra dimensión aquí"
+                }
+            },
+            "customize": {
+                "tittle": "4. Personalizar"
+            },
+            "export": {
+                "tittle": "5. Exportar"
+            }
+        },
+        "reset": "Reiniciar",
+        "changedata": "Camiar datos",
+        "column": "Columna",
+        "copyclipboard": "Copiar al portapapeles",
+        "copiedclipboard": "Copiado al portapales",
+        "message": {
+            "loadrows": {
+                "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han sido correctamente parseadas, ahora puedes elegir un gráfico!</p>"
+            }
+        }
+    },         
+    "separator" : {
+        "Tab":"Tabulador",
+        "Semicolon":"Punto y coma",
+        "Comma":"Coma",
+        "Pipe":"Barra"
+    }
+} 

@@ -1,0 +1,67 @@
+{
+    "global": {
+        "section": {
+            "loaddata": {
+                "tittle": "1. Carregar dades",
+                "paste": {
+                    "name": "Enganxar dades",
+                    "message": "Copieu i enganxeu les dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON."
+                },
+                "upload": {
+                    "name": "Pujar dades",
+                    "message": "Podeu carregar dades tabulars (TSV, CSV, DSV) o JSON."
+                },
+                "sample": {
+                    "name": "Provar exemples dades",
+                    "message": ""
+                },
+                "sparql": {
+                    "name" : "Consulta SPARQL",
+                    "message": ""
+                },
+                "url": {
+                    "name": "Des de URL",
+                    "message": "Introduïu una adreça web (URL) que apunti a les dades (per exemple, un fitxer públic de Dropbox, una API pública, ...). Assegureu-vos que el servidor té CORS habilitat."
+                },
+                "project": {
+                    "name": "Obrir projecte",
+                    "messagge": "Carregar .rawgraphs projecte."
+                }
+            },
+            "chartselection": {
+                "tittle": "2. Seleccioneu gràfic"
+            },
+            "mapping": {
+                "tittle": "3. Mapejos",
+                "chartvariables":{
+                    "dimensions": "DIMENSIONS",
+                    "variables": "VARIABLES GRÀFIC",
+                    "dropdimension" : "Arrossegueu dimensió aquí",
+                    "dropanotherdimen": "Arrossegueu una altra dimensió aqu"
+                }
+            },
+            "customize": {
+                "tittle": "4. Personalitzar"
+            },
+            "export": {
+                "tittle": "5. Exportar"
+            }
+        },
+        "reset": "Reiniciar",
+        "changedata": "Canviar dades",
+        "column": "Columna",
+        "copyclipboard": "Copiar al porta-retalls",
+        "copiedclipboard": "Copiat al portapals",
+        "message": {
+            "loadrows": {
+                "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han estat correctament parsejades, ara pots triar un gràfic!</p>"
+            }
+        }
+    },         
+    "separator" : {
+        "Tab":"Tabulador",
+        "Semicolon":"Punt i coma",
+        "Comma":"Coma",
+        "Pipe":"Barra"
+    }
+} 

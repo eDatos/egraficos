@@ -1,0 +1,19 @@
+{
+    "separator": {
+        "tittle" : "DATA PARSING OPTIONS",
+        "column" :  {
+            "name": "Column separator"
+        },
+        "thousands": {
+            "name": "Thousands separator"
+        },
+        "decimals": {
+            "name": "Decimals separators"
+        }   
+    },
+    "datelocale":"Date Locale",
+    "datatransform": {
+        "tittle": "DATA TRANSFORMATION",
+        "stack": "Stack on"
+    }  
+}

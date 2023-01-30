@@ -1,92 +1,118 @@
-# Edatos Graphs
+## About
 
+**RAWGraphs** is an open web tool to create custom vector-based visualizations on top of the amazing [d3.js](https://github.com/mbostock/d3) library.
+It has been developed by [DensityDesign Research Lab](http://www.densitydesign.org/) ([Politecnico di Milano](http://www.polimi.it/)), [Calibro](http://calib.ro/) and [INMAGIK](https://inmagik.com/).
 
+Primarily conceived as a tool for designers and vis geeks, RAWGraphs aims at providing a missing link between spreadsheet applications (e.g., LibreOffice Calc, Microsoft Excel, Apple Numbers, Google Docs) and vector graphics editors (e.g., Inkscape, Adobe Illustrator).
 
-## Getting started
+RAWGraphs works with [tabular data](<https://en.wikipedia.org/wiki/Table_(information)>) (e.g., spreadsheets and comma-separated values) as well as with copied-and-pasted texts from other applications. Based on the [SVG](http://en.wikipedia.org/wiki/Svg) format, visualizations can be easily edited with vector graphics applications for further refinements or directly embedded into web pages.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Knowing the need to work with sensitive information, the data injected into RAWGraphs is processed only by the web browser: **no server-side operations or storages are performed**. No one will see, touch or copy your data!
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+RAWGraphs is also highly customizable and extensible, accepting new custom layouts defined by users. For more information about adding or editing layouts, see the [Developer Guide](https://github.com/rawgraphs/raw/wiki/Developer-Guide).
 
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://git.arte-consultores.com/istac/edatos-graphs.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://git.arte-consultores.com/istac/edatos-graphs/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+- App page: [app.rawgraphs.io](http://app.rawgraphs.io)
+- Project official page: [rawgraphs.io](http://rawgraphs.io)
+- Google group: [groups.google.com/forum/#!forum/densitydesign-raw](https://groups.google.com/forum/#!forum/densitydesign-raw)
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+The easiest way to use RAWGraphs is by accessing the most updated version on the **[official app page](http://app.rawgraphs.io)**. However, RAWGraphs can also run locally on your machine: see the installation instructions below for know-how.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Installation
+
+If you want to run your instance of RAWGraphs locally on your machine, be sure you have the following requirements installed. The following guide is for intermediate users (you will have to open your console and type some commands, it's better if you know what you are doing).
+
+### Requirements
+
+If you want to run your instance of RAWGraphs locally on your machine, be sure you have the following requirements installed.
+
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (it could be used through the interface of [GitHub Desktop](https://desktop.github.com/))
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+
+### Instructions (macOS)
+
+In the terminal, navigate to the folder where you want to install the app and clone the `RAWGraphs-app` GitHub repository:
+
+```shell
+git clone https://github.com/rawgraphs/rawgraphs-app.git
+```
+
+Browse the folder containing the repository:
+
+```shell
+cd rawgraphs-app
+```
+
+Install the needed dependencies through Yarn:
+
+```shell
+yarn install
+```
+
+Now you can run the project locally in development mode with the command:
+
+```shell
+yarn start
+```
+
+You can also build your own version and upload it on your server by running the command:
+
+```shell
+yarn build
+```
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Want to contribute to RAWGraphs's development? You are more than welcome! Start by forking the repository (the "Fork" button at the top-right corner of this page) and follow the instructions above to clone it and install dependencies. Then you can use Github's issues and pull requests to discuss and share your work.
+You will need to sign a [Contributor License Agreement (CLA)](https://en.wikipedia.org/wiki/Contributor_License_Agreement) before submitting. We adopted CLA to be sure that the project will remain open source. For more information, write us: <hello@rawgraphs.io>.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Publications / Citing RAWGraphs
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+If you have found RAWGraphs helpful in your research, or if you want to reference it in your work, please consider citing the paper we presented at [CHItaly 2017](http://sites.unica.it/chitaly2017/).
+
+you can read the full article in Green Open Access at the following link:
+
+![oa icon](http://dl.acm.org/images/oa.gif) [RAWGraphs: A Visualisation Platform to Create Open Outputs](http://rawgraphs.io/about/#cite)
+
+Cite RAWGraphs:
+
+> Mauri, M., Elli, T., Caviglia, G., Uboldi, G., & Azzi, M. (2017). RAWGraphs: A Visualisation Platform to Create Open Outputs. In _Proceedings of the 12th Biannual Conference on Italian SIGCHI Chapter_ (p. 28:1–28:5). New York, NY, USA: ACM. https://doi.org/10.1145/3125571.3125585
+
+Bibtex:
+
+```
+@inproceedings{Mauri:2017:RVP:3125571.3125585,
+ author = {Mauri, Michele and Elli, Tommaso and Caviglia, Giorgio and Uboldi, Giorgio and Azzi, Matteo},
+ title = {RAWGraphs: A Visualisation Platform to Create Open Outputs},
+ booktitle = {Proceedings of the 12th Biannual Conference on Italian SIGCHI Chapter},
+ series = {CHItaly '17},
+ year = {2017},
+ isbn = {978-1-4503-5237-6},
+ location = {Cagliari, Italy},
+ pages = {28:1--28:5},
+ articleno = {28},
+ numpages = {5},
+ url = {http://doi.acm.org/10.1145/3125571.3125585},
+ doi = {10.1145/3125571.3125585},
+ acmid = {3125585},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Visualization tools, data visualization, open output, visual interface},
+}
+```
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+RAWGraphs is provided under the [Apache License 2.0](https://github.com/rawgraphs/rawgraphs-app/blob/master/LICENSE):
+
+    Copyright (c), 2013-2021 DensityDesign Lab, Calibro, INMAGIK <hello@rawgraphs.io>
+    
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+    	http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and limitations under the License.
