@@ -149,6 +149,8 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
           type: 'bar',
           datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0,
       }
+      } else {
+        return {}
       }
     });
 

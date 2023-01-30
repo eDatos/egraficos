@@ -29,6 +29,15 @@ const samplesList = [
     sourceName: 'RIAA',
     sourceURL: 'https://www.riaa.com/u-s-sales-database/',
   },
+  {
+    name: 'EDATOS EXAMPLE',
+    category: 'Bar chart, line chart',
+    url: './sample-datasets/C00017A_0001.tsv',
+    delimiter: '\t',
+    sourceName: 'EDATOS',
+    sourceURL: '',
+  },
+  //C00017A_0001.tsv
   // {
   //   name: '',
   //   category: '',

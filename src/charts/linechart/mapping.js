@@ -35,7 +35,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 
   let results = []
 
-  const result = d3.rollups(
+  d3.rollups(
     data,
     (v) =>
       d3.rollups(
@@ -109,6 +109,8 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
         showSymbol: visualOptions.showPoints,
         symbolSize: visualOptions.dotsDiameter
     }
+    } else {
+      return {}
     }
   });
   return {
