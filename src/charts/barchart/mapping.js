@@ -148,6 +148,9 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
         return { 
           type: 'bar',
           datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0,
+          //TODO EDATOS Controlar el color de cada serie a partir de selector
+          //color: visualOptions.colorScale.defaultColor
+
       }
       } else {
         return {}
@@ -188,6 +191,5 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
       series: [
         ...barSeries,
       ],
-      color: visualOptions.colorScale.defaultColor
     };
     }
