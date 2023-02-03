@@ -268,14 +268,7 @@ function App() {
   }, [setCookie,i18n,cookies.chosenLocale]);
   return (
     <div className="App">
-      <Header />
-      {/* <div> //TODO EDATOS TEMPORAL PARA VERIFICAR EL CAMBIO DE IDIOMAS
-          {Object.keys(lngs).map((lng) => (
-            <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-              {lngs[lng].nativeName}
-            </button>
-          ))}
-      </div> */}
+      <Header value={cookies.chosenLocale}/>      
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}
@@ -324,7 +317,7 @@ function App() {
             <Exporter rawViz={rawViz} exportProject={exportProject} />
           </Section>
         )}
-        <Footer />
+        <Footer value={cookies.chosenLocale}/>
         <CookieConsent
           location="bottom"
           buttonText="Got it!"
