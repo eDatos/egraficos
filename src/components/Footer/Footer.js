@@ -21,7 +21,8 @@ export default function Footer(props) {
     const slotHtml = document.createRange().createContextualFragment(htmlFileString) // Create a 'tiny' document and parse the html string
     divRef.current.innerHTML = '' // Clear the container
     divRef.current.appendChild(slotHtml) // Append the new content
-  }, [htmlFileString, divRef, props]);
+  }, // eslint-disable-next-line 
+  [htmlFileString]); 
   return (
     <div ref={divRef}></div>)
 }
