@@ -1,12 +1,19 @@
 import React, { useEffect, useState, useRef  } from 'react'
+import applicationConfig from '../../application.json'
 
 export default function Header(props) {
   let[htmlFileString, setHtmlFileString] = useState();
   const divRef = useRef()
 
-  async function fetchHtml() {
-    //TODO EDATOS HAY QUE PARAMETRIZAR LA URL
-    setHtmlFileString(await (await fetch(`https://estadisticas.arte-consultores.com/apps/organisations/istac/apis/header/header.html`)).text());
+  async function fetchHtml() {    
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    };        
+    const headerUrlData = await fetch(applicationConfig['metadata']['endpoint'] + '/properties/'+applicationConfig['metadata']['navbarPathKey'], requestOptions)
+                                  .then(response => response.json())
+    setHtmlFileString(await (await fetch(headerUrlData['value'], requestOptions)).text()); 
+        
   }
   useEffect(() => {
     fetchHtml();

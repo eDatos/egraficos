@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import applicationConfig from '../../application.json'
 
 
 export default function Footer(props) {
@@ -6,9 +7,14 @@ export default function Footer(props) {
   const divRef = useRef(null)
 
   async function fetchHtml() {
-        //TODO EDATOS HAY QUE PARAMETRIZAR LA URL
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    };        
+    const footerUrlData = await fetch(applicationConfig['metadata']['endpoint'] + '/properties/'+applicationConfig['metadata']['footerPathKey'], requestOptions)
+                                  .then(response => response.json())
 
-    setHtmlFileString(await (await fetch(`https://estadisticas.arte-consultores.com/apps/organisations/istac/common/footer/footer.html`)).text());
+    setHtmlFileString(await (await fetch(footerUrlData['value'], requestOptions)).text());
   }
   useEffect(() => {
     fetchHtml();
