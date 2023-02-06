@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import applicationConfig from '../../application.json'
 
 
 export default function Footer(props) {
-  let[htmlFileString, setHtmlFileString] = useState();
   const divRef = useRef(null)
 
   async function fetchHtml(chosenLocale) {
@@ -11,18 +10,20 @@ export default function Footer(props) {
       method: 'GET',
       headers: { 'Accept': 'application/json' }
     };        
-    const footerUrlData = await fetch(applicationConfig['metadata']['endpoint'] + '/properties/'+applicationConfig['metadata']['footerPathKey'], requestOptions)
-                                  .then(response => response.json())
+    const responseFooterURL = await fetch(applicationConfig['metadata']['endpoint'] + '/properties/'+applicationConfig['metadata']['footerPathKey'], requestOptions);    
+    const footerUrlData = await responseFooterURL.json();
 
-    setHtmlFileString(await (await fetch(footerUrlData['value']+'?chosenLocale='+chosenLocale, requestOptions)).text());
+    return await (await fetch(footerUrlData['value']+'?chosenLocale='+chosenLocale, requestOptions)).text();    
   }
   useEffect(() => {
-    fetchHtml(props.value);
-    const slotHtml = document.createRange().createContextualFragment(htmlFileString) // Create a 'tiny' document and parse the html string
-    divRef.current.innerHTML = '' // Clear the container
-    divRef.current.appendChild(slotHtml) // Append the new content
-  }, // eslint-disable-next-line 
-  [htmlFileString]); 
+    const { current } = divRef;
+
+    fetchHtml(props.value).then((htmlContent) => {      
+      const slotHtml = document.createRange().createContextualFragment(htmlContent) // Create a 'tiny' document and parse the html string
+      current.innerHTML = '' // Clear the container
+      current.append(slotHtml) // Append the new content
+    });    
+  }, [props.value]); 
   return (
     <div ref={divRef}></div>)
 }

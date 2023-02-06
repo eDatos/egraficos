@@ -1,5 +1,6 @@
 {
     "global": {
+        "appName": "Sistema de gráficos a medida",
         "section": {
             "loaddata": {
                 "tittle": "1. Cargar datos",

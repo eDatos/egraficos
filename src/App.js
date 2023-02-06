@@ -246,13 +246,13 @@ function App() {
     [hydrateFromSavedProject, importCustomChartFromProject]
   )
 
-  useEffect(() => {
+  useEffect(() => {    
     setCookie();
     i18n.changeLanguage(cookies.chosenLocale);
   }, [setCookie,i18n,cookies.chosenLocale]);
   return (
     <div className="App">
-      <Header value={cookies.chosenLocale}/>      
+      <Header value={i18n} />      
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}

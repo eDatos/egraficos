@@ -1,5 +1,6 @@
 {
     "global": {
+        "appName": "Custom graphics development system",
         "section": {
             "loaddata": {
                 "tittle": "1. Load your data",
