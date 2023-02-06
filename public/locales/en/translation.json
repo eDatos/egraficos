@@ -24,7 +24,7 @@
                 },
                 "project": {
                     "name": "Open your project",
-                    "messagge": "Load a .rawgraphs project."
+                    "messagge": "Load a .edatosgraphs project."
                 }
             },
             "chartselection": {

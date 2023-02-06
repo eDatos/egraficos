@@ -63,7 +63,7 @@ export default function Exporter({ rawViz, exportProject }) {
     [exportProject]
   )
 
-  const exportFormats = ['svg', 'png', 'jpg', 'rawgraphs']
+  const exportFormats = ['svg', 'png', 'jpg', 'edatosgraphs']
 
   const [currentFormat, setCurrentFormat] = useState('svg')
   const [currentFile, setCurrentFile] = useState('viz')
@@ -79,8 +79,8 @@ export default function Exporter({ rawViz, exportProject }) {
       case 'jpg':
         downloadImage('image/jpeg', `${currentFile}.jpg`)
         break
-      case 'rawgraphs':
-        downloadProject(`${currentFile}.rawgraphs`)
+      case 'edatosgraphs':
+        downloadProject(`${currentFile}.edatosgraphs`)
         break
       default:
         break
