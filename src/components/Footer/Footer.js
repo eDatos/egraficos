@@ -1,21 +1,29 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import applicationConfig from '../../application.json'
 
 
 export default function Footer(props) {
-  let[htmlFileString, setHtmlFileString] = useState();
   const divRef = useRef(null)
 
-  async function fetchHtml() {
-        //TODO EDATOS HAY QUE PARAMETRIZAR LA URL
+  async function fetchHtml(chosenLocale) {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    };        
+    const responseFooterURL = await fetch(applicationConfig['metadata']['endpoint'] + '/properties/'+applicationConfig['metadata']['footerPathKey'], requestOptions);    
+    const footerUrlData = await responseFooterURL.json();
 
-    setHtmlFileString(await (await fetch(`https://estadisticas.arte-consultores.com/apps/organisations/istac/common/footer/footer.html`)).text());
+    return await (await fetch(footerUrlData['value']+'?chosenLocale='+chosenLocale, requestOptions)).text();    
   }
   useEffect(() => {
-    fetchHtml();
-    const slotHtml = document.createRange().createContextualFragment(htmlFileString) // Create a 'tiny' document and parse the html string
-    divRef.current.innerHTML = '' // Clear the container
-    divRef.current.appendChild(slotHtml) // Append the new content
-  }, [htmlFileString, divRef]);
+    const { current } = divRef;
+
+    fetchHtml(props.value).then((htmlContent) => {      
+      const slotHtml = document.createRange().createContextualFragment(htmlContent) // Create a 'tiny' document and parse the html string
+      current.innerHTML = '' // Clear the container
+      current.append(slotHtml) // Append the new content
+    });    
+  }, [props.value]); 
   return (
     <div ref={divRef}></div>)
 }

@@ -1,5 +1,6 @@
 {
     "global": {
+        "appName": "Sistema de gràfics a mida",
         "section": {
             "loaddata": {
                 "tittle": "1. Carregar dades",
@@ -25,7 +26,7 @@
                 },
                 "project": {
                     "name": "Obrir projecte",
-                    "messagge": "Carregar .rawgraphs projecte."
+                    "messagge": "Carregar .edatosgraphs projecte."
                 }
             },
             "chartselection": {

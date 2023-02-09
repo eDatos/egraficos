@@ -1,5 +1,6 @@
 {
     "global": {
+        "appName": "Custom graphics development system",
         "section": {
             "loaddata": {
                 "tittle": "1. Load your data",
@@ -23,7 +24,7 @@
                 },
                 "project": {
                     "name": "Open your project",
-                    "messagge": "Load a .rawgraphs project."
+                    "messagge": "Load a .edatosgraphs project."
                 }
             },
             "chartselection": {
