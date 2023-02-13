@@ -36,18 +36,6 @@ function getPartialMapping(mapping, dimension, repeatIndex) {
   }
 }
 
-function getPartialMappedData(mappedData, dimension, repeatIndex) {
-  return Array.isArray(mappedData)
-    ? mappedData.map((datum) => {
-        const value = get(datum[dimension], `[${repeatIndex}]`)
-        return {
-          ...datum,
-          [dimension]: value,
-        }
-      })
-    : mappedData
-}
-
 function getDefaultForRepeat(def, index) {
   if (Array.isArray(def.repeatDefault)) {
     return get(def.repeatDefault, `[${index}]`, def.default)
@@ -83,11 +71,7 @@ function WrapControlComponent({
       //as sometimes the current chart is not in synch with current options (chart is set before options, we just handle an exception)
       //everything should be ok on the next render.
       try {
-        const domain = props.chart[props.domain](
-          props.mappedData,
-          props.mapping,
-          props.visualOptions
-        )
+        const domain = props.chart[props.domain](null, props.mapping)
         return domain
       } catch (e) {
         return null
@@ -100,7 +84,6 @@ function WrapControlComponent({
     type,
     props.chart,
     props.domain,
-    props.mappedData,
     props.mapping,
     remainingOptions,
   ])
@@ -133,7 +116,8 @@ function WrapControlComponent({
     if (domainFromChart) {
       return domainFromChart.domain
     }
-
+    //TODO: Esta es la función que creo que habría que cambiar para mostrar selector de colores
+/*
     if (props.mappedData) {
       return props.mappedData
         .map((d) => get(d, props.dimension))
@@ -143,7 +127,9 @@ function WrapControlComponent({
     } else {
       return []
     }
-  }, [type, props.dimension, domainFromChart, props.mappedData])
+ */
+    return []
+  }, [type, /*props.dimension, */domainFromChart])
 
   const handleControlChange = useCallback(
     (nextValue) => {
@@ -185,7 +171,6 @@ function WrapControlComponent({
         'chart',
         'dataset',
         'dataTypes',
-        'mappedData',
       ])}
       onChange={handleControlChange}
     />
@@ -200,7 +185,6 @@ const ChartOptions = ({
   visualOptions,
   setVisualOptions,
   error,
-  mappedData,
 }) => {
   const optionsConfig = useMemo(() => {
     return getOptionsConfig(chart?.visualOptions)
@@ -323,11 +307,6 @@ const ChartOptions = ({
                     visualOptions={
                       def.type === 'colorScale' ? visualOptions : undefined
                     }
-                    mappedData={getPartialMappedData(
-                      mappedData,
-                      def.repeatFor,
-                      repeatIndex
-                    )}
                     setVisualOptions={setVisualOptions}
                     isEnabled={enabledOptions[optionId]}
                   />
@@ -347,7 +326,6 @@ const ChartOptions = ({
                   visualOptions={
                     def.type === 'colorScale' ? visualOptions : undefined
                   }
-                  mappedData={mappedData}
                   setVisualOptions={setVisualOptions}
                   isEnabled={enabledOptions[optionId]}
                 />

@@ -26,7 +26,7 @@
                 },
                 "project": {
                     "name": "Abrir proyecto",
-                    "messagge": "Cargar .edatosgraphs project."
+                    "messagge": "Cargar un proyecto .edatosgraphs."
                 }
             },
             "chartselection": {

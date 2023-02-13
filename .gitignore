@@ -29,3 +29,5 @@ yarn-error.log*
 .settings/
 .classpath
 .project
+.idea
+

@@ -78,6 +78,19 @@ export const visualOptions = {
       default: false,
       group: 'artboard'
     },
+    render: {
+      type: 'text',
+      label: 'Render',
+      group: 'artboard',
+      options: [{
+        label: 'Svg',
+        value: 'svg'
+      }, {
+        label: 'Canvas',
+        value: 'canvas'
+      }],
+      default: 'svg'
+    },
     padding: {
       type: 'number',
       label: 'Padding',

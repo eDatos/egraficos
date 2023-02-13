@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
-export const mapData = function (data, mapping, dataTypes, dimensions) {
+const mapData = function (data, mapping, dataTypes, dimensions) {
 
   //TODO EDATOS DESCARTADO DE MOMENTO. MIRAR SI ES NECESARIO
 //   const colorAggregator = getDimensionAggregator(
@@ -17,7 +17,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     dataTypes,
     dimensions
   )
-console.log('sizeAggregator',sizeAggregator)
   if (mapping.series === undefined) {
     mapping.series = {
       value: undefined
@@ -48,8 +47,7 @@ console.log('sizeAggregator',sizeAggregator)
         [v[0][mapping.series.value]]: mapping.size.value
         ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
         : v.length
-
-        // color: mapping.color.value
+        //color: mapping.color.value
         //   ? colorAggregator(v.map((d) => d[mapping.color.value]))
         //   : 'default', // aggregate, by default single color.
       }
@@ -150,7 +148,6 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
           datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0,
           //TODO EDATOS Controlar el color de cada serie a partir de selector
           //color: visualOptions.colorScale.defaultColor
-
       }
       } else {
         return {}
@@ -165,6 +162,7 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
           right:visualOptions.legendMarginRight,
           top:visualOptions.legendMarginTop
       },
+      backgroundColor: visualOptions.background,
       tooltip: {},//añadir a las opciones
       toolbox: {//añadir a las opciones
         show: visualOptions.showToolbox,
