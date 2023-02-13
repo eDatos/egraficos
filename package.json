@@ -43,6 +43,7 @@
     "react-i18next": "^12.0.0",
     "react-icons": "^3.10.0",
     "react-scripts": "^4.0.3",
+    "react-uuid": "^2.0.0",
     "sparql-http-client": "^2.4.0",
     "sparqljs": "^3.5.1",
     "typeface-inter": "^3.12.0",

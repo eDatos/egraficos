@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import { InputGroup, DropdownButton, Dropdown } from 'react-bootstrap'
+import uuid from 'react-uuid'
 
 function downloadBlob(url, filename) {
   // Create a new anchor element
@@ -57,11 +58,12 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
   ])
 
   function getWidget() {
-      return '<div id="chart-container" style="position: relative; height: 100vh; overflow: hidden;"></div>\n' +
+      const generatedUUID = uuid();
+      return '<div id="chart-container-' + generatedUUID + '" style="position: relative; height: 100vh; overflow: hidden;"></div>\n' +
           '  <script src="' + window.location.href +'echarts.min.js"></script>\n' +
           '  <script src="' + window.location.href +'edatosgraphs.js"></script>\n' +
           '  <script>\n' +
-          '      renderGraph(' + JSON.stringify(options) + ', \'chart-container\')\n' +
+          '      renderGraph(' + JSON.stringify(options) + ', \'chart-container-' + generatedUUID +'\')\n' +
           '  </script>'
   }
 
