@@ -59,12 +59,12 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
 
   function getWidget() {
       const generatedUUID = uuid();
-      return '<div id="chart-container-' + generatedUUID + '" style="position: relative; height: 100vh; overflow: hidden;"></div>\n' +
-          '  <script src="' + window.location.href +'echarts.min.js"></script>\n' +
-          '  <script src="' + window.location.href +'edatosgraphs.js"></script>\n' +
-          '  <script>\n' +
-          '      renderGraph(' + JSON.stringify(options) + ', \'chart-container-' + generatedUUID +'\')\n' +
-          '  </script>'
+      return '<div id="chart-container-' + generatedUUID + '"></div>\n' +
+          '<script src="' + window.location.href +'widget/widget.js"></script>\n' +
+          '<script>\n' +
+          '    EdatosGraphs.config({selector: \'#chart-container-' + generatedUUID +'\', renderer: \'' + render + '\', options: ' + JSON.stringify(options) + '});\n' +
+          '    EdatosGraphs.widgets.egraph.new().render(); \n' +
+          '</script>'
   }
 
   useEffect(() => {

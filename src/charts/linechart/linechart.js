@@ -8,9 +8,7 @@ import { colorDomain  } from './render'
 export const linechart = {
   metadata,
   dimensions,
-  //mapData,
   getChartOptions,
   colorDomain,
-
   visualOptions
 }

@@ -219,7 +219,7 @@ const ChartOptionColorScale = ({
       const nextInterpolators = colorPresets[nextScaleType]
         ? Object.keys(colorPresets[nextScaleType])
         : []
-      setInterpolators(nextInterpolators)
+
 
       //set first interpolator
       const nextInterpolator = nextInterpolators[0]
@@ -231,6 +231,7 @@ const ChartOptionColorScale = ({
         nextScaleType,
       )
       setUserValues(nextUserValues)
+      setInterpolators(nextUserValues.length > 1 ? nextInterpolators : nextInterpolators.slice(0, 1))
       const valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
 
       //notify ui

@@ -23,27 +23,6 @@ export const dimensions = [
       validTypes: ['number', 'string', 'date'],
       required: false,
       operation: 'get',
-    },
-  
-    // {
-    //   id: 'color',
-    //   name: 'Color',
-    //   operation: 'get',
-    //   validTypes: ['number', 'string', 'date'],
-    //   required: false,
-    //   aggregation: true,
-    //   aggregationDefault: {
-    //     number: 'sum',
-    //     string: 'csvDistinct',
-    //     date: 'csvDistinct',
-    //   },
-    // },
-  // TODO EDATOS NO CONTROLADO DE MOMENTO. SERA NECESARIO?
-    // {
-    //   id: 'series',
-    //   name: 'Series',
-    //   validTypes: ['number', 'string', 'date'],
-    //   required: false,
-    //   operation: 'get',
-    // },
+    }
+
   ]

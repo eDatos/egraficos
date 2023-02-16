@@ -17,20 +17,6 @@ export const dimensions = [
       aggregationDefault: 'sum',
     },
   
-    // {
-    //   id: 'color',
-    //   name: 'Color',
-    //   operation: 'get',
-    //   validTypes: ['number', 'string', 'date'],
-    //   required: false,
-    //   aggregation: true,
-    //   aggregationDefault: {
-    //     number: 'sum',
-    //     string: 'csvDistinct',
-    //     date: 'csvDistinct',
-    //   },
-    // },
-  
     {
       id: 'series',
       name: 'Series',

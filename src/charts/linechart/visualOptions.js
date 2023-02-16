@@ -241,15 +241,15 @@ export const visualOptions = {
     //     showLabels: false,
     //   },
     // }, 
-    //TODO EDATOS FALTA CONTROLAR EL COLOR. HABRA QUE RELACIONARLO CON LAS DIMENSIONES GENERADAS EN LOS DATASETS
-    // colorScale: {
-    //   type: 'colorScale',
-    //   label: 'Color scale',
-    //   domain: 'colorDomain',
-    //   default: {
-    //     scaleType: 'ordinal',
-    //     interpolator: 'interpolateSpectral',
-    //   },
-    //   group: 'colors',
-    // },
+    colorScale: {
+        type: 'colorScale',
+        label: 'Color scale',
+        domain: 'colorDomain',
+        default: {
+            scaleType: 'ordinal',
+            interpolator: 'interpolateSpectral',
+            defaultColor: '#385ad4'
+        },
+        group: 'colors'
+    }
   }

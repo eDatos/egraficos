@@ -174,10 +174,10 @@ export const visualOptions = {
     colorScale: {
       type: 'colorScale',
       label: 'Color scale',
-      dimension: 'color',
+      domain: 'colorDomain',
       default: {
         scaleType: 'ordinal',
-        interpolator: 'interpolateBlues',
+        interpolator: 'interpolateSpectral',
         defaultColor: '#385ad4'
       },
       group: 'colors'

@@ -3,14 +3,6 @@ import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
 const mapData = function (data, mapping, dataTypes, dimensions) {
 
-  //TODO EDATOS DESCARTADO DE MOMENTO. MIRAR SI ES NECESARIO
-//   const colorAggregator = getDimensionAggregator(
-//     'color',
-//     mapping,
-//     dataTypes,
-//     dimensions
-//   )
-
   const sizeAggregator = getDimensionAggregator(
     'size',
     mapping,
@@ -47,9 +39,6 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
         [v[0][mapping.series.value]]: mapping.size.value
         ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
         : v.length
-        //color: mapping.color.value
-        //   ? colorAggregator(v.map((d) => d[mapping.color.value]))
-        //   : 'default', // aggregate, by default single color.
       }
       results.push(item)
       return item
@@ -139,19 +128,27 @@ return [{
 export const getChartOptions = function (visualOptions, datachart, mapping, dataTypes, dimensions){
     const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
     let dimensiones = getDimensions(resultMap, mapping)
-    const seriesSize = dimensiones.length-1;
-    //TODO EDATOS CAMBIAR COMO SE ITERA?
-    const barSeries = dimensiones.map(function (item, index) {
-      if (index <seriesSize) {
+    const barSeries = dimensiones.splice(1).map(function (item, index) {
+        let colorValue
+        if (visualOptions.colorScale.userScaleValues?.length === 1) {
+            colorValue = visualOptions.colorScale.userScaleValues[0].range
+        } else {
+            switch (visualOptions.colorScale.scaleType) {
+                case 'ordinal':
+                    colorValue = visualOptions.colorScale.userScaleValues.find(e => e.domain === item)?.range
+                    break
+                case 'sequential':
+                    colorValue = visualOptions.colorScale.userScaleValues.map(res => res.range)
+                    break
+                default:
+                    colorValue = visualOptions.colorScale.defaultColor
+            }
+        }
         return { 
           type: 'bar',
           datasetIndex: visualOptions.sortBarsBy !== "original" ? 1 : 0,
-          //TODO EDATOS Controlar el color de cada serie a partir de selector
-          //color: visualOptions.colorScale.defaultColor
-      }
-      } else {
-        return {}
-      }
+          color: colorValue
+        }
     });
 
     return {

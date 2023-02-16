@@ -1,0 +1,1 @@
+cd widget && export PATH=../node:$PATH && export PATH=../node/yarn/dist/bin:$PATH && yarn build
