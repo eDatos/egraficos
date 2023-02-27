@@ -198,7 +198,6 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
         <Col>
           <h5 className="text-uppercase">{t('global.section.mapping.chartvariables.variables')}</h5>
           <Row
-            className="sticky-top"
             style={{ top: 'calc(var(--header-height) + 16px)' }}
           >
             {dimensions.map((d) => {

@@ -254,7 +254,7 @@ const ChartOptions = ({
               collapseStatus[groupName] ? styles['collapsed'] : '',
             ].join(' ')}
           >
-            <Row className="sticky-top">
+            <Row>
               <Col
                 className={`d-flex justify-content-between align-items-center ${styles['group-header']}`}
               >
