@@ -1,14 +1,10 @@
 const path = require('path');
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const publicPath = '/';
 module.exports = {
     // Entry point, from where all extraction should be made
-    entry: './src/index.js',
+    entry: './src/widget/index.js',
     // Init webpack rules to collect js, jsx, css files
     module: {
         rules: [
@@ -17,12 +13,7 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
-            },
-            {
-                // Extract CSS files
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader"]
-            },
+            }
         ]
     },
     // https://webpack.js.org/configuration/output/
@@ -44,27 +35,18 @@ module.exports = {
         hot: true,
         compress: true,
     },
-    // https://webpack.js.org/configuration/plugins/
-    plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: "./public/index.html",
-        }),
-        new MiniCssExtractPlugin({
-            filename: "widget.css",
-            chunkFilename: "widget.css"
-        }),
-    ],
     // https://webpack.js.org/configuration/optimization/
     optimization: {
         minimizer: [
             new TerserPlugin({
                 parallel: true,
+                extractComments: false,
                 terserOptions: {
                     output: {
                         comments: false,
+
                     }
-                },
+                }
             }),
         ]
     }

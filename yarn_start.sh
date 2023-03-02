@@ -1,1 +1,0 @@
-export PATH=node:$PATH && node/yarn/dist/bin/yarn start 
