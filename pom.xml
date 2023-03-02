@@ -51,7 +51,7 @@
 						</goals>
 						<configuration>
 							<executable>yarn</executable>
-							<arguments>build</arguments>
+							<arguments>build:all</arguments>
 							<environmentVariables>
 								<CI>true</CI> <!-- Forzamos a que los warnings lanzados durante la compilación sean considerados errores y rompan la misma para simular el comportamiento del GITLAB -->
 							</environmentVariables>
