@@ -29,13 +29,9 @@ const ChartPreviewWithOptions = ({
           mapping: mapping,
           dataTypes,
         }, chart.rawCustomChart)
-          .then(() => {
-            setMappingLoading(false)
-          })
           .catch((err) => {
             console.error(err)
-            setMappingLoading(false)
-          })
+          }).finally(() => setMappingLoading(false))
       } else {
         setMappingLoading(false)
       }

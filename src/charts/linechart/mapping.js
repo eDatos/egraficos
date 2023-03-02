@@ -64,7 +64,7 @@ function getDimensions(resultMap, mapping) {
 function getXData(resultMap) {
   let xData = []
   resultMap.forEach(e => {
-    let value = e['x']
+    let value = e.x
     if (xData.indexOf(value) === -1) {
       xData.push(value)
     }
@@ -88,18 +88,9 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
   const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
   const xData = getXData(resultMap)
   console.log('getChartOptionsresultMap', resultMap)
-  //resultMap.sort((a, b) => d3.ascending(a.x, b.x))
-  //resultMap.sort((a, b) => d3.ascending(a.lines, b.lines))
-  //TODO EDATOS HAY QUE REVISAR PQ DEBERÍAN DE ESTAR AGRUPADOS POR LINES Y DENTRO DE CADA GRUPO ORDENADOS POR EL VALOR DE LA X(MENOS A MAYOR)
-  //FALTA DARLE UNA VUELTA PARA QUE LOS GRUPOS ENTRE SI TB ESTEN ORDENADOS POR EL MENOR VALOR DE LA X
-  var grouped = _.groupBy(resultMap, 'lines');
 
-  //for (var lines in grouped) {
-  //  _.sortBy(grouped[lines], 'x');
-  //}
-  //grouped.sort((a, b) => d3.ascending(a.reduce((prev, curr) => prev.x > curr.x, {x: 0}), b.reduce((prev, curr) => prev.x > curr.x, {x: 0})))
-  //let dimensiones = getDimensions(resultMap, mapping)
-  //const seriesSize = dimensiones.length-1;
+  let grouped = _.groupBy(resultMap, 'lines');
+
   const lineSeries = getDimensions(resultMap, mapping).filter((dimension) => dimension !== 'x').map(function (item, index) {
     let colorValue
     if (visualOptions.colorScale.userScaleValues?.length === 1) {

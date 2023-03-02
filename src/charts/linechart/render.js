@@ -1,7 +1,6 @@
 export function colorDomain(data, mapping) {
-  let domain = ''
+  let domain = []
   if (data && mapping.lines?.value && mapping.lines.value?.length > 0) {
-    domain = []
     data.forEach(e => {
       let value = e[mapping.lines.value]
       if (domain.indexOf(value) === -1) {
