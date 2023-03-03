@@ -6,7 +6,6 @@ import S from './LoadProject.module.scss'
 import { deserializeProject } from '@rawgraphs/rawgraphs-core'
 import charts from '../../../charts'
 
-
 export default function LoadProject({ onProjectSelected, setLoadingError }) {
   const onDrop = useCallback(
     (acceptedFiles) => {
@@ -26,16 +25,12 @@ export default function LoadProject({ onProjectSelected, setLoadingError }) {
     },
     [onProjectSelected, setLoadingError]
   )
-  const {
-    getRootProps,
-    getInputProps,
-    isDragReject,
-    isDragAccept,
-  } = useDropzone({
-    onDrop,
-    accept: '.edatosgraphs',
-    maxFiles: 1,
-  })
+  const { getRootProps, getInputProps, isDragReject, isDragAccept } =
+    useDropzone({
+      onDrop,
+      accept: '.edatosgraphs',
+      maxFiles: 1,
+    })
   return (
     <div
       className={classNames(S.dropzone, {

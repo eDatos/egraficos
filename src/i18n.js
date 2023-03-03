@@ -1,11 +1,11 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import Backend  from 'i18next-http-backend';
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
+import Backend from 'i18next-http-backend'
 
 const options = {
   order: ['querystring', 'navigator'],
-  lookupQuerystring: 'lng'
+  lookupQuerystring: 'lng',
 }
 
 i18n
@@ -21,14 +21,14 @@ i18n
     debug: true,
     detection: options,
     fallbackLng: 'es',
-    supportedLngs: ['en', 'es','ca'],
+    supportedLngs: ['en', 'es', 'ca'],
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
     backend: {
       // for all available options read the backend's repository readme file
-      loadPath: process.env.PUBLIC_URL +'/locales/{{lng}}/{{ns}}.json'
-    }
-  });
+      loadPath: process.env.PUBLIC_URL + '/locales/{{lng}}/{{ns}}.json',
+    },
+  })
 
-export default i18n;
+export default i18n

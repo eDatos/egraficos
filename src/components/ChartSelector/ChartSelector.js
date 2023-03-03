@@ -3,14 +3,8 @@ import classNames from 'classnames'
 import { Row, Col, Card } from 'react-bootstrap'
 import styles from './ChartSelector.module.scss'
 
-
-function ChartSelector({
-  availableCharts,
-  currentChart,
-  setCurrentChart
-}) {
-
-  const charts = availableCharts;
+function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
+  const charts = availableCharts
 
   return (
     <>
@@ -69,8 +63,7 @@ function ChartSelector({
                 </Col>
               )
             })}
-            <Col xs={4} className={`p-3`}>
-            </Col>
+            <Col xs={4} className={`p-3`}></Col>
           </Row>
         </Col>
       </Row>

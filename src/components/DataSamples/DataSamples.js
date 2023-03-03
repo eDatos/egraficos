@@ -3,7 +3,6 @@ import { Row, Col, Card } from 'react-bootstrap'
 import styles from './DataSamples.module.scss'
 
 const samplesList = [
-
   {
     name: 'Netflix Original Series 2013/2017',
     category: 'Bar chart',

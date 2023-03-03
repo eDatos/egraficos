@@ -13,7 +13,7 @@ export default function CustomChartWarnModal({
       centered
       aria-labelledby="contained-modal-title-vcenter"
       className="raw-modal"
-      contentClassName='border'
+      contentClassName="border"
     >
       <Modal.Header closeButton>
         <Modal.Title>Warning!</Modal.Title>

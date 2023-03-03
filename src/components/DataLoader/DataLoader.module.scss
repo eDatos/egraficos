@@ -77,7 +77,14 @@
   & .bg-animated {
     width: 200%;
     height: 100%;
-    background: linear-gradient(-45deg, var(--primary-lighter), var(--gray-bg), var(--primary-lighter), var(--gray-bg), var(--primary-lighter));
+    background: linear-gradient(
+      -45deg,
+      var(--primary-lighter),
+      var(--gray-bg),
+      var(--primary-lighter),
+      var(--gray-bg),
+      var(--primary-lighter)
+    );
     position: absolute;
     top: 0;
     left: 0;
@@ -87,7 +94,7 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
   }
-  
+
   & > p {
     color: black;
     margin: 0;
@@ -95,6 +102,10 @@
 }
 
 @keyframes bg-animation {
-  from {left:0%}
-  to {left:-100%}
+  from {
+    left: 0%;
+  }
+  to {
+    left: -100%;
+  }
 }

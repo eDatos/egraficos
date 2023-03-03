@@ -15,8 +15,7 @@ import get from 'lodash/get'
 import uniqueId from 'lodash/uniqueId'
 import arrayInsert from 'array-insert'
 import { getDefaultDimensionAggregation } from '@rawgraphs/rawgraphs-core'
-import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from 'react-i18next'
 
 function removeIndex(mapping, i) {
   let nextConfig
@@ -149,7 +148,7 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
   )
 
   const [draggingId, setDraggingId] = useState(null)
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const rollbackLocalMapping = useCallback(() => {
     setLocalMapping(mapping)
@@ -182,7 +181,9 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
     <DndProvider backend={HTML5Backend}>
       <Row>
         <Col xs={3}>
-          <h5 className="text-uppercase">{t('global.section.mapping.chartvariables.dimensions')}</h5>
+          <h5 className="text-uppercase">
+            {t('global.section.mapping.chartvariables.dimensions')}
+          </h5>
           {map(dataTypes, (dataType, columnName) => {
             return (
               <ColumnCard
@@ -196,10 +197,10 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
           })}
         </Col>
         <Col>
-          <h5 className="text-uppercase">{t('global.section.mapping.chartvariables.variables')}</h5>
-          <Row
-            style={{ top: 'calc(var(--header-height) + 16px)' }}
-          >
+          <h5 className="text-uppercase">
+            {t('global.section.mapping.chartvariables.variables')}
+          </h5>
+          <Row style={{ top: 'calc(var(--header-height) + 16px)' }}>
             {dimensions.map((d) => {
               return (
                 <ChartDimensionCard

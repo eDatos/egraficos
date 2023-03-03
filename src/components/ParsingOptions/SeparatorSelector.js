@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import { separatorsLabels } from '../../constants'
-import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from 'react-i18next'
 
 import styles from './ParsingOptions.module.scss'
 
@@ -12,7 +11,7 @@ export default function SeparatorSelector({
   onChange,
   ...props
 }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const inputValue = value
     .replace(/\r/g, '\\r')
@@ -32,10 +31,13 @@ export default function SeparatorSelector({
     [onChange]
   )
 
-  const formatValue = (value)=>{
+  const formatValue = (value) => {
     return (
       <>
-        <span className={['small',styles['separator-preview']].join(' ')}>{value}</span> <span>{t(separatorsLabels[value])}</span>
+        <span className={['small', styles['separator-preview']].join(' ')}>
+          {value}
+        </span>{' '}
+        <span>{t(separatorsLabels[value])}</span>
       </>
     )
   }
@@ -45,14 +47,22 @@ export default function SeparatorSelector({
       <div className="option">
         {title}
         <Dropdown className="d-inline-block raw-dropdown">
-          <Dropdown.Toggle variant="white" className="d-flex justify-content-start align-items-center text-truncate">
-            { formatValue(inputValue) }
+          <Dropdown.Toggle
+            variant="white"
+            className="d-flex justify-content-start align-items-center text-truncate"
+          >
+            {formatValue(inputValue)}
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {Object.keys(separatorsLabels).map(key=>{
-              return <Dropdown.Item key={separatorsLabels[key]} onSelect={() => handleChange(key)}>
-                { formatValue(key) }
-              </Dropdown.Item>
+            {Object.keys(separatorsLabels).map((key) => {
+              return (
+                <Dropdown.Item
+                  key={separatorsLabels[key]}
+                  onSelect={() => handleChange(key)}
+                >
+                  {formatValue(key)}
+                </Dropdown.Item>
+              )
             })}
           </Dropdown.Menu>
         </Dropdown>

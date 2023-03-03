@@ -8,8 +8,7 @@ import uniqueId from 'lodash/uniqueId'
 import classnames from 'classnames'
 import arrayMove from 'array-move'
 import arrayInsert from 'array-insert'
-import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from 'react-i18next'
 
 // import { DATATYPE_ICONS } from "../../constants"
 import { dataTypeIcons } from '../../constants'
@@ -36,7 +35,7 @@ const ChartDimensionCard = ({
   replaceDimension,
   localMappding,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const [{ isOver }, drop] = useDrop({
     accept: ['column', 'card'],
     collect: (monitor) => ({
@@ -48,7 +47,7 @@ const ChartDimensionCard = ({
           ? getDefaultDimensionAggregation(dimension, dataTypes[item.id])
           : null
 
-        const columnDataType = getTypeName(dataTypes[item.id]);
+        const columnDataType = getTypeName(dataTypes[item.id])
         const isValid =
           dimension.validTypes?.length === 0 ||
           dimension.validTypes?.includes(columnDataType)
@@ -79,7 +78,6 @@ const ChartDimensionCard = ({
       }
     },
   })
-  
 
   // const [collectedProps, drag] = useDrag({
   //   item: {
@@ -276,8 +274,11 @@ const ChartDimensionCard = ({
             })}
             ref={drop}
           >
-            {!dimension.multiple && t('global.section.mapping.chartvariables.dropdimension')}
-            {dimension.multiple && columnsMappedHere.length === 0 && t('global.section.mapping.chartvariables.dropdimension')}
+            {!dimension.multiple &&
+              t('global.section.mapping.chartvariables.dropdimension')}
+            {dimension.multiple &&
+              columnsMappedHere.length === 0 &&
+              t('global.section.mapping.chartvariables.dropdimension')}
             {dimension.multiple &&
               columnsMappedHere.length > 0 &&
               t('global.section.mapping.chartvariables.dropanotherdimen')}

@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import useDebounce from '../../hooks/useDebounce'
 import WarningMessage from '../WarningMessage'
-import ReactEcharts from "echarts-for-react"
-
+import ReactEcharts from 'echarts-for-react'
 
 const ChartPreview = ({
   chart,
@@ -12,14 +11,14 @@ const ChartPreview = ({
   error,
   setError,
   setRawViz,
-  setOptions
+  setOptions,
 }) => {
   const domRef = useRef(null)
   const vizOptionsDebounced = useDebounce(visualOptions, 200)
-  console.log('data', data);
-  console.log('chart', chart);
-  console.log('mapping', mapping);
-  console.log('visualOptions', visualOptions);
+  console.log('data', data)
+  console.log('chart', chart)
+  console.log('mapping', mapping)
+  console.log('visualOptions', visualOptions)
   console.log('rawViz', setRawViz)
   useEffect(() => {
     setError(null)
@@ -42,7 +41,11 @@ const ChartPreview = ({
         <span>
           Required chart variables: you need to map{' '}
           {requiredVariables
-            .map((d, i) => <span key={i} className="font-weight-bold">{d.name}</span>)
+            .map((d, i) => (
+              <span key={i} className="font-weight-bold">
+                {d.name}
+              </span>
+            ))
             .reduce((prev, curr) => [prev, ' and ', curr])}
         </span>
       )
@@ -101,44 +104,57 @@ const ChartPreview = ({
         return
       }
     }
-    console.log('currentlyMapped', currentlyMapped);
+    console.log('currentlyMapped', currentlyMapped)
   }, [setError, vizOptionsDebounced, setRawViz, chart, mapping])
 
-  var options =  {}
+  var options = {}
   try {
-    options = error === null ? chart.getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {};
-    console.log('optionsfinal', options);
+    options =
+      error === null
+        ? chart.getChartOptions(
+            visualOptions,
+            data,
+            mapping,
+            chart.dataTypes,
+            chart.dimensions
+          )
+        : {}
+    console.log('optionsfinal', options)
     if (domRef && domRef.current && !error) {
-      domRef.current.getEchartsInstance().setOption(options, true);
-      setRawViz(domRef.current?.getEchartsInstance());
-      setOptions(options);
+      domRef.current.getEchartsInstance().setOption(options, true)
+      setRawViz(domRef.current?.getEchartsInstance())
+      setOptions(options)
     }
   } catch (e) {
-         console.log("chart error", e)
-         setError({ variant: 'danger', message: 'Chart error. ' + e.message })
-         setRawViz(null)
+    console.log('chart error', e)
+    setError({ variant: 'danger', message: 'Chart error. ' + e.message })
+    setRawViz(null)
   }
   return (
     <div className={'col-8 col-xl-9'}>
       <div
-         className={['overflow-auto', 'position-sticky'].join(' ')}
-         style={{ top: 'calc(15px + var(--header-height))' }}
+        className={['overflow-auto', 'position-sticky'].join(' ')}
+        style={{ top: 'calc(15px + var(--header-height))' }}
       >
         {error && (
           <WarningMessage variant={error.variant} message={error.message} />
         )}
         <div ref={domRef}>{/* Don't put content in this <div /> */}</div>
       </div>
-      <ReactEcharts 
-        option={options} className='echarts-for-echarts' ref={domRef}
-        style={{width:visualOptions.width,
-                height:visualOptions.height,
-                //marginTop:visualOptions.marginTop,
-                //marginLeft:visualOptions.marginLeft,
-                //marginBottom:visualOptions.marginBottom,
-                backgroundColor:visualOptions.background}}
-                //marginRight:visualOptions.marginRight}}
-                opts={{renderer: visualOptions.render}}
+      <ReactEcharts
+        option={options}
+        className="echarts-for-echarts"
+        ref={domRef}
+        style={{
+          width: visualOptions.width,
+          height: visualOptions.height,
+          //marginTop:visualOptions.marginTop,
+          //marginLeft:visualOptions.marginLeft,
+          //marginBottom:visualOptions.marginBottom,
+          backgroundColor: visualOptions.background,
+        }}
+        //marginRight:visualOptions.marginRight}}
+        opts={{ renderer: visualOptions.render }}
       />
     </div>
   )

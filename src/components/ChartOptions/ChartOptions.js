@@ -80,13 +80,7 @@ function WrapControlComponent({
       return null
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    type,
-    props.chart,
-    props.domain,
-    props.mapping,
-    remainingOptions,
-  ])
+  }, [type, props.chart, props.domain, props.mapping, remainingOptions])
 
   const mappingValue = useMemo(() => {
     if (type !== 'colorScale') {
@@ -117,7 +111,7 @@ function WrapControlComponent({
       return domainFromChart.domain
     }
     //TODO: Esta es la función que creo que habría que cambiar para mostrar selector de colores
-/*
+    /*
     if (props.mappedData) {
       return props.mappedData
         .map((d) => get(d, props.dimension))
@@ -129,7 +123,7 @@ function WrapControlComponent({
     }
  */
     return []
-  }, [type, /*props.dimension, */domainFromChart])
+  }, [type, /*props.dimension, */ domainFromChart])
 
   const handleControlChange = useCallback(
     (nextValue) => {
@@ -278,39 +272,41 @@ const ChartOptions = ({
               // (when a new value is dragged to the dimension that repeats the option)
               // the same approach is applied in option validation by the raw core lib
               return def.repeatFor ? (
-                get(
-                  mapping,
-                  `[${def.repeatFor}].value`,
-                  []
-                ).map((v, repeatIndex) => (
-                  <WrapControlComponent
-                    className={styles['chart-option']}
-                    key={optionId + repeatIndex}
-                    repeatIndex={repeatIndex}
-                    {...def}
-                    optionId={optionId}
-                    error={error?.errors?.[optionId + repeatIndex]}
-                    value={
-                      visualOptions?.[optionId]?.[repeatIndex] ??
-                      getDefaultForRepeat(def, repeatIndex)
-                    }
-                    mapping={
-                      def.type === 'colorScale'
-                        ? getPartialMapping(mapping, def.repeatFor, repeatIndex)
-                        : undefined
-                    }
-                    chart={def.type === 'colorScale' ? chart : undefined}
-                    dataset={def.type === 'colorScale' ? dataset : undefined}
-                    dataTypes={
-                      def.type === 'colorScale' ? dataTypes : undefined
-                    }
-                    visualOptions={
-                      def.type === 'colorScale' ? visualOptions : undefined
-                    }
-                    setVisualOptions={setVisualOptions}
-                    isEnabled={enabledOptions[optionId]}
-                  />
-                ))
+                get(mapping, `[${def.repeatFor}].value`, []).map(
+                  (v, repeatIndex) => (
+                    <WrapControlComponent
+                      className={styles['chart-option']}
+                      key={optionId + repeatIndex}
+                      repeatIndex={repeatIndex}
+                      {...def}
+                      optionId={optionId}
+                      error={error?.errors?.[optionId + repeatIndex]}
+                      value={
+                        visualOptions?.[optionId]?.[repeatIndex] ??
+                        getDefaultForRepeat(def, repeatIndex)
+                      }
+                      mapping={
+                        def.type === 'colorScale'
+                          ? getPartialMapping(
+                              mapping,
+                              def.repeatFor,
+                              repeatIndex
+                            )
+                          : undefined
+                      }
+                      chart={def.type === 'colorScale' ? chart : undefined}
+                      dataset={def.type === 'colorScale' ? dataset : undefined}
+                      dataTypes={
+                        def.type === 'colorScale' ? dataTypes : undefined
+                      }
+                      visualOptions={
+                        def.type === 'colorScale' ? visualOptions : undefined
+                      }
+                      setVisualOptions={setVisualOptions}
+                      isEnabled={enabledOptions[optionId]}
+                    />
+                  )
+                )
               ) : (
                 <WrapControlComponent
                   className={styles['chart-option']}

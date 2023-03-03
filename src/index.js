@@ -2,16 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles/index.scss'
 import App from './App'
-import './i18n';
+import './i18n'
 import * as serviceWorker from './serviceWorker'
-import { CookiesProvider } from "react-cookie";
+import { CookiesProvider } from 'react-cookie'
 
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-    <React.Suspense fallback ="loading">
-    <App />
-    </React.Suspense>
+      <React.Suspense fallback="loading">
+        <App />
+      </React.Suspense>
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')

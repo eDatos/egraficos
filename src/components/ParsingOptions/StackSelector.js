@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 import { Dropdown } from 'react-bootstrap'
-import { Trans } from 'react-i18next';
-
+import { Trans } from 'react-i18next'
 
 export default function StackSelector({
   title,

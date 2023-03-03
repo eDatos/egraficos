@@ -1,4 +1,5 @@
-export const dimensions = [{
+export const dimensions = [
+  {
     id: 'arcs',
     name: 'Arcs',
     validTypes: ['number'],
@@ -7,9 +8,9 @@ export const dimensions = [{
     operation: 'get',
     aggregation: true,
     aggregationDefault: {
-      number: 'sum'
-    }
-  }, 
+      number: 'sum',
+    },
+  },
   //TODO EDATOS HAY QUE AÑADIRLO. COMENTADO PQ NO ESTA BIEN CONTROLADA LA SERIE
   // {
   //   id: 'series',
@@ -18,5 +19,4 @@ export const dimensions = [{
   //   required: false,
   //   operation: 'get'
   // }
-];
-  
+]

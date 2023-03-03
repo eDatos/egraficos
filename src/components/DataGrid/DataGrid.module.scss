@@ -67,7 +67,7 @@
 }
 
 .column-name {
-  width: calc(100% - 52px)
+  width: calc(100% - 52px);
 }
 
 .has-error {
@@ -115,8 +115,8 @@
   position: relative;
   height: 100%;
   display: flex;
-    align-items: center;
-    justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
 
   &:after {
     content: ' ';

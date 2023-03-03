@@ -4,10 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import classNames from 'classnames'
 import S from './UploadFile.module.scss'
 
-export default function UploadFile({
-  setUserInput,
-  setLoadingError,
-}) {
+export default function UploadFile({ setUserInput, setLoadingError }) {
   const onDrop = useCallback(
     (acceptedFiles) => {
       const reader = new FileReader()
@@ -21,17 +18,13 @@ export default function UploadFile({
     },
     [setLoadingError, setUserInput]
   )
-  const {
-    getRootProps,
-    getInputProps,
-    isDragReject,
-    isDragAccept,
-  } = useDropzone({
-    onDrop,
-    accept:
-      'text/csv,text/plain,application/json,application/vnd.ms-excel,text/tsv,text/tab-separated-values',
-    maxFiles: 1,
-  })
+  const { getRootProps, getInputProps, isDragReject, isDragAccept } =
+    useDropzone({
+      onDrop,
+      accept:
+        'text/csv,text/plain,application/json,application/vnd.ms-excel,text/tsv,text/tab-separated-values',
+      maxFiles: 1,
+    })
   return (
     <div
       className={classNames(S.dropzone, {

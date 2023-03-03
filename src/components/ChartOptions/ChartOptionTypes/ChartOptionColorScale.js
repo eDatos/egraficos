@@ -51,10 +51,9 @@ const ChartOptionColorScale = ({
   hasAnyMapping,
   ...props
 }) => {
-
   // here we leverage injection of the __loaded prop in the color scale, see App.js
   const initialValue = useRef(!!value.__loaded)
-  
+
   const [scaleType, setScaleType] = useState(get(value, 'scaleType'))
 
   const defaultColor = useMemo(() => {
@@ -108,7 +107,7 @@ const ChartOptionColorScale = ({
         colorDataType,
         scaleType, //
         interpolator,
-        userValuesForFinalScale,
+        userValuesForFinalScale
       )
 
       return previewScale
@@ -153,7 +152,6 @@ const ChartOptionColorScale = ({
   )
 
   const currentFinalScale = useMemo(() => {
-
     if (scaleType && interpolator) {
       const currentUserValues =
         userValues && userValues.length
@@ -186,7 +184,14 @@ const ChartOptionColorScale = ({
       }
       onChange(outScaleParams)
     },
-    [getUserValuesForFinalScale, scaleType, interpolator, defaultColor, locked, onChange]
+    [
+      getUserValuesForFinalScale,
+      scaleType,
+      interpolator,
+      defaultColor,
+      locked,
+      onChange,
+    ]
   )
 
   const setUserValueRange = useCallback(
@@ -209,17 +214,14 @@ const ChartOptionColorScale = ({
     [handleChangeValues, userValues]
   )
 
-
   const handleChangeScaleType = useCallback(
     (nextScaleType) => {
-
       setScaleType(nextScaleType)
 
       //update interpolators
       const nextInterpolators = colorPresets[nextScaleType]
         ? Object.keys(colorPresets[nextScaleType])
         : []
-
 
       //set first interpolator
       const nextInterpolator = nextInterpolators[0]
@@ -228,10 +230,14 @@ const ChartOptionColorScale = ({
       //user values
       const nextUserValues = getDefaultUserValues(
         nextInterpolator,
-        nextScaleType,
+        nextScaleType
       )
       setUserValues(nextUserValues)
-      setInterpolators(nextUserValues.length > 1 ? nextInterpolators : nextInterpolators.slice(0, 1))
+      setInterpolators(
+        nextUserValues.length > 1
+          ? nextInterpolators
+          : nextInterpolators.slice(0, 1)
+      )
       const valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
 
       //notify ui
@@ -245,7 +251,13 @@ const ChartOptionColorScale = ({
       onChange(outScaleParams)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [getDefaultUserValues, getUserValuesForFinalScale, defaultColor, onChange, locked]
+    [
+      getDefaultUserValues,
+      getUserValuesForFinalScale,
+      defaultColor,
+      onChange,
+      locked,
+    ]
   )
 
   const handleSetInterpolator = useCallback(
@@ -256,12 +268,14 @@ const ChartOptionColorScale = ({
       const nextUserValues = getDefaultUserValues(nextInterpolator, scaleType)
       setUserValues(nextUserValues)
       let valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
-      
-      if(customUserValues){
+
+      if (customUserValues) {
         const byDomain = keyBy(customUserValues, 'domain')
-        valuesForFinalScale = valuesForFinalScale.map(v => ({
+        valuesForFinalScale = valuesForFinalScale.map((v) => ({
           ...v,
-          range: byDomain[v.domain.toString()] ? byDomain[v.domain.toString()].userRange : v.range
+          range: byDomain[v.domain.toString()]
+            ? byDomain[v.domain.toString()].userRange
+            : v.range,
         }))
       }
       //notify ui
@@ -274,7 +288,14 @@ const ChartOptionColorScale = ({
       }
       onChange(outScaleParams)
     },
-    [getDefaultUserValues, getUserValuesForFinalScale, onChange, scaleType, defaultColor, locked,]
+    [
+      getDefaultUserValues,
+      getUserValuesForFinalScale,
+      onChange,
+      scaleType,
+      defaultColor,
+      locked,
+    ]
   )
 
   const handleChangeLocked = useCallback(
@@ -295,14 +316,11 @@ const ChartOptionColorScale = ({
     [scaleType, interpolator, userValues, defaultColor, onChange]
   )
 
-
-
   const resetScale = useCallback(() => {
     handleSetInterpolator(interpolator, userValues)
   }, [handleSetInterpolator, interpolator, userValues])
 
   const invertScale = useCallback(() => {
-
     let reversedValues = [...userValues]
     reversedValues.reverse()
 
@@ -310,14 +328,11 @@ const ChartOptionColorScale = ({
       ...v,
       userRange: reversedValues[i].userRange,
       range: reversedValues[i].range,
-
     }))
 
     setUserValues(invertedValues)
     handleChangeValues(invertedValues)
   }, [handleChangeValues, userValues])
-
-
 
   const prevMappingValue = usePrevious(mappingValue)
 
@@ -332,7 +347,6 @@ const ChartOptionColorScale = ({
       const nextScaleType = availableScaleTypes[0]
       handleChangeScaleType(nextScaleType)
     }
-
   }, [availableScaleTypes, handleChangeScaleType, locked])
 
   // update scale on dataset update.
@@ -362,35 +376,46 @@ const ChartOptionColorScale = ({
   //   }
   // }, [colorDataset, defaultColor, getDefaultUserValues, getUserValuesForFinalScale, interpolator, locked, onChange, prevDataset, prevScaleType, scaleType])
 
-
   return hasAnyMapping ? (
     <>
-      <Row className={props.className} style={{marginTop:'8px', marginBottom:'8px'}}>
+      <Row
+        className={props.className}
+        style={{ marginTop: '8px', marginBottom: '8px' }}
+      >
         <Col xs={5} className="d-flex align-items-center nowrap">
           Color scale
         </Col>
         <Col xs={7}>
           <Dropdown className="d-inline-block raw-dropdown w-100">
-            <Dropdown.Toggle variant="white" className="w-100" style={{paddingRight:24}} disabled={!colorDataType}>
+            <Dropdown.Toggle
+              variant="white"
+              className="w-100"
+              style={{ paddingRight: 24 }}
+              disabled={!colorDataType}
+            >
               {get(SCALES_LABELS, scaleType, scaleType)}
             </Dropdown.Toggle>
             <Dropdown.Menu className="w-100">
-            {availableScaleTypes.map(
-              (s) => {
+              {availableScaleTypes.map((s) => {
                 return (
-                  <Dropdown.Item key={s} onClick={()=>handleChangeScaleType(s)}>
+                  <Dropdown.Item
+                    key={s}
+                    onClick={() => handleChangeScaleType(s)}
+                  >
                     {get(SCALES_LABELS, s, s)}
                   </Dropdown.Item>
                 )
-              }
-            )}
+              })}
             </Dropdown.Menu>
           </Dropdown>
         </Col>
       </Row>
 
       {/* Color scheme */}
-      <Row className={[props.className].join(' ')} style={{marginTop:'8px', marginBottom:'8px'}}>
+      <Row
+        className={[props.className].join(' ')}
+        style={{ marginTop: '8px', marginBottom: '8px' }}
+      >
         <Col xs={5} className="d-flex align-items-center nowrap">
           Color scheme
         </Col>
@@ -441,8 +466,8 @@ const ChartOptionColorScale = ({
                         {i === 0
                           ? 'Start'
                           : i === userValues.length - 1
-                            ? 'End'
-                            : 'Middle'}
+                          ? 'End'
+                          : 'Middle'}
                       </span>
                       <input
                         disabled={locked}
@@ -473,18 +498,16 @@ const ChartOptionColorScale = ({
             <Col className="d-flex justify-content-end">
               <ResetBtn resetScale={resetScale} />
               <InvertBtn invertScale={invertScale} />
-              {
-                scaleType !== 'ordinal' && (
-                  <LockBtn locked={locked} handleChangeLocked={handleChangeLocked} />
-                )
-              }
-
+              {scaleType !== 'ordinal' && (
+                <LockBtn
+                  locked={locked}
+                  handleChangeLocked={handleChangeLocked}
+                />
+              )}
             </Col>
           </Row>
-
         </div>
       )}
-
     </>
   ) : null
 }

@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import styles from './InlineColorPicker.module.scss'
 import { SketchPicker } from 'react-color'
 
-export default function InlineColorPicker({ color: maybeColor, onChange, disabled }) {
+export default function InlineColorPicker({
+  color: maybeColor,
+  onChange,
+  disabled,
+}) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false)
   const color = maybeColor ?? '#000000' // Same as <input type='color' />
 

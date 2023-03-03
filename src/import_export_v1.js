@@ -1,16 +1,16 @@
-import { get, has } from "lodash"
-import charts from "./charts"
+import { get, has } from 'lodash'
+import charts from './charts'
 
-export const VERSION = "1"
+export const VERSION = '1'
 
 function objectsToMatrix(listOfObjects, columns) {
-  return listOfObjects.map(obj => {
-    return columns.map(col => obj[col])
+  return listOfObjects.map((obj) => {
+    return columns.map((col) => obj[col])
   })
 }
 
 function matrixToObjects(matrix, columns) {
-  return matrix.map(record => {
+  return matrix.map((record) => {
     const obj = {}
     for (let i = 0; i < columns.length; i++) {
       obj[columns[i]] = record[i]
@@ -35,10 +35,10 @@ export function serializeProject(
   dataSource,
   currentChart,
   mapping,
-  visualOptions,
+  visualOptions
 ) {
   const project = {
-    version: "1",
+    version: '1',
   }
 
   /* First stage: user input */
@@ -56,7 +56,7 @@ export function serializeProject(
     locale,
     stackDimension,
     unstackedData,
-    unstackedColumns
+    unstackedColumns,
   }
 
   /* Third stage: typed data ready for chart */
@@ -72,42 +72,44 @@ export function serializeProject(
 
 function getOrError(object, path) {
   if (!has(object, path)) {
-    console.log("IMPORT ERROR", object, path)
-    throw new Error("Selected project is not valid")
+    console.log('IMPORT ERROR', object, path)
+    throw new Error('Selected project is not valid')
   }
   return get(object, path)
 }
 
 export function deserializeProject(project) {
-  if (project.version !== "1") {
-    throw new Error("Invalid version number, please use a suitable deserializer")
+  if (project.version !== '1') {
+    throw new Error(
+      'Invalid version number, please use a suitable deserializer'
+    )
   }
 
-  const chartName = getOrError(project, "chart")
-  const chart = charts.find(c => c.metadata.name === chartName)
+  const chartName = getOrError(project, 'chart')
+  const chart = charts.find((c) => c.metadata.name === chartName)
   if (!chart) {
-    throw new Error("Unknown chart!")
+    throw new Error('Unknown chart!')
   }
 
   return {
-    userInput: getOrError(project, "userInput"),
+    userInput: getOrError(project, 'userInput'),
     userData: matrixToObjects(
-      getOrError(project, "rawData"), 
-      Object.keys(getOrError(project, "dataTypes"))
+      getOrError(project, 'rawData'),
+      Object.keys(getOrError(project, 'dataTypes'))
     ),
-    userDataType: getOrError(project, "userInputFormat"),
-    parseError: getOrError(project, "parseError"),
-    unstackedData: getOrError(project, "parseOptions.unstackedData"),
-    unstackedColumns: getOrError(project, "parseOptions.unstackedColumns"),
-    dataTypes: getOrError(project, "dataTypes"),
-    separator: getOrError(project, "parseOptions.separator"),
-    thousandsSeparator: getOrError(project, "parseOptions.thousandsSeparator"),
-    decimalsSeparator: getOrError(project, "parseOptions.decimalsSeparator"),
-    locale: getOrError(project, "parseOptions.locale"),
-    stackDimension: get(project, "parseOptions.stackDimension", undefined),
-    dataSource: getOrError(project, "dataSource"),
+    userDataType: getOrError(project, 'userInputFormat'),
+    parseError: getOrError(project, 'parseError'),
+    unstackedData: getOrError(project, 'parseOptions.unstackedData'),
+    unstackedColumns: getOrError(project, 'parseOptions.unstackedColumns'),
+    dataTypes: getOrError(project, 'dataTypes'),
+    separator: getOrError(project, 'parseOptions.separator'),
+    thousandsSeparator: getOrError(project, 'parseOptions.thousandsSeparator'),
+    decimalsSeparator: getOrError(project, 'parseOptions.decimalsSeparator'),
+    locale: getOrError(project, 'parseOptions.locale'),
+    stackDimension: get(project, 'parseOptions.stackDimension', undefined),
+    dataSource: getOrError(project, 'dataSource'),
     currentChart: chart,
-    mapping: getOrError(project, "mapping"),
-    visualOptions: getOrError(project, "visualOptions"),
+    mapping: getOrError(project, 'mapping'),
+    visualOptions: getOrError(project, 'visualOptions'),
   }
 }
