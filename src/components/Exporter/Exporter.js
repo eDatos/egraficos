@@ -59,11 +59,11 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
 
   function getWidget() {
       const generatedUUID = uuid();
-      return '<script src="' + window.location.href +'widget/widget.js"></script>\n' +
+      return '<div id="chart-container-' + generatedUUID + '"></div>\n' +
+            '<script src="' + window.location.href +'widget/widget.js"></script>\n' +
             '<script>\n' +
             '    EdatosGraphs.widgets.egraph.render({selector: \'#chart-container-' + generatedUUID +'\', renderer: \'' + render + '\', options: ' + JSON.stringify(options) + '});\n' +
-            '</script>\n' +
-            '<div id="chart-container-' + generatedUUID + '"></div>'
+            '</script>'
   }
 
   useEffect(() => {
