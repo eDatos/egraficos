@@ -29,3 +29,6 @@ yarn-error.log*
 .settings/
 .classpath
 .project
+.idea
+
+/public/widget/

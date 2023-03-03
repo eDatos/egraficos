@@ -33,7 +33,7 @@ export default function LoadProject({ onProjectSelected, setLoadingError }) {
     isDragAccept,
   } = useDropzone({
     onDrop,
-    accept: '.rawgraphs',
+    accept: '.edatosgraphs',
     maxFiles: 1,
   })
   return (

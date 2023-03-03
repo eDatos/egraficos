@@ -83,7 +83,19 @@ export const visualOptions = {
       default: false,
       group: 'artboard'
     },
-  
+    render: {
+        type: 'text',
+        label: 'Render',
+        group: 'artboard',
+        options: [{
+            label: 'Svg',
+            value: 'svg'
+        }, {
+            label: 'Canvas',
+            value: 'canvas'
+        }],
+        default: 'svg'
+    },
     showPoints: {
       type: 'boolean',
       label: 'Show dots on data values',
@@ -229,15 +241,15 @@ export const visualOptions = {
     //     showLabels: false,
     //   },
     // }, 
-    //TODO EDATOS FALTA CONTROLAR EL COLOR. HABRA QUE RELACIONARLO CON LAS DIMENSIONES GENERADAS EN LOS DATASETS
-    // colorScale: {
-    //   type: 'colorScale',
-    //   label: 'Color scale',
-    //   domain: 'colorDomain',
-    //   default: {
-    //     scaleType: 'ordinal',
-    //     interpolator: 'interpolateSpectral',
-    //   },
-    //   group: 'colors',
-    // },
+    colorScale: {
+        type: 'colorScale',
+        label: 'Color scale',
+        domain: 'colorDomain',
+        default: {
+            scaleType: 'ordinal',
+            interpolator: 'interpolateSpectral',
+            defaultColor: '#385ad4'
+        },
+        group: 'colors'
+    }
   }

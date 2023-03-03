@@ -3,14 +3,7 @@ import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 import _ from 'lodash';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
-  
-  //TODO EDATOS DESCARTADO DE MOMENTO ¿NECESARIO?
-  // const colorAggregator = getDimensionAggregator(
-  //   'color',
-  //   mapping,
-  //   dataTypes,
-  //   dimensions
-  // )
+
   const yAggregator = getDimensionAggregator(
     'y',
     mapping,
@@ -44,7 +37,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
           const item = {
             x: vv[0][mapping.x.value], //get the first one since it's grouped
             y: yAggregator[0](vv.map((d) => d[mapping.y.value])), // aggregate
-            //color: colorAggregator(v.map((d) => d[mapping.color.value])), // aggregate
             series: vv[0][mapping.series.value], //get the first one since it's grouped
             lines: vv[0][mapping.lines.value], //get the first one since it's grouped
             [vv[0][mapping.lines.value]]: yAggregator[0](vv.map((d) => d[mapping.y.value]))
@@ -68,51 +60,66 @@ function getDimensions(resultMap, mapping) {
       return dimensions
     }
 }
-function getDataset(resultMap, mapping, visualOptions) {
-  return [{
-    dimensions: getDimensions(resultMap, mapping),
-    source: resultMap,
-  },
-  ]
-  }
-  const getxAxis = (visualOptions, datachart, resultMap) => {
-    return {
-        type: 'category',
-         axisLabel: {
-           show:visualOptions.showXaxisLabels,
-           rotate: visualOptions.showXaxisLabelsRotate,
-           fontSize:visualOptions.showXaxisLabelsFontSize
-       },
+
+function getXData(resultMap) {
+  let xData = []
+  resultMap.forEach(e => {
+    let value = e.x
+    if (xData.indexOf(value) === -1) {
+      xData.push(value)
+    }
+  })
+  return xData.sort((a, b) => a - b);
+}
+
+const getxAxis = (visualOptions, xData) => {
+  return {
+      type: 'category',
+      axisLabel: {
+        show:visualOptions.showXaxisLabels,
+        rotate: visualOptions.showXaxisLabelsRotate,
+        fontSize:visualOptions.showXaxisLabelsFontSize
+      },
+      data: xData
     }
   }
+
 export function getChartOptions (visualOptions, datachart, mapping, dataTypes, dimensions){
   const resultMap = mapData(datachart,mapping, dataTypes,dimensions)
+  const xData = getXData(resultMap)
   console.log('getChartOptionsresultMap', resultMap)
-  resultMap.sort((a, b) => d3.ascending(a.x, b.x))
-  resultMap.sort((a, b) => d3.ascending(a.lines, b.lines))
-  //TODO EDATOS HAY QUE REVISAR PQ DEBERÍAN DE ESTAR AGRUPADOS POR LINES Y DENTRO DE CADA GRUPO ORDENADOS POR EL VALOR DE LA X(MENOS A MAYOR)
-  //FALTA DARLE UNA VUELTA PARA QUE LOS GRUPOS ENTRE SI TB ESTEN ORDENADOS POR EL MENOR VALOR DE LA X
-  var grouped = _.groupBy(resultMap, 'lines');
 
-  for (var lines in grouped) {
-    _.sortBy(grouped[lines], 'x');
-  }
-  let dimensiones = getDimensions(resultMap, mapping)
-  const seriesSize = dimensiones.length-1;
-  const lineSeries = getDimensions(resultMap, mapping).map(function (item, index) {
-    if (index <seriesSize) {
-      return { 
-        type: 'line',
-        smooth: true,
-        step: visualOptions.stepCurve ? visualOptions.stepType: false,
-        emphasis: { focus: 'series' },
-        showSymbol: visualOptions.showPoints,
-        symbolSize: visualOptions.dotsDiameter
-    }
+  let grouped = _.groupBy(resultMap, 'lines');
+
+  const lineSeries = getDimensions(resultMap, mapping).filter((dimension) => dimension !== 'x').map(function (item, index) {
+    let colorValue
+    if (visualOptions.colorScale.userScaleValues?.length === 1) {
+      colorValue = visualOptions.colorScale.userScaleValues[0].range
     } else {
-      return {}
+      colorValue = visualOptions.colorScale.userScaleValues.find(e => e.domain === item)?.range
+    }
+    let lineData = []
+    xData.forEach(e => {
+      let value =  _.find(grouped[item], ['x',  e])
+      if (value) {
+        lineData.push(value.y)
+      } else {
+        lineData.push('')
+      }
+    })
+    return {
+      name: item,
+      type: 'line',
+      smooth: true,
+      step: visualOptions.stepCurve ? visualOptions.stepType : false,
+      emphasis: {focus: 'series'},
+      showSymbol: visualOptions.showPoints,
+      symbolSize: visualOptions.dotsDiameter,
+      color: colorValue,
+      data: lineData
     }
   });
+
   return {
     legend: {
         show:visualOptions.showLegend,
@@ -121,6 +128,7 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
         right:visualOptions.legendMarginRight,
         top:visualOptions.legendMarginTop
     },
+    backgroundColor: visualOptions.background,
     tooltip: {},//añadir a las opciones
     toolbox: {//añadir a las opciones
       show: visualOptions.showToolbox,
@@ -134,7 +142,6 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
         restore: {}
       }
   },
-  dataset:getDataset(resultMap, mapping, visualOptions),
   grid: {
      left:  visualOptions.marginLeft,
      right: visualOptions.marginRight,
@@ -142,7 +149,7 @@ export function getChartOptions (visualOptions, datachart, mapping, dataTypes, d
      top: visualOptions.marginTop,
     containLabel: true
   },
-    xAxis:getxAxis(visualOptions,datachart, resultMap),
+    xAxis:getxAxis(visualOptions, xData),
     yAxis: {},
     series: [
       ...lineSeries,

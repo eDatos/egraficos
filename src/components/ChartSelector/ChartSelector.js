@@ -1,7 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
 import { Row, Col, Card } from 'react-bootstrap'
-import { BsLink } from 'react-icons/bs'
 import styles from './ChartSelector.module.scss'
 
 
@@ -28,26 +27,6 @@ function ChartSelector({
                   <h4 className="mb-2">{currentChart.metadata.category}</h4>
                 </Card.Subtitle>
                 <Card.Text>{currentChart.metadata.description}</Card.Text>
-                <Card.Link
-                  className={classNames({
-                    [styles.disabled]: !currentChart.metadata.code,
-                    underlined: true,
-                  })}
-                  href={currentChart.metadata.code}
-                  target="_blank"
-                >
-                  <BsLink color="black" /> Code
-                </Card.Link>
-                <Card.Link
-                  className={classNames({
-                    [styles.disabled]: !currentChart.metadata.tutorial,
-                    underlined: true,
-                  })}
-                  href={currentChart.metadata.tutorial}
-                  target="_blank"
-                >
-                  <BsLink color="black" /> Tutorial
-                </Card.Link>
               </Card.Body>
             </Card>
           )}

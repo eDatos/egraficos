@@ -67,6 +67,7 @@ function App() {
     return getDefaultOptionsValues(options)
   })
   const [rawViz, setRawViz] = useState(null)
+  const [options, setOptions] = useState({})
   const [mappingLoading, setMappingLoading] = useState(false)
   const dataMappingRef = useRef(null)
 
@@ -293,12 +294,13 @@ function App() {
               setVisualOptions={setVisualOptions}
               setRawViz={setRawViz}
               setMappingLoading={setMappingLoading}
+              setOptions={setOptions}
             />
           </Section>
         )}
-        {data && currentChart && (//&& rawViz && (
+        {data && rawViz && (
           <Section title={t('global.section.export.tittle')}>
-            <Exporter rawViz={rawViz} exportProject={exportProject} />
+            <Exporter rawViz={rawViz} exportProject={exportProject} render={visualOptions.render} options={options}/>
           </Section>
         )}
         <Footer value={cookies.chosenLocale}/>        

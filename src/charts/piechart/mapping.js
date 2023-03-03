@@ -139,6 +139,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
         top:visualOptions.legendMarginTop
   
     },
+    backgroundColor: visualOptions.background,
     tooltip: {},//añadir a las opciones
     toolbox: {//añadir a las opciones
       show: visualOptions.showToolbox,

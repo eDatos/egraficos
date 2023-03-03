@@ -7,13 +7,12 @@ import ReactEcharts from "echarts-for-react"
 const ChartPreview = ({
   chart,
   dataset: data,
-  dataTypes,
   mapping,
   visualOptions,
   error,
   setError,
   setRawViz,
-  mappedData,
+  setOptions
 }) => {
   const domRef = useRef(null)
   const vizOptionsDebounced = useDebounce(visualOptions, 200)
@@ -21,6 +20,7 @@ const ChartPreview = ({
   console.log('chart', chart);
   console.log('mapping', mapping);
   console.log('visualOptions', visualOptions);
+  console.log('rawViz', setRawViz)
   useEffect(() => {
     setError(null)
 
@@ -102,27 +102,22 @@ const ChartPreview = ({
       }
     }
     console.log('currentlyMapped', currentlyMapped);
-    if (!mappedData) {
+  }, [setError, vizOptionsDebounced, setRawViz, chart, mapping])
 
-      // console.info('Clearing viz')
-      setRawViz(null)
-      while (domRef.current.firstChild) {
-        domRef.current.removeChild(domRef.current.firstChild)
-      }
-      return
-    }
-  }, [setError, vizOptionsDebounced, setRawViz, mappedData, chart, mapping])
   var options =  {}
   try {
-    options = error === null ? chart.getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {}
+    options = error === null ? chart.getChartOptions(visualOptions, data,mapping,chart.dataTypes,chart.dimensions) : {};
     console.log('optionsfinal', options);
-    if (domRef && domRef.current)
-    domRef.current?.getEchartsInstance().setOption(options,true);
+    if (domRef && domRef.current && !error) {
+      domRef.current.getEchartsInstance().setOption(options, true);
+      setRawViz(domRef.current?.getEchartsInstance());
+      setOptions(options);
+    }
   } catch (e) {
          console.log("chart error", e)
          setError({ variant: 'danger', message: 'Chart error. ' + e.message })
          setRawViz(null)
-   }
+  }
   return (
     <div className={'col-8 col-xl-9'}>
       <div
@@ -135,16 +130,16 @@ const ChartPreview = ({
         <div ref={domRef}>{/* Don't put content in this <div /> */}</div>
       </div>
       <ReactEcharts 
-    option={options} className='echarts-for-echarts' ref={domRef}
-    style={{width:visualOptions.width,
-            height:visualOptions.height,
-            //marginTop:visualOptions.marginTop,
-            //marginLeft:visualOptions.marginLeft,
-            //marginBottom:visualOptions.marginBottom,
-            backgroundColor:visualOptions.background}}
-            //marginRight:visualOptions.marginRight}}
-            opts={{renderer: 'svg'}}
-  />
+        option={options} className='echarts-for-echarts' ref={domRef}
+        style={{width:visualOptions.width,
+                height:visualOptions.height,
+                //marginTop:visualOptions.marginTop,
+                //marginLeft:visualOptions.marginLeft,
+                //marginBottom:visualOptions.marginBottom,
+                backgroundColor:visualOptions.background}}
+                //marginRight:visualOptions.marginRight}}
+                opts={{renderer: visualOptions.render}}
+      />
     </div>
   )
 }

@@ -78,6 +78,19 @@ export const visualOptions = {
       default: false,
       group: 'artboard'
     },
+    render: {
+      type: 'text',
+      label: 'Render',
+      group: 'artboard',
+      options: [{
+        label: 'Svg',
+        value: 'svg'
+      }, {
+        label: 'Canvas',
+        value: 'canvas'
+      }],
+      default: 'svg'
+    },
     padding: {
       type: 'number',
       label: 'Padding',
@@ -161,10 +174,10 @@ export const visualOptions = {
     colorScale: {
       type: 'colorScale',
       label: 'Color scale',
-      dimension: 'color',
+      domain: 'colorDomain',
       default: {
         scaleType: 'ordinal',
-        interpolator: 'interpolateBlues',
+        interpolator: 'interpolateSpectral',
         defaultColor: '#385ad4'
       },
       group: 'colors'
