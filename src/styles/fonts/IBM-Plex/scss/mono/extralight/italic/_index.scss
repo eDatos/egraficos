@@ -5,8 +5,10 @@ $font-prefix: '..' !default;
   font-weight: 200;
   src: local('IBM Plex Mono ExtraLight Italic'),
     local('IBMPlexMono-ExtraLightItalic'),
-    url('#{$font-prefix}/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-ExtraLightItalic.woff2') format('woff2'),
-    url('#{$font-prefix}/IBM-Plex-Mono/fonts/complete/woff/IBMPlexMono-ExtraLightItalic.woff') format('woff');
+    url('#{$font-prefix}/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-ExtraLightItalic.woff2')
+      format('woff2'),
+    url('#{$font-prefix}/IBM-Plex-Mono/fonts/complete/woff/IBMPlexMono-ExtraLightItalic.woff')
+      format('woff');
 }
 
 @import 'cyrillic';

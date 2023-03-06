@@ -27,8 +27,7 @@ import DataMismatchModal from './DataMismatchModal'
 import SparqlFetch from './loaders/SparqlFetch'
 import { tsvFormat } from 'd3-dsv'
 import { CopyToClipboardButton } from '../CopyToClipboardButton'
-import { Trans } from 'react-i18next';
-
+import { Trans } from 'react-i18next'
 
 function DataLoader({
   userInput,
@@ -68,7 +67,7 @@ function DataLoader({
   const options = [
     {
       id: 'paste',
-      name:  <Trans i18nKey="global.section.loaddata.paste.name"></Trans>,
+      name: <Trans i18nKey="global.section.loaddata.paste.name"></Trans>,
       loader: (
         <Paste
           userInput={userInput}
@@ -76,7 +75,7 @@ function DataLoader({
           setLoadingError={setLoadingError}
         />
       ),
-      message:<Trans i18nKey="global.section.loaddata.paste.message"></Trans>,
+      message: <Trans i18nKey="global.section.loaddata.paste.message"></Trans>,
       icon: BsClipboard,
       allowedForReplace: true,
     },
@@ -89,7 +88,6 @@ function DataLoader({
           setUserInput={(rawInput) =>
             setUserInput(rawInput, { type: 'upload' })
           }
-
           setLoadingError={setLoadingError}
         />
       ),
@@ -131,8 +129,7 @@ function DataLoader({
     {
       id: 'url',
       name: <Trans i18nKey="global.section.loaddata.url.name"></Trans>,
-      message:
-      <Trans i18nKey="global.section.loaddata.url.message"></Trans>,
+      message: <Trans i18nKey="global.section.loaddata.url.message"></Trans>,
       loader: (
         <UrlFetch
           userInput={userInput}
@@ -150,7 +147,9 @@ function DataLoader({
     {
       id: 'project',
       name: <Trans i18nKey="global.section.loaddata.project.name"></Trans>,
-      message: <Trans i18nKey="global.section.loaddata.project.message"></Trans>,
+      message: (
+        <Trans i18nKey="global.section.loaddata.project.message"></Trans>
+      ),
       loader: (
         <LoadProject
           onProjectSelected={hydrateFromProject}
@@ -351,7 +350,9 @@ function DataLoader({
               onClick={reloadRAW}
             >
               <BsArrowRepeat className="mr-2" />
-              <h4 className="m-0 d-inline-block"><Trans i18nKey="global.reset"></Trans></h4>
+              <h4 className="m-0 d-inline-block">
+                <Trans i18nKey="global.reset"></Trans>
+              </h4>
             </div>
 
             <div
@@ -366,7 +367,9 @@ function DataLoader({
               }}
             >
               <BsArrowCounterclockwise className="mr-2" />
-              <h4 className="m-0 d-inline-block"><Trans i18nKey="global.changedata"></Trans></h4>
+              <h4 className="m-0 d-inline-block">
+                <Trans i18nKey="global.changedata"></Trans>
+              </h4>
             </div>
           </Col>
         )}
@@ -378,11 +381,17 @@ function DataLoader({
               {data && !parseError && get(data, 'errors', []).length === 0 && (
                 <WarningMessage
                   variant="success"
-                  message = {
-                  <Trans i18nKey="global.message.loadrows.succes"
-                  values= {{rowsnumber:data.dataset.length, 
-                  cellsnumber:data.dataset.length * Object.keys(data.dataTypes).length}}>
-                  </Trans>}
+                  message={
+                    <Trans
+                      i18nKey="global.message.loadrows.succes"
+                      values={{
+                        rowsnumber: data.dataset.length,
+                        cellsnumber:
+                          data.dataset.length *
+                          Object.keys(data.dataTypes).length,
+                      }}
+                    ></Trans>
+                  }
                   action={copyToClipboardButton}
                 />
               )}

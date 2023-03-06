@@ -23,11 +23,11 @@ import useDataLoader from './hooks/useDataLoader'
 import isPlainObject from 'lodash/isPlainObject'
 import CustomChartWarnModal from './components/CustomChartWarnModal'
 import { useTranslation } from 'react-i18next'
-import { useCookies } from "react-cookie"
+import { useCookies } from 'react-cookie'
 
 function App() {
-  const [cookies, setCookie] = useCookies();
-  const { t, i18n} = useTranslation();
+  const [cookies, setCookie] = useCookies()
+  const { t, i18n } = useTranslation()
   const [
     customCharts,
     {
@@ -247,20 +247,20 @@ function App() {
     [hydrateFromSavedProject, importCustomChartFromProject]
   )
 
-  useEffect(() => {    
-    setCookie();
-    i18n.changeLanguage(cookies.chosenLocale);
-  }, [setCookie,i18n,cookies.chosenLocale]);
+  useEffect(() => {
+    setCookie()
+    i18n.changeLanguage(cookies.chosenLocale)
+  }, [setCookie, i18n, cookies.chosenLocale])
   return (
     <div className="App">
-      <Header value={i18n} />      
+      <Header value={i18n} />
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}
         abortCustomChartLoad={abortCustomChartLoad}
       />
       <div className="app-sections">
-        <Section title= {t('global.section.loaddata.tittle')} loading={loading}>
+        <Section title={t('global.section.loaddata.tittle')} loading={loading}>
           <DataLoader {...dataLoader} hydrateFromProject={importProject} />
         </Section>
         {data && (
@@ -273,7 +273,10 @@ function App() {
           </Section>
         )}
         {data && currentChart && (
-          <Section title={t('global.section.mapping.tittle')} loading={mappingLoading}>
+          <Section
+            title={t('global.section.mapping.tittle')}
+            loading={mappingLoading}
+          >
             <DataMapping
               ref={dataMappingRef}
               dimensions={currentChart.dimensions}
@@ -300,10 +303,15 @@ function App() {
         )}
         {data && rawViz && (
           <Section title={t('global.section.export.tittle')}>
-            <Exporter rawViz={rawViz} exportProject={exportProject} render={visualOptions.render} options={options}/>
+            <Exporter
+              rawViz={rawViz}
+              exportProject={exportProject}
+              render={visualOptions.render}
+              options={options}
+            />
           </Section>
         )}
-        <Footer value={cookies.chosenLocale}/>        
+        <Footer value={cookies.chosenLocale} />
       </div>
       <ScreenSizeAlert />
     </div>

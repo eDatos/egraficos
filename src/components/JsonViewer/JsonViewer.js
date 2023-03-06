@@ -8,7 +8,7 @@ const JsonViewerRecursive = ({
   context,
   selectFilter,
   onSelect,
-  path
+  path,
 }) => {
   const isSelectable = selectFilter(context)
   const contextType = typeof context
@@ -27,7 +27,7 @@ const JsonViewerRecursive = ({
       if (isSelectable) {
         e.stopPropagation()
         e.preventDefault()
-        if (onSelect) onSelect(context, path.join("."))
+        if (onSelect) onSelect(context, path.join('.'))
       }
     },
     [context, isSelectable, onSelect, path]

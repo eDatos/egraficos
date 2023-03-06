@@ -13,7 +13,9 @@ const ChartOptionSelect = ({
 }) => {
   return (
     <Row className={props.className}>
-      <Col xs={6} className="d-flex align-items-center nowrap">{label}</Col>
+      <Col xs={6} className="d-flex align-items-center nowrap">
+        {label}
+      </Col>
       <Col xs={6}>
         <select
           className="custom-select raw-select"

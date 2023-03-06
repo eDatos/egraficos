@@ -12,17 +12,13 @@ function LoadFromFile({ loading, load }) {
       load(acceptedFiles[0])
     }
   }
-  const {
-    getRootProps,
-    getInputProps,
-    isDragReject,
-    isDragAccept,
-  } = useDropzone({
-    disabled: loading,
-    onDrop,
-    accept: 'text/plan,text/javascript',
-    maxFiles: 1,
-  })
+  const { getRootProps, getInputProps, isDragReject, isDragAccept } =
+    useDropzone({
+      disabled: loading,
+      onDrop,
+      accept: 'text/plan,text/javascript',
+      maxFiles: 1,
+    })
   return (
     <div
       className={classNames(styles.dropzone, {
@@ -212,7 +208,7 @@ function CustomChartLoader({ isOpen, onClose, ...props }) {
         <CustomChartLoaderForm {...props} onClose={onClose} />
       </Modal.Body>
       <Modal.Footer>
-        <div className='text-center w-100'>
+        <div className="text-center w-100">
           Do you want to know how to create a custom chart?{' '}
           <a href="https://rawgraphs.io" target="_blank" rel="noreferrer">
             Check our documentation

@@ -5,7 +5,6 @@ import ChartPreview from '../ChartPreview'
 import { mapDataInWorker } from '../../worker'
 import { WEBWORKER_ACTIVE } from '../../constants'
 
-
 const ChartPreviewWithOptions = ({
   chart,
   dataset,
@@ -17,21 +16,29 @@ const ChartPreviewWithOptions = ({
   setMappingLoading,
   setOptions,
 }) => {
-  const [error, setError] = useState({variant: "secondary", message: "Required chart variables"})
+  const [error, setError] = useState({
+    variant: 'secondary',
+    message: 'Required chart variables',
+  })
 
   useEffect(() => {
     try {
       setMappingLoading(true)
 
       if (WEBWORKER_ACTIVE) {
-        mapDataInWorker(chart.metadata.name, {
-          data: dataset,
-          mapping: mapping,
-          dataTypes,
-        }, chart.rawCustomChart)
+        mapDataInWorker(
+          chart.metadata.name,
+          {
+            data: dataset,
+            mapping: mapping,
+            dataTypes,
+          },
+          chart.rawCustomChart
+        )
           .catch((err) => {
             console.error(err)
-          }).finally(() => setMappingLoading(false))
+          })
+          .finally(() => setMappingLoading(false))
       } else {
         setMappingLoading(false)
       }
@@ -51,25 +58,25 @@ const ChartPreviewWithOptions = ({
 
   return (
     <Row>
-        <ChartOptions
-          chart={chart}
-          dataset={dataset}
-          mapping={mapping}
-          dataTypes={dataTypes}
-          visualOptions={visualOptions}
-          setVisualOptions={setVisualOptions}
-          error={error}
-        /> 
-        <ChartPreview
-          chart={chart}
-          dataset={dataset}
-          mapping={mapping}
-          visualOptions={visualOptions}
-          error={error}
-          setError={setError}
-          setRawViz={setRawViz}
-          setOptions={setOptions}
-        />
+      <ChartOptions
+        chart={chart}
+        dataset={dataset}
+        mapping={mapping}
+        dataTypes={dataTypes}
+        visualOptions={visualOptions}
+        setVisualOptions={setVisualOptions}
+        error={error}
+      />
+      <ChartPreview
+        chart={chart}
+        dataset={dataset}
+        mapping={mapping}
+        visualOptions={visualOptions}
+        error={error}
+        setError={setError}
+        setRawViz={setRawViz}
+        setOptions={setOptions}
+      />
     </Row>
   )
 }

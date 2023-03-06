@@ -178,7 +178,9 @@ async function exportCustomChart(chart) {
  *  exportCustomChart: (chart: CustomChartContract) => Promise<{ source: string, content: string | null }>
  * }]}
  */
-export default function useCustomCharts({ storage = true } = { storage: true }) {
+export default function useCustomCharts(
+  { storage = true } = { storage: true }
+) {
   const [customCharts, setCustomCharts] = useState([])
 
   // Loads custom charts saved in user storage
@@ -201,10 +203,8 @@ export default function useCustomCharts({ storage = true } = { storage: true }) 
           url,
         },
       }))
-      const [
-        nextCustomCharts,
-        releasedCustomCharts,
-      ] = getNextCustomChartsAndReleased(customCharts, newChartsToInject)
+      const [nextCustomCharts, releasedCustomCharts] =
+        getNextCustomChartsAndReleased(customCharts, newChartsToInject)
       releasedCustomCharts.forEach((c) => {
         URL.revokeObjectURL(c.rawCustomChart.url)
       })
@@ -305,10 +305,8 @@ export default function useCustomCharts({ storage = true } = { storage: true }) 
           url,
         },
       }
-      const [
-        nextCustomCharts,
-        releasedCustomCharts,
-      ] = getNextCustomChartsAndReleased(customCharts, [newChart])
+      const [nextCustomCharts, releasedCustomCharts] =
+        getNextCustomChartsAndReleased(customCharts, [newChart])
       releasedCustomCharts.forEach((c) => {
         URL.revokeObjectURL(c.rawCustomChart.url)
       })

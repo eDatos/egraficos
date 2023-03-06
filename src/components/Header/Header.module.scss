@@ -1,5 +1,5 @@
 @import '../../styles/variables';
-@import "~bootstrap/scss/mixins";
+@import '~bootstrap/scss/mixins';
 /* ==========================================================================
 Navbar
 ========================================================================== */
@@ -18,15 +18,15 @@ Navbar
   .dropdown-item.active,
   .dropdown-item.active:focus,
   .dropdown-item.active:hover {
-      background-color: $istac-gray-dark;
+    background-color: $istac-gray-dark;
   }
   ul.navbar-nav {
-      .nav-item {
-          white-space: nowrap;
-          &.active {
-              background: $istac-gray-dark;
-          }
+    .nav-item {
+      white-space: nowrap;
+      &.active {
+        background: $istac-gray-dark;
       }
+    }
   }
 }
 
@@ -45,10 +45,10 @@ Logo styles
 
 .navbar-brand {
   &.logo {
-      .logo-img {
-          height: $navbar-content-height;
-          margin-right: 15px;
-      }
+    .logo-img {
+      height: $navbar-content-height;
+      margin-right: 15px;
+    }
   }
 }
 
@@ -56,8 +56,7 @@ Logo styles
   $page-padding-left: 15px;
   $page-padding-right: 15px;
   .app-navbar {
-      padding-left: $page-padding-left;
-      padding-right: $page-padding-right;
+    padding-left: $page-padding-left;
+    padding-right: $page-padding-right;
   }
 }
-

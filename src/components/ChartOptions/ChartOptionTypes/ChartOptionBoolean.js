@@ -1,10 +1,20 @@
 import React from 'react'
 import { Row, Col, Form } from 'react-bootstrap'
 
-const ChartOptionBoolean = ({ optionId, label, value, error, onChange, className, isEnabled }) => {
+const ChartOptionBoolean = ({
+  optionId,
+  label,
+  value,
+  error,
+  onChange,
+  className,
+  isEnabled,
+}) => {
   return (
     <Row className={className}>
-      <Col xs={6} className="d-flex align-items-center nowrap">{label}</Col>
+      <Col xs={6} className="d-flex align-items-center nowrap">
+        {label}
+      </Col>
       <Form className="col-6 d-flex align-items-center">
         <Form.Check
           type="switch"
