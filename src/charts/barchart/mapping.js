@@ -175,7 +175,6 @@ export const getChartOptions = function (
     backgroundColor: visualOptions.background,
     tooltip: {}, //añadir a las opciones
     toolbox: {
-      //añadir a las opciones
       show: visualOptions.showToolbox,
       feature: {
         saveAsImage: {},
