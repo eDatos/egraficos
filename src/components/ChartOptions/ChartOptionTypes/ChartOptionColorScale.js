@@ -349,33 +349,6 @@ const ChartOptionColorScale = ({
     }
   }, [availableScaleTypes, handleChangeScaleType, locked])
 
-  // update scale on dataset update.
-  // #TODO: fixme
-
-  // const prevDataset = usePrevious(colorDataset)
-  // const prevScaleType = usePrevious(colorDataset)
-
-  // useEffect(() => {
-  //   if (!locked && colorDataset !== prevDataset && prevScaleType === scaleType) {
-  //     console.info("dddd resetting scope")
-  //     const nextUserValues = getDefaultUserValues(
-  //       interpolator,
-  //       scaleType,
-  //     )
-  //     setUserValues(nextUserValues)
-  //     const valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
-  //     //notify ui
-  //     const outScaleParams = {
-  //       scaleType,
-  //       interpolator,
-  //       userScaleValues: valuesForFinalScale,
-  //       defaultColor,
-  //       locked,
-  //     }
-  //     onChange(outScaleParams)
-  //   }
-  // }, [colorDataset, defaultColor, getDefaultUserValues, getUserValuesForFinalScale, interpolator, locked, onChange, prevDataset, prevScaleType, scaleType])
-
   return hasAnyMapping ? (
     <>
       <Row

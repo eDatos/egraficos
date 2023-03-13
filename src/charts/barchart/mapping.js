@@ -48,7 +48,7 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
 
   return results
 }
-const getxAxis = (visualOptions, datachart, resultMap) => {
+const getxAxis = (visualOptions) => {
   if ('vertical' === visualOptions.barsOrientation) {
     return {
       type: 'category',
@@ -64,7 +64,7 @@ const getxAxis = (visualOptions, datachart, resultMap) => {
     }
   }
 }
-const getyAxis = (visualOptions, datachart, resultMap) => {
+const getyAxis = (visualOptions) => {
   if ('horizontal' === visualOptions.barsOrientation) {
     return {
       type: 'category',
@@ -84,18 +84,20 @@ function getDimensions(resultMap, mapping) {
   if (mapping.series.value === undefined || mapping.series.value.length === 0) {
     return ['bars', 'size']
   } else {
-    var dimensions = resultMap
+    const dimensions = resultMap
       .map((res) => res.series)
       .filter((value, index, self) => self.indexOf(value) === index)
       .sort()
     dimensions.unshift('bars')
-    dimensions.push('size')
     return dimensions
   }
 }
 
-function getSorterConfig(resultMap, mapping, visualOptions) {
-  if ('name' === visualOptions.sortBarsBy) {
+function getSorterConfig(visualOptions, dimensions) {
+  if (
+    'name' === visualOptions.sortBarsBy ||
+    dimensions.findIndex((d) => d === 'size') < 0
+  ) {
     return {
       transform: {
         type: 'sort',
@@ -120,13 +122,15 @@ function getSorterConfig(resultMap, mapping, visualOptions) {
     }
   }
 }
+
 function getDataset(resultMap, mapping, visualOptions) {
+  const dimensions = getDimensions(resultMap, mapping)
   return [
     {
-      dimensions: getDimensions(resultMap, mapping),
+      dimensions: dimensions,
       source: resultMap,
     },
-    getSorterConfig(resultMap, mapping, visualOptions),
+    getSorterConfig(visualOptions, dimensions),
   ]
 }
 export const getChartOptions = function (
@@ -195,8 +199,8 @@ export const getChartOptions = function (
       top: visualOptions.marginTop,
       containLabel: true,
     },
-    xAxis: getxAxis(visualOptions, datachart, resultMap),
-    yAxis: getyAxis(visualOptions, datachart, resultMap),
+    xAxis: getxAxis(visualOptions),
+    yAxis: getyAxis(visualOptions),
     series: [...barSeries],
   }
 }

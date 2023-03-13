@@ -111,7 +111,7 @@ export const visualOptions = {
         value: 'horizontal',
       },
     ],
-    default: 'vertical'
+    default: 'vertical',
   },
   sortBarsBy: {
     type: 'text',

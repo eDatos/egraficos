@@ -15,11 +15,6 @@ const ChartPreview = ({
 }) => {
   const domRef = useRef(null)
   const vizOptionsDebounced = useDebounce(visualOptions, 200)
-  console.log('data', data)
-  console.log('chart', chart)
-  console.log('mapping', mapping)
-  console.log('visualOptions', visualOptions)
-  console.log('rawViz', setRawViz)
   useEffect(() => {
     setError(null)
 
@@ -104,7 +99,6 @@ const ChartPreview = ({
         return
       }
     }
-    console.log('currentlyMapped', currentlyMapped)
   }, [setError, vizOptionsDebounced, setRawViz, chart, mapping])
 
   var options = {}
@@ -119,14 +113,12 @@ const ChartPreview = ({
             chart.dimensions
           )
         : {}
-    console.log('optionsfinal', options)
     if (domRef && domRef.current && !error) {
       domRef.current.getEchartsInstance().setOption(options, true)
       setRawViz(domRef.current?.getEchartsInstance())
       setOptions(options)
     }
   } catch (e) {
-    console.log('chart error', e)
     setError({ variant: 'danger', message: 'Chart error. ' + e.message })
     setRawViz(null)
   }

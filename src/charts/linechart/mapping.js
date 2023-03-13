@@ -97,7 +97,6 @@ export function getChartOptions(
 ) {
   const resultMap = mapData(datachart, mapping, dataTypes, dimensions)
   const xData = getXData(resultMap)
-  console.log('getChartOptionsresultMap', resultMap)
 
   let grouped = _.groupBy(resultMap, 'lines')
 

@@ -24,7 +24,6 @@ const ColumnCard = ({
       } else {
         rollbackLocalMapping()
       }
-      // console.log('DID DROP', didDrop)
     },
   })
 

@@ -110,18 +110,6 @@ function WrapControlComponent({
     if (domainFromChart) {
       return domainFromChart.domain
     }
-    //TODO: Esta es la función que creo que habría que cambiar para mostrar selector de colores
-    /*
-    if (props.mappedData) {
-      return props.mappedData
-        .map((d) => get(d, props.dimension))
-        .filter(
-          (item) => item !== undefined && !(Array.isArray(item) && !item.length)
-        )
-    } else {
-      return []
-    }
- */
     return []
   }, [type, /*props.dimension, */ domainFromChart])
 
