@@ -89,6 +89,7 @@ function getDimensions(resultMap, mapping) {
       .filter((value, index, self) => self.indexOf(value) === index)
       .sort()
     dimensions.unshift('bars')
+    dimensions.push('size')
     return dimensions
   }
 }

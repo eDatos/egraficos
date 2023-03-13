@@ -97,13 +97,6 @@ export const visualOptions = {
     ],
     default: 'svg',
   },
-  padding: {
-    type: 'number',
-    label: 'Padding',
-    default: 1,
-    group: 'chart',
-    disabled: true, //TODO VER SI SE METE ESTA PROPIEDAD
-  },
   barsOrientation: {
     type: 'text',
     label: 'Bars orientation',
@@ -118,8 +111,7 @@ export const visualOptions = {
         value: 'horizontal',
       },
     ],
-    default: 'vertical',
-    disabled: true, //TODO VER SI SE METE ESTA PROPIEDAD
+    default: 'vertical'
   },
   sortBarsBy: {
     type: 'text',
@@ -144,45 +136,7 @@ export const visualOptions = {
       },
     ],
     default: 'name',
-    disabled: true, //TODO VER SI SE METE ESTA PROPIEDAD.SI SE AÑADIRA SEGURO
   },
-  // useSameScale: {
-  //   type: 'boolean',
-  //   label: 'Use same scale',
-  //   default: true,
-  //   group: 'series'
-  // },
-  // columnsNumber: {
-  //   type: 'number',
-  //   label: 'Number of columns',
-  //   default: 0,
-  //   group: 'series'
-  // },
-  // sortSeriesBy: {
-  //   type: 'text',
-  //   label: 'Sort series by',
-  //   group: 'series',
-  //   options: ['Total value (descending)', 'Total value (ascending)', 'Name', 'Original'],
-  //   default: 'Total value (descending)'
-  // },
-  // showSeriesLabels: {
-  //   type: 'boolean',
-  //   label: 'Show series titles',
-  //   default: true,
-  //   group: 'series'
-  // },
-  // repeatAxesLabels: {
-  //   type: 'boolean',
-  //   label: 'Repeat axis labels for each series',
-  //   default: false,
-  //   group: 'series'
-  // },
-  // showGrid: {
-  //   type: 'boolean',
-  //   label: 'Show series grid',
-  //   default: false,
-  //   group: 'series'
-  // },
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
