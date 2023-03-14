@@ -168,7 +168,6 @@ function DataLoader({
     mainContent = (
       <DataGrid
         userDataset={userData}
-        dataset={data.dataset}
         errors={data.errors}
         dataTypes={data.dataTypes}
         coerceTypes={coerceTypes}
@@ -373,7 +372,7 @@ function DataLoader({
             </div>
           </Col>
         )}
-        <Col>
+        <Col xs={9} lg={10}>
           <Row className="h-100">
             <Col className="h-100">
               {mainContent}
