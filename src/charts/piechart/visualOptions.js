@@ -2,37 +2,31 @@ export const visualOptions = {
   // Artboard
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
     default: 10,
     group: 'artboard',
   },
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
     default: 2,
     group: 'artboard',
   },
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
     default: 2,
     group: 'artboard',
   },
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
     default: 2,
     group: 'artboard',
   },
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
     default: false,
     group: 'artboard',
   },
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
     default: 500,
     group: 'artboard',
     disabled: {
@@ -41,16 +35,15 @@ export const visualOptions = {
   },
   legendOrient: {
     type: 'text',
-    label: 'Legend orient',
     default: 'horizontal',
     group: 'artboard',
     options: [
       {
-        label: 'Vertical',
+        label: 'vertical',
         value: 'vertical',
       },
       {
-        label: 'Horizontal',
+        label: 'horizontal',
         value: 'horizontal',
       },
     ],
@@ -60,7 +53,6 @@ export const visualOptions = {
   },
   legendMarginRight: {
     type: 'number',
-    label: 'Legend Margin(Right)',
     default: 'auto',
     group: 'artboard',
     disabled: {
@@ -69,7 +61,6 @@ export const visualOptions = {
   },
   legendMarginTop: {
     type: 'number',
-    label: 'Legend Margin(Top)',
     default: 'auto',
     group: 'artboard',
     disabled: {
@@ -78,13 +69,11 @@ export const visualOptions = {
   },
   showToolbox: {
     type: 'boolean',
-    label: 'Show Toolbox',
     default: false,
     group: 'artboard',
   },
   render: {
     type: 'text',
-    label: 'Render',
     group: 'artboard',
     options: [
       {
@@ -101,13 +90,11 @@ export const visualOptions = {
   // chart
   drawDonut: {
     type: 'boolean',
-    label: 'Draw as donuts',
     default: false,
     group: 'chart',
   },
   arcTichkness: {
     type: 'number',
-    label: 'Donut thickness',
     default: 10,
     group: 'chart',
     disabled: {
@@ -116,13 +103,11 @@ export const visualOptions = {
   },
   nightingaleChart: {
     type: 'boolean',
-    label: 'Draw as Nightingale Chart',
     default: false,
     group: 'chart',
   },
   nightingaleChartOption: {
     type: 'text',
-    label: 'Nightingale',
     group: 'chart',
     disabled: {
       nightingaleChartOption: false,
@@ -139,30 +124,6 @@ export const visualOptions = {
     ],
     default: 'area',
   },
-  sortArcsBy: {
-    type: 'text',
-    label: 'Sort arcs by',
-    group: 'series',
-    options: [
-      {
-        label: 'Size (descending)',
-        value: 'totalDescending',
-      },
-      {
-        label: 'Size (ascending)',
-        value: 'totalAscending',
-      },
-      {
-        label: 'Name',
-        value: 'name',
-      },
-      {
-        label: 'Original',
-        value: 'original',
-      },
-    ],
-    default: 'name',
-  },
   // colors
   colorScale: {
     type: 'colorScale',
@@ -177,61 +138,29 @@ export const visualOptions = {
   // labels
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show pies titles',
     default: true,
     group: 'labels',
   },
   showSeriesLabelsPosition: {
     type: 'text',
-    label: 'Label position',
     group: 'labels',
     disabled: {
       showSeriesLabels: false,
     },
     options: [
       {
-        label: 'Outside',
+        label: 'outside',
         value: 'outside',
       },
       {
-        label: 'Inside',
+        label: 'inside',
         value: 'inside',
       },
       {
-        label: 'Inner',
-        value: 'inner',
-      },
-      {
-        label: 'Center',
+        label: 'center',
         value: 'center',
       },
     ],
     default: 'inner',
-  },
-  // series
-  // sortPiesBy: {
-  //   type: 'text',
-  //   label: 'Sort pies by',
-  //   group: 'series',
-  //   options: [{
-  //     label: 'Size (descending)',
-  //     value: 'totalDescending'
-  //   }, {
-  //     label: 'Size (ascending)',
-  //     value: 'totalAscending'
-  //   }, {
-  //     label: 'Name',
-  //     value: 'name'
-  //   }, {
-  //     label: 'Original',
-  //     value: 'original'
-  //   }],
-  //   default: 'name'
-  // },
-  rowsNumber: {
-    type: 'number',
-    label: 'Grid rows',
-    default: 1,
-    group: 'series',
   },
 }

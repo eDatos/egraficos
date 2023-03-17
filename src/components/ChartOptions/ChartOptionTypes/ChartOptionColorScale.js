@@ -17,6 +17,7 @@ import {
 } from '@rawgraphs/rawgraphs-core'
 import styles from '../ChartOptions.module.scss'
 import usePrevious from '../../../hooks/usePrevious'
+import { useTranslation } from 'react-i18next'
 
 function getDatePickerValue(userValue) {
   if (userValue.userDomain === 0) {
@@ -53,6 +54,8 @@ const ChartOptionColorScale = ({
 }) => {
   // here we leverage injection of the __loaded prop in the color scale, see App.js
   const initialValue = useRef(!!value.__loaded)
+
+  const { t } = useTranslation(['visualoptions'])
 
   const [scaleType, setScaleType] = useState(get(value, 'scaleType'))
 
@@ -356,7 +359,7 @@ const ChartOptionColorScale = ({
         style={{ marginTop: '8px', marginBottom: '8px' }}
       >
         <Col xs={5} className="d-flex align-items-center nowrap">
-          Color scale
+          {t('colorScale')}
         </Col>
         <Col xs={7}>
           <Dropdown className="d-inline-block raw-dropdown w-100">
@@ -390,7 +393,7 @@ const ChartOptionColorScale = ({
         style={{ marginTop: '8px', marginBottom: '8px' }}
       >
         <Col xs={5} className="d-flex align-items-center nowrap">
-          Color scheme
+          {t('colorScheme')}
         </Col>
         <Col xs={7}>
           <ColorSchemesDropDown

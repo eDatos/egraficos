@@ -1,37 +1,31 @@
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
     default: 20,
     group: 'artboard',
   },
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
     default: 10,
     group: 'artboard',
   },
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
     default: 20,
     group: 'artboard',
   },
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
     default: 50,
     group: 'artboard',
   },
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
     default: false,
     group: 'artboard',
   },
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
     default: 500,
     group: 'artboard',
     disabled: {
@@ -40,15 +34,14 @@ export const visualOptions = {
   },
   legendOrient: {
     type: 'text',
-    label: 'Legend orient',
     group: 'artboard',
     options: [
       {
-        label: 'Vertical',
+        label: 'vertical',
         value: 'vertical',
       },
       {
-        label: 'Horizontal',
+        label: 'horizontal',
         value: 'horizontal',
       },
     ],
@@ -59,7 +52,6 @@ export const visualOptions = {
   },
   legendMarginRight: {
     type: 'number',
-    label: 'Legend Margin(Right)',
     default: 'auto',
     group: 'artboard',
     disabled: {
@@ -68,7 +60,6 @@ export const visualOptions = {
   },
   legendMarginTop: {
     type: 'number',
-    label: 'Legend Margin(Top)',
     default: 'auto',
     group: 'artboard',
     disabled: {
@@ -77,13 +68,11 @@ export const visualOptions = {
   },
   showToolbox: {
     type: 'boolean',
-    label: 'Show Toolbox',
     default: false,
     group: 'artboard',
   },
   render: {
     type: 'text',
-    label: 'Render',
     group: 'artboard',
     options: [
       {
@@ -103,11 +92,11 @@ export const visualOptions = {
     group: 'chart',
     options: [
       {
-        label: 'Vertically',
+        label: 'vertical',
         value: 'vertical',
       },
       {
-        label: 'Horizontally',
+        label: 'horizontal',
         value: 'horizontal',
       },
     ],
@@ -115,23 +104,22 @@ export const visualOptions = {
   },
   sortBarsBy: {
     type: 'text',
-    label: 'Sort bars by',
     group: 'chart',
     options: [
       {
-        label: 'Size (descending)',
+        label: 'totalDescending',
         value: 'totalDescending',
       },
       {
-        label: 'Size (ascending)',
+        label: 'totalAscending',
         value: 'totalAscending',
       },
       {
-        label: 'Name',
+        label: 'name',
         value: 'name',
       },
       {
-        label: 'Original',
+        label: 'original',
         value: 'original',
       },
     ],
@@ -139,7 +127,6 @@ export const visualOptions = {
   },
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
     domain: 'colorDomain',
     default: {
       scaleType: 'ordinal',
@@ -157,7 +144,6 @@ export const visualOptions = {
   },
   showXaxisLabelsRotate: {
     type: 'number',
-    label: 'Label rotation',
     group: 'labels',
     disabled: {
       showXaxisLabels: false,
@@ -166,7 +152,6 @@ export const visualOptions = {
   },
   showXaxisLabelsFontSize: {
     type: 'number',
-    label: 'Label size',
     group: 'labels',
     disabled: {
       showXaxisLabels: false,

@@ -3,6 +3,7 @@ import InilineColorPicker from '../../InlineColorPicker'
 import { Col } from 'react-bootstrap'
 import get from 'lodash/get'
 import style from '../ChartOptions.module.scss'
+import { useTranslation } from 'react-i18next'
 
 const ChartOptionColorScaleDefault = ({
   value,
@@ -46,11 +47,13 @@ const ChartOptionColorScaleDefault = ({
     }
   }, [defaultColor, defaultValue, handleChangeDefaultColor])
 
+  const { t } = useTranslation(['visualoptions'])
+
   return (
     <>
       <label className={[style['chart-option'], 'row'].join(' ')}>
         <Col xs={6} className="d-flex align-items-center">
-          Default
+          {t('color')}
         </Col>
         <Col xs={6}>
           <InilineColorPicker

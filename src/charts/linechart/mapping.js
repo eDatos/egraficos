@@ -97,8 +97,9 @@ export function getChartOptions(
 ) {
   const resultMap = mapData(datachart, mapping, dataTypes, dimensions)
   const xData = getXData(resultMap)
+  const multiplesLines = mapping.lines.value?.length > 0
 
-  let grouped = _.groupBy(resultMap, 'lines')
+  let data = multiplesLines ? _.groupBy(resultMap, 'lines') : resultMap
 
   const lineSeries = getDimensions(resultMap, mapping)
     .filter((dimension) => dimension !== 'x')
@@ -113,7 +114,7 @@ export function getChartOptions(
       }
       let lineData = []
       xData.forEach((e) => {
-        let value = _.find(grouped[item], ['x', e])
+        let value = _.find(multiplesLines ? data[item] : data, ['x', e], 0)
         if (value) {
           lineData.push(value.y)
         } else {

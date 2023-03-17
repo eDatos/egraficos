@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import isObject from 'lodash/isObject'
+import { useTranslation } from 'react-i18next'
 
 const ChartOptionSelect = ({
   options = [],
@@ -11,6 +12,7 @@ const ChartOptionSelect = ({
   label,
   ...props
 }) => {
+  const { t } = useTranslation(['visualoptions'])
   return (
     <Row className={props.className}>
       <Col xs={6} className="d-flex align-items-center nowrap">
@@ -30,7 +32,7 @@ const ChartOptionSelect = ({
           {options.map((option) =>
             isObject(option) ? (
               <option key={option.value} value={option.value}>
-                {option.label}
+                {t(option.label)}
               </option>
             ) : (
               <option key={option} value={option}>
