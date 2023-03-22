@@ -75,6 +75,9 @@
       "IE 11"
     ]
   },
+  "browserslistComments": {
+    "IE 11": "Necesario para compatibilidad con librería react-data-grid hasta actualización a react-scripts 5 y react 18"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
