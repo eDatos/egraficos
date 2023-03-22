@@ -10,7 +10,6 @@ import arrayMove from 'array-move'
 import arrayInsert from 'array-insert'
 import { useTranslation } from 'react-i18next'
 
-// import { DATATYPE_ICONS } from "../../constants"
 import { dataTypeIcons } from '../../constants'
 import {
   getTypeName,
@@ -78,13 +77,6 @@ const ChartDimensionCard = ({
       }
     },
   })
-
-  // const [collectedProps, drag] = useDrag({
-  //   item: {
-  //     type: 'card',
-
-  //   }
-  // })
 
   const setAggregation = useCallback(
     (newAggregations) => {
@@ -196,11 +188,6 @@ const ChartDimensionCard = ({
   )
 
   return (
-    // <div
-    //   className="Xcard Xp-3 Xm-2 "
-    //   style={{ minWidth: 250 }}
-    // >
-
     <Col xs={6} lg={4} xl={4}>
       <div className={styles['chart-dimension'] + ' user-select-none'}>
         {/* This is the card header */}
@@ -210,12 +197,6 @@ const ChartDimensionCard = ({
           <span className="text-left">
             {dimension.validTypes.map((t) => {
               return <DataTypeIcon key={t} type={t} />
-              // const DataTypeIcon = dataTypeIcons[t]
-              // return (
-              //   <span key={t}>
-              //     <DataTypeIcon className={styles['accepted-type-icon']} />
-              //   </span>
-              // )
             })}
           </span>
           <span className="text-capitalize text-center">{dimension.name}</span>

@@ -17,6 +17,7 @@ import {
 } from '@rawgraphs/rawgraphs-core'
 import styles from '../ChartOptions.module.scss'
 import usePrevious from '../../../hooks/usePrevious'
+import { useTranslation } from 'react-i18next'
 
 function getDatePickerValue(userValue) {
   if (userValue.userDomain === 0) {
@@ -53,6 +54,8 @@ const ChartOptionColorScale = ({
 }) => {
   // here we leverage injection of the __loaded prop in the color scale, see App.js
   const initialValue = useRef(!!value.__loaded)
+
+  const { t } = useTranslation(['visualoptions'])
 
   const [scaleType, setScaleType] = useState(get(value, 'scaleType'))
 
@@ -349,33 +352,6 @@ const ChartOptionColorScale = ({
     }
   }, [availableScaleTypes, handleChangeScaleType, locked])
 
-  // update scale on dataset update.
-  // #TODO: fixme
-
-  // const prevDataset = usePrevious(colorDataset)
-  // const prevScaleType = usePrevious(colorDataset)
-
-  // useEffect(() => {
-  //   if (!locked && colorDataset !== prevDataset && prevScaleType === scaleType) {
-  //     console.info("dddd resetting scope")
-  //     const nextUserValues = getDefaultUserValues(
-  //       interpolator,
-  //       scaleType,
-  //     )
-  //     setUserValues(nextUserValues)
-  //     const valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
-  //     //notify ui
-  //     const outScaleParams = {
-  //       scaleType,
-  //       interpolator,
-  //       userScaleValues: valuesForFinalScale,
-  //       defaultColor,
-  //       locked,
-  //     }
-  //     onChange(outScaleParams)
-  //   }
-  // }, [colorDataset, defaultColor, getDefaultUserValues, getUserValuesForFinalScale, interpolator, locked, onChange, prevDataset, prevScaleType, scaleType])
-
   return hasAnyMapping ? (
     <>
       <Row
@@ -383,7 +359,7 @@ const ChartOptionColorScale = ({
         style={{ marginTop: '8px', marginBottom: '8px' }}
       >
         <Col xs={5} className="d-flex align-items-center nowrap">
-          Color scale
+          {t('colorScale')}
         </Col>
         <Col xs={7}>
           <Dropdown className="d-inline-block raw-dropdown w-100">
@@ -417,7 +393,7 @@ const ChartOptionColorScale = ({
         style={{ marginTop: '8px', marginBottom: '8px' }}
       >
         <Col xs={5} className="d-flex align-items-center nowrap">
-          Color scheme
+          {t('colorScheme')}
         </Col>
         <Col xs={7}>
           <ColorSchemesDropDown

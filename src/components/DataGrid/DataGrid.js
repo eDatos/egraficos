@@ -1,9 +1,10 @@
 import React, { useMemo, useRef, useState, useCallback } from 'react'
-import ReactDataGrid from 'react-data-grid'
+import ReactDataGrid, { headerRenderer, textEditor } from 'react-data-grid'
 import { Overlay, OverlayTrigger } from 'react-bootstrap'
 import classNames from 'classnames'
 import { getTypeName, dateFormats } from '@rawgraphs/rawgraphs-core'
 import S from './DataGrid.module.scss'
+import 'react-data-grid/lib/styles.css'
 import { keyBy, get, isEqual } from 'lodash'
 import {
   dataTypeIcons,
@@ -193,19 +194,14 @@ function DataTypeSelector({
 }
 
 function HeaderRenderer({ ...props }) {
-  const { column } = props
-  const { key, sortColumn, sortDirection } = column
+  const { column, sortDirection } = props
   return (
     <div
       className={classNames(
         { [S['raw-col-header']]: true },
-        {
-          [S['unsorted']]:
-            key !== sortColumn ||
-            (key === sortColumn && sortDirection === 'NONE'),
-        },
-        { [S['acs']]: key === sortColumn && sortDirection === 'ASC' },
-        { [S['desc']]: key === sortColumn && sortDirection === 'DESC' }
+        { [S['unsorted']]: sortDirection === undefined },
+        { [S['acs']]: sortDirection === 'ASC' },
+        { [S['desc']]: sortDirection === 'DESC' }
       )}
     >
       <DataTypeSelector
@@ -217,149 +213,133 @@ function HeaderRenderer({ ...props }) {
         className={classNames(S['column-name'], 'text-truncate', 'd-block')}
         title={column.name}
       >
-        {column.name}
+        {headerRenderer({ column, ...props })}
       </span>
     </div>
   )
 }
 
-export default function DataGrid({
-  userDataset,
-  dataset,
-  errors,
-  dataTypes,
-  coerceTypes,
-  onDataUpdate,
-}) {
-  const [[sortColumn, sortDirection], setSort] = useState(['id', 'NONE'])
-
-  const keyedErrors = useMemo(() => keyBy(errors, 'row'), [errors])
-
-  const containerEl = useRef()
-
-  // Make id column just as large as needed
-  // Adjust constants to fit cell padding and font size
-  // (Math.floor(Math.log10(data.dataset.length)) + 1) is the number
-  //   of digits of the highest id
+function createColumns(userDataSet, dataTypes, containerEl, coerceTypes) {
+  if (!userDataSet || !dataTypes) {
+    return []
+  }
   const idColumnWidth =
-    24 + 8 * (Math.floor(Math.log10(userDataset.length)) + 1)
-
+    24 + 8 * (Math.floor(Math.log10(userDataSet.length)) + 1)
   const equalDinstribution =
     (containerEl.current?.getBoundingClientRect().width - idColumnWidth - 1) /
     Object.keys(dataTypes).length
   const columnWidth = equalDinstribution
     ? Math.max(equalDinstribution, 170)
     : 170
-
-  const columns = useMemo(() => {
-    if (!userDataset || !dataTypes) {
-      return []
-    }
-    return [
-      {
-        key: '_id',
-        name: '',
-        headerRenderer: () => null,
-        frozen: true,
-        width: idColumnWidth,
-        sortable: true,
+  return [
+    {
+      key: 'id',
+      name: '',
+      frozen: true,
+      width: idColumnWidth,
+    },
+    ...Object.keys(dataTypes).map((k, i) => ({
+      key: k,
+      name: k,
+      sortable: true,
+      editable: true,
+      resizable: true,
+      width: columnWidth,
+      _raw_datatype: dataTypes[k],
+      _raw_coerceType: (nextType) =>
+        coerceTypes({ ...dataTypes, [k]: nextType }),
+      formatter: ({ row }) => {
+        return (
+          <div className={classNames({ [S['has-error']]: row?._errors?.[k] })}>
+            {row[k]?.toString()}
+          </div>
+        )
       },
-      ...Object.keys(dataTypes).map((k, i) => ({
-        key: k,
-        name: k,
-        sortColumn: sortColumn,
-        sortDirection: sortDirection,
-        headerRenderer: HeaderRenderer,
-        editable: true,
-        formatter: ({ row }) => {
-          return (
-            <div
-              className={classNames({ [S['has-error']]: row?._errors?.[k] })}
-            >
-              {row[k]?.toString()}
-              {/* {row[k]} */}
-            </div>
-          )
-        },
-        _raw_datatype: dataTypes[k],
-        _raw_coerceType: (nextType) =>
-          coerceTypes({ ...dataTypes, [k]: nextType }),
-        sortable: true,
-        resizable: true,
-        width: columnWidth,
-      })),
-    ]
-  }, [
-    coerceTypes,
-    dataTypes,
-    userDataset,
-    idColumnWidth,
-    columnWidth,
-    sortColumn,
-    sortDirection,
-  ])
+      editor: textEditor,
+    })),
+  ]
+}
 
-  const sortedDataset = useMemo(() => {
+export default function DataGrid({
+  userDataset,
+  errors,
+  dataTypes,
+  coerceTypes,
+  onDataUpdate,
+}) {
+  const keyedErrors = useMemo(() => keyBy(errors, 'row'), [errors])
+  const containerEl = useRef()
+  const columns = createColumns(
+    userDataset,
+    dataTypes,
+    containerEl,
+    coerceTypes
+  )
+  const [sortColumns, setSortColumns] = useState([])
+  const onSortColumnsChange = useCallback((sortColumns) => {
+    setSortColumns(sortColumns.slice(-1))
+  }, [])
+
+  const ordererColumns = useMemo(() => {
+    function headerRenderer(props) {
+      return <HeaderRenderer {...props} />
+    }
+    return columns.map((c) => {
+      if (c.key === 'id') return c
+      return { ...c, headerRenderer }
+    })
+  }, [columns])
+
+  const sortedRows = useMemo(() => {
     let datasetWithIds = userDataset.map((item, i) => ({
       // Using .map ensures that we are not mutating a property
       ...item,
-      _id: i + 1, // Give items some id to populate left-most column
-      _stage3: dataset[i], // The dataset parsed by raw lib basing on data types is needed for sorting!
+      id: i + 1, // Give items some id to populate left-most column
+      _stage3: item, // The dataset parsed by raw lib basing on data types is needed for sorting!
       _errors: keyedErrors[i]?.error, // Inject errors to format cells with parsing errors
     }))
-    if (sortDirection === 'NONE') return datasetWithIds
+    if (sortColumns.length === 0) return datasetWithIds
+    const { columnKey, direction } = sortColumns[0]
 
-    const sortColumnType = getTypeName(dataTypes[sortColumn])
+    const sortColumnType = getTypeName(dataTypes[columnKey])
 
-    if (sortColumnType === 'number') {
-      datasetWithIds = datasetWithIds.sort(
-        (a, b) => a._stage3[sortColumn] - b._stage3[sortColumn]
-      )
-    } else if (sortColumnType === 'date') {
-      datasetWithIds =
-        datasetWithIds.sort(
-          (a, b) =>
-            a._stage3[sortColumn]?.valueOf() ??
-            0 - b._stage3[sortColumn]?.valueOf()
-        ) ?? 0
-    } else {
-      datasetWithIds = datasetWithIds.sort((a, b) =>
-        a._stage3[sortColumn]
-          ?.toString()
-          .localeCompare(b._stage3[sortColumn].toString())
-      )
+    let sortedRows
+
+    switch (sortColumnType) {
+      case 'number':
+        sortedRows = datasetWithIds.sort(
+          (a, b) => a._stage3[columnKey] - b._stage3[columnKey]
+        )
+        break
+      case 'date':
+        sortedRows =
+          datasetWithIds.sort(
+            (a, b) =>
+              a._stage3[columnKey]?.valueOf() ??
+              0 - b._stage3[columnKey]?.valueOf()
+          ) ?? 0
+        break
+      default:
+        sortedRows = datasetWithIds.sort((a, b) =>
+          a._stage3[columnKey]
+            ?.toString()
+            .localeCompare(b._stage3[columnKey].toString())
+        )
     }
-
-    return sortDirection === 'DESC' ? datasetWithIds.reverse() : datasetWithIds
-  }, [userDataset, sortDirection, dataTypes, sortColumn, dataset, keyedErrors])
-
-  const handleSort = useCallback((columnKey, direction) => {
-    setSort([columnKey, direction])
-  }, [])
+    return direction === 'DESC' ? sortedRows.reverse() : sortedRows
+  }, [userDataset, sortColumns, dataTypes, keyedErrors])
 
   return (
-    <div ref={containerEl}>
-      <ReactDataGrid
-        minColumnWidth={idColumnWidth}
-        columns={columns}
-        rows={sortedDataset}
-        rowHeight={48}
-        sortColumn={sortColumn}
-        sortDirection={sortDirection}
-        onSort={handleSort}
-        height={432}
-        onColumnResize={() => {}}
-        onRowsUpdate={(update) => {
-          if (update.action === 'CELL_UPDATE') {
-            const newDataset = [...userDataset]
-            newDataset[update.fromRow] = {
-              ...newDataset[update.fromRow],
-              [update.cellKey]: update.updated[update.cellKey],
-            }
-            onDataUpdate && onDataUpdate(newDataset)
-          }
-        }}
-      />
-    </div>
+    <ReactDataGrid
+      className="rdg-light"
+      columns={ordererColumns}
+      rows={sortedRows}
+      sortColumns={sortColumns}
+      onSortColumnsChange={onSortColumnsChange}
+      defaultColumnOptions={{ width: '1fr' }}
+      onRowsChange={(newRows) => {
+        onDataUpdate(newRows)
+      }}
+    />
   )
 }

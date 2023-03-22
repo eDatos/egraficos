@@ -62,9 +62,7 @@ export function getChartOptions(
     Math.floor(100 / Math.ceil(resultMap.length / filas)) - 10,
     6
   )
-  console.log('spam', spam)
   const regforraw = Math.ceil(resultMap.length / filas)
-  console.log('regforraw', regforraw)
   var spamfilas = 100 / filas - 10
   var countreg = 0
   var left = 0
@@ -87,11 +85,8 @@ export function getChartOptions(
       return ''
     }
   }
-  //TODO EDATOS EL CALCULO DE LA SERIE ESTA MAL PARA DIVIDIR LOS DISTRIBUIR LOS DIFERENTES GRAFICOS
-  //HAY QUE CALCULAR BIEN Y DEMOMENTAR LA DIMIENSIÓN PARA PODER USARLO
-  const pieSeries = resultMap.map(function (item, index) {
-    console.log('pieSeriesitem', item)
 
+  const pieSeries = resultMap.map(function (item, index) {
     countreg = countreg + 1
     const map2 = new Map(Object.entries(item))
     const valuedentro = mapping.arcs.value.map((arc) => ({
@@ -139,7 +134,6 @@ export function getChartOptions(
       color: visualOptions.colorScale.userScaleValues.map((res) => res.range),
     }
   })
-  console.log('pieSeries', pieSeries)
   return {
     legend: {
       show: visualOptions.showLegend,

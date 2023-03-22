@@ -16,6 +16,7 @@ import get from 'lodash/get'
 import map from 'lodash/map'
 import styles from './ChartOptions.module.scss'
 import omit from 'lodash/omit'
+import { useTranslation } from 'react-i18next'
 
 const CHART_OPTION_COMPONENTS = {
   number: ChartOptionNumber,
@@ -52,6 +53,7 @@ function WrapControlComponent({
   ...props
 }) {
   const Component = CHART_OPTION_COMPONENTS[type]
+  const { t } = useTranslation(['visualoptions'])
 
   const remainingOptions = useMemo(() => {
     if (type !== 'colorScale') {
@@ -110,18 +112,6 @@ function WrapControlComponent({
     if (domainFromChart) {
       return domainFromChart.domain
     }
-    //TODO: Esta es la función que creo que habría que cambiar para mostrar selector de colores
-    /*
-    if (props.mappedData) {
-      return props.mappedData
-        .map((d) => get(d, props.dimension))
-        .filter(
-          (item) => item !== undefined && !(Array.isArray(item) && !item.length)
-        )
-    } else {
-      return []
-    }
- */
     return []
   }, [type, /*props.dimension, */ domainFromChart])
 
@@ -156,7 +146,7 @@ function WrapControlComponent({
             {label} ({repeatIndex + 1})
           </React.Fragment>
         ) : (
-          label
+          t(optionId)
         )
       }
       {...omit(props, [
@@ -180,6 +170,8 @@ const ChartOptions = ({
   setVisualOptions,
   error,
 }) => {
+  const { t } = useTranslation(['visualoptions'])
+
   const optionsConfig = useMemo(() => {
     return getOptionsConfig(chart?.visualOptions)
   }, [chart])
@@ -252,7 +244,7 @@ const ChartOptions = ({
               <Col
                 className={`d-flex justify-content-between align-items-center ${styles['group-header']}`}
               >
-                <h5 className="text-uppercase m-0">{groupName}</h5>
+                <h5 className="text-uppercase m-0">{t(groupName)}</h5>
                 <span
                   className={[styles['collapse-button'], 'cursor-pointer'].join(
                     ' '

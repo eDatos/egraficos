@@ -72,7 +72,6 @@ export function serializeProject(
 
 function getOrError(object, path) {
   if (!has(object, path)) {
-    console.log('IMPORT ERROR', object, path)
     throw new Error('Selected project is not valid')
   }
   return get(object, path)

@@ -48,7 +48,7 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
 
   return results
 }
-const getxAxis = (visualOptions, datachart, resultMap) => {
+const getxAxis = (visualOptions) => {
   if ('vertical' === visualOptions.barsOrientation) {
     return {
       type: 'category',
@@ -64,7 +64,7 @@ const getxAxis = (visualOptions, datachart, resultMap) => {
     }
   }
 }
-const getyAxis = (visualOptions, datachart, resultMap) => {
+const getyAxis = (visualOptions) => {
   if ('horizontal' === visualOptions.barsOrientation) {
     return {
       type: 'category',
@@ -84,7 +84,7 @@ function getDimensions(resultMap, mapping) {
   if (mapping.series.value === undefined || mapping.series.value.length === 0) {
     return ['bars', 'size']
   } else {
-    var dimensions = resultMap
+    const dimensions = resultMap
       .map((res) => res.series)
       .filter((value, index, self) => self.indexOf(value) === index)
       .sort()
@@ -93,39 +93,26 @@ function getDimensions(resultMap, mapping) {
   }
 }
 
-function getSorterConfig(resultMap, mapping, visualOptions) {
-  if ('name' === visualOptions.sortBarsBy) {
-    return {
-      transform: {
-        type: 'sort',
-        config: { dimension: 'bars', order: 'asc' },
-      },
-    }
-  }
-  if ('totalDescending' === visualOptions.sortBarsBy) {
-    return {
-      transform: {
-        type: 'sort',
-        config: { dimension: 'size', order: 'desc' },
-      },
-    }
-  }
-  if ('totalAscending' === visualOptions.sortBarsBy) {
-    return {
-      transform: {
-        type: 'sort',
-        config: { dimension: 'size', order: 'asc' },
-      },
-    }
+function getSorterConfig(visualOptions, dimensions) {
+  let sortBySize = 'name' !== visualOptions.sortBarsBy && dimensions.findIndex((d) => d === 'size') >= 0
+  let dimension = sortBySize ? 'size' : 'bars'
+  let order = sortBySize && 'totalDescending' === visualOptions.sortBarsBy ? 'desc' : 'asc'
+  return {
+    transform: {
+      type: 'sort',
+      config: { dimension, order },
+    },
   }
 }
+
 function getDataset(resultMap, mapping, visualOptions) {
+  const dimensions = getDimensions(resultMap, mapping)
   return [
     {
-      dimensions: getDimensions(resultMap, mapping),
+      dimensions: dimensions,
       source: resultMap,
     },
-    getSorterConfig(resultMap, mapping, visualOptions),
+    getSorterConfig(visualOptions, dimensions),
   ]
 }
 export const getChartOptions = function (
@@ -193,8 +180,8 @@ export const getChartOptions = function (
       top: visualOptions.marginTop,
       containLabel: true,
     },
-    xAxis: getxAxis(visualOptions, datachart, resultMap),
-    yAxis: getyAxis(visualOptions, datachart, resultMap),
+    xAxis: getxAxis(visualOptions),
+    yAxis: getyAxis(visualOptions),
     series: [...barSeries],
   }
 }

@@ -25,6 +25,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     }
   }
 
+  const multiplesLines = mapping.lines.value?.length > 0
   let results = []
 
   d3.rollups(
@@ -37,10 +38,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
             x: vv[0][mapping.x.value], //get the first one since it's grouped
             y: yAggregator[0](vv.map((d) => d[mapping.y.value])), // aggregate
             series: vv[0][mapping.series.value], //get the first one since it's grouped
-            lines: vv[0][mapping.lines.value], //get the first one since it's grouped
-            [vv[0][mapping.lines.value]]: yAggregator[0](
-              vv.map((d) => d[mapping.y.value])
-            ),
+            lines: multiplesLines ? vv[0][mapping.lines.value] : 'y' //get the first one since it's grouped
           }
           results.push(item)
         },
@@ -97,9 +95,8 @@ export function getChartOptions(
 ) {
   const resultMap = mapData(datachart, mapping, dataTypes, dimensions)
   const xData = getXData(resultMap)
-  console.log('getChartOptionsresultMap', resultMap)
 
-  let grouped = _.groupBy(resultMap, 'lines')
+  let data = _.groupBy(resultMap, 'lines')
 
   const lineSeries = getDimensions(resultMap, mapping)
     .filter((dimension) => dimension !== 'x')
@@ -114,7 +111,7 @@ export function getChartOptions(
       }
       let lineData = []
       xData.forEach((e) => {
-        let value = _.find(grouped[item], ['x', e])
+        let value = _.find(data[item], ['x', e], 0)
         if (value) {
           lineData.push(value.y)
         } else {
