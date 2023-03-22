@@ -13,7 +13,7 @@ const samplesList = [
   },
   {
     name: 'GDP sector composition',
-    category: 'Pie chart, Stacked barchart',
+    category: 'Pie chart, Scatter Chart',
     url: './sample-datasets/Stacked barchart - GDP sector composition.tsv',
     delimiter: '\t',
     sourceName: 'Wikipedia',
@@ -22,7 +22,7 @@ const samplesList = [
   },
   {
     name: 'Revenues per Music format',
-    category: 'Line chart',
+    category: 'Line chart, Scatter Chart, Pie Chart',
     url: './sample-datasets/Line chart - RIAA Music format revenues.tsv',
     delimiter: '\t',
     sourceName: 'RIAA',
@@ -30,21 +30,12 @@ const samplesList = [
   },
   {
     name: 'EDATOS EXAMPLE',
-    category: 'Bar chart, line chart',
+    category: 'Bar chart',
     url: './sample-datasets/C00017A_0001.tsv',
     delimiter: '\t',
     sourceName: 'EDATOS',
     sourceURL: '',
   },
-  //C00017A_0001.tsv
-  // {
-  //   name: '',
-  //   category: '',
-  //   url: './sample-datasets/',
-  //   delimiter: '\t',
-  //   sourceName: '',
-  //   sourceURL: '',
-  // },
 ]
 export default function DataSamples({ onSampleReady, setLoadingError }) {
   const select = async (sample) => {

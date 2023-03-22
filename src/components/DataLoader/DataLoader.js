@@ -24,7 +24,6 @@ import UrlFetch from './loaders/UrlFetch'
 import Loading from './loading'
 import WarningMessage from '../WarningMessage'
 import DataMismatchModal from './DataMismatchModal'
-import SparqlFetch from './loaders/SparqlFetch'
 import { tsvFormat } from 'd3-dsv'
 import { CopyToClipboardButton } from '../CopyToClipboardButton'
 import { Trans } from 'react-i18next'
@@ -106,24 +105,6 @@ function DataLoader({
         />
       ),
       icon: BsGift,
-      allowedForReplace: true,
-    },
-    {
-      id: 'sparql',
-      name: <Trans i18nKey="global.section.loaddata.sparql.name"></Trans>,
-      message: 'Load data with a SparQL query',
-      loader: (
-        <SparqlFetch
-          userInput={userInput}
-          setUserInput={(rawInput, source) => setUserInput(rawInput, source)}
-          setLoadingError={setLoadingError}
-          initialState={
-            initialOptionState?.type === 'sparql' ? initialOptionState : null
-          }
-        />
-      ),
-      icon: BsCloud,
-      disabled: false,
       allowedForReplace: true,
     },
     {
