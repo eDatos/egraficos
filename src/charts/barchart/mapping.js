@@ -94,32 +94,14 @@ function getDimensions(resultMap, mapping) {
 }
 
 function getSorterConfig(visualOptions, dimensions) {
-  if (
-    'name' === visualOptions.sortBarsBy ||
-    dimensions.findIndex((d) => d === 'size') < 0
-  ) {
-    return {
-      transform: {
-        type: 'sort',
-        config: { dimension: 'bars', order: 'asc' },
-      },
-    }
-  }
-  if ('totalDescending' === visualOptions.sortBarsBy) {
-    return {
-      transform: {
-        type: 'sort',
-        config: { dimension: 'size', order: 'desc' },
-      },
-    }
-  }
-  if ('totalAscending' === visualOptions.sortBarsBy) {
-    return {
-      transform: {
-        type: 'sort',
-        config: { dimension: 'size', order: 'asc' },
-      },
-    }
+  let sortBySize = 'name' !== visualOptions.sortBarsBy && dimensions.findIndex((d) => d === 'size') >= 0
+  let dimension = sortBySize ? 'size' : 'bars'
+  let order = sortBySize && 'totalDescending' === visualOptions.sortBarsBy ? 'desc' : 'asc'
+  return {
+    transform: {
+      type: 'sort',
+      config: { dimension, order },
+    },
   }
 }
 
