@@ -10,14 +10,17 @@ import styles from './ParsingOptions.module.scss'
 import { BsArrowRepeat } from 'react-icons/bs'
 import { get } from 'lodash'
 import { fetchData as fetchDataFromUrl } from '../DataLoader/loaders/UrlFetch'
+import { fetchData as fetchDataFromSparql } from '../DataLoader/loaders/SparqlFetch'
 import { useTranslation } from 'react-i18next'
 
 const dataRefreshWorkers = {
-  url: fetchDataFromUrl
+  url: fetchDataFromUrl,
+  sparql: fetchDataFromSparql,
 }
 
 const dataRefreshCaptions = {
-  url: 'Refresh data from url'
+  url: 'Refresh data from url',
+  sparql: 'Refresh data from query',
 }
 
 export default function ParsingOptions(props) {

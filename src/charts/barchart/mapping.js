@@ -94,9 +94,14 @@ function getDimensions(resultMap, mapping) {
 }
 
 function getSorterConfig(visualOptions, dimensions) {
-  let sortBySize = 'name' !== visualOptions.sortBarsBy && dimensions.findIndex((d) => d === 'size') >= 0
+  let sortBySize =
+    'name' !== visualOptions.sortBarsBy &&
+    dimensions.findIndex((d) => d === 'size') >= 0
   let dimension = sortBySize ? 'size' : 'bars'
-  let order = sortBySize && 'totalDescending' === visualOptions.sortBarsBy ? 'desc' : 'asc'
+  let order =
+    sortBySize && 'totalDescending' === visualOptions.sortBarsBy
+      ? 'desc'
+      : 'asc'
   return {
     transform: {
       type: 'sort',

@@ -253,7 +253,7 @@ function App() {
   }, [setCookie, i18n, cookies.chosenLocale])
   return (
     <div className="App">
-      <Header value={i18n} />
+      <Header value={i18n.language} />
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}

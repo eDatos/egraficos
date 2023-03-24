@@ -58,5 +58,7 @@
     "showYaxisLabelsFontSize": "Tamaño etiqueta eje Y",
     "outside": "Fuera",
     "inside": "Dentro",
-    "center": "Centro"
+    "center": "Centro",
+    "Svg": "Svg",
+    "Canvas": "Canvas"
 }

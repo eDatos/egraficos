@@ -26,8 +26,6 @@ export default function ChartDimensionItem({
   rollbackLocalMapping,
   onInsertColumn,
   replaceDimension,
-
-  localMappding,
 }) {
   const ref = useRef(null)
 
@@ -114,7 +112,13 @@ export default function ChartDimensionItem({
   })
 
   const [{ isDragging }, drag] = useDrag({
-    item: { type: 'card', index, id: columnId, dimensionId: dimension.id },
+    type: 'card',
+    item: () => ({
+      index,
+      id: columnId,
+      dimensionId: dimension.id,
+      type: 'card',
+    }),
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),

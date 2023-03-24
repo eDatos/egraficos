@@ -17,8 +17,7 @@
 		<!--MVN -->
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 		<frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
-		<yarn.version>v1.22.19</yarn.version>
-		<node.version>v14.17.0</node.version>
+		<node.version>v18.11.0</node.version>
 	</properties>
 
 	<build>
@@ -29,29 +28,27 @@
 				<version>${frontend-maven-plugin.version}</version>
 				<executions>
 					<execution>
-						<id>install node and yarn</id>
+						<id>install node and npm</id>
 						<goals>
-							<goal>install-node-and-yarn</goal>
+							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
 							<nodeVersion>${node.version}</nodeVersion>
-							<yarnVersion>${yarn.version}</yarnVersion>
 						</configuration>
 					</execution>
 					<execution>
-						<id>yarn install</id>
+						<id>npm install</id>
 						<goals>
-							<goal>yarn</goal>
+							<goal>npm</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>yarn build</id>
+						<id>npm build</id>
 						<goals>
-							<goal>yarn</goal>
+							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<executable>yarn</executable>
-							<arguments>build:all</arguments>
+							<arguments>run build:all</arguments>
 							<environmentVariables>
 								<CI>true</CI> <!-- Forzamos a que los warnings lanzados durante la compilación sean considerados errores y rompan la misma para simular el comportamiento del GITLAB -->
 							</environmentVariables>

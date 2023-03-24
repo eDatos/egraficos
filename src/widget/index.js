@@ -1,20 +1,25 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import EDatosGraph from './components/echart'
 
 export default {
   widgets: {
     egraph: {
       render: (config) => {
-        ReactDOM.render(
+        const selector = ReactDOM.createRoot(
+          document.querySelector(config.selector)
+        )
+        selector.render(
           <React.StrictMode>
             <EDatosGraph options={config.options} renderer={config.renderer} />
-          </React.StrictMode>,
-          document.querySelector(config.selector)
+          </React.StrictMode>
         )
       },
       unmount: (config) => {
-        ReactDOM.unmountComponentAtNode(document.querySelector(config.selector))
+        const selector = ReactDOM.createRoot(
+          document.querySelector(config.selector)
+        )
+        selector.unmount()
       },
     },
   },

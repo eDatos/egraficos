@@ -58,5 +58,7 @@
     "showYaxisLabelsFontSize": "Mida etiqueta eix Y",
     "outside": "Fora",
     "inside": "Dins",
-    "center": "Centre"
+    "center": "Centre",
+    "Svg": "Svg",
+    "Canvas": "Canvas"
 }
