@@ -2,7 +2,6 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
-  useRef,
   useState,
 } from 'react'
 import { Row, Col } from 'react-bootstrap'
@@ -52,13 +51,15 @@ function handleReplaceLocalMapping(
   const removedItem = {}
   removedItem.aggregation =
     prev[fromDimension]?.config?.aggregation?.[fromIndex]
-  removedItem.value = prev[fromDimension].value[fromIndex]
+  removedItem.value = prev[fromDimension]?.value[fromIndex]
 
   let moveFn = multiple ? arrayInsert : arrayReplace
 
   const prevToMapping = prev[toDimension] || {}
+  const originDimensionData = prev[fromDimension] || {}
   const toDimensionMapping = {
-    ...prevToMapping,
+    ...originDimensionData,
+    config: undefined,
     ids: moveFn(prevToMapping.ids ?? [], toIndex, nextId),
     value: moveFn(prevToMapping.value ?? [], toIndex, removedItem.value),
   }
@@ -91,7 +92,7 @@ function handleReplaceLocalMapping(
 }
 
 function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
-  const [localMappding, setLocalMapping] = useState(mapping)
+  const [localMapping, setLocalMapping] = useState(mapping)
 
   const updateMapping = useCallback(
     (dimension, mappingConf, isLocal) => {
@@ -150,21 +151,18 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
   const [draggingId, setDraggingId] = useState(null)
   const { t } = useTranslation()
 
-  const rollbackLocalMapping = useCallback(() => {
+  const rollbackLocalMapping = () => {
     setLocalMapping(mapping)
-    setDraggingId(null)
-  }, [mapping])
-
-  const commitLocalMapping = () => {
-    // setMapping()
-    setMapping(lastMapping.current)
     setDraggingId(null)
   }
 
-  const lastMapping = useRef()
+  const commitLocalMapping = () => {
+    setDraggingId(null)
+  }
+
   useEffect(() => {
-    lastMapping.current = localMappding
-  })
+    setMapping(localMapping)
+  }, [setMapping, localMapping])
 
   useImperativeHandle(ref, () => ({
     clearLocalMapping: () => {
@@ -202,8 +200,7 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
                   key={d.id}
                   dimension={d}
                   dataTypes={dataTypes}
-                  // mapping={mapping[d.id] || {}}
-                  mapping={localMappding[d.id] || {}}
+                  mapping={localMapping[d.id] || {}}
                   setMapping={(mappingConf, isLocal = false) =>
                     updateMapping(d.id, mappingConf, isLocal)
                   }
@@ -212,7 +209,6 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
                   draggingId={draggingId}
                   setDraggingId={setDraggingId}
                   replaceDimension={replaceDimension}
-                  localMappding={localMappding}
                 />
               )
             })}

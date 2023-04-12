@@ -32,7 +32,6 @@ const ChartDimensionCard = ({
   draggingId,
   setDraggingId,
   replaceDimension,
-  localMappding,
 }) => {
   const { t } = useTranslation()
   const [{ isOver }, drop] = useDrop({
@@ -42,7 +41,7 @@ const ChartDimensionCard = ({
     }),
     drop: (item, monitor) => {
       if (item.type === 'column') {
-        const defaulAggregation = dimension.aggregation
+        const defaultAggregation = dimension.aggregation
           ? getDefaultDimensionAggregation(dimension, dataTypes[item.id])
           : null
 
@@ -61,7 +60,7 @@ const ChartDimensionCard = ({
             ? {
                 aggregation: [
                   ...(get(mapping, 'config.aggregation') || []),
-                  defaulAggregation,
+                  defaultAggregation,
                 ],
               }
             : undefined,
@@ -242,7 +241,6 @@ const ChartDimensionCard = ({
               onInsertColumn={onInsertColumn}
               draggingColumn={draggingId === renderId}
               replaceDimension={replaceDimension}
-              localMappding={localMappding}
             />
           )
         })}

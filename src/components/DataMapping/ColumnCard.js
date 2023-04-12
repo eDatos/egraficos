@@ -13,11 +13,12 @@ const ColumnCard = ({
   rollbackLocalMapping,
 }) => {
   const [{ isDragging }, drag] = useDrag({
-    item: { id: dimensionName, type: 'column' },
+    type: 'column',
+    item: () => ({ id: dimensionName, type: 'column' }),
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: monitor.isDragging(),
     }),
-    end: (dropResult, monitor) => {
+    end: (item, monitor) => {
       const didDrop = monitor.didDrop()
       if (didDrop) {
         commitLocalMapping()

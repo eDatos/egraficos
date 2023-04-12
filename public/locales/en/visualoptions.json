@@ -60,5 +60,7 @@
     "showYaxisLabelsFontSize": "Label Y size",
     "outside": "Outside",
     "inside": "Inside",
-    "center": "Center"
+    "center": "Center",
+    "Svg": "Svg",
+    "Canvas": "Canvas"
 }

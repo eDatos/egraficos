@@ -38,7 +38,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
             x: vv[0][mapping.x.value], //get the first one since it's grouped
             y: yAggregator[0](vv.map((d) => d[mapping.y.value])), // aggregate
             series: vv[0][mapping.series.value], //get the first one since it's grouped
-            lines: multiplesLines ? vv[0][mapping.lines.value] : 'y' //get the first one since it's grouped
+            lines: multiplesLines ? vv[0][mapping.lines.value] : 'y', //get the first one since it's grouped
           }
           results.push(item)
         },
