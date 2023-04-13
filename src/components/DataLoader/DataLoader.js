@@ -123,7 +123,7 @@ function DataLoader({
         />
       ),
       icon: BsCloud,
-      disabled: false,
+      disabled: true,
       allowedForReplace: true,
     },
     {
@@ -160,8 +160,8 @@ function DataLoader({
       allowedForReplace: false,
     },
   ]
-  const [optionIndex, setOptionIndex] = useState(0)
-  const selectedOption = options[optionIndex]
+  const [optionId, setOptionId] = useState('sample')
+  const selectedOption = options.filter((option) => option.id === optionId)[0]
 
   let mainContent
   if (userData && data) {
@@ -262,8 +262,9 @@ function DataLoader({
             {options
               .filter((opt) => {
                 return (
-                  dataLoaderMode !== DATA_LOADER_MODE.REPLACE ||
-                  opt.allowedForReplace
+                  !opt.disabled &&
+                  (dataLoaderMode !== DATA_LOADER_MODE.REPLACE ||
+                    opt.allowedForReplace)
                 )
               })
               .map((d, i) => {
@@ -287,7 +288,7 @@ function DataLoader({
                     key={d.id}
                     className={classnames}
                     onClick={() => {
-                      setOptionIndex(i)
+                      setOptionId(d.id)
                     }}
                   >
                     <d.icon className="w-25" />
@@ -361,7 +362,7 @@ function DataLoader({
                 const dataSourceIndex = options.findIndex(
                   (opt) => opt.id === dataSource?.type
                 )
-                setOptionIndex(Math.max(dataSourceIndex, 0))
+                setOptionId(options[Math.max(dataSourceIndex, 0)].id)
                 startDataReplace()
               }}
             >
