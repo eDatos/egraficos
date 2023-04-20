@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { InputGroup, DropdownButton, Dropdown } from 'react-bootstrap'
+import { InputGroup, DropdownButton, Dropdown, Form } from 'react-bootstrap'
 import uuid from 'react-uuid'
 
 function downloadBlob(url, filename) {
@@ -11,7 +11,18 @@ function downloadBlob(url, filename) {
   return a
 }
 
-export default function Exporter({ rawViz, exportProject, render, options }) {
+export default function Exporter({
+  rawViz,
+  exportProject,
+  render,
+  options,
+  dataSource,
+  chartIndex,
+  mapping,
+  visualOptions,
+  dataTypes,
+  dimensions,
+}) {
   const download = useCallback(
     (filename, format) => {
       downloadBlob(rawViz.getDataURL({ type: format }), filename)
@@ -35,7 +46,11 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
   const [exportFormats, setExportFormats] = useState(['edatosgraphs'])
   const [currentFormat, setCurrentFormat] = useState('edatosgraphs')
   const [currentFile, setCurrentFile] = useState('viz')
+  const [dynamicLoadWidget, setDynamicLoadWidget] = useState(false)
 
+  const handleOnChangeDynamicLoadWidget = () => {
+    setDynamicLoadWidget(!dynamicLoadWidget)
+  }
   const downloadViz = useCallback(() => {
     switch (currentFormat) {
       case 'svg':
@@ -54,6 +69,32 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
 
   function getWidget() {
     const generatedUUID = uuid()
+
+    function getProps() {
+      if (!dynamicLoadWidget || !dataSource?.url) {
+        return 'options: ' + JSON.stringify(options)
+      }
+      return (
+        "chartIndex: '" +
+        chartIndex +
+        "', " +
+        'source: ' +
+        JSON.stringify(dataSource) +
+        ', ' +
+        'visualOptions: ' +
+        JSON.stringify(visualOptions) +
+        ', ' +
+        'mapping: ' +
+        JSON.stringify(mapping) +
+        ', ' +
+        'dataTypes: ' +
+        JSON.stringify(dataTypes) +
+        ', ' +
+        'dimensions: ' +
+        JSON.stringify(dimensions)
+      )
+    }
+
     return (
       '<div id="chart-container-' +
       generatedUUID +
@@ -66,8 +107,8 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
       generatedUUID +
       "', renderer: '" +
       render +
-      "', options: " +
-      JSON.stringify(options) +
+      "', " +
+      getProps() +
       '});\n' +
       '</script>'
     )
@@ -121,21 +162,36 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
           </div>
         )}
       </div>
+      {currentFormat === 'widget' && dataSource.url && (
+        <div className="row">
+          <div className="col col-sm-12">
+            <Form.Check
+              id="dynamicLoadWidget"
+              label="Generar widget dinámico con carga de datos por url"
+              type="switch"
+              checked={dynamicLoadWidget}
+              onChange={handleOnChangeDynamicLoadWidget}
+            />
+          </div>
+        </div>
+      )}
       {currentFormat === 'widget' && (
-        <div className="col cos-sm-12">
-          <textarea
-            value={getWidget()}
-            style={{
-              backgroundColor: 'white',
-              border: '1px solid lightgrey',
-              borderRadius: 4,
-              width: '100%',
-              padding: '1rem',
-              minHeight: '250px',
-              height: '40vh',
-            }}
-            readOnly
-          />
+        <div className="row">
+          <div className="col cos-sm-12">
+            <textarea
+              value={getWidget()}
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid lightgrey',
+                borderRadius: 4,
+                width: '100%',
+                padding: '1rem',
+                minHeight: '250px',
+                height: '40vh',
+              }}
+              readOnly
+            />
+          </div>
         </div>
       )}
     </>

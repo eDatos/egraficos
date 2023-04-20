@@ -3,5 +3,11 @@
     "endpoint": "https://estadisticas.arte-consultores.com/cmetadata/v1.0",
     "navbarPathKey": "metamac.app.style.header.url",
     "footerPathKey": "metamac.app.style.footer.url"
+  },
+  "statistical-resources-internal": {
+    "endpoint": "https://estadisticas.arte-consultores.com/statistical-resources-internal/apis/statistical-resources-internal/v1.0"
+  },
+  "statistical-operations-internal": {
+    "endpoint": "https://estadisticas.arte-consultores.com/statistical-operations-internal/apis/operations-internal/v1.0"
   }
 }

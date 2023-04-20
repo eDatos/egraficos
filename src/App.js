@@ -251,6 +251,7 @@ function App() {
     setCookie()
     i18n.changeLanguage(cookies.chosenLocale)
   }, [setCookie, i18n, cookies.chosenLocale])
+  const chartIndex = charts.findIndex((c) => c === currentChart)
   return (
     <div className="App">
       <Header value={i18n.language} />
@@ -301,17 +302,23 @@ function App() {
             />
           </Section>
         )}
-        {data && rawViz && (
+        {data && rawViz && dataLoader.dataSource && (
           <Section title={t('global.section.export.tittle')}>
             <Exporter
               rawViz={rawViz}
               exportProject={exportProject}
               render={visualOptions.render}
               options={options}
+              dataSource={dataLoader.dataSource}
+              chartIndex={chartIndex}
+              mapping={mapping}
+              visualOptions={visualOptions}
+              dataTypes={data.dataTypes}
+              dimensions={currentChart.dimensions}
             />
           </Section>
         )}
-        <Footer value={cookies.chosenLocale} />
+        <Footer value={i18n.language} />
       </div>
       <ScreenSizeAlert />
     </div>

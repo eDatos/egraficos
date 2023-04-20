@@ -20,11 +20,19 @@
                 },
                 "url": {
                     "name": "From URL",
-                    "message": "Enter a web address (URL) pointing to the data (e.g. a public Dropbox file, a public API, ...). Please, be sure the server is CORS-enabled."
+                    "message": "Enter a web address (URL) pointing to the data (e.g. a public Dropbox file, a public API, ...). Please, be sure the server is CORS-enabled.",
+                    "loadButton": "Load Data"
                 },
                 "project": {
                     "name": "Open your project",
-                    "messagge": "Load a .edatosgraphs project."
+                    "message": "Load a .edatosgraphs project."
+                },
+                "edatos": {
+                    "name": "From eDatos",
+                    "message": "Select statistical operation and cube",
+                    "loadButton": "Load Data",
+                    "statisticalOperations": "Statistical operations",
+                    "cubes": "Cubes"
                 }
             },
             "chartselection": {

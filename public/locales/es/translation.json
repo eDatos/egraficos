@@ -22,11 +22,19 @@
                 },
                 "url": {
                     "name": "Desde URL",
-                    "message": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...). Por favor, asegúrese de que el servidor tiene CORS habilitado."
+                    "message": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...). Por favor, asegúrese de que el servidor tiene CORS habilitado.",
+                    "loadButton": "Cargar Datos"
                 },
                 "project": {
                     "name": "Abrir proyecto",
-                    "messagge": "Cargar un proyecto .edatosgraphs."
+                    "message": "Cargar un proyecto .edatosgraphs."
+                },
+                "edatos": {
+                    "name": "Desde eDatos",
+                    "message": "Seleccione operación estadística y cubo",
+                    "loadButton": "Cargar Datos",
+                    "statisticalOperations": "Operaciones estadísticas",
+                    "cubes": "Cubos"
                 }
             },
             "chartselection": {
