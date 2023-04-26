@@ -67,7 +67,6 @@ function App() {
     return getDefaultOptionsValues(options)
   })
   const [rawViz, setRawViz] = useState(null)
-  const [options, setOptions] = useState({})
   const [mappingLoading, setMappingLoading] = useState(false)
   const dataMappingRef = useRef(null)
 
@@ -298,7 +297,6 @@ function App() {
               setVisualOptions={setVisualOptions}
               setRawViz={setRawViz}
               setMappingLoading={setMappingLoading}
-              setOptions={setOptions}
             />
           </Section>
         )}
@@ -307,8 +305,7 @@ function App() {
             <Exporter
               rawViz={rawViz}
               exportProject={exportProject}
-              render={visualOptions.render}
-              options={options}
+              userData={dataLoader.userData}
               dataSource={dataLoader.dataSource}
               chartIndex={chartIndex}
               mapping={mapping}

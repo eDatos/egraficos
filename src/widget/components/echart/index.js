@@ -13,23 +13,28 @@ const EDatosGraph = (props) => {
       return text
     }
 
-    const fetchOptions = async () => {
-      const data = await fetchData(props.source)
-      const [dataType, parsedUserData, error, extra] = parseAndCheckData(data, {
-        separator: null,
-      })
-      const chart = charts[props.chartIndex]
+    const getChartOptions = (data) => {
       return chart.getChartOptions(
         props.visualOptions,
-        parsedUserData,
+        data,
         props.mapping,
         props.dataTypes,
         chart.dimensions
       )
     }
 
+    const chart = charts[props.chartIndex]
+
+    const fetchOptions = async () => {
+      const data = await fetchData(props.source)
+      const [dataType, parsedUserData, error, extra] = parseAndCheckData(data, {
+        separator: null,
+      })
+      return getChartOptions(parsedUserData)
+    }
+
     if (!props.source?.url) {
-      setOptions(props.options)
+      setOptions(getChartOptions(props.data))
     } else {
       fetchOptions(props).then((options) => {
         setOptions(options)
@@ -37,7 +42,12 @@ const EDatosGraph = (props) => {
     }
   }, [props])
 
-  return <ReactECharts option={options} opts={{ renderer: props.renderer }} />
+  return (
+    <ReactECharts
+      option={options}
+      opts={{ renderer: props.visualOptions.renderer }}
+    />
+  )
 }
 
 export default EDatosGraph

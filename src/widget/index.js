@@ -12,14 +12,13 @@ export default {
         selector.render(
           <React.StrictMode>
             <EDatosGraph
-              options={config.options}
-              renderer={config.renderer}
               source={config.source}
               chartIndex={config.chartIndex}
               visualOptions={config.visualOptions}
               mapping={config.mapping}
               dataTypes={config.dataTypes}
               dimensions={config.dimensions}
+              data={config.data}
             />
           </React.StrictMode>
         )

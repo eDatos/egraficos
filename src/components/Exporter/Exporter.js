@@ -14,8 +14,7 @@ function downloadBlob(url, filename) {
 export default function Exporter({
   rawViz,
   exportProject,
-  render,
-  options,
+  userData,
   dataSource,
   chartIndex,
   mapping,
@@ -70,11 +69,24 @@ export default function Exporter({
   function getWidget() {
     const generatedUUID = uuid()
 
+    function getFilteredUserData() {
+      const dataMappings = Object.keys(mapping)
+        .map((key) => mapping[key].value)
+        .flat(1)
+        .filter(Boolean)
+      const filterUserData = userData.map((entry) =>
+        Object.keys(entry)
+          .filter((key) => dataMappings.includes(key))
+          .reduce((obj, key) => {
+            obj[key] = entry[key]
+            return obj
+          }, {})
+      )
+      return filterUserData
+    }
+
     function getProps() {
-      if (!dynamicLoadWidget || !dataSource?.url) {
-        return 'options: ' + JSON.stringify(options)
-      }
-      return (
+      let props =
         "chartIndex: '" +
         chartIndex +
         "', " +
@@ -92,7 +104,10 @@ export default function Exporter({
         ', ' +
         'dimensions: ' +
         JSON.stringify(dimensions)
-      )
+      if (!dynamicLoadWidget || !dataSource?.url) {
+        props = props + ', data: ' + JSON.stringify(getFilteredUserData())
+      }
+      return props
     }
 
     return (
@@ -106,7 +121,7 @@ export default function Exporter({
       "    EdatosGraphs.widgets.egraph.render({selector: '#chart-container-" +
       generatedUUID +
       "', renderer: '" +
-      render +
+      visualOptions.render +
       "', " +
       getProps() +
       '});\n' +
@@ -117,12 +132,12 @@ export default function Exporter({
   useEffect(() => {
     const baseExportFormats = ['edatosgraphs', 'widget']
     const newExportFormats =
-      render === 'svg'
+      visualOptions.render === 'svg'
         ? [...baseExportFormats, 'svg']
         : [...baseExportFormats, 'png']
     setExportFormats(newExportFormats)
     setCurrentFormat('edatosgraphs')
-  }, [render])
+  }, [visualOptions.render])
 
   return (
     <>
