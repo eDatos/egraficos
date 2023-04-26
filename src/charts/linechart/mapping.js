@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 import _ from 'lodash'
+import { parseObject } from '../utils/parseUtils'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   const yAggregator = getDimensionAggregator(
@@ -9,16 +10,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     dataTypes,
     dimensions
   )
-  if (mapping.series === undefined) {
-    mapping.series = {
-      value: undefined,
-    }
-  }
-  if (mapping.color === undefined) {
-    mapping.color = {
-      value: undefined,
-    }
-  }
   if (mapping.lines === undefined) {
     mapping.lines = {
       value: undefined,
@@ -37,15 +28,15 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
           const item = {
             x: vv[0][mapping.x.value], //get the first one since it's grouped
             y: yAggregator[0](vv.map((d) => d[mapping.y.value])), // aggregate
-            series: vv[0][mapping.series.value], //get the first one since it's grouped
-            lines: multiplesLines ? vv[0][mapping.lines.value] : 'y', //get the first one since it's grouped
+            lines: multiplesLines
+              ? parseObject(vv[0][mapping.lines.value])
+              : 'y', //get the first one since it's grouped
           }
           results.push(item)
         },
         (d) => d[mapping.x.value].toString() // sub-group functions. toString() to enable grouping on dates
       ),
-    (d) => d[mapping.series.value], // series grouping
-    (d) => d[mapping.lines.value] // group functions
+    (d) => parseObject(d[mapping.lines.value]) // group functions
   )
 
   return results
@@ -55,7 +46,7 @@ function getDimensions(resultMap, mapping) {
     return ['x', 'y']
   } else {
     var dimensions = resultMap
-      .map((res) => res.lines)
+      .map((res) => parseObject(res.lines))
       .filter((value, index, self) => self.indexOf(value) === index)
       .sort()
     dimensions.unshift('x')
@@ -77,12 +68,13 @@ function getXData(resultMap) {
 const getxAxis = (visualOptions, xData) => {
   return {
     type: 'category',
+    boundaryGap: false,
     axisLabel: {
       show: visualOptions.showXaxisLabels,
       rotate: visualOptions.showXaxisLabelsRotate,
       fontSize: visualOptions.showXaxisLabelsFontSize,
     },
-    data: xData,
+    data: xData.map((data) => parseObject(data)),
   }
 }
 

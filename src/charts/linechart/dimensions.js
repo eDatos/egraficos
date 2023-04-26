@@ -11,7 +11,7 @@ export const dimensions = [
     id: 'y',
     name: 'Y Axis',
     operation: 'get',
-    validTypes: ['number', 'date'],
+    validTypes: ['number'],
     required: true,
     aggregation: true,
     aggregationDefault: 'sum',

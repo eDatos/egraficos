@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { parseObjectToValue } from '../utils/parseUtils'
 
 const getAxis = (
   showName,
@@ -34,21 +35,40 @@ const getSeries = (visualOptions, data, mapping) => {
     : data
   return [...new Set(data.map((item) => item[mapping.labels?.value]))].map(
     (item) => {
-      const myData = (item ? grouped[item] : grouped).map((d) => [
-        d[mapping.x.value],
-        d[mapping.y.value],
-        d[mapping.size?.value],
-      ])
+      const myData = (item ? grouped[item] : grouped)
+        .map((d) => [
+          parseObjectToValue(d[mapping.x.value]),
+          parseObjectToValue(d[mapping.y.value]),
+        ])
+        .reduce((accumulator, currentValue) => {
+          let findIndex = accumulator.findIndex(
+            (d) => d[0] === currentValue[0] && d[1] === currentValue[1]
+          )
+          if (findIndex < 0) {
+            return [...accumulator, [currentValue[0], currentValue[1], 1]]
+          } else {
+            accumulator[findIndex][2] += 1
+          }
+          return accumulator
+        }, [])
       return {
-        name: item,
+        name: item ? item : mapping.y.value[0],
         type: 'scatter',
-        symbolSize: visualOptions.symbolSize,
         data: myData,
+        symbolSize: (data) => data[2] + visualOptions.symbolSize,
         color: item
           ? visualOptions.colorScale.userScaleValues.find(
               (e) => e.domain === item
             )?.range
           : visualOptions.colorScale.userScaleValues[0].range,
+        emphasis: {
+          focus: 'series',
+          label: {
+            show: true,
+            formatter: (param) => param.data[2],
+            position: 'top',
+          },
+        },
       }
     }
   )
@@ -64,12 +84,7 @@ export const getChartOptions = function (visualOptions, datachart, mapping) {
       top: visualOptions.legendMarginTop,
     },
     backgroundColor: visualOptions.background,
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'cross',
-      },
-    },
+    tooltip: {},
     toolbox: {
       show: visualOptions.showToolbox,
       feature: {
