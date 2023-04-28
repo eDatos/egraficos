@@ -312,6 +312,9 @@ function App() {
               visualOptions={visualOptions}
               dataTypes={data.dataTypes}
               dimensions={currentChart.dimensions}
+              locale={dataLoader.locale}
+              decimalsSeparator={dataLoader.decimalsSeparator}
+              thousandsSeparator={dataLoader.thousandsSeparator}
             />
           </Section>
         )}

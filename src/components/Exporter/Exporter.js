@@ -21,6 +21,9 @@ export default function Exporter({
   visualOptions,
   dataTypes,
   dimensions,
+  locale,
+  decimalsSeparator,
+  thousandsSeparator,
 }) {
   const download = useCallback(
     (filename, format) => {
@@ -68,13 +71,13 @@ export default function Exporter({
 
   function getWidget() {
     const generatedUUID = uuid()
+    const dataMappings = Object.keys(mapping)
+      .map((key) => mapping[key].value)
+      .flat(1)
+      .filter(Boolean)
 
     function getFilteredUserData() {
-      const dataMappings = Object.keys(mapping)
-        .map((key) => mapping[key].value)
-        .flat(1)
-        .filter(Boolean)
-      const filterUserData = userData.map((entry) =>
+      const filteredUserData = userData.map((entry) =>
         Object.keys(entry)
           .filter((key) => dataMappings.includes(key))
           .reduce((obj, key) => {
@@ -82,13 +85,28 @@ export default function Exporter({
             return obj
           }, {})
       )
-      return filterUserData
+      return filteredUserData
+    }
+
+    function getFilteredDataTypes() {
+      return Object.fromEntries(
+        Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
+      )
     }
 
     function getProps() {
       let props =
         "chartIndex: '" +
         chartIndex +
+        "', " +
+        "locale: '" +
+        locale +
+        "', " +
+        "decimalsSeparator: '" +
+        decimalsSeparator +
+        "', " +
+        "thousandsSeparator: '" +
+        thousandsSeparator +
         "', " +
         'source: ' +
         JSON.stringify(dataSource) +
@@ -100,7 +118,7 @@ export default function Exporter({
         JSON.stringify(mapping) +
         ', ' +
         'dataTypes: ' +
-        JSON.stringify(dataTypes) +
+        JSON.stringify(getFilteredDataTypes()) +
         ', ' +
         'dimensions: ' +
         JSON.stringify(dimensions)

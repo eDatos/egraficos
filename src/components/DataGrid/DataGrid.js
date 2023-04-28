@@ -14,6 +14,8 @@ import {
 } from '../../constants'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 
+//add custom date formats
+dateFormats['YYYY-MMM'] = '%Y-M%m'
 const DATE_FORMATS = Object.keys(dateFormats)
 
 const DateFormatSelector = React.forwardRef(

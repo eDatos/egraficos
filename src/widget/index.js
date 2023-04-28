@@ -19,6 +19,9 @@ export default {
               dataTypes={config.dataTypes}
               dimensions={config.dimensions}
               data={config.data}
+              locale={config.locale}
+              decimalsSeparator={config.decimalsSeparator}
+              thousandsSeparator={config.thousandsSeparator}
             />
           </React.StrictMode>
         )
