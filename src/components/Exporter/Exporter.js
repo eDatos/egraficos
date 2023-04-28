@@ -48,7 +48,7 @@ export default function Exporter({
   const [exportFormats, setExportFormats] = useState(['edatosgraphs'])
   const [currentFormat, setCurrentFormat] = useState('edatosgraphs')
   const [currentFile, setCurrentFile] = useState('viz')
-  const [dynamicLoadWidget, setDynamicLoadWidget] = useState(false)
+  const [dynamicLoadWidget, setDynamicLoadWidget] = useState(true)
 
   const handleOnChangeDynamicLoadWidget = () => {
     setDynamicLoadWidget(!dynamicLoadWidget)
