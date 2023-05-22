@@ -476,6 +476,7 @@ export default function useDataLoader() {
     setLocale: handleChangeLocale,
     stackDimension,
     dataSource,
+    setDataSource,
     data,
     loading,
     coerceTypes,

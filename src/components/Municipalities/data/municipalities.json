@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "name": "Agaete",
+    "codprov": 35,
+    "code": 35001,
+    "coordinates": [28.099193, -15.698739]
+  },
+  {
+    "id": 2,
+    "name": "Agüimes",
+    "codprov": 35,
+    "code": 35002,
+    "coordinates": [27.903927, -15.445914]
+  },
+  {
+    "id": 3,
+    "name": "Antigua",
+    "codprov": 35,
+    "code": 35003,
+    "coordinates": [28.423412, -14.014024]
+  },
+  {
+    "id": 4,
+    "name": "Arrecife",
+    "codprov": 35,
+    "code": 35004,
+    "coordinates": [28.959235, -13.546719]
+  },
+  {
+    "id": 5,
+    "name": "Artenara",
+    "codprov": 35,
+    "code": 35005,
+    "coordinates": [28.020308, -15.646436]
+  },
+  {
+    "id": 6,
+    "name": "Arucas",
+    "codprov": 35,
+    "code": 35006,
+    "coordinates": [28.118491, -15.525382]
+  },
+  {
+    "id": 7,
+    "name": "Betancuria",
+    "codprov": 35,
+    "code": 35007,
+    "coordinates": [28.424732, -14.057803]
+  },
+  {
+    "id": 8,
+    "name": "Firgas",
+    "codprov": 35,
+    "code": 35008,
+    "coordinates": [28.107765, -15.563323]
+  },
+  {
+    "id": 9,
+    "name": "Gáldar",
+    "codprov": 35,
+    "code": 35009,
+    "coordinates": [28.145522, -15.653237]
+  },
+  {
+    "id": 10,
+    "name": "Haría",
+    "codprov": 35,
+    "code": 35010,
+    "coordinates": [29.146093, -13.499847]
+  },
+  {
+    "id": 11,
+    "name": "Ingenio",
+    "codprov": 35,
+    "code": 35011,
+    "coordinates": [27.919557, -15.443647]
+  },
+  {
+    "id": 12,
+    "name": "Mogán",
+    "codprov": 35,
+    "code": 35012,
+    "coordinates": [27.883888, -15.723836]
+  },
+  {
+    "id": 13,
+    "name": "Moya",
+    "codprov": 35,
+    "code": 35013,
+    "coordinates": [28.110822, -15.583339]
+  },
+  {
+    "id": 14,
+    "name": "La Oliva",
+    "codProv": 35,
+    "code": 35014,
+    "coordinates": [28.610297, -13.927763]
+  }
+]

@@ -33,7 +33,15 @@
                     "loadButton": "Load Data",
                     "statisticalOperations": "Statistical operations",
                     "cubes": "Cubes"
+                },
+                "wms": {
+                    "name": "From WMS server",
+                    "message": "Enter a web address (URL) from WMS server",
+                    "loadButton": "Load WMS"
                 }
+            },
+            "wmslayerselection": {
+                "tittle": "Choose layers"
             },
             "chartselection": {
                 "tittle": "2. Choose a chart"

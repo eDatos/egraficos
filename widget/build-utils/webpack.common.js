@@ -19,6 +19,14 @@ module.exports = {
                 issuer: /\.[jt]sx?$/,
                 use: ['@svgr/webpack'],
             },
+            {
+                test: /\.(scss|css)$/i,
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                type: 'asset/inline'
+            }
         ]
     },
     // https://webpack.js.org/configuration/output/

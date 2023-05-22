@@ -8,6 +8,7 @@ import {
   BsCloud,
   BsFolder,
   BsGift,
+  BsMap,
   BsSearch,
   BsUpload,
 } from 'react-icons/bs'
@@ -29,6 +30,7 @@ import { tsvFormat } from 'd3-dsv'
 import { CopyToClipboardButton } from '../CopyToClipboardButton'
 import { Trans } from 'react-i18next'
 import EDatosFetch from './loaders/EDatosFetch'
+import WMSFetch from './loaders/WMSFetch'
 
 function DataLoader({
   userInput,
@@ -47,6 +49,7 @@ function DataLoader({
   setLocale,
   stackDimension,
   dataSource,
+  setDataSource,
   data,
   loading,
   coerceTypes,
@@ -61,6 +64,9 @@ function DataLoader({
   commitDataReplace,
   replaceRequiresConfirmation,
   hydrateFromProject,
+  setLayers,
+  selectedLayers,
+  setSelectedLayers,
 }) {
   const [loadingError, setLoadingError] = useState()
   const [initialOptionState, setInitialOptionState] = useState(null)
@@ -170,6 +176,23 @@ function DataLoader({
         />
       ),
       icon: BsFolder,
+      allowedForReplace: false,
+    },
+    {
+      id: 'WMS',
+      name: <Trans i18nKey="global.section.loaddata.wms.name"></Trans>,
+      message: <Trans i18nKey="global.section.loaddata.wms.message"></Trans>,
+      loader: (
+        <WMSFetch
+          //url="https://datos.canarias.es/api/estadisticas/geographical-resources/IGR-00080/wms?request=GetCapabilities"
+          url="https://pre-datos.canarias.es/api/estadisticas/geographical-resources/Demografia4/wms?request=GetCapabilities"
+          setLayers={setLayers}
+          setDataSource={setDataSource}
+          selectedLayers={selectedLayers}
+          setSelectedLayers={setSelectedLayers}
+        />
+      ),
+      icon: BsMap,
       allowedForReplace: false,
     },
   ]

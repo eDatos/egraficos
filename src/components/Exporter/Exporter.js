@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { InputGroup, DropdownButton, Dropdown, Form } from 'react-bootstrap'
+import { Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
 import uuid from 'react-uuid'
 
 function downloadBlob(url, filename) {
@@ -24,6 +24,8 @@ export default function Exporter({
   locale,
   decimalsSeparator,
   thousandsSeparator,
+  selectedLayers,
+  map,
 }) {
   const download = useCallback(
     (filename, format) => {
@@ -69,15 +71,53 @@ export default function Exporter({
     }
   }, [currentFile, currentFormat, download, downloadProject])
 
-  function getWidget() {
-    const generatedUUID = uuid()
+  const getWidgetHeader = (generatedUUID) =>
+    '<div id="chart-container-' +
+    generatedUUID +
+    '"></div>\n' +
+    '<script src="' +
+    window.location.href +
+    'widget/widget.js"></script>\n'
+
+  function getWmsWidget(generatedUUID, position, mapZoom) {
+    function getProps() {
+      return (
+        'layers: ' +
+        JSON.stringify(selectedLayers) +
+        ', ' +
+        "url: '" +
+        dataSource.url +
+        "', " +
+        'center: [' +
+        position.lat +
+        ', ' +
+        position.lng +
+        '], ' +
+        'zoom: ' +
+        mapZoom
+      )
+    }
+
+    return (
+      getWidgetHeader(generatedUUID) +
+      '<script>\n' +
+      "    EdatosGraphs.widgets.wms.render({selector: '#chart-container-" +
+      generatedUUID +
+      "', " +
+      getProps() +
+      '});\n' +
+      '</script>'
+    )
+  }
+
+  function getEGraphWidget(generatedUUID) {
     const dataMappings = Object.keys(mapping)
       .map((key) => mapping[key].value)
       .flat(1)
       .filter(Boolean)
 
     function getFilteredUserData() {
-      const filteredUserData = userData.map((entry) =>
+      return userData.map((entry) =>
         Object.keys(entry)
           .filter((key) => dataMappings.includes(key))
           .reduce((obj, key) => {
@@ -85,7 +125,6 @@ export default function Exporter({
             return obj
           }, {})
       )
-      return filteredUserData
     }
 
     function getFilteredDataTypes() {
@@ -129,12 +168,7 @@ export default function Exporter({
     }
 
     return (
-      '<div id="chart-container-' +
-      generatedUUID +
-      '"></div>\n' +
-      '<script src="' +
-      window.location.href +
-      'widget/widget.js"></script>\n' +
+      getWidgetHeader(generatedUUID) +
       '<script>\n' +
       "    EdatosGraphs.widgets.egraph.render({selector: '#chart-container-" +
       generatedUUID +
@@ -156,6 +190,26 @@ export default function Exporter({
     setExportFormats(newExportFormats)
     setCurrentFormat('edatosgraphs')
   }, [visualOptions.render])
+
+  const [position, setPosition] = useState(() => map.getCenter())
+  const [mapZoom, setMapZoom] = useState(() => map.getZoom())
+
+  const onMapMove = useCallback(() => {
+    setPosition(map.getCenter())
+  }, [map])
+
+  const onMapZoom = useCallback(() => {
+    setMapZoom(map.getZoom())
+  }, [map])
+
+  useEffect(() => {
+    map.on('move', onMapMove)
+    map.on('zoom', onMapZoom)
+    return () => {
+      map.off('move', onMapMove)
+      map.off('zoom', onMapZoom)
+    }
+  }, [map, onMapMove, onMapZoom])
 
   return (
     <>
@@ -195,24 +249,30 @@ export default function Exporter({
           </div>
         )}
       </div>
-      {currentFormat === 'widget' && dataSource.url && (
-        <div className="row">
-          <div className="col col-sm-12">
-            <Form.Check
-              id="dynamicLoadWidget"
-              label="Generar widget dinámico con carga de datos por url"
-              type="switch"
-              checked={dynamicLoadWidget}
-              onChange={handleOnChangeDynamicLoadWidget}
-            />
+      {currentFormat === 'widget' &&
+        dataSource.url &&
+        dataSource.type !== 'wms' && (
+          <div className="row">
+            <div className="col col-sm-12">
+              <Form.Check
+                id="dynamicLoadWidget"
+                label="Generar widget dinámico con carga de datos por url"
+                type="switch"
+                checked={dynamicLoadWidget}
+                onChange={handleOnChangeDynamicLoadWidget}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
       {currentFormat === 'widget' && (
         <div className="row">
           <div className="col cos-sm-12">
             <textarea
-              value={getWidget()}
+              value={
+                dataSource.type === 'wms'
+                  ? getWmsWidget(uuid(), position, mapZoom)
+                  : getEGraphWidget(uuid())
+              }
               style={{
                 backgroundColor: 'white',
                 border: '1px solid lightgrey',

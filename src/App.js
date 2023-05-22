@@ -24,6 +24,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import CustomChartWarnModal from './components/CustomChartWarnModal'
 import { useTranslation } from 'react-i18next'
 import { useCookies } from 'react-cookie'
+import WMSMap from './components/WMSMap/WMSMap'
 
 function App() {
   const [cookies, setCookie] = useCookies()
@@ -251,6 +252,11 @@ function App() {
     i18n.changeLanguage(cookies.chosenLocale)
   }, [setCookie, i18n, cookies.chosenLocale])
   const chartIndex = charts.findIndex((c) => c === currentChart)
+
+  const [layers, setLayers] = useState(null)
+  const [map, setMap] = useState(null)
+  const [selectedLayers, setSelectedLayers] = useState([])
+
   return (
     <div className="App">
       <Header value={i18n.language} />
@@ -261,8 +267,26 @@ function App() {
       />
       <div className="app-sections">
         <Section title={t('global.section.loaddata.tittle')} loading={loading}>
-          <DataLoader {...dataLoader} hydrateFromProject={importProject} />
+          <DataLoader
+            {...dataLoader}
+            hydrateFromProject={importProject}
+            setLayers={setLayers}
+            selectedLayers={selectedLayers}
+            setSelectedLayers={setSelectedLayers}
+          />
         </Section>
+        {layers && !data && (
+          <Section title="WMS Map">
+            <WMSMap
+              layers={layers}
+              url={dataLoader.dataSource.url}
+              setMap={setMap}
+              map={map}
+              selectedLayers={selectedLayers}
+              setSelectedLayers={setSelectedLayers}
+            />
+          </Section>
+        )}
         {data && (
           <Section title={t('global.section.chartselection.tittle')}>
             <ChartSelector
@@ -300,7 +324,7 @@ function App() {
             />
           </Section>
         )}
-        {data && rawViz && dataLoader.dataSource && (
+        {((data && rawViz) || map) && dataLoader.dataSource && (
           <Section title={t('global.section.export.tittle')}>
             <Exporter
               rawViz={rawViz}
@@ -310,11 +334,13 @@ function App() {
               chartIndex={chartIndex}
               mapping={mapping}
               visualOptions={visualOptions}
-              dataTypes={data.dataTypes}
+              dataTypes={data?.dataTypes}
               dimensions={currentChart.dimensions}
               locale={dataLoader.locale}
               decimalsSeparator={dataLoader.decimalsSeparator}
               thousandsSeparator={dataLoader.thousandsSeparator}
+              selectedLayers={selectedLayers}
+              map={map}
             />
           </Section>
         )}

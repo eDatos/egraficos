@@ -34,10 +34,13 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
                     onClick={() => {
                       setCurrentChart(d)
                     }}
-                    className={classNames('flex-row h-100 cursor-pointer', {
-                      active: d === currentChart ? 'active' : '',
-                      [styles.customChart]: !!d.rawCustomChart,
-                    })}
+                    className={classNames(
+                      'flex-row h-100 cursor-pointer custom-card',
+                      {
+                        active: d === currentChart ? 'active' : '',
+                        [styles.customChart]: !!d.rawCustomChart,
+                      }
+                    )}
                   >
                     <div
                       className={`h-100 w-25 ${styles.thumbnail}`}

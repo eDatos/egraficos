@@ -15,8 +15,7 @@ const EDatosGraph = (props) => {
   useEffect(() => {
     const fetchData = async (source) => {
       const response = await fetch(source.url)
-      const text = await response.text()
-      return text
+      return await response.text()
     }
 
     const getChartOptions = (data) => {
