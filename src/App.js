@@ -67,7 +67,6 @@ function App() {
     return getDefaultOptionsValues(options)
   })
   const [rawViz, setRawViz] = useState(null)
-  const [options, setOptions] = useState({})
   const [mappingLoading, setMappingLoading] = useState(false)
   const dataMappingRef = useRef(null)
 
@@ -251,6 +250,7 @@ function App() {
     setCookie()
     i18n.changeLanguage(cookies.chosenLocale)
   }, [setCookie, i18n, cookies.chosenLocale])
+  const chartIndex = charts.findIndex((c) => c === currentChart)
   return (
     <div className="App">
       <Header value={i18n.language} />
@@ -297,21 +297,28 @@ function App() {
               setVisualOptions={setVisualOptions}
               setRawViz={setRawViz}
               setMappingLoading={setMappingLoading}
-              setOptions={setOptions}
             />
           </Section>
         )}
-        {data && rawViz && (
+        {data && rawViz && dataLoader.dataSource && (
           <Section title={t('global.section.export.tittle')}>
             <Exporter
               rawViz={rawViz}
               exportProject={exportProject}
-              render={visualOptions.render}
-              options={options}
+              userData={dataLoader.userData}
+              dataSource={dataLoader.dataSource}
+              chartIndex={chartIndex}
+              mapping={mapping}
+              visualOptions={visualOptions}
+              dataTypes={data.dataTypes}
+              dimensions={currentChart.dimensions}
+              locale={dataLoader.locale}
+              decimalsSeparator={dataLoader.decimalsSeparator}
+              thousandsSeparator={dataLoader.thousandsSeparator}
             />
           </Section>
         )}
-        <Footer value={cookies.chosenLocale} />
+        <Footer value={i18n.language} />
       </div>
       <ScreenSizeAlert />
     </div>

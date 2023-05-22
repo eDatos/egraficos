@@ -14,6 +14,8 @@ import {
 } from '../../constants'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 
+//add custom date formats
+dateFormats['YYYY-MMM'] = '%Y-M%m'
 const DATE_FORMATS = Object.keys(dateFormats)
 
 const DateFormatSelector = React.forwardRef(
@@ -22,7 +24,7 @@ const DateFormatSelector = React.forwardRef(
       <div
         className={classNames(className, S['date-format-selector'])}
         ref={ref}
-        {...props}
+        style={props.style}
       >
         {DATE_FORMATS.map((dateFmt) => (
           <div
@@ -30,14 +32,13 @@ const DateFormatSelector = React.forwardRef(
             className={classNames(S['date-format-selector-entry'], {
               [S.selected]: get(currentFormat, 'dateFormat', '') === dateFmt,
             })}
-            onClick={(e) => {
+            onMouseDownCapture={(e) => {
               e.stopPropagation()
               e.preventDefault()
-              onChange &&
-                onChange({
-                  type: 'date',
-                  dateFormat: dateFmt,
-                })
+              onChange({
+                type: 'date',
+                dateFormat: dateFmt,
+              })
             }}
           >
             {dateFmt}
@@ -88,8 +89,6 @@ function DataTypeSelector({
 
   const handleTargetClick = useCallback(
     (e) => {
-      e.stopPropagation()
-      e.preventDefault()
       setShowPicker(!showPicker)
     },
     [showPicker]
@@ -119,11 +118,11 @@ function DataTypeSelector({
         container={document.body}
       >
         {({
-          placement,
-          scheduleUpdate,
-          arrowProps,
-          outOfBoundaries,
+          placement: _placement,
+          arrowProps: _arrowProps,
           show: _show,
+          popper: _popper,
+          hasDoneInitialMeasure: _hasDoneInitialMeasure,
           ...props
         }) => (
           <div
@@ -140,6 +139,15 @@ function DataTypeSelector({
               })}
             >
               <NumberIcon /> Number
+            </div>
+            <div
+              data-datatype="string"
+              onClick={handleTypeChange}
+              className={classNames(S['data-type-selector-item'], {
+                [S.selected]: currentType === 'string',
+              })}
+            >
+              <StringIcon /> String
             </div>
             <OverlayTrigger
               placement="right-start"
@@ -177,15 +185,6 @@ function DataTypeSelector({
                 </div>
               )}
             </OverlayTrigger>
-            <div
-              data-datatype="string"
-              onClick={handleTypeChange}
-              className={classNames(S['data-type-selector-item'], {
-                [S.selected]: currentType === 'string',
-              })}
-            >
-              <StringIcon /> String
-            </div>
           </div>
         )}
       </Overlay>
@@ -337,9 +336,7 @@ export default function DataGrid({
       sortColumns={sortColumns}
       onSortColumnsChange={onSortColumnsChange}
       defaultColumnOptions={{ width: '1fr' }}
-      onRowsChange={(newRows) => {
-        onDataUpdate(newRows)
-      }}
+      onRowsChange={(newRows) => onDataUpdate(newRows)}
     />
   )
 }

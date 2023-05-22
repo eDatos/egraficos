@@ -11,15 +11,15 @@ class DataTypeIcon extends React.Component {
 
   render() {
     const DataTypeIcon = dataTypeIcons[this.props.type]
+    const renderTooltip = (props) => (
+      <Tooltip id={`tooltip-top`} {...props}>
+        Accepts {this.props.type}s
+      </Tooltip>
+    )
+
     return (
       <span>
-        <OverlayTrigger
-          key="top"
-          placement="top"
-          overlay={
-            <Tooltip id={`tooltip-top`}>Accepts {this.props.type}s</Tooltip>
-          }
-        >
+        <OverlayTrigger key="top" placement="top" overlay={renderTooltip}>
           <div ref={this.iconRef} className="d-inline-block">
             <DataTypeIcon className={styles['accepted-type-icon']} />
           </div>

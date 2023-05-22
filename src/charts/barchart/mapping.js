@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
+import { parseObject } from '../utils/parseUtils'
 
 const mapData = function (data, mapping, dataTypes, dimensions) {
   const sizeAggregator = getDimensionAggregator(
@@ -10,11 +11,6 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
   )
   if (mapping.series === undefined) {
     mapping.series = {
-      value: undefined,
-    }
-  }
-  if (mapping.color === undefined) {
-    mapping.color = {
       value: undefined,
     }
   }
@@ -30,20 +26,17 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
     data,
     (v) => {
       const item = {
-        series: v[0][mapping.series.value], // get the first one since it's grouped
-        bars: v[0][mapping.bars.value], // get the first one since it's grouped
+        series: v[0][mapping.series.value], //get the first one since it's grouped
+        bars: parseObject(v[0][mapping.bars.value]), // get the first one since it's grouped
         size: mapping.size.value
           ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
           : v.length, // aggregate. If not mapped, give 1 as size
-        [v[0][mapping.series.value]]: mapping.size.value
-          ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
-          : v.length,
       }
       results.push(item)
       return item
     },
-    (d) => d[mapping.series.value], // series grouping
-    (d) => d[mapping.bars.value].toString() // bars grouping. toString() to enable grouping on dates
+    (d) => parseObject(d[mapping.series.value]), //series grouping
+    (d) => parseObject(d[mapping.bars.value]) // bars grouping
   )
 
   return results
@@ -80,12 +73,13 @@ const getyAxis = (visualOptions) => {
     }
   }
 }
+
 function getDimensions(resultMap, mapping) {
   if (mapping.series.value === undefined || mapping.series.value.length === 0) {
     return ['bars', 'size']
   } else {
     const dimensions = resultMap
-      .map((res) => res.series)
+      .map((res) => parseObject(res.series))
       .filter((value, index, self) => self.indexOf(value) === index)
       .sort()
     dimensions.unshift('bars')
@@ -115,7 +109,12 @@ function getDataset(resultMap, mapping, visualOptions) {
   return [
     {
       dimensions: dimensions,
-      source: resultMap,
+      source: resultMap.map((res) => {
+        if (res.series) {
+          return { bars: res.bars, [parseObject(res.series)]: res.size }
+        }
+        return res
+      }),
     },
     getSorterConfig(visualOptions, dimensions),
   ]

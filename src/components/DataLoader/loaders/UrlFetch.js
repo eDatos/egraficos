@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import classNames from 'classnames'
 import S from './UrlFetch.module.scss'
+import { useTranslation } from 'react-i18next'
 
 export async function fetchData(source) {
   const response = await fetch(source.url)
@@ -15,10 +16,13 @@ export default function UrlFetch({
   initialState = null,
 }) {
   const [url, setUrl] = useState(initialState?.url)
+  const [loading, setLoading] = useState(false)
+  const { t } = useTranslation(['translation'])
 
   const fetchUrl = useCallback(
     async (url) => {
       const source = { type: 'url', url }
+      setLoading(true)
       let data
       try {
         data = await fetchData(source)
@@ -27,6 +31,7 @@ export default function UrlFetch({
       } catch (e) {
         setLoadingError('Loading error. ' + e.message)
       }
+      setLoading(false)
     },
     [setLoadingError, setUserInput]
   )
@@ -53,10 +58,10 @@ export default function UrlFetch({
       <div className="text-right">
         <button
           className="btn btn-sm btn-success mt-3"
-          disabled={!url}
+          disabled={!url || loading}
           type="submit"
         >
-          Load data
+          {t('global.section.loaddata.url.loadButton')}
         </button>
       </div>
     </form>

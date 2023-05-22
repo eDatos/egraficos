@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { InputGroup, DropdownButton, Dropdown } from 'react-bootstrap'
+import { InputGroup, DropdownButton, Dropdown, Form } from 'react-bootstrap'
 import uuid from 'react-uuid'
 
 function downloadBlob(url, filename) {
@@ -11,7 +11,20 @@ function downloadBlob(url, filename) {
   return a
 }
 
-export default function Exporter({ rawViz, exportProject, render, options }) {
+export default function Exporter({
+  rawViz,
+  exportProject,
+  userData,
+  dataSource,
+  chartIndex,
+  mapping,
+  visualOptions,
+  dataTypes,
+  dimensions,
+  locale,
+  decimalsSeparator,
+  thousandsSeparator,
+}) {
   const download = useCallback(
     (filename, format) => {
       downloadBlob(rawViz.getDataURL({ type: format }), filename)
@@ -35,7 +48,11 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
   const [exportFormats, setExportFormats] = useState(['edatosgraphs'])
   const [currentFormat, setCurrentFormat] = useState('edatosgraphs')
   const [currentFile, setCurrentFile] = useState('viz')
+  const [dynamicLoadWidget, setDynamicLoadWidget] = useState(true)
 
+  const handleOnChangeDynamicLoadWidget = () => {
+    setDynamicLoadWidget(!dynamicLoadWidget)
+  }
   const downloadViz = useCallback(() => {
     switch (currentFormat) {
       case 'svg':
@@ -53,7 +70,44 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
   }, [currentFile, currentFormat, download, downloadProject])
 
   function getWidget() {
+
+    function getFilteredUserData() {
+      return userData.map((entry) =>
+          Object.keys(entry)
+              .filter((key) => dataMappings.includes(key))
+              .reduce((obj, key) => {
+                obj[key] = entry[key]
+                return obj
+              }, {})
+      )
+    }
+
+    function getFilteredDataTypes() {
+      return Object.fromEntries(
+          Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
+      )
+    }
+
     const generatedUUID = uuid()
+    const dataMappings = Object.keys(mapping)
+      .map((key) => mapping[key].value)
+      .flat(1)
+      .filter(Boolean)
+    const props = {
+      selector: "#chart-container-" + generatedUUID,
+      renderer: visualOptions.render,
+      chartIndex: chartIndex,
+      locale: locale,
+      decimalsSeparator: decimalsSeparator,
+      thousandsSeparator: thousandsSeparator,
+      source: dataSource,
+      visualOptions: visualOptions,
+      mapping: mapping,
+      dataTypes: getFilteredDataTypes(),
+      dimensions: dimensions,
+      data: !dynamicLoadWidget || !dataSource?.url ? getFilteredUserData() : []
+    }
+
     return (
       '<div id="chart-container-' +
       generatedUUID +
@@ -62,13 +116,7 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
       window.location.href +
       'widget/widget.js"></script>\n' +
       '<script>\n' +
-      "    EdatosGraphs.widgets.egraph.render({selector: '#chart-container-" +
-      generatedUUID +
-      "', renderer: '" +
-      render +
-      "', options: " +
-      JSON.stringify(options) +
-      '});\n' +
+      '    EdatosGraphs.widgets.egraph.render(' + JSON.stringify(props) + ');\n' +
       '</script>'
     )
   }
@@ -76,12 +124,12 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
   useEffect(() => {
     const baseExportFormats = ['edatosgraphs', 'widget']
     const newExportFormats =
-      render === 'svg'
+      visualOptions.render === 'svg'
         ? [...baseExportFormats, 'svg']
         : [...baseExportFormats, 'png']
     setExportFormats(newExportFormats)
     setCurrentFormat('edatosgraphs')
-  }, [render])
+  }, [visualOptions.render])
 
   return (
     <>
@@ -121,21 +169,36 @@ export default function Exporter({ rawViz, exportProject, render, options }) {
           </div>
         )}
       </div>
+      {currentFormat === 'widget' && dataSource.url && (
+        <div className="row">
+          <div className="col col-sm-12">
+            <Form.Check
+              id="dynamicLoadWidget"
+              label="Generar widget dinámico con carga de datos por url"
+              type="switch"
+              checked={dynamicLoadWidget}
+              onChange={handleOnChangeDynamicLoadWidget}
+            />
+          </div>
+        </div>
+      )}
       {currentFormat === 'widget' && (
-        <div className="col cos-sm-12">
-          <textarea
-            value={getWidget()}
-            style={{
-              backgroundColor: 'white',
-              border: '1px solid lightgrey',
-              borderRadius: 4,
-              width: '100%',
-              padding: '1rem',
-              minHeight: '250px',
-              height: '40vh',
-            }}
-            readOnly
-          />
+        <div className="row">
+          <div className="col cos-sm-12">
+            <textarea
+              value={getWidget()}
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid lightgrey',
+                borderRadius: 4,
+                width: '100%',
+                padding: '1rem',
+                minHeight: '250px',
+                height: '40vh',
+              }}
+              readOnly
+            />
+          </div>
         </div>
       )}
     </>

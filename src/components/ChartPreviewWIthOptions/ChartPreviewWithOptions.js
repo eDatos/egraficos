@@ -14,7 +14,6 @@ const ChartPreviewWithOptions = ({
   setVisualOptions,
   setRawViz,
   setMappingLoading,
-  setOptions,
 }) => {
   const [error, setError] = useState({
     variant: 'secondary',
@@ -75,7 +74,6 @@ const ChartPreviewWithOptions = ({
         error={error}
         setError={setError}
         setRawViz={setRawViz}
-        setOptions={setOptions}
       />
     </Row>
   )

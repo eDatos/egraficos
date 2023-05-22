@@ -2,6 +2,8 @@
   "metadata": {
     "endpoint": "https://estadisticas.arte-consultores.com/cmetadata/v1.0",
     "navbarPathKey": "metamac.app.style.header.url",
-    "footerPathKey": "metamac.app.style.footer.url"
+    "footerPathKey": "metamac.app.style.footer.url",
+    "statisticalResourcesPathKey": "metamac.statistical_resources.rest.internal",
+    "statisticalOperationsPathKey": "metamac.statistical_operations.rest.internal"
   }
 }

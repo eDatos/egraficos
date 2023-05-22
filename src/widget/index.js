@@ -11,7 +11,18 @@ export default {
         )
         selector.render(
           <React.StrictMode>
-            <EDatosGraph options={config.options} renderer={config.renderer} />
+            <EDatosGraph
+              source={config.source}
+              chartIndex={config.chartIndex}
+              visualOptions={config.visualOptions}
+              mapping={config.mapping}
+              dataTypes={config.dataTypes}
+              dimensions={config.dimensions}
+              data={config.data}
+              locale={config.locale}
+              decimalsSeparator={config.decimalsSeparator}
+              thousandsSeparator={config.thousandsSeparator}
+            />
           </React.StrictMode>
         )
       },

@@ -11,7 +11,6 @@ const ChartPreview = ({
   error,
   setError,
   setRawViz,
-  setOptions,
 }) => {
   const domRef = useRef(null)
   const vizOptionsDebounced = useDebounce(visualOptions, 200)
@@ -116,7 +115,6 @@ const ChartPreview = ({
     if (domRef && domRef.current && !error) {
       domRef.current.getEchartsInstance().setOption(options, true)
       setRawViz(domRef.current?.getEchartsInstance())
-      setOptions(options)
     }
   } catch (e) {
     setError({ variant: 'danger', message: 'Chart error. ' + e.message })
