@@ -70,62 +70,42 @@ export default function Exporter({
   }, [currentFile, currentFormat, download, downloadProject])
 
   function getWidget() {
+
+    function getFilteredUserData() {
+      return userData.map((entry) =>
+          Object.keys(entry)
+              .filter((key) => dataMappings.includes(key))
+              .reduce((obj, key) => {
+                obj[key] = entry[key]
+                return obj
+              }, {})
+      )
+    }
+
+    function getFilteredDataTypes() {
+      return Object.fromEntries(
+          Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
+      )
+    }
+
     const generatedUUID = uuid()
     const dataMappings = Object.keys(mapping)
       .map((key) => mapping[key].value)
       .flat(1)
       .filter(Boolean)
-
-    function getFilteredUserData() {
-      const filteredUserData = userData.map((entry) =>
-        Object.keys(entry)
-          .filter((key) => dataMappings.includes(key))
-          .reduce((obj, key) => {
-            obj[key] = entry[key]
-            return obj
-          }, {})
-      )
-      return filteredUserData
-    }
-
-    function getFilteredDataTypes() {
-      return Object.fromEntries(
-        Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
-      )
-    }
-
-    function getProps() {
-      let props =
-        "chartIndex: '" +
-        chartIndex +
-        "', " +
-        "locale: '" +
-        locale +
-        "', " +
-        "decimalsSeparator: '" +
-        decimalsSeparator +
-        "', " +
-        "thousandsSeparator: '" +
-        thousandsSeparator +
-        "', " +
-        'source: ' +
-        JSON.stringify(dataSource) +
-        ', ' +
-        'visualOptions: ' +
-        JSON.stringify(visualOptions) +
-        ', ' +
-        'mapping: ' +
-        JSON.stringify(mapping) +
-        ', ' +
-        'dataTypes: ' +
-        JSON.stringify(getFilteredDataTypes()) +
-        ', ' +
-        'dimensions: ' +
-        JSON.stringify(dimensions)
-      if (!dynamicLoadWidget || !dataSource?.url) {
-        props = props + ', data: ' + JSON.stringify(getFilteredUserData())
-      }
-      return props
+    const props = {
+      selector: "#chart-container-" + generatedUUID,
+      renderer: visualOptions.render,
+      chartIndex: chartIndex,
+      locale: locale,
+      decimalsSeparator: decimalsSeparator,
+      thousandsSeparator: thousandsSeparator,
+      source: dataSource,
+      visualOptions: visualOptions,
+      mapping: mapping,
+      dataTypes: getFilteredDataTypes(),
+      dimensions: dimensions,
+      data: !dynamicLoadWidget || !dataSource?.url ? getFilteredUserData() : []
     }
 
     return (
@@ -136,13 +116,7 @@ export default function Exporter({
       window.location.href +
       'widget/widget.js"></script>\n' +
       '<script>\n' +
-      "    EdatosGraphs.widgets.egraph.render({selector: '#chart-container-" +
-      generatedUUID +
-      "', renderer: '" +
-      visualOptions.render +
-      "', " +
-      getProps() +
-      '});\n' +
+      '    EdatosGraphs.widgets.egraph.render(' + JSON.stringify(props) + ');\n' +
       '</script>'
     )
   }
