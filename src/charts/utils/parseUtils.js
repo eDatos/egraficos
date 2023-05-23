@@ -1,7 +1,7 @@
-export function parseObject(data) {
+export const parseObject = (data) => {
   return data instanceof Date ? data.toJSON() : data
 }
 
-export function parseObjectToValue(data) {
+export const parseObjectToValue = (data) => {
   return data instanceof Date ? data.getTime() : data
 }

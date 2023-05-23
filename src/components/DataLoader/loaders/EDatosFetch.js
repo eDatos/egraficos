@@ -28,33 +28,45 @@ class DataSetTypeahead extends React.Component {
   }
   componentDidMount() {
     fetch(
-      applicationConfig['statistical-resources-internal']['endpoint'] +
-        "/datasets.json?limit=1000&orderBy=ID ASC&query=STATISTICAL_OPERATION_URN EQ 'urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" +
-        this.props.operationId +
-        "'"
+      applicationConfig['metadata']['endpoint'] +
+        '/properties/' +
+        applicationConfig['metadata']['statisticalResourcesPathKey'],
+      {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+      }
     )
       .then((response) => response.json())
-      .then((res) => {
-        const collection = res.dataset
-          .filter(
-            (value, index, self) =>
-              index === self.findIndex((t) => t.id === value.id)
-          )
-          .map((o) => {
-            const localizedName = o.name.text?.filter(
-              (text) => text.lang === this.props.language
-            )[0]?.value
-            return {
-              id: o.id,
-              name: localizedName ? localizedName : o.name.text[0]?.value,
-              url:
-                o.selfLink.href.slice(0, o.selfLink.href.lastIndexOf('/')) +
-                '/~latest',
-            }
-          })
-          .sort((a, b) => a.name.localeCompare(b.name))
+      .then((urlData) => {
+        fetch(
+          urlData['value'] +
+            "/latest/datasets.json?limit=1000&orderBy=ID ASC&query=STATISTICAL_OPERATION_URN EQ 'urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" +
+            this.props.operationId +
+            "'"
+        )
+          .then((response) => response.json())
+          .then((res) => {
+            const collection = res.dataset
+              .filter(
+                (value, index, self) =>
+                  index === self.findIndex((t) => t.id === value.id)
+              )
+              .map((o) => {
+                const localizedName = o.name.text?.filter(
+                  (text) => text.lang === this.props.language
+                )[0]?.value
+                return {
+                  id: o.id,
+                  name: localizedName ? localizedName : o.name.text[0]?.value,
+                  url:
+                    o.selfLink.href.slice(0, o.selfLink.href.lastIndexOf('/')) +
+                    '/~latest',
+                }
+              })
+              .sort((a, b) => a.name.localeCompare(b.name))
 
-        this.setState({ collection })
+            this.setState({ collection })
+          })
       })
   }
   onChange = (event) => {
@@ -88,25 +100,37 @@ class OperationTypeahead extends React.Component {
   }
   componentDidMount() {
     fetch(
-      applicationConfig['statistical-operations-internal']['endpoint'] +
-        '/operations.json?query=STATUS EQ "PRODUCTION"&limit=1000&orderBy=ID ASC'
+      applicationConfig['metadata']['endpoint'] +
+        '/properties/' +
+        applicationConfig['metadata']['statisticalOperationsPathKey'],
+      {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+      }
     )
       .then((response) => response.json())
-      .then((res) =>
-        this.setState({
-          collection: res.operation
-            .map((o) => {
-              const localizedName = o.name.text?.filter(
-                (text) => text.lang === this.props.language
-              )[0]?.value
-              return {
-                id: o.id,
-                name: localizedName ? localizedName : o.name.text[0]?.value,
-              }
+      .then((urlData) => {
+        fetch(
+          urlData['value'] +
+            '/latest/operations.json?query=STATUS EQ "PRODUCTION"&limit=1000&orderBy=ID ASC'
+        )
+          .then((response) => response.json())
+          .then((res) =>
+            this.setState({
+              collection: res.operation
+                .map((o) => {
+                  const localizedName = o.name.text?.filter(
+                    (text) => text.lang === this.props.language
+                  )[0]?.value
+                  return {
+                    id: o.id,
+                    name: localizedName ? localizedName : o.name.text[0]?.value,
+                  }
+                })
+                .sort((a, b) => a.name.localeCompare(b.name)),
             })
-            .sort((a, b) => a.name.localeCompare(b.name)),
-        })
-      )
+          )
+      })
   }
   onChange = (event) => {
     this.setState({ value: event[0] })

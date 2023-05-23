@@ -72,111 +72,87 @@ export default function Exporter({
   }, [currentFile, currentFormat, download, downloadProject])
 
   const getWidgetHeader = (generatedUUID) =>
-    '<div id="chart-container-' +
-    generatedUUID +
-    '"></div>\n' +
-    '<script src="' +
-    window.location.href +
-    'widget/widget.js"></script>\n'
+      '<div id="chart-container-' +
+      generatedUUID +
+      '"></div>\n' +
+      '<script src="' +
+      window.location.href +
+      'widget/widget.js"></script>\n'
 
   function getWmsWidget(generatedUUID, position, mapZoom) {
     function getProps() {
       return (
-        'layers: ' +
-        JSON.stringify(selectedLayers) +
-        ', ' +
-        "url: '" +
-        dataSource.url +
-        "', " +
-        'center: [' +
-        position.lat +
-        ', ' +
-        position.lng +
-        '], ' +
-        'zoom: ' +
-        mapZoom
+          'layers: ' +
+          JSON.stringify(selectedLayers) +
+          ', ' +
+          "url: '" +
+          dataSource.url +
+          "', " +
+          'center: [' +
+          position.lat +
+          ', ' +
+          position.lng +
+          '], ' +
+          'zoom: ' +
+          mapZoom
       )
     }
 
     return (
-      getWidgetHeader(generatedUUID) +
-      '<script>\n' +
-      "    EdatosGraphs.widgets.wms.render({selector: '#chart-container-" +
-      generatedUUID +
-      "', " +
-      getProps() +
-      '});\n' +
-      '</script>'
+        getWidgetHeader(generatedUUID) +
+        '<script>\n' +
+        "    EdatosGraphs.widgets.wms.render({selector: '#chart-container-" +
+        generatedUUID +
+        "', " +
+        getProps() +
+        '});\n' +
+        '</script>'
     )
   }
 
   function getEGraphWidget(generatedUUID) {
-    const dataMappings = Object.keys(mapping)
-      .map((key) => mapping[key].value)
-      .flat(1)
-      .filter(Boolean)
 
     function getFilteredUserData() {
       return userData.map((entry) =>
-        Object.keys(entry)
-          .filter((key) => dataMappings.includes(key))
-          .reduce((obj, key) => {
-            obj[key] = entry[key]
-            return obj
-          }, {})
+          Object.keys(entry)
+              .filter((key) => dataMappings.includes(key))
+              .reduce((obj, key) => {
+                obj[key] = entry[key]
+                return obj
+              }, {})
       )
     }
 
     function getFilteredDataTypes() {
       return Object.fromEntries(
-        Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
+          Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
       )
     }
 
-    function getProps() {
-      let props =
-        "chartIndex: '" +
-        chartIndex +
-        "', " +
-        "locale: '" +
-        locale +
-        "', " +
-        "decimalsSeparator: '" +
-        decimalsSeparator +
-        "', " +
-        "thousandsSeparator: '" +
-        thousandsSeparator +
-        "', " +
-        'source: ' +
-        JSON.stringify(dataSource) +
-        ', ' +
-        'visualOptions: ' +
-        JSON.stringify(visualOptions) +
-        ', ' +
-        'mapping: ' +
-        JSON.stringify(mapping) +
-        ', ' +
-        'dataTypes: ' +
-        JSON.stringify(getFilteredDataTypes()) +
-        ', ' +
-        'dimensions: ' +
-        JSON.stringify(dimensions)
-      if (!dynamicLoadWidget || !dataSource?.url) {
-        props = props + ', data: ' + JSON.stringify(getFilteredUserData())
-      }
-      return props
+    const generatedUUID = uuid()
+    const dataMappings = Object.keys(mapping)
+      .map((key) => mapping[key].value)
+      .flat(1)
+      .filter(Boolean)
+    const props = {
+      selector: "#chart-container-" + generatedUUID,
+      renderer: visualOptions.render,
+      chartIndex: chartIndex,
+      locale: locale,
+      decimalsSeparator: decimalsSeparator,
+      thousandsSeparator: thousandsSeparator,
+      source: dataSource,
+      visualOptions: visualOptions,
+      mapping: mapping,
+      dataTypes: getFilteredDataTypes(),
+      dimensions: dimensions,
+      data: !dynamicLoadWidget || !dataSource?.url ? getFilteredUserData() : []
     }
 
     return (
       getWidgetHeader(generatedUUID) +
       '<script>\n' +
-      "    EdatosGraphs.widgets.egraph.render({selector: '#chart-container-" +
-      generatedUUID +
-      "', renderer: '" +
-      visualOptions.render +
-      "', " +
-      getProps() +
-      '});\n' +
+      '    EdatosGraphs.widgets.egraph.render(' + JSON.stringify(props) + ');\n' +
       '</script>'
     )
   }
