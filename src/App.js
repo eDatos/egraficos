@@ -270,6 +270,7 @@ function App() {
           <DataLoader
             {...dataLoader}
             hydrateFromProject={importProject}
+            layers={layers}
             setLayers={setLayers}
             selectedLayers={selectedLayers}
             setSelectedLayers={setSelectedLayers}

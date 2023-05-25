@@ -51,6 +51,8 @@ export default function Exporter({
   const [currentFormat, setCurrentFormat] = useState('edatosgraphs')
   const [currentFile, setCurrentFile] = useState('viz')
   const [dynamicLoadWidget, setDynamicLoadWidget] = useState(true)
+  const [position, setPosition] = useState(() => map?.getCenter())
+  const [mapZoom, setMapZoom] = useState(() => map?.getZoom())
 
   const handleOnChangeDynamicLoadWidget = () => {
     setDynamicLoadWidget(!dynamicLoadWidget)
@@ -72,70 +74,65 @@ export default function Exporter({
   }, [currentFile, currentFormat, download, downloadProject])
 
   const getWidgetHeader = (generatedUUID) =>
-      '<div id="chart-container-' +
-      generatedUUID +
-      '"></div>\n' +
-      '<script src="' +
-      window.location.href +
-      'widget/widget.js"></script>\n'
+    '<div id="chart-container-' +
+    generatedUUID +
+    '"></div>\n' +
+    '<script src="' +
+    window.location.href +
+    'widget/widget.js"></script>\n'
 
-  function getWmsWidget(generatedUUID, position, mapZoom) {
-    function getProps() {
-      return (
-          'layers: ' +
-          JSON.stringify(selectedLayers) +
-          ', ' +
-          "url: '" +
-          dataSource.url +
-          "', " +
-          'center: [' +
-          position.lat +
-          ', ' +
-          position.lng +
-          '], ' +
-          'zoom: ' +
-          mapZoom
-      )
-    }
+  function getWidget(type) {
+    const generatedUUID = uuid()
 
+    const props =
+      type === 'wms'
+        ? getWmsWidgetProps(generatedUUID)
+        : getEGraphWidgetProps(generatedUUID)
     return (
-        getWidgetHeader(generatedUUID) +
-        '<script>\n' +
-        "    EdatosGraphs.widgets.wms.render({selector: '#chart-container-" +
-        generatedUUID +
-        "', " +
-        getProps() +
-        '});\n' +
-        '</script>'
+      getWidgetHeader(generatedUUID) +
+      '<script>\n' +
+      `    EdatosGraphs.widgets.${type}.render(` +
+      JSON.stringify(props) +
+      ');\n' +
+      '</script>'
     )
   }
 
-  function getEGraphWidget(generatedUUID) {
+  function getWmsWidgetProps(generatedUUID) {
+    return {
+      selector: '#chart-container-' + generatedUUID,
+      layers: selectedLayers,
+      url: dataSource.url,
+      center: [position.lat, position.lng],
+      zoom: mapZoom,
+    }
+  }
+
+  function getEGraphWidgetProps(generatedUUID) {
+    const dataMappings = Object.keys(mapping)
+      .map((key) => mapping[key].value)
+      .flat(1)
+      .filter(Boolean)
 
     function getFilteredUserData() {
       return userData.map((entry) =>
-          Object.keys(entry)
-              .filter((key) => dataMappings.includes(key))
-              .reduce((obj, key) => {
-                obj[key] = entry[key]
-                return obj
-              }, {})
+        Object.keys(entry)
+          .filter((key) => dataMappings.includes(key))
+          .reduce((obj, key) => {
+            obj[key] = entry[key]
+            return obj
+          }, {})
       )
     }
 
     function getFilteredDataTypes() {
       return Object.fromEntries(
-          Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
+        Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
       )
     }
 
-    const generatedUUID = uuid()
-    const dataMappings = Object.keys(mapping)
-      .map((key) => mapping[key].value)
-      .flat(1)
-      .filter(Boolean)
-    const props = {
-      selector: "#chart-container-" + generatedUUID,
+    return {
+      selector: '#chart-container-' + generatedUUID,
       renderer: visualOptions.render,
       chartIndex: chartIndex,
       locale: locale,
@@ -146,15 +143,8 @@ export default function Exporter({
       mapping: mapping,
       dataTypes: getFilteredDataTypes(),
       dimensions: dimensions,
-      data: !dynamicLoadWidget || !dataSource?.url ? getFilteredUserData() : []
+      data: !dynamicLoadWidget || !dataSource?.url ? getFilteredUserData() : [],
     }
-
-    return (
-      getWidgetHeader(generatedUUID) +
-      '<script>\n' +
-      '    EdatosGraphs.widgets.egraph.render(' + JSON.stringify(props) + ');\n' +
-      '</script>'
-    )
   }
 
   useEffect(() => {
@@ -167,9 +157,6 @@ export default function Exporter({
     setCurrentFormat('edatosgraphs')
   }, [visualOptions.render])
 
-  const [position, setPosition] = useState(() => map.getCenter())
-  const [mapZoom, setMapZoom] = useState(() => map.getZoom())
-
   const onMapMove = useCallback(() => {
     setPosition(map.getCenter())
   }, [map])
@@ -179,11 +166,11 @@ export default function Exporter({
   }, [map])
 
   useEffect(() => {
-    map.on('move', onMapMove)
-    map.on('zoom', onMapZoom)
+    map?.on('move', onMapMove)
+    map?.on('zoom', onMapZoom)
     return () => {
-      map.off('move', onMapMove)
-      map.off('zoom', onMapZoom)
+      map?.off('move', onMapMove)
+      map?.off('zoom', onMapZoom)
     }
   }, [map, onMapMove, onMapZoom])
 
@@ -244,11 +231,7 @@ export default function Exporter({
         <div className="row">
           <div className="col cos-sm-12">
             <textarea
-              value={
-                dataSource.type === 'wms'
-                  ? getWmsWidget(uuid(), position, mapZoom)
-                  : getEGraphWidget(uuid())
-              }
+              value={getWidget(dataSource.type !== 'wms' ? 'egraph' : 'wms')}
               style={{
                 backgroundColor: 'white',
                 border: '1px solid lightgrey',

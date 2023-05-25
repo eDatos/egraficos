@@ -45,6 +45,9 @@
             "wmslayerselection": {
                 "tittle": "Seleccioneu capes"
             },
+            "wmsmunicipalityselection": {
+                "tittle": "Seleccioneu municipi"
+            },
             "chartselection": {
                 "tittle": "2. Seleccioneu gràfic"
             },

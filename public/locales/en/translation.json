@@ -43,6 +43,9 @@
             "wmslayerselection": {
                 "tittle": "Choose layers"
             },
+            "wmsmunicipalityselection": {
+                "tittle": "Choose municipality"
+            },
             "chartselection": {
                 "tittle": "2. Choose a chart"
             },

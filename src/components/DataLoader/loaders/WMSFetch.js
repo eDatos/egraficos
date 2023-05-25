@@ -44,11 +44,25 @@ export default class WMSFetch extends React.Component {
                   (element) => element.name === 'LegendURL'
                 )[0]
                 if (legendURL) {
+                  const styleName = children.children
+                    .filter((element) => element.name === 'Name')
+                    .map((e) => e.value)[0]
+                  const styleTitle = children.children
+                    .filter((element) => element.name === 'Title')
+                    .map((e) => e.value)[0]
                   const attributes = legendURL.attributes
                   attributes['url'] = legendURL.children.filter(
                     (element) => element.name === 'OnlineResource'
                   )[0].attributes['xlink:href']
-                  return [{ [legendURL.name]: attributes }]
+                  return [
+                    {
+                      [styleName]: {
+                        styleTitle: styleTitle,
+                        styleName: styleName,
+                        [legendURL.name]: attributes,
+                      },
+                    },
+                  ]
                 }
                 return []
               }

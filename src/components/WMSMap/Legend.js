@@ -7,7 +7,6 @@ export default function Legend(props) {
   const map = useMap()
   const legend = L.control({ position: 'bottomright' })
   const [isLegendHovering, setIsLegendHovering] = useState(false)
-  console.log('entro a incluir una leyenda')
 
   useEffect(() => {
     if (map && props.legendURL?.url) {

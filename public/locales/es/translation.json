@@ -43,7 +43,10 @@
                 }
             },
             "wmslayerselection": {
-                "tittle": "Selecciona capas"
+                "tittle": "Seleccione capas"
+            },
+            "wmsmunicipalityselection": {
+                "tittle": "Seleccione municipio"
             },
             "chartselection": {
                 "tittle": "2. Seleccione gráfico"

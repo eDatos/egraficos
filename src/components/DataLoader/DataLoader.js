@@ -64,6 +64,7 @@ function DataLoader({
   commitDataReplace,
   replaceRequiresConfirmation,
   hydrateFromProject,
+  layers,
   setLayers,
   selectedLayers,
   setSelectedLayers,
@@ -289,7 +290,7 @@ function DataLoader({
   return (
     <>
       <Row>
-        {!userData && (
+        {!userData && !layers && (
           <Col
             xs={3}
             lg={2}
@@ -405,6 +406,23 @@ function DataLoader({
               <BsArrowCounterclockwise className="mr-2" />
               <h4 className="m-0 d-inline-block">
                 <Trans i18nKey="global.changedata"></Trans>
+              </h4>
+            </div>
+          </Col>
+        )}
+        {!userData && layers && (
+          <Col
+            xs={3}
+            lg={2}
+            className="d-flex flex-column justify-content-start pl-3 pr-0 options"
+          >
+            <div
+              className={`w-100 mb-2 d-flex justify-content-center align-items-center ${styles['start-over']} user-select-none cursor-pointer`}
+              onClick={reloadRAW}
+            >
+              <BsArrowRepeat className="mr-2" />
+              <h4 className="m-0 d-inline-block">
+                <Trans i18nKey="global.reset"></Trans>
               </h4>
             </div>
           </Col>

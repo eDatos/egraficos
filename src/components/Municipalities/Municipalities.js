@@ -21,7 +21,7 @@ function Municipalities(props) {
           },
         })
       })
-  })
+  }, [setMunicipalities])
 
   return (
     <Typeahead
@@ -29,7 +29,7 @@ function Municipalities(props) {
       labelKey="etiqueta"
       onChange={props.onChange}
       options={municipalities}
-      placeholder="Selecciona Municipio"
+      placeholder={t('global.section.wmsmunicipalityselection.tittle')}
     />
   )
 }

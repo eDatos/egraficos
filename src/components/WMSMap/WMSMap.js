@@ -11,7 +11,6 @@ import Legend from './Legend'
 import 'react-bootstrap-typeahead/css/Typeahead.css'
 import { useTranslation } from 'react-i18next'
 import WMSCustomLayer from './WMSCustomLayer'
-import * as WMS from 'leaflet.wms'
 import Municipalities from '../Municipalities/Municipalities'
 
 const SelectionLayerCombo = (props) => {
@@ -19,7 +18,6 @@ const SelectionLayerCombo = (props) => {
   const styleMap = { zIndex: '1001' }
   const onMove = useCallback(
     (dragIndex, hoverIndex) => {
-      console.log('OnMove')
       const item = props.selectedLayers[dragIndex]
 
       const newSelected = props.selectedLayers.slice()
@@ -70,11 +68,6 @@ function WMSMap(props) {
   const center = [28.2, -16.5]
   const zoom = 8
   const styleMap = { width: '100%', height: '80vh' }
-  const source = WMS.source(props.url, {
-    format: 'image/png',
-    transparent: 'true',
-  })
-
   return (
     <>
       <Row>
@@ -94,11 +87,6 @@ function WMSMap(props) {
           />
         </Col>
         <Col>
-          <SelectionLayerCombo
-            layers={props.layers}
-            selectedLayers={props.selectedLayers}
-            onChange={props.setSelectedLayers}
-          />
           <MapContainer
             center={center}
             zoom={zoom}
@@ -119,22 +107,25 @@ function WMSMap(props) {
                   checked
                   key={layer['Name']}
                 >
-                  <WMSCustomLayer
-                    key={layer['Name']}
-                    source={source}
-                    layerName={layer['Name']}
-                  />
+                    <WMSCustomLayer
+                      key={layer['Name']}
+                      layer={layer}
+                      url={props.url}
+                    />
+
                 </LayersControl.Overlay>
               ))}
             </LayersControl>
             <div>
               {props.selectedLayers.map((layer) => (
                 <React.Fragment key={layer['Name']}>
-                  <Legend
-                    legendURL={layer['LegendURL']}
-                    layer={layer['Name']}
-                    layerTitle={layer['Title']}
-                  />
+                  {layer.StyleSelected && (
+                    <Legend
+                      legendURL={layer.StyleSelected['LegendURL']}
+                      layer={layer['Name']}
+                      layerTitle={layer['Title']}
+                    />
+                  )}
                 </React.Fragment>
               ))}
             </div>

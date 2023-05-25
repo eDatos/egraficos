@@ -11,7 +11,6 @@ const SelectionLayerCombo = (props) => {
   const styleMap = { zIndex: '1001' }
   const onMove = useCallback(
     (dragIndex, hoverIndex) => {
-      console.log('OnMove')
       const item = props.selectedLayers[dragIndex]
 
       const newSelected = props.selectedLayers.slice()
@@ -65,27 +64,61 @@ function LayersOptionCard({
   selectedLayers,
   setSelectedLayers,
 }) {
+  const styles = selectedLayers.flatMap((layer) => [
+    {
+      [layer.Name]: Object.fromEntries(
+        Object.entries(layer).filter(
+          ([key]) => key !== 'Name' && key !== 'Title'
+        )
+      ),
+    },
+  ])
+
   return (
     <Card className="mt-3" bg="Primary">
-      <Card.Header>WMS: {url}</Card.Header>
+      <Card.Header>{title}</Card.Header>
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Text>
-          Configuración de capas
-        </Card.Text>
+        <Card.Title>Configuración de capas</Card.Title>
         <Form>
-        <SelectionLayerCombo
-          layers={layers}
-          selectedLayers={selectedLayers}
-          onChange={setSelectedLayers}
-        />
-          <Card.Text>Mostrar Leyenda</Card.Text>
-          {selectedLayers.map((layer) =>
-              <Form.Check type="checkbox" className="mt-2">
-                  <Form.Check.Input type="checkbox" />
-                  <Form.Check.Label>{layer.Title}</Form.Check.Label>
-              </Form.Check>
-          )}
+          <SelectionLayerCombo
+            layers={layers}
+            selectedLayers={selectedLayers}
+            onChange={setSelectedLayers}
+          />
+          {selectedLayers.map((layer, index) => {
+            const options = styles
+              .filter((o) => o[layer.Name])
+              .flatMap((o) => o[layer.Name])
+              .reduce(
+                (acc, curr) =>
+                  acc.concat(
+                    Object.entries(curr).flatMap(([k, v]) =>
+                      k !== 'StyleSelected' ? v : []
+                    )
+                  ),
+                []
+              )
+            if (options.length > 0) {
+              return (
+                <>
+                  <Card.Text className="mt-3"><b>Selecciona estilo para capa: </b>{layer.Title}</Card.Text>
+                  <Typeahead
+                    id="select-style"
+                    labelKey="styleTitle"
+                    onChange={(stylesSelected) => {
+                      let newSelectedsLayer = [...selectedLayers]
+                      layer.StyleSelected = stylesSelected[0]
+                      newSelectedsLayer[index] = layer
+                      setSelectedLayers(newSelectedsLayer)
+                    }}
+                    options={options}
+                    placeholder="Default style"
+                  />
+                </>
+              )
+            }
+            return <></>
+          })}
         </Form>
       </Card.Body>
     </Card>
