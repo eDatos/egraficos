@@ -1,96 +1,7 @@
+import { baseVisualOptions } from '../baseVisualOptions'
+
 export const visualOptions = {
-  marginTop: {
-    type: 'number',
-    default: 50,
-    group: 'artboard',
-  },
-
-  marginRight: {
-    type: 'number',
-    default: 20,
-    group: 'artboard',
-  },
-
-  marginBottom: {
-    type: 'number',
-    default: 20,
-    group: 'artboard',
-  },
-
-  marginLeft: {
-    type: 'number',
-    default: 50,
-    group: 'artboard',
-  },
-
-  showLegend: {
-    type: 'boolean',
-    default: false,
-    group: 'artboard',
-  },
-  legendWidth: {
-    type: 'number',
-    default: 500,
-    group: 'artboard',
-    disabled: {
-      showLegend: false,
-    },
-  },
-  legendOrient: {
-    type: 'text',
-    group: 'artboard',
-    options: [
-      {
-        label: 'vertical',
-        value: 'vertical',
-      },
-      {
-        label: 'horizontal',
-        value: 'horizontal',
-      },
-    ],
-    default: 'horizontal',
-    disabled: {
-      showLegend: false,
-    },
-  },
-  legendMarginRight: {
-    type: 'number',
-    default: 'auto',
-    group: 'artboard',
-    disabled: {
-      showLegend: false,
-    },
-  },
-  legendMarginTop: {
-    type: 'number',
-    default: 'auto',
-    group: 'artboard',
-    disabled: {
-      showLegend: false,
-    },
-  },
-  showToolbox: {
-    type: 'boolean',
-    default: false,
-    group: 'artboard',
-  },
-  render: {
-    type: 'text',
-    label: 'Render',
-    group: 'artboard',
-    options: [
-      {
-        label: 'Svg',
-        value: 'svg',
-      },
-      {
-        label: 'Canvas',
-        value: 'canvas',
-      },
-    ],
-    default: 'svg',
-  },
+  ...baseVisualOptions,
   symbolSize: {
     type: 'number',
     default: 10,
@@ -98,12 +9,12 @@ export const visualOptions = {
   },
   xAxisOriginTo0: {
     type: 'boolean',
-    default: false,
+    default: true,
     group: 'chart',
   },
   yAxisOriginTo0: {
     type: 'boolean',
-    default: false,
+    default: true,
     group: 'chart',
   },
   showXaxisName: {
@@ -187,7 +98,7 @@ export const visualOptions = {
         value: 'end',
       },
     ],
-    default: 'end',
+    default: 'middle',
   },
   yAxisNameGap: {
     type: 'number',
@@ -195,7 +106,7 @@ export const visualOptions = {
     disabled: {
       showYaxisName: false,
     },
-    default: 15,
+    default: 35,
   },
   showYaxisLabels: {
     type: 'boolean',

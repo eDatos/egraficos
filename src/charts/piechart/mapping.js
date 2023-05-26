@@ -143,7 +143,25 @@ export function getChartOptions(
       top: visualOptions.legendMarginTop,
     },
     backgroundColor: visualOptions.background,
-    tooltip: {}, //añadir a las opciones
+    tooltip: {
+      formatter: function (params) {
+        var colorSpan = (color) =>
+          '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:' +
+          color +
+          '"></span>'
+        const value = visualOptions.showpercentage
+          ? params.percent + '%'
+          : params.value
+        return (
+          colorSpan(params.color) +
+          ' ' +
+          params.name +
+          '   <b>' +
+          value +
+          '</b>'
+        )
+      },
+    }, //añadir a las opciones
     toolbox: {
       //añadir a las opciones
       show: visualOptions.showToolbox,

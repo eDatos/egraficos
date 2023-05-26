@@ -70,21 +70,20 @@ export default function Exporter({
   }, [currentFile, currentFormat, download, downloadProject])
 
   function getWidget() {
-
     function getFilteredUserData() {
       return userData.map((entry) =>
-          Object.keys(entry)
-              .filter((key) => dataMappings.includes(key))
-              .reduce((obj, key) => {
-                obj[key] = entry[key]
-                return obj
-              }, {})
+        Object.keys(entry)
+          .filter((key) => dataMappings.includes(key))
+          .reduce((obj, key) => {
+            obj[key] = entry[key]
+            return obj
+          }, {})
       )
     }
 
     function getFilteredDataTypes() {
       return Object.fromEntries(
-          Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
+        Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
       )
     }
 
@@ -94,7 +93,7 @@ export default function Exporter({
       .flat(1)
       .filter(Boolean)
     const props = {
-      selector: "#chart-container-" + generatedUUID,
+      selector: '#chart-container-' + generatedUUID,
       renderer: visualOptions.render,
       chartIndex: chartIndex,
       locale: locale,
@@ -105,7 +104,7 @@ export default function Exporter({
       mapping: mapping,
       dataTypes: getFilteredDataTypes(),
       dimensions: dimensions,
-      data: !dynamicLoadWidget || !dataSource?.url ? getFilteredUserData() : []
+      data: !dynamicLoadWidget || !dataSource?.url ? getFilteredUserData() : [],
     }
 
     return (
@@ -116,7 +115,9 @@ export default function Exporter({
       window.location.href +
       'widget/widget.js"></script>\n' +
       '<script>\n' +
-      '    EdatosGraphs.widgets.egraph.render(' + JSON.stringify(props) + ');\n' +
+      '    EdatosGraphs.widgets.egraph.render(' +
+      JSON.stringify(props) +
+      ');\n' +
       '</script>'
     )
   }
