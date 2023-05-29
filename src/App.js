@@ -38,7 +38,6 @@ colorPresets.ordinal.grayPalette = {
 }
 
 function App() {
-
   const [cookies, setCookie] = useCookies()
   const { t, i18n } = useTranslation()
   const [

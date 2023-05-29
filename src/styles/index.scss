@@ -217,3 +217,11 @@ h5 {
   border-top: 1px solid var(--gray-400);
   display: inline-block;
 }
+
+.tooltip-circle {
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 10px;
+  width: 9px;
+  height: 9px;
+}
