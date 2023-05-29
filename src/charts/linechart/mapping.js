@@ -65,7 +65,7 @@ function getXData(resultMap) {
   return xData.sort((a, b) => a - b)
 }
 
-const getxAxis = (visualOptions, xData, name) => {
+const getXAxis = (visualOptions, xData, name) => {
   return {
     name: visualOptions.showXaxisName ? name : '',
     nameLocation: visualOptions.xAxisNamePosition,
@@ -81,7 +81,7 @@ const getxAxis = (visualOptions, xData, name) => {
   }
 }
 
-const getyAxis = (visualOptions, name) => {
+const getYAxis = (visualOptions, name) => {
   return {
     name: visualOptions.showYaxisName ? name : '',
     nameLocation: visualOptions.yAxisNamePosition,
@@ -168,8 +168,8 @@ export function getChartOptions(
       top: visualOptions.marginTop,
       containLabel: true,
     },
-    xAxis: getxAxis(visualOptions, xData, mapping.x.value),
-    yAxis: getyAxis(visualOptions, mapping.y.value),
+    xAxis: getXAxis(visualOptions, xData, mapping.x.value),
+    yAxis: getYAxis(visualOptions, mapping.y.value),
     series: [...lineSeries],
   }
 }
