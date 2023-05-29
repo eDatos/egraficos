@@ -56,7 +56,7 @@ export const visualOptions = {
     domain: 'colorDomain',
     default: {
       scaleType: 'ordinal',
-      interpolator: 'interpolateSpectral',
+      interpolator: 'defaultPalette',
     },
     group: 'colors',
   },
