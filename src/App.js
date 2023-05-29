@@ -3,6 +3,7 @@ import {
   getOptionsConfig,
   getDefaultOptionsValues,
   deserializeProject,
+  colorPresets,
 } from '@rawgraphs/rawgraphs-core'
 import Header from './components/Header'
 import Section from './components/Section'
@@ -24,6 +25,17 @@ import isPlainObject from 'lodash/isPlainObject'
 import CustomChartWarnModal from './components/CustomChartWarnModal'
 import { useTranslation } from 'react-i18next'
 import { useCookies } from 'react-cookie'
+import { defaultPalette, grayPalette } from './constants'
+
+//Custom colors
+colorPresets.ordinal.defaultPalette = {
+  value: defaultPalette,
+  label: 'Default Palette',
+}
+colorPresets.ordinal.grayPalette = {
+  value: grayPalette,
+  label: 'Gray Palette',
+}
 
 function App() {
   const [cookies, setCookie] = useCookies()

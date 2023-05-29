@@ -41,36 +41,47 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
 
   return results
 }
-const getxAxis = (visualOptions) => {
-  if ('vertical' === visualOptions.barsOrientation) {
-    return {
-      type: 'category',
-      axisLabel: {
-        show: visualOptions.showXaxisLabels,
-        rotate: visualOptions.showXaxisLabelsRotate,
-        fontSize: visualOptions.showXaxisLabelsFontSize,
-      },
-    }
-  } else {
-    return {
-      type: 'value',
-    }
+
+function categoryOptions(visualOptions, name) {
+  return {
+    name: visualOptions.showXaxisName ? name : '',
+    nameLocation: visualOptions.xAxisNamePosition,
+    nameGap: visualOptions.xAxisNameGap,
+    type: 'category',
+    axisLabel: {
+      show: visualOptions.showXaxisLabels,
+      rotate: visualOptions.showXaxisLabelsRotate,
+      fontSize: visualOptions.showXaxisLabelsFontSize,
+    },
   }
 }
-const getyAxis = (visualOptions) => {
-  if ('horizontal' === visualOptions.barsOrientation) {
-    return {
-      type: 'category',
-      axisLabel: {
-        show: visualOptions.showXaxisLabels,
-        rotate: visualOptions.showXaxisLabelsRotate,
-        fontSize: visualOptions.showXaxisLabelsFontSize,
-      },
-    }
+
+function valueOptions(visualOptions, name) {
+  return {
+    name: visualOptions.showYaxisName ? name : '',
+    nameLocation: visualOptions.yAxisNamePosition,
+    nameGap: visualOptions.yAxisNameGap,
+    type: 'value',
+    axisLabel: {
+      show: visualOptions.showYaxisLabels,
+      rotate: visualOptions.showYaxisLabelsRotate,
+      fontSize: visualOptions.showYaxisLabelsFontSize,
+    },
+  }
+}
+
+const getxAxis = (visualOptions, name) => {
+  if ('vertical' === visualOptions.barsOrientation) {
+    return categoryOptions(visualOptions, name)
   } else {
-    return {
-      type: 'value',
-    }
+    return valueOptions(visualOptions, name)
+  }
+}
+const getyAxis = (visualOptions, name) => {
+  if ('horizontal' === visualOptions.barsOrientation) {
+    return categoryOptions(visualOptions, name)
+  } else {
+    return valueOptions(visualOptions, name)
   }
 }
 
@@ -184,8 +195,8 @@ export const getChartOptions = function (
       top: visualOptions.marginTop,
       containLabel: true,
     },
-    xAxis: getxAxis(visualOptions),
-    yAxis: getyAxis(visualOptions),
+    xAxis: getxAxis(visualOptions, mapping.bars.value),
+    yAxis: getyAxis(visualOptions, mapping.size.value),
     series: [...barSeries],
   }
 }

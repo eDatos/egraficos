@@ -65,8 +65,11 @@ function getXData(resultMap) {
   return xData.sort((a, b) => a - b)
 }
 
-const getxAxis = (visualOptions, xData) => {
+const getXAxis = (visualOptions, xData, name) => {
   return {
+    name: visualOptions.showXaxisName ? name : '',
+    nameLocation: visualOptions.xAxisNamePosition,
+    nameGap: visualOptions.xAxisNameGap,
     type: 'category',
     boundaryGap: false,
     axisLabel: {
@@ -75,6 +78,19 @@ const getxAxis = (visualOptions, xData) => {
       fontSize: visualOptions.showXaxisLabelsFontSize,
     },
     data: xData.map((data) => parseObject(data)),
+  }
+}
+
+const getYAxis = (visualOptions, name) => {
+  return {
+    name: visualOptions.showYaxisName ? name : '',
+    nameLocation: visualOptions.yAxisNamePosition,
+    nameGap: visualOptions.yAxisNameGap,
+    axisLabel: {
+      show: visualOptions.showYaxisLabels,
+      rotate: visualOptions.showYaxisLabelsRotate,
+      fontSize: visualOptions.showYaxisLabelsFontSize,
+    },
   }
 }
 
@@ -152,8 +168,8 @@ export function getChartOptions(
       top: visualOptions.marginTop,
       containLabel: true,
     },
-    xAxis: getxAxis(visualOptions, xData),
-    yAxis: {},
+    xAxis: getXAxis(visualOptions, xData, mapping.x.value),
+    yAxis: getYAxis(visualOptions, mapping.y.value),
     series: [...lineSeries],
   }
 }

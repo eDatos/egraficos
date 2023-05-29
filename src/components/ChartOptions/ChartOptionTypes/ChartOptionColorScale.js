@@ -227,7 +227,10 @@ const ChartOptionColorScale = ({
         : []
 
       //set first interpolator
-      const nextInterpolator = nextInterpolators[0]
+      const nextInterpolator =
+        nextInterpolators.findIndex((value) => value === interpolator) >= 0
+          ? interpolator
+          : nextInterpolators[0]
       setInterpolator(nextInterpolator)
 
       //user values
@@ -237,9 +240,7 @@ const ChartOptionColorScale = ({
       )
       setUserValues(nextUserValues)
       setInterpolators(
-        nextUserValues.length > 1
-          ? nextInterpolators
-          : nextInterpolators.slice(0, 1)
+        nextUserValues.length > 1 ? nextInterpolators : [nextInterpolator]
       )
       const valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
 

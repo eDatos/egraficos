@@ -114,4 +114,34 @@ export const COLOR_SCHEMES_LABELS = {
   schemeCategory10: 'Categorical 10',
   interpolateTurbo: 'Turbo discrete',
   interpolateSpectral: 'Spectral discrete',
+  defaultPalette: 'Default palette',
+  grayPalette: 'Gray Palette',
 }
+
+export const defaultPalette = [
+  '#009BD7',
+  '#F0A82D',
+  '#E95000',
+  '#AF46A8',
+  '#A18979',
+  '#009245',
+  '#66C3E7',
+  '#F6CB81',
+  '#F29666',
+  '#CF90CB',
+  '#C7B8AF',
+  '#66BE8F',
+  '#B2E1F3',
+  '#FBE5C0',
+  '#F8CAB2',
+  '#E7C7E5',
+  '#E3DCD7',
+  '#B2DEC7',
+]
+export const grayPalette = [
+  '#333333',
+  '#666666',
+  '#999999',
+  '#CCCCCC',
+  '#F2F2F2',
+]
