@@ -2,12 +2,25 @@ import React, { useEffect, useState } from 'react'
 import ReactECharts from 'echarts-for-react'
 import charts from '../../../charts'
 import { parseAndCheckData } from '../../../hooks/useDataLoaderUtils/parser'
-import { dateFormats, parseDataset } from '@rawgraphs/rawgraphs-core'
+import {
+  colorPresets,
+  dateFormats,
+  parseDataset,
+} from '@rawgraphs/rawgraphs-core'
 import { get } from 'lodash'
-import { localeList } from '../../../constants'
+import { defaultPalette, grayPalette, localeList } from '../../../constants'
 
 //add custom date formats
 dateFormats['YYYY-MMM'] = '%Y-M%m'
+//Custom colors
+colorPresets.ordinal.defaultPalette = {
+  value: defaultPalette,
+  label: 'Default Palette',
+}
+colorPresets.ordinal.grayPalette = {
+  value: grayPalette,
+  label: 'Gray Palette',
+}
 
 const EDatosGraph = (props) => {
   const [options, setOptions] = useState({})

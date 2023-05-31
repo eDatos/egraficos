@@ -1,101 +1,21 @@
+import { baseVisualOptions } from '../baseVisualOptions'
+
 export const visualOptions = {
-  // Artboard
-  marginTop: {
-    type: 'number',
-    default: 10,
-    group: 'artboard',
-  },
-  marginRight: {
-    type: 'number',
-    default: 2,
-    group: 'artboard',
-  },
-  marginBottom: {
-    type: 'number',
-    default: 2,
-    group: 'artboard',
-  },
+  ...baseVisualOptions,
   marginLeft: {
     type: 'number',
-    default: 2,
+    default: 15,
     group: 'artboard',
-  },
-  showLegend: {
-    type: 'boolean',
-    default: false,
-    group: 'artboard',
-  },
-  legendWidth: {
-    type: 'number',
-    default: 500,
-    group: 'artboard',
-    disabled: {
-      showLegend: false,
-    },
-  },
-  legendOrient: {
-    type: 'text',
-    default: 'horizontal',
-    group: 'artboard',
-    options: [
-      {
-        label: 'vertical',
-        value: 'vertical',
-      },
-      {
-        label: 'horizontal',
-        value: 'horizontal',
-      },
-    ],
-    disabled: {
-      showLegend: false,
-    },
-  },
-  legendMarginRight: {
-    type: 'number',
-    default: 'auto',
-    group: 'artboard',
-    disabled: {
-      showLegend: false,
-    },
-  },
-  legendMarginTop: {
-    type: 'number',
-    default: 'auto',
-    group: 'artboard',
-    disabled: {
-      showLegend: false,
-    },
-  },
-  showToolbox: {
-    type: 'boolean',
-    default: false,
-    group: 'artboard',
-  },
-  render: {
-    type: 'text',
-    group: 'artboard',
-    options: [
-      {
-        label: 'Svg',
-        value: 'svg',
-      },
-      {
-        label: 'Canvas',
-        value: 'canvas',
-      },
-    ],
-    default: 'svg',
   },
   // chart
   drawDonut: {
     type: 'boolean',
-    default: false,
+    default: true,
     group: 'chart',
   },
   arcTichkness: {
     type: 'number',
-    default: 10,
+    default: 25,
     group: 'chart',
     disabled: {
       drawDonut: false,
@@ -124,6 +44,11 @@ export const visualOptions = {
     ],
     default: 'area',
   },
+  showpercentage: {
+    type: 'boolean',
+    default: false,
+    group: 'chart',
+  },
   // colors
   colorScale: {
     type: 'colorScale',
@@ -131,7 +56,7 @@ export const visualOptions = {
     domain: 'colorDomain',
     default: {
       scaleType: 'ordinal',
-      interpolator: 'interpolateSpectral',
+      interpolator: 'defaultPalette',
     },
     group: 'colors',
   },
@@ -161,6 +86,6 @@ export const visualOptions = {
         value: 'center',
       },
     ],
-    default: 'inner',
+    default: 'inside',
   },
 }

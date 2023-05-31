@@ -62,5 +62,6 @@
     "inside": "Inside",
     "center": "Center",
     "Svg": "Svg",
-    "Canvas": "Canvas"
+    "Canvas": "Canvas",
+    "showpercentage": "Show percentages"
 }
