@@ -70,8 +70,8 @@ export function getChartOptions(
   function calculoradio(radius) {
     if (visualOptions.drawDonut) {
       return [
-        radius - visualOptions.arcTichkness + '%',
         visualOptions.arcTichkness + '%',
+        radius - visualOptions.arcTichkness + '%',
       ]
     } else {
       return radius + '%'
@@ -89,10 +89,29 @@ export function getChartOptions(
   const pieSeries = resultMap.map(function (item, index) {
     countreg = countreg + 1
     const map2 = new Map(Object.entries(item))
-    const valuedentro = mapping.arcs.value.map((arc) => ({
+    var valuedentro = mapping.arcs.value.map((arc) => ({
       name: arc,
       value: map2.get(arc),
     }))
+    if (visualOptions.halfDonut) {
+      const totalValue = valuedentro.reduce((acc, curr) => acc + curr.value, 0)
+      valuedentro = [
+        ...valuedentro,
+        {
+          value: totalValue,
+          itemStyle: {
+            // stop the chart from rendering this piece
+            color: 'none',
+            decal: {
+              symbol: 'none',
+            },
+          },
+          label: {
+            show: false,
+          },
+        },
+      ]
+    }
 
     var total = resultMap.length
     var radius = spam
@@ -118,6 +137,7 @@ export function getChartOptions(
       },
       radius: calculoradio(radius),
       center: [left + '%', top + '%'],
+      startAngle: visualOptions.halfDonut ? 180 : 90,
       roseType: roseType(),
       label: {
         show: visualOptions.showSeriesLabels,
@@ -150,7 +170,8 @@ export function getChartOptions(
           color +
           '"></span>'
         const value = visualOptions.showpercentage
-          ? params.percent + '%'
+          ? (visualOptions.halfDonut ? params.percent * 2 : params.percent) +
+            '%'
           : params.value
         return `${colorSpan(params.color)} ${params.name} <b>${value}</b>`
       },
