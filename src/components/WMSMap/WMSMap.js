@@ -61,21 +61,19 @@ function WMSMap(props) {
                 ))
               )}
             </LayersControl>
-            <div>
-              {props.sources.map((source) =>
-                source.selectedLayers.map((layer) => (
-                  <React.Fragment key={layer['Name']}>
-                    {layer.showLegend && (
-                      <Legend
-                        legendURL={layer.StyleSelected['LegendURL']}
-                        layer={layer['Name']}
-                        layerTitle={layer['Title']}
-                      />
-                    )}
-                  </React.Fragment>
-                ))
-              )}
-            </div>
+            {props.sources.map((source) =>
+              source.selectedLayers.map((layer) => (
+                <React.Fragment key={layer['Name']}>
+                  {layer.showLegend && (
+                    <Legend
+                      legendURL={layer.StyleSelected['LegendURL']}
+                      layer={layer['Name']}
+                      layerTitle={layer['Title']}
+                    />
+                  )}
+                </React.Fragment>
+              ))
+            )}
           </MapContainer>
         </Col>
       </Row>

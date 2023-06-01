@@ -7,10 +7,6 @@ import * as WMS from 'leaflet.wms'
 
 const EDatosWMS = (props) => {
   const styleMap = { width: '100%', height: '80vh' }
-  const source = WMS.source(props.url, {
-    format: 'image/png',
-    transparent: 'true',
-  })
   return (
     <MapContainer
       center={props.center}
@@ -25,29 +21,35 @@ const EDatosWMS = (props) => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
         </LayersControl.BaseLayer>
-        {props.layers.map((layer) => (
-          <LayersControl.Overlay
-            name={layer['Title']}
-            checked
-            key={layer['Name']}
-          >
-            <WMSCustomLayer
+        {props.sources.map((source) =>
+          source.selectedLayers.map((layer) => (
+            <LayersControl.Overlay
+              name={layer['Title']}
+              checked
               key={layer['Name']}
-              source={source}
-              layerName={layer['Name']}
-            />
-          </LayersControl.Overlay>
-        ))}
+            >
+              <WMSCustomLayer
+                key={layer['Name']}
+                layer={layer}
+                url={source.url}
+              />
+            </LayersControl.Overlay>
+          ))
+        )}
       </LayersControl>
-      {props.layers.map((layer) => (
-        <React.Fragment key={layer['Name']}>
-          <Legend
-            legendURL={layer['LegendURL']}
-            layer={layer['Name']}
-            layerTitle={layer['Title']}
-          />
-        </React.Fragment>
-      ))}
+      {props.sources.map((source) =>
+        source.selectedLayers.map((layer) => (
+          <React.Fragment key={layer['Name']}>
+            {layer.showLegend && (
+              <Legend
+                legendURL={layer.StyleSelected['LegendURL']}
+                layer={layer['Name']}
+                layerTitle={layer['Title']}
+              />
+            )}
+          </React.Fragment>
+        ))
+      )}
     </MapContainer>
   )
 }

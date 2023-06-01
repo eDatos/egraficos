@@ -42,8 +42,7 @@ export default {
         selector.render(
           <React.StrictMode>
             <EDatosWMS
-              url={config.url}
-              layers={config.layers}
+              sources={config.sources}
               center={config.center}
               zoom={config.zoom}
             />
