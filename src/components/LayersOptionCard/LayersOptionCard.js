@@ -5,10 +5,11 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Typeahead, TypeaheadInputMulti } from 'react-bootstrap-typeahead'
 import Token from '../WMSMap/Token'
+import { BsXCircle } from 'react-icons/bs'
 
 const SelectionLayerCombo = (props) => {
   const { t } = useTranslation(['translation'])
-  const styleMap = { zIndex: '1001' }
+  const styleMap = { zIndex: `100${10 - props.index}` }
   const onMove = useCallback(
     (dragIndex, hoverIndex) => {
       const item = props.selectedLayers[dragIndex]
@@ -58,11 +59,12 @@ const SelectionLayerCombo = (props) => {
 }
 
 function LayersOptionCard({
-  url,
   title,
   layers,
   selectedLayers,
   setSelectedLayers,
+  index,
+  onRemove,
 }) {
   const styles = selectedLayers.flatMap((layer) => [
     {
@@ -76,11 +78,15 @@ function LayersOptionCard({
 
   return (
     <Card className="mt-3" bg="Primary">
-      <Card.Header>{title}</Card.Header>
+      <Card.Header className="d-flex justify-content-between">
+        {title}
+        <BsXCircle onClick={() => onRemove(index)}>Delete</BsXCircle>
+      </Card.Header>
       <Card.Body>
-        <Card.Title>Configuración de capas</Card.Title>
+        <Card.Title> Configuración de capas</Card.Title>
         <Form>
           <SelectionLayerCombo
+            index={index}
             layers={layers}
             selectedLayers={selectedLayers}
             onChange={setSelectedLayers}
@@ -98,26 +104,43 @@ function LayersOptionCard({
                   ),
                 []
               )
-            if (options.length > 0) {
-              return (
-                <>
-                  <Card.Text className="mt-3"><b>Selecciona estilo para capa: </b>{layer.Title}</Card.Text>
-                  <Typeahead
-                    id="select-style"
-                    labelKey="styleTitle"
-                    onChange={(stylesSelected) => {
-                      let newSelectedsLayer = [...selectedLayers]
-                      layer.StyleSelected = stylesSelected[0]
-                      newSelectedsLayer[index] = layer
-                      setSelectedLayers(newSelectedsLayer)
-                    }}
-                    options={options}
-                    placeholder="Default style"
-                  />
-                </>
-              )
-            }
-            return <></>
+            return (
+              <React.Fragment key={index}>
+                {options.length > 0 && (
+                  <>
+                    <Card.Subtitle className="mt-3">
+                      <b>Selecciona estilo para capa: </b>
+                      {layer.Title}
+                    </Card.Subtitle>
+                    <Typeahead
+                      id="select-style"
+                      labelKey="styleTitle"
+                      onChange={(stylesSelected) => {
+                        let newSelectedLayers = [...selectedLayers]
+                        layer.StyleSelected = stylesSelected[0]
+                        newSelectedLayers[index] = layer
+                        setSelectedLayers(newSelectedLayers)
+                      }}
+                      options={options}
+                      placeholder="Default style"
+                    />
+                    <Form.Check
+                      id="showLegend"
+                      className="mt-2"
+                      label="Show Legend"
+                      type="switch"
+                      checked={layer.showLegend}
+                      onChange={() => {
+                        let newSelectedLayers = [...selectedLayers]
+                        layer.showLegend = !layer.showLegend
+                        newSelectedLayers[index] = layer
+                        setSelectedLayers(newSelectedLayers)
+                      }}
+                    />
+                  </>
+                )}
+              </React.Fragment>
+            )
           })}
         </Form>
       </Card.Body>

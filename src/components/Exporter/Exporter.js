@@ -24,7 +24,6 @@ export default function Exporter({
   locale,
   decimalsSeparator,
   thousandsSeparator,
-  selectedLayers,
   map,
 }) {
   const download = useCallback(
@@ -101,8 +100,9 @@ export default function Exporter({
   function getWmsWidgetProps(generatedUUID) {
     return {
       selector: '#chart-container-' + generatedUUID,
-      layers: selectedLayers,
-      url: dataSource.url,
+      sources: dataSource.sources.flatMap((source) => [
+        { url: source.url, selectedLayers: source.selectedLayers },
+      ]),
       center: [position.lat, position.lng],
       zoom: mapZoom,
     }

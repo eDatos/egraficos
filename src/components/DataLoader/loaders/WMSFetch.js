@@ -11,10 +11,30 @@ export default class WMSFetch extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      url: props.url,
       loading: false,
       sources: [],
+      type: 'wms',
     }
+  }
+
+  removeWMS = (index) => {
+    const newSources = [...this.state.sources]
+    newSources.splice(index, 1)
+    this.updateSources(newSources)
+  }
+
+  setSelectedLayers = (layers, index) => {
+    const sources = [...this.state.sources]
+    sources[index].selectedLayers = layers
+    this.updateSources(sources)
+  }
+
+  updateSources(sources) {
+    this.setState({ sources: sources })
+    this.props.setDataSource({
+      type: this.state.type,
+      sources: sources,
+    })
   }
 
   handleSubmit = (event) => {
@@ -22,10 +42,10 @@ export default class WMSFetch extends React.Component {
     event.preventDefault()
     this.setState({ loading: true })
     const source = {
-      type: 'wms',
       url: this.state.url.split('?')[0],
       title: '',
       layers: [],
+      selectedLayers: [],
     }
     axios
       .get(this.state.url)
@@ -79,9 +99,11 @@ export default class WMSFetch extends React.Component {
             })
             return [...acc, entry]
           }, [])
-        this.props.setLayers(source.layers)
-        this.props.setDataSource(source)
         this.setState({ sources: [...this.state.sources, source] })
+        this.props.setDataSource({
+          type: this.state.type,
+          sources: this.state.sources,
+        })
       })
       .finally(() => this.setState({ loading: false }))
   }
@@ -109,13 +131,17 @@ export default class WMSFetch extends React.Component {
                 </button>
               </div>
             </Form>
-            {this.state.sources.map((source) => (
+            {this.state.sources.map((source, index) => (
               <LayersOptionCard
-                url={source.url}
+                key={index}
+                index={index}
                 title={source.title}
                 layers={source.layers}
-                selectedLayers={this.props.selectedLayers}
-                setSelectedLayers={this.props.setSelectedLayers}
+                selectedLayers={source.selectedLayers}
+                setSelectedLayers={(selectedLayers) =>
+                  this.setSelectedLayers(selectedLayers, index)
+                }
+                onRemove={this.removeWMS}
               />
             ))}
           </>

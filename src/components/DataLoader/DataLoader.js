@@ -64,10 +64,6 @@ function DataLoader({
   commitDataReplace,
   replaceRequiresConfirmation,
   hydrateFromProject,
-  layers,
-  setLayers,
-  selectedLayers,
-  setSelectedLayers,
 }) {
   const [loadingError, setLoadingError] = useState()
   const [initialOptionState, setInitialOptionState] = useState(null)
@@ -187,10 +183,7 @@ function DataLoader({
         <WMSFetch
           //url="https://datos.canarias.es/api/estadisticas/geographical-resources/IGR-00080/wms?request=GetCapabilities"
           url="https://pre-datos.canarias.es/api/estadisticas/geographical-resources/Demografia4/wms?request=GetCapabilities"
-          setLayers={setLayers}
           setDataSource={setDataSource}
-          selectedLayers={selectedLayers}
-          setSelectedLayers={setSelectedLayers}
         />
       ),
       icon: BsMap,
@@ -290,7 +283,7 @@ function DataLoader({
   return (
     <>
       <Row>
-        {!userData && !layers && (
+        {!userData && !dataSource?.sources && (
           <Col
             xs={3}
             lg={2}
@@ -410,7 +403,7 @@ function DataLoader({
             </div>
           </Col>
         )}
-        {!userData && layers && (
+        {!userData && dataSource?.sources && (
           <Col
             xs={3}
             lg={2}

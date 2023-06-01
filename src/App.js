@@ -264,10 +264,7 @@ function App() {
     i18n.changeLanguage(cookies.chosenLocale)
   }, [setCookie, i18n, cookies.chosenLocale])
   const chartIndex = charts.findIndex((c) => c === currentChart)
-
-  const [layers, setLayers] = useState(null)
   const [map, setMap] = useState(null)
-  const [selectedLayers, setSelectedLayers] = useState([])
 
   return (
     <div className="App">
@@ -279,24 +276,14 @@ function App() {
       />
       <div className="app-sections">
         <Section title={t('global.section.loaddata.tittle')} loading={loading}>
-          <DataLoader
-            {...dataLoader}
-            hydrateFromProject={importProject}
-            layers={layers}
-            setLayers={setLayers}
-            selectedLayers={selectedLayers}
-            setSelectedLayers={setSelectedLayers}
-          />
+          <DataLoader {...dataLoader} hydrateFromProject={importProject} />
         </Section>
-        {layers && !data && (
+        {dataLoader.dataSource?.type === 'wms' && !data && (
           <Section title="WMS Map">
             <WMSMap
-              layers={layers}
-              url={dataLoader.dataSource.url}
+              sources={dataLoader.dataSource?.sources}
               setMap={setMap}
               map={map}
-              selectedLayers={selectedLayers}
-              setSelectedLayers={setSelectedLayers}
             />
           </Section>
         )}
@@ -352,7 +339,6 @@ function App() {
               locale={dataLoader.locale}
               decimalsSeparator={dataLoader.decimalsSeparator}
               thousandsSeparator={dataLoader.thousandsSeparator}
-              selectedLayers={selectedLayers}
               map={map}
             />
           </Section>
