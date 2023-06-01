@@ -13,6 +13,14 @@ export const visualOptions = {
     default: true,
     group: 'chart',
   },
+  halfDonut: {
+    type: 'boolean',
+    default: false,
+    group: 'chart',
+    disabled: {
+      drawDonut: false,
+    },
+  },
   arcTichkness: {
     type: 'number',
     default: 25,
@@ -20,29 +28,6 @@ export const visualOptions = {
     disabled: {
       drawDonut: false,
     },
-  },
-  nightingaleChart: {
-    type: 'boolean',
-    default: false,
-    group: 'chart',
-  },
-  nightingaleChartOption: {
-    type: 'text',
-    group: 'chart',
-    disabled: {
-      nightingaleChartOption: false,
-    },
-    options: [
-      {
-        label: 'Radius',
-        value: 'radius',
-      },
-      {
-        label: 'Area',
-        value: 'area',
-      },
-    ],
-    default: 'area',
   },
   showpercentage: {
     type: 'boolean',
