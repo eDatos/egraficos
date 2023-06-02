@@ -179,13 +179,7 @@ function DataLoader({
       id: 'WMS',
       name: <Trans i18nKey="global.section.loaddata.wms.name"></Trans>,
       message: <Trans i18nKey="global.section.loaddata.wms.message"></Trans>,
-      loader: (
-        <WMSFetch
-          //url="https://datos.canarias.es/api/estadisticas/geographical-resources/IGR-00080/wms?request=GetCapabilities"
-          url="https://pre-datos.canarias.es/api/estadisticas/geographical-resources/Demografia4/wms?request=GetCapabilities"
-          setDataSource={setDataSource}
-        />
-      ),
+      loader: <WMSFetch setDataSource={setDataSource} />,
       icon: BsMap,
       allowedForReplace: false,
     },

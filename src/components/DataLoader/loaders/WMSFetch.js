@@ -11,6 +11,7 @@ export default class WMSFetch extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      url: '',
       loading: false,
       sources: [],
       type: 'wms',
