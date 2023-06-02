@@ -73,12 +73,8 @@ export default function Exporter({
   }, [currentFile, currentFormat, download, downloadProject])
 
   const getWidgetHeader = (generatedUUID) =>
-    '<div id="chart-container-' +
-    generatedUUID +
-    '"></div>\n' +
-    '<script src="' +
-    window.location.href +
-    'widget/widget.js"></script>\n'
+`<div id="chart-container-${generatedUUID}"></div>
+<script src="${window.location.href}widget/widget.js"></script>`
 
   function getWidget(type) {
     const generatedUUID = uuid()
@@ -87,14 +83,10 @@ export default function Exporter({
       type === 'wms'
         ? getWmsWidgetProps(generatedUUID)
         : getEGraphWidgetProps(generatedUUID)
-    return (
-      getWidgetHeader(generatedUUID) +
-      '<script>\n' +
-      `    EdatosGraphs.widgets.${type}.render(` +
-      JSON.stringify(props) +
-      ');\n' +
-      '</script>'
-    )
+    return `${getWidgetHeader(generatedUUID)}
+<script>
+   EdatosGraphs.widgets.${type}.render(${JSON.stringify(props)});
+</script>`
   }
 
   function getWmsWidgetProps(generatedUUID) {
