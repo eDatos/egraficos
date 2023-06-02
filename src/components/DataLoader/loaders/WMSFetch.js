@@ -39,6 +39,56 @@ export default class WMSFetch extends React.Component {
   }
 
   handleSubmit = (event) => {
+    function getStyleName(children) {
+      return children.children
+        .filter((element) => element.name === 'Name')
+        .map((e) => e.value)[0]
+    }
+
+    function getStyleTitle(children) {
+      return children.children
+        .filter((element) => element.name === 'Title')
+        .map((e) => e.value)[0]
+    }
+
+    function getURL(legendURL) {
+      return legendURL.children.filter(
+        (element) => element.name === 'OnlineResource'
+      )[0].attributes['xlink:href']
+    }
+
+    function getLegendURL(children) {
+      return children.children.filter(
+        (element) => element.name === 'LegendURL'
+      )[0]
+    }
+
+    function parseStyleChildren(children) {
+      const legendURL = getLegendURL(children)
+      if (legendURL) {
+        const styleName = getStyleName(children)
+        const styleTitle = getStyleTitle(children)
+        const attributes = legendURL.attributes
+        attributes['url'] = getURL(legendURL)
+        return [
+          {
+            [styleName]: {
+              styleTitle: styleTitle,
+              styleName: styleName,
+              [legendURL.name]: attributes,
+            },
+          },
+        ]
+      }
+      return []
+    }
+
+    function parseNameAndTitleChildren(children) {
+      return children.name === 'Title' || children.name === 'Name'
+        ? [{ [children.name]: children.value }]
+        : []
+    }
+
     event.stopPropagation()
     event.preventDefault()
     this.setState({ loading: true })
@@ -48,6 +98,7 @@ export default class WMSFetch extends React.Component {
       layers: [],
       selectedLayers: [],
     }
+
     axios
       .get(this.state.url)
       .then((response) => response.data)
@@ -61,35 +112,9 @@ export default class WMSFetch extends React.Component {
           .map((input) =>
             input.children.flatMap((children) => {
               if (children.name === 'Style') {
-                const legendURL = children.children.filter(
-                  (element) => element.name === 'LegendURL'
-                )[0]
-                if (legendURL) {
-                  const styleName = children.children
-                    .filter((element) => element.name === 'Name')
-                    .map((e) => e.value)[0]
-                  const styleTitle = children.children
-                    .filter((element) => element.name === 'Title')
-                    .map((e) => e.value)[0]
-                  const attributes = legendURL.attributes
-                  attributes['url'] = legendURL.children.filter(
-                    (element) => element.name === 'OnlineResource'
-                  )[0].attributes['xlink:href']
-                  return [
-                    {
-                      [styleName]: {
-                        styleTitle: styleTitle,
-                        styleName: styleName,
-                        [legendURL.name]: attributes,
-                      },
-                    },
-                  ]
-                }
-                return []
+                return parseStyleChildren(children)
               }
-              return children.name === 'Title' || children.name === 'Name'
-                ? [{ [children.name]: children.value }]
-                : []
+              return parseNameAndTitleChildren(children)
             })
           )
           .filter((input) => input.length > 1)

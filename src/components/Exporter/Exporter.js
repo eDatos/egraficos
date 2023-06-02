@@ -73,7 +73,7 @@ export default function Exporter({
   }, [currentFile, currentFormat, download, downloadProject])
 
   const getWidgetHeader = (generatedUUID) =>
-`<div id="chart-container-${generatedUUID}"></div>
+    `<div id="chart-container-${generatedUUID}"></div>
 <script src="${window.location.href}widget/widget.js"></script>`
 
   function getWidget(type) {
