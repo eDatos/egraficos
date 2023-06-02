@@ -35,7 +35,18 @@
                     "loadButton": "Carregar dades",
                     "statisticalOperations": "Operacions estadístiques",
                     "cubes": "Cubs"
+                },
+                "wms": {
+                    "name": "Des d'un servidor WMS",
+                    "message": "Introduïu una adreça web (URL) del servidor WMS",
+                    "loadButton": "Carregar WMS"
                 }
+            },
+            "wmslayerselection": {
+                "tittle": "Seleccioneu capes"
+            },
+            "wmsmunicipalityselection": {
+                "tittle": "Seleccioneu municipi"
             },
             "chartselection": {
                 "tittle": "2. Seleccioneu gràfic"

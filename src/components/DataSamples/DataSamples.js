@@ -59,7 +59,7 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
         .map((d, i) => {
           return (
             <Col xs={6} lg={4} xl={3} key={i} style={{ marginBottom: 15 }}>
-              <Card className="cursor-pointer h-100">
+              <Card className="custom-card cursor-pointer h-100">
                 <Card.Body
                   onClick={() => {
                     select(d)

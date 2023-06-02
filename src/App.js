@@ -25,6 +25,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import CustomChartWarnModal from './components/CustomChartWarnModal'
 import { useTranslation } from 'react-i18next'
 import { useCookies } from 'react-cookie'
+import WMSMap from './components/WMSMap/WMSMap'
 import { defaultPalette, grayPalette } from './constants'
 
 //Custom colors
@@ -263,6 +264,8 @@ function App() {
     i18n.changeLanguage(cookies.chosenLocale)
   }, [setCookie, i18n, cookies.chosenLocale])
   const chartIndex = charts.findIndex((c) => c === currentChart)
+  const [map, setMap] = useState(null)
+
   return (
     <div className="App">
       <Header value={i18n.language} />
@@ -275,6 +278,15 @@ function App() {
         <Section title={t('global.section.loaddata.tittle')} loading={loading}>
           <DataLoader {...dataLoader} hydrateFromProject={importProject} />
         </Section>
+        {dataLoader.dataSource?.type === 'wms' && !data && (
+          <Section title="WMS Map">
+            <WMSMap
+              sources={dataLoader.dataSource?.sources}
+              setMap={setMap}
+              map={map}
+            />
+          </Section>
+        )}
         {data && (
           <Section title={t('global.section.chartselection.tittle')}>
             <ChartSelector
@@ -312,7 +324,7 @@ function App() {
             />
           </Section>
         )}
-        {data && rawViz && dataLoader.dataSource && (
+        {((data && rawViz) || map) && dataLoader.dataSource && (
           <Section title={t('global.section.export.tittle')}>
             <Exporter
               rawViz={rawViz}
@@ -322,11 +334,12 @@ function App() {
               chartIndex={chartIndex}
               mapping={mapping}
               visualOptions={visualOptions}
-              dataTypes={data.dataTypes}
+              dataTypes={data?.dataTypes}
               dimensions={currentChart.dimensions}
               locale={dataLoader.locale}
               decimalsSeparator={dataLoader.decimalsSeparator}
               thousandsSeparator={dataLoader.thousandsSeparator}
+              map={map}
             />
           </Section>
         )}

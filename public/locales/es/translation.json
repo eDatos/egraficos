@@ -35,7 +35,18 @@
                     "loadButton": "Cargar Datos",
                     "statisticalOperations": "Operaciones estadísticas",
                     "cubes": "Cubos"
+                },
+                "wms": {
+                    "name": "Desde un servidor WMS",
+                    "message": "Introduzca una dirección web (URL) del servidor WMS",
+                    "loadButton": "Cargar WMS"
                 }
+            },
+            "wmslayerselection": {
+                "tittle": "Seleccione capas"
+            },
+            "wmsmunicipalityselection": {
+                "tittle": "Seleccione municipio"
             },
             "chartselection": {
                 "tittle": "2. Seleccione gráfico"

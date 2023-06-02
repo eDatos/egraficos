@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 export async function fetchData(source) {
   const response = await fetch(source.url)
-  const text = await response.text()
-  return text
+  return await response.text()
 }
 
 export default function UrlFetch({

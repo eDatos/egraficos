@@ -4,6 +4,8 @@ import { Form } from 'react-bootstrap'
 import applicationConfig from '../../../application.json'
 import { Translation } from 'react-i18next'
 
+import 'react-bootstrap-typeahead/css/Typeahead.css'
+
 const SelectionCombo = (props) => {
   return (
     <Typeahead
@@ -181,7 +183,6 @@ export default class EDatosFetch extends React.Component {
         this.props.setUserInput(data, source)
       })
       .finally(() => this.setState({ loading: false }))
-    console.log('url: ', this.state.url + '.tsv')
   }
 
   render() {

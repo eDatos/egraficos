@@ -8,6 +8,7 @@ import {
   BsCloud,
   BsFolder,
   BsGift,
+  BsMap,
   BsSearch,
   BsUpload,
 } from 'react-icons/bs'
@@ -29,6 +30,7 @@ import { tsvFormat } from 'd3-dsv'
 import { CopyToClipboardButton } from '../CopyToClipboardButton'
 import { Trans } from 'react-i18next'
 import EDatosFetch from './loaders/EDatosFetch'
+import WMSFetch from './loaders/WMSFetch'
 
 function DataLoader({
   userInput,
@@ -47,6 +49,7 @@ function DataLoader({
   setLocale,
   stackDimension,
   dataSource,
+  setDataSource,
   data,
   loading,
   coerceTypes,
@@ -172,6 +175,14 @@ function DataLoader({
       icon: BsFolder,
       allowedForReplace: false,
     },
+    {
+      id: 'WMS',
+      name: <Trans i18nKey="global.section.loaddata.wms.name"></Trans>,
+      message: <Trans i18nKey="global.section.loaddata.wms.message"></Trans>,
+      loader: <WMSFetch setDataSource={setDataSource} />,
+      icon: BsMap,
+      allowedForReplace: false,
+    },
   ]
   const [optionId, setOptionId] = useState('eDatos')
   const selectedOption = options.filter((option) => option.id === optionId)[0]
@@ -266,7 +277,7 @@ function DataLoader({
   return (
     <>
       <Row>
-        {!userData && (
+        {!userData && !dataSource?.sources && (
           <Col
             xs={3}
             lg={2}
@@ -382,6 +393,23 @@ function DataLoader({
               <BsArrowCounterclockwise className="mr-2" />
               <h4 className="m-0 d-inline-block">
                 <Trans i18nKey="global.changedata"></Trans>
+              </h4>
+            </div>
+          </Col>
+        )}
+        {!userData && dataSource?.sources && (
+          <Col
+            xs={3}
+            lg={2}
+            className="d-flex flex-column justify-content-start pl-3 pr-0 options"
+          >
+            <div
+              className={`w-100 mb-2 d-flex justify-content-center align-items-center ${styles['start-over']} user-select-none cursor-pointer`}
+              onClick={reloadRAW}
+            >
+              <BsArrowRepeat className="mr-2" />
+              <h4 className="m-0 d-inline-block">
+                <Trans i18nKey="global.reset"></Trans>
               </h4>
             </div>
           </Col>
