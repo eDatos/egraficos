@@ -5,5 +5,8 @@
     "footerPathKey": "metamac.app.style.footer.url",
     "statisticalResourcesPathKey": "metamac.statistical_resources.rest.internal",
     "statisticalOperationsPathKey": "metamac.statistical_operations.rest.internal"
+  },
+  "municipalities": {
+    "endpoint": "https://datos.canarias.es/catalogos/estadisticas/dataset/6dd8baf4-14f4-43a3-88b2-984d034c965c/resource/74237bc8-1e5f-43f1-9f6b-24ef9e073903/download/municipios_desde2007_20170101.csv"
   }
 }
