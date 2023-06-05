@@ -9,12 +9,23 @@ const WMSCustomLayer = ({ layer, url }) => {
 
   useEffect(() => {
     const selectedStyles = layer.StyleSelected?.styleName ?? []
-    const source = WMS.source(url, {
+    const container = context.layerContainer || context.map
+
+    var MySource = WMS.Source.extend({
+      showFeatureInfo: function (latlng, info) {
+        if (!this._map || !info) {
+          return
+        }
+        this._map.openPopup(info, latlng)
+      },
+    })
+
+    const source = new MySource(url, {
       format: 'image/png',
       transparent: 'true',
       styles: selectedStyles,
     })
-    const container = context.layerContainer || context.map
+
     layerRef.current = source.getLayer(layerName)
     container.addLayer(layerRef.current)
     return () => {
