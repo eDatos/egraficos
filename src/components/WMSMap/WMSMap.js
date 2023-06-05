@@ -48,12 +48,12 @@ function WMSMap(props) {
               {props.sources.map((source) =>
                 source.selectedLayers.map((layer) => (
                   <LayersControl.Overlay
-                    name={layer['Title']}
+                    name={layer.Title}
                     checked
-                    key={layer['Name']}
+                    key={layer.Name}
                   >
                     <WMSCustomLayer
-                      key={layer['Name']}
+                      key={layer.Name}
                       layer={layer}
                       url={source.url}
                     />
@@ -63,12 +63,12 @@ function WMSMap(props) {
             </LayersControl>
             {props.sources.map((source) =>
               source.selectedLayers.map((layer) => (
-                <React.Fragment key={layer['Name']}>
+                <React.Fragment key={layer.Name}>
                   {layer.showLegend && (
                     <Legend
-                      legendURL={layer.StyleSelected['LegendURL']}
-                      layer={layer['Name']}
-                      layerTitle={layer['Title']}
+                      legendURL={layer.StyleSelected?.LegendURL}
+                      layer={layer.Name}
+                      layerTitle={layer.Title}
                     />
                   )}
                 </React.Fragment>
