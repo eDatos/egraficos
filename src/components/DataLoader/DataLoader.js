@@ -1,6 +1,6 @@
-import { get } from 'lodash'
-import React, { useCallback, useState } from 'react'
-import { Col, Row } from 'react-bootstrap'
+import { get } from 'lodash';
+import React, { useCallback, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import {
   BsArrowCounterclockwise,
   BsArrowRepeat,
@@ -11,26 +11,26 @@ import {
   BsMap,
   BsSearch,
   BsUpload,
-} from 'react-icons/bs'
-import { DATA_LOADER_MODE } from '../../hooks/useDataLoader'
-import DataGrid from '../DataGrid/DataGrid'
-import DataSamples from '../DataSamples/DataSamples'
-import JsonViewer from '../JsonViewer'
-import ParsingOptions from '../ParsingOptions'
-import styles from './DataLoader.module.scss'
-import LoadProject from './loaders/LoadProject'
-import Paste from './loaders/Paste'
-import UploadFile from './loaders/UploadFile'
-import UrlFetch from './loaders/UrlFetch'
-import Loading from './loading'
-import WarningMessage from '../WarningMessage'
-import DataMismatchModal from './DataMismatchModal'
-import SparqlFetch from './loaders/SparqlFetch'
-import { tsvFormat } from 'd3-dsv'
-import { CopyToClipboardButton } from '../CopyToClipboardButton'
-import { Trans } from 'react-i18next'
-import EDatosFetch from './loaders/EDatosFetch'
-import WMSFetch from './loaders/WMSFetch'
+} from 'react-icons/bs';
+import { DATA_LOADER_MODE } from '../../hooks/useDataLoader';
+import DataGrid from '../DataGrid/DataGrid';
+import DataSamples from '../DataSamples/DataSamples';
+import JsonViewer from '../JsonViewer';
+import ParsingOptions from '../ParsingOptions';
+import styles from './DataLoader.module.scss';
+import LoadProject from './loaders/LoadProject';
+import Paste from './loaders/Paste';
+import UploadFile from './loaders/UploadFile';
+import UrlFetch from './loaders/UrlFetch';
+import Loading from './loading';
+import WarningMessage from '../WarningMessage';
+import DataMismatchModal from './DataMismatchModal';
+import SparqlFetch from './loaders/SparqlFetch';
+import { tsvFormat } from 'd3-dsv';
+import { CopyToClipboardButton } from '../CopyToClipboardButton';
+import { Trans } from 'react-i18next';
+import EDatosFetch from './loaders/EDatosFetch';
+import WMSFetch from './loaders/WMSFetch';
 
 function DataLoader({
   userInput,
@@ -65,8 +65,8 @@ function DataLoader({
   replaceRequiresConfirmation,
   hydrateFromProject,
 }) {
-  const [loadingError, setLoadingError] = useState()
-  const [initialOptionState, setInitialOptionState] = useState(null)
+  const [loadingError, setLoadingError] = useState();
+  const [initialOptionState, setInitialOptionState] = useState(null);
 
   const options = [
     {
@@ -183,11 +183,11 @@ function DataLoader({
       icon: BsMap,
       allowedForReplace: false,
     },
-  ]
-  const [optionId, setOptionId] = useState('eDatos')
-  const selectedOption = options.filter((option) => option.id === optionId)[0]
+  ];
+  const [optionId, setOptionId] = useState('eDatos');
+  const selectedOption = options.filter((option) => option.id === optionId)[0];
 
-  let mainContent
+  let mainContent;
   if (userData && data) {
     mainContent = (
       <DataGrid
@@ -197,19 +197,19 @@ function DataLoader({
         coerceTypes={coerceTypes}
         onDataUpdate={handleInlineEdit}
       />
-    )
+    );
   } else if (userDataType === 'json' && userData === null) {
     mainContent = (
       <JsonViewer
         context={JSON.parse(userInput)}
         selectFilter={(ctx) => Array.isArray(ctx)}
         onSelect={(ctx, path) => {
-          setJsonData(ctx, path)
+          setJsonData(ctx, path);
         }}
       />
-    )
+    );
   } else if (loading && !data) {
-    mainContent = <Loading />
+    mainContent = <Loading />;
   } else {
     mainContent = (
       <>
@@ -225,15 +225,15 @@ function DataLoader({
           </a>*/}
         </p>
       </>
-    )
+    );
   }
 
   // #TODO: memoize/move to component?
   function parsingErrors(data) {
-    const errors = get(data, 'errors', [])
-    const successRows = data.dataset.length - errors.length
-    const row = errors[0].row + 1
-    const column = Object.keys(errors[0].error)[0]
+    const errors = get(data, 'errors', []);
+    const successRows = data.dataset.length - errors.length;
+    const row = errors[0].row + 1;
+    const column = Object.keys(errors[0].error)[0];
     return (
       <span>
         Ops, please check <span className="font-weight-bold">row {row}</span> at
@@ -263,16 +263,16 @@ function DataLoader({
           </>
         )}
       </span>
-    )
+    );
   }
 
   const reloadRAW = useCallback(() => {
-    window.location.replace(window.location.pathname)
-  }, [])
+    window.location.replace(window.location.pathname);
+  }, []);
 
   const copyToClipboardButton = !!userData ? (
     <CopyToClipboardButton content={tsvFormat(userData)} />
-  ) : null
+  ) : null;
 
   return (
     <>
@@ -289,7 +289,7 @@ function DataLoader({
                   !opt.disabled &&
                   (dataLoaderMode !== DATA_LOADER_MODE.REPLACE ||
                     opt.allowedForReplace)
-                )
+                );
               })
               .map((d, i) => {
                 const classnames = [
@@ -306,19 +306,19 @@ function DataLoader({
                   userDataType ? styles.disabled : null,
                 ]
                   .filter((c) => c !== null)
-                  .join(' ')
+                  .join(' ');
                 return (
                   <div
                     key={d.id}
                     className={classnames}
                     onClick={() => {
-                      setOptionId(d.id)
+                      setOptionId(d.id);
                     }}
                   >
                     <d.icon className="w-25" />
                     <h4 className="m-0 d-inline-block">{d.name}</h4>
                   </div>
-                )
+                );
               })}
 
             {dataLoaderMode === DATA_LOADER_MODE.REPLACE && (
@@ -335,7 +335,7 @@ function DataLoader({
                 <div
                   className={`w-100 d-flex justify-content-center align-items-center ${styles['start-over']} ${styles['cancel']} user-select-none cursor-pointer mb-3`}
                   onClick={() => {
-                    cancelDataReplace()
+                    cancelDataReplace();
                   }}
                 >
                   <h4 className="m-0 d-inline-block">{'Cancel'}</h4>
@@ -382,12 +382,12 @@ function DataLoader({
             <div
               className={`w-100 d-flex justify-content-center align-items-center ${styles['start-over']} user-select-none cursor-pointer`}
               onClick={() => {
-                setInitialOptionState(dataSource)
+                setInitialOptionState(dataSource);
                 const dataSourceIndex = options.findIndex(
                   (opt) => opt.id === dataSource?.type
-                )
-                setOptionId(options[Math.max(dataSourceIndex, 0)].id)
-                startDataReplace()
+                );
+                setOptionId(options[Math.max(dataSourceIndex, 0)].id);
+                startDataReplace();
               }}
             >
               <BsArrowCounterclockwise className="mr-2" />
@@ -472,7 +472,7 @@ function DataLoader({
         />
       )}
     </>
-  )
+  );
 }
 
-export default React.memo(DataLoader)
+export default React.memo(DataLoader);

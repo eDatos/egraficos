@@ -1,10 +1,10 @@
-import React from 'react'
-import classNames from 'classnames'
-import { Row, Col, Card } from 'react-bootstrap'
-import styles from './ChartSelector.module.scss'
+import React from 'react';
+import classNames from 'classnames';
+import { Row, Col, Card } from 'react-bootstrap';
+import styles from './ChartSelector.module.scss';
 
 function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
-  const charts = availableCharts
+  const charts = availableCharts;
 
   return (
     <>
@@ -32,7 +32,7 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
                 <Col xs={4} key={'chart-' + i} className={`p-3`}>
                   <Card
                     onClick={() => {
-                      setCurrentChart(d)
+                      setCurrentChart(d);
                     }}
                     className={classNames(
                       'flex-row h-100 cursor-pointer custom-card',
@@ -64,14 +64,14 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
                     </Card.Body>
                   </Card>
                 </Col>
-              )
+              );
             })}
             <Col xs={4} className={`p-3`}></Col>
           </Row>
         </Col>
       </Row>
     </>
-  )
+  );
 }
 
-export default React.memo(ChartSelector)
+export default React.memo(ChartSelector);

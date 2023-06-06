@@ -11,4 +11,4 @@ export const dimensions = [
       number: 'sum',
     },
   },
-]
+];

@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react'
-import useDebounce from '../../hooks/useDebounce'
-import WarningMessage from '../WarningMessage'
-import ReactEcharts from 'echarts-for-react'
+import React, { useRef, useEffect } from 'react';
+import useDebounce from '../../hooks/useDebounce';
+import WarningMessage from '../WarningMessage';
+import ReactEcharts from 'echarts-for-react';
 
 const ChartPreview = ({
   chart,
@@ -12,23 +12,23 @@ const ChartPreview = ({
   setError,
   setRawViz,
 }) => {
-  const domRef = useRef(null)
-  const vizOptionsDebounced = useDebounce(visualOptions, 200)
+  const domRef = useRef(null);
+  const vizOptionsDebounced = useDebounce(visualOptions, 200);
   useEffect(() => {
-    setError(null)
+    setError(null);
 
     // control required variables
     // need to create this array because the prop mapping does not return to {} when data is inserted and removed
-    const currentlyMapped = []
+    const currentlyMapped = [];
     for (let variable in mapping) {
       if (mapping[variable].ids && mapping[variable].ids.length > 0) {
-        currentlyMapped.push(variable)
+        currentlyMapped.push(variable);
       }
     }
 
     let requiredVariables = chart.dimensions.filter(
       (d) => d.required && currentlyMapped.indexOf(d.id) === -1
-    )
+    );
 
     if (requiredVariables.length > 0) {
       let errorMessage = (
@@ -42,13 +42,13 @@ const ChartPreview = ({
             ))
             .reduce((prev, curr) => [prev, ' and ', curr])}
         </span>
-      )
-      setError({ variant: 'secondary', message: errorMessage })
-      setRawViz(null)
+      );
+      setError({ variant: 'secondary', message: errorMessage });
+      setRawViz(null);
       while (domRef.current.firstChild) {
-        domRef.current.removeChild(domRef.current.firstChild)
+        domRef.current.removeChild(domRef.current.firstChild);
       }
-      return
+      return;
     }
 
     // control multiple required variables
@@ -58,7 +58,7 @@ const ChartPreview = ({
         d.required &&
         d.minValues &&
         mapping[d.id].ids.length < d.minValues
-    )
+    );
     if (multivaluesVariables.length > 0) {
       let errorMessage = (
         <span>
@@ -73,13 +73,13 @@ const ChartPreview = ({
             .reduce((prev, curr) => [prev, ' and ', curr])}
           .
         </span>
-      )
-      setError({ variant: 'secondary', message: errorMessage })
-      setRawViz(null)
+      );
+      setError({ variant: 'secondary', message: errorMessage });
+      setRawViz(null);
       while (domRef.current.firstChild) {
-        domRef.current.removeChild(domRef.current.firstChild)
+        domRef.current.removeChild(domRef.current.firstChild);
       }
-      return
+      return;
     }
     // control data-types mismatches
     for (let variable in mapping) {
@@ -88,19 +88,19 @@ const ChartPreview = ({
         mapping[variable].ids.length > 0 &&
         !mapping[variable].isValid
       ) {
-        const variableObj = chart.dimensions.find((d) => d.id === variable)
-        const errorMessage = `Data-type mismatch: you can’t map ${mapping[variable].mappedType}s on ${variableObj.name}.`
-        setError({ variant: 'danger', message: errorMessage })
-        setRawViz(null)
+        const variableObj = chart.dimensions.find((d) => d.id === variable);
+        const errorMessage = `Data-type mismatch: you can’t map ${mapping[variable].mappedType}s on ${variableObj.name}.`;
+        setError({ variant: 'danger', message: errorMessage });
+        setRawViz(null);
         while (domRef.current.firstChild) {
-          domRef.current.removeChild(domRef.current.firstChild)
+          domRef.current.removeChild(domRef.current.firstChild);
         }
-        return
+        return;
       }
     }
-  }, [setError, vizOptionsDebounced, setRawViz, chart, mapping])
+  }, [setError, vizOptionsDebounced, setRawViz, chart, mapping]);
 
-  var options = {}
+  var options = {};
   try {
     options =
       error === null
@@ -111,14 +111,14 @@ const ChartPreview = ({
             chart.dataTypes,
             chart.dimensions
           )
-        : {}
+        : {};
     if (domRef && domRef.current && !error) {
-      domRef.current.getEchartsInstance().setOption(options, true)
-      setRawViz(domRef.current?.getEchartsInstance())
+      domRef.current.getEchartsInstance().setOption(options, true);
+      setRawViz(domRef.current?.getEchartsInstance());
     }
   } catch (e) {
-    setError({ variant: 'danger', message: 'Chart error. ' + e.message })
-    setRawViz(null)
+    setError({ variant: 'danger', message: 'Chart error. ' + e.message });
+    setRawViz(null);
   }
   return (
     <div className={'col-8 col-xl-9'}>
@@ -147,7 +147,7 @@ const ChartPreview = ({
         opts={{ renderer: visualOptions.render }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default React.memo(ChartPreview)
+export default React.memo(ChartPreview);

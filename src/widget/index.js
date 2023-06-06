@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import EDatosGraph from './components/echart'
-import EDatosWMS from './components/wms'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import EDatosGraph from './components/echart';
+import EDatosWMS from './components/wms';
 
 export default {
   widgets: {
@@ -9,7 +9,7 @@ export default {
       render: (config) => {
         const selector = ReactDOM.createRoot(
           document.querySelector(config.selector)
-        )
+        );
         selector.render(
           <React.StrictMode>
             <EDatosGraph
@@ -25,20 +25,20 @@ export default {
               thousandsSeparator={config.thousandsSeparator}
             />
           </React.StrictMode>
-        )
+        );
       },
       unmount: (config) => {
         const selector = ReactDOM.createRoot(
           document.querySelector(config.selector)
-        )
-        selector.unmount()
+        );
+        selector.unmount();
       },
     },
     wms: {
       render: (config) => {
         const selector = ReactDOM.createRoot(
           document.querySelector(config.selector)
-        )
+        );
         selector.render(
           <React.StrictMode>
             <EDatosWMS
@@ -47,14 +47,14 @@ export default {
               zoom={config.zoom}
             />
           </React.StrictMode>
-        )
+        );
       },
       unmount: (config) => {
         const selector = ReactDOM.createRoot(
           document.querySelector(config.selector)
-        )
-        selector.unmount()
+        );
+        selector.unmount();
       },
     },
   },
-}
+};

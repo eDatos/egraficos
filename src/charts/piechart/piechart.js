@@ -1,8 +1,8 @@
-import { metadata } from './metadata'
-import { dimensions } from './dimensions'
-import { getChartOptions } from './mapping'
-import { colorDomain } from './render'
-import { visualOptions } from './visualOptions'
+import { metadata } from './metadata';
+import { dimensions } from './dimensions';
+import { getChartOptions } from './mapping';
+import { colorDomain } from './render';
+import { visualOptions } from './visualOptions';
 
 export const piechart = {
   metadata,
@@ -11,4 +11,4 @@ export const piechart = {
   //mapData,
   colorDomain,
   visualOptions,
-}
+};

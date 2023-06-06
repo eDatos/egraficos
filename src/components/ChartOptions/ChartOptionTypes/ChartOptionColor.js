@@ -1,7 +1,7 @@
-import React from 'react'
-import { Col } from 'react-bootstrap'
-import InilineColorPicker from '../../InlineColorPicker'
-import ChartOptionSelect from './ChartOptionSelect'
+import React from 'react';
+import { Col } from 'react-bootstrap';
+import InilineColorPicker from '../../InlineColorPicker';
+import ChartOptionSelect from './ChartOptionSelect';
 
 const ChartOptionColor = ({
   value,
@@ -22,7 +22,7 @@ const ChartOptionColor = ({
         label={label}
         {...props}
       />
-    )
+    );
   }
 
   return (
@@ -43,7 +43,7 @@ const ChartOptionColor = ({
         </small>
       )}
     </label>
-  )
-}
+  );
+};
 
-export default React.memo(ChartOptionColor)
+export default React.memo(ChartOptionColor);

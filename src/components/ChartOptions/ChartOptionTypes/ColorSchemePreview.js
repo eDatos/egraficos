@@ -1,17 +1,17 @@
-import React from 'react'
-import styles from '../ChartOptions.module.scss'
-import { COLOR_SCHEMES_LABELS } from '../../../constants'
-import get from 'lodash/get'
+import React from 'react';
+import styles from '../ChartOptions.module.scss';
+import { COLOR_SCHEMES_LABELS } from '../../../constants';
+import get from 'lodash/get';
 
 const ColorSchemePreview = ({ label, scale, numSamples = 150 }) => {
-  let samples
+  let samples;
   if (scale.ticks) {
-    samples = scale.ticks(numSamples)
+    samples = scale.ticks(numSamples);
   } else {
     if (scale.domain) {
-      samples = scale.domain()
+      samples = scale.domain();
     } else {
-      samples = []
+      samples = [];
     }
   }
   return (
@@ -30,7 +30,7 @@ const ColorSchemePreview = ({ label, scale, numSamples = 150 }) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default React.memo(ColorSchemePreview)
+export default React.memo(ColorSchemePreview);

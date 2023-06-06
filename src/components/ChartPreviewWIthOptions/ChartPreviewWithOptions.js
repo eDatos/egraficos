@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Row } from 'react-bootstrap'
-import ChartOptions from '../ChartOptions'
-import ChartPreview from '../ChartPreview'
-import { mapDataInWorker } from '../../worker'
-import { WEBWORKER_ACTIVE } from '../../constants'
+import React, { useState, useEffect } from 'react';
+import { Row } from 'react-bootstrap';
+import ChartOptions from '../ChartOptions';
+import ChartPreview from '../ChartPreview';
+import { mapDataInWorker } from '../../worker';
+import { WEBWORKER_ACTIVE } from '../../constants';
 
 const ChartPreviewWithOptions = ({
   chart,
@@ -18,11 +18,11 @@ const ChartPreviewWithOptions = ({
   const [error, setError] = useState({
     variant: 'secondary',
     message: 'Required chart variables',
-  })
+  });
 
   useEffect(() => {
     try {
-      setMappingLoading(true)
+      setMappingLoading(true);
 
       if (WEBWORKER_ACTIVE) {
         mapDataInWorker(
@@ -35,15 +35,15 @@ const ChartPreviewWithOptions = ({
           chart.rawCustomChart
         )
           .catch((err) => {
-            console.error(err)
+            console.error(err);
           })
-          .finally(() => setMappingLoading(false))
+          .finally(() => setMappingLoading(false));
       } else {
-        setMappingLoading(false)
+        setMappingLoading(false);
       }
     } catch (e) {
-      console.error(e)
-      setMappingLoading(false)
+      console.error(e);
+      setMappingLoading(false);
     }
   }, [
     chart,
@@ -53,7 +53,7 @@ const ChartPreviewWithOptions = ({
     setRawViz,
     setMappingLoading,
     dataset,
-  ])
+  ]);
 
   return (
     <Row>
@@ -76,7 +76,7 @@ const ChartPreviewWithOptions = ({
         setRawViz={setRawViz}
       />
     </Row>
-  )
-}
+  );
+};
 
-export default ChartPreviewWithOptions
+export default ChartPreviewWithOptions;

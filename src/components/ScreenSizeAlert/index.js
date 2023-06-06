@@ -1,1 +1,1 @@
-export { default } from './ScreenSizeAlert'
+export { default } from './ScreenSizeAlert';

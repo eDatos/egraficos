@@ -12,7 +12,7 @@
 /**
  * @type string | null
  */
-let prevChartIdRendered = null
+let prevChartIdRendered = null;
 
 /**
  * @param {ChartMetada} chartMetadata
@@ -20,14 +20,14 @@ let prevChartIdRendered = null
 export function onChartRendered(chartMetadata) {
   if (prevChartIdRendered === chartMetadata.id) {
     // Nothing to report the chart still the same
-    return
+    return;
   }
-  prevChartIdRendered = chartMetadata.id
+  prevChartIdRendered = chartMetadata.id;
 
   if (typeof window.gtag === 'function') {
     window.gtag('event', 'chart-render', {
       event_category: chartMetadata.id,
-    })
+    });
   }
 }
 
@@ -40,6 +40,6 @@ export function onChartExported(chartMetadata, format) {
     window.gtag('event', 'chart-export', {
       event_category: chartMetadata.id,
       event_label: format,
-    })
+    });
   }
 }

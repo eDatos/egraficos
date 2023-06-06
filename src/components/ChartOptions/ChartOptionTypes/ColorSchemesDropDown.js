@@ -1,12 +1,12 @@
-import React from 'react'
-import { Dropdown } from 'react-bootstrap'
-import ColorSchemePreview from './ColorSchemePreview'
+import React from 'react';
+import { Dropdown } from 'react-bootstrap';
+import ColorSchemePreview from './ColorSchemePreview';
 import {
   colorPresets,
   getColorDomain,
   getPresetScale,
-} from '@rawgraphs/rawgraphs-core'
-import styles from '../ChartOptions.module.scss'
+} from '@rawgraphs/rawgraphs-core';
+import styles from '../ChartOptions.module.scss';
 
 const ColorSchemesDropDown = ({
   interpolators,
@@ -48,12 +48,12 @@ const ColorSchemesDropDown = ({
                   />
                 )}
               </Dropdown.Item>
-            )
+            );
           })}
         </Dropdown.Menu>
       )}
     </Dropdown>
-  )
-}
+  );
+};
 
-export default React.memo(ColorSchemesDropDown)
+export default React.memo(ColorSchemesDropDown);

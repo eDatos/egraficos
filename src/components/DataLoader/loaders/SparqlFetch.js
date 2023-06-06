@@ -1,11 +1,17 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import classNames from 'classnames'
-import S from './SparqlFetch.module.scss'
-import { html, render } from 'lit-html'
-import SimpleClient from 'sparql-http-client/SimpleClient'
-import { Generator } from 'sparqljs'
-import '@rdfjs-elements/sparql-editor/sparql-editor.js'
-import { SparqlMarker } from '../../../hooks/useDataLoaderUtils/parser'
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import classNames from 'classnames';
+import S from './SparqlFetch.module.scss';
+import { html, render } from 'lit-html';
+import SimpleClient from 'sparql-http-client/SimpleClient';
+import { Generator } from 'sparqljs';
+import '@rdfjs-elements/sparql-editor/sparql-editor.js';
+import { SparqlMarker } from '../../../hooks/useDataLoaderUtils/parser';
 
 const DEFAULT_PREFIXES = {
   wd: 'http://www.wikidata.org/entity/',
@@ -37,20 +43,20 @@ const DEFAULT_PREFIXES = {
   bds: 'http://www.bigdata.com/rdf/search#',
   gas: 'http://www.bigdata.com/rdf/gas#',
   hint: 'http://www.bigdata.com/queryHints#',
-}
+};
 
 export async function fetchData(source) {
-  const sparqlGenerator = new Generator()
+  const sparqlGenerator = new Generator();
   const client = new SimpleClient({
     endpointUrl: source.url,
-  })
+  });
   const response = await client.query.select(
     sparqlGenerator.stringify(source.query)
-  )
-  const results = await response.json()
-  const rows = bindingsToJson(results.head.vars, results.results.bindings)
-  rows[SparqlMarker] = true
-  return rows
+  );
+  const results = await response.json();
+  const rows = bindingsToJson(results.head.vars, results.results.bindings);
+  rows[SparqlMarker] = true;
+  return rows;
 }
 
 export default function SparqlFetch({
@@ -61,56 +67,56 @@ export default function SparqlFetch({
 }) {
   const [url, setUrl] = useState(
     initialState?.url ?? 'https://query.wikidata.org/sparql'
-  )
-  const [parsedQuery, setParsedQuery] = useState(null)
+  );
+  const [parsedQuery, setParsedQuery] = useState(null);
 
-  const editorDomRef = useRef()
+  const editorDomRef = useRef();
 
   const initialQuery = useMemo(() => {
     if (initialState?.query) {
-      const sparqlGenerator = new Generator()
-      return sparqlGenerator.stringify(initialState.query)
+      const sparqlGenerator = new Generator();
+      return sparqlGenerator.stringify(initialState.query);
     } else {
-      return ''
+      return '';
     }
-  }, [initialState])
+  }, [initialState]);
 
   const onQueryParsed = useCallback((evt) => {
-    const { query } = evt.detail
+    const { query } = evt.detail;
     if (query.queryType === 'SELECT') {
-      setParsedQuery(query)
+      setParsedQuery(query);
     } else {
-      setParsedQuery(null)
+      setParsedQuery(null);
     }
-  }, [])
+  }, []);
 
   const onParserFailure = useCallback(() => {
-    setParsedQuery(null)
-  }, [])
+    setParsedQuery(null);
+  }, []);
 
   const onSubmit = useCallback(() => {
     const source = {
       type: 'sparql',
       url,
       query: parsedQuery,
-    }
+    };
     fetchData(source)
       .then((result) => {
         setUserInput(result, {
           type: 'sparql',
           url,
           query: parsedQuery,
-        })
+        });
       })
       .catch((err) => {
         setLoadingError(
           'It was not possible to execute the query on the given endpoint'
-        )
-      })
-  }, [parsedQuery, setLoadingError, setUserInput, url])
+        );
+      });
+  }, [parsedQuery, setLoadingError, setUserInput, url]);
 
   useEffect(() => {
-    const node = editorDomRef.current
+    const node = editorDomRef.current;
     render(
       html`<sparql-editor
         auto-parse
@@ -120,8 +126,8 @@ export default function SparqlFetch({
         @parsing-failed=${onParserFailure}
       ></sparql-editor>`,
       node
-    )
-  }, [onQueryParsed, onParserFailure, initialQuery])
+    );
+  }, [onQueryParsed, onParserFailure, initialQuery]);
 
   return (
     <>
@@ -132,7 +138,7 @@ export default function SparqlFetch({
         className={classNames('w-100', S['url-input'])}
         value={url}
         onChange={(e) => {
-          setUrl(e.target.value)
+          setUrl(e.target.value);
         }}
       />
       <div className={classNames(S['query-input-here'])}>
@@ -149,22 +155,22 @@ export default function SparqlFetch({
         </button>
       </div>
     </>
-  )
+  );
 }
 
 function bindingsToJson(varNames, bindings) {
-  const result = []
+  const result = [];
   for (const binding of bindings) {
-    const row = {}
+    const row = {};
     for (const variable of varNames) {
-      const term = binding[variable]
+      const term = binding[variable];
       if (!term) {
-        row[variable] = ''
+        row[variable] = '';
       } else {
-        row[variable] = term.value
+        row[variable] = term.value;
       }
     }
-    result.push(row)
+    result.push(row);
   }
-  return result
+  return result;
 }

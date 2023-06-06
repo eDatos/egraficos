@@ -1,22 +1,22 @@
-import { get, has } from 'lodash'
-import charts from './charts'
+import { get, has } from 'lodash';
+import charts from './charts';
 
-export const VERSION = '1'
+export const VERSION = '1';
 
 function objectsToMatrix(listOfObjects, columns) {
   return listOfObjects.map((obj) => {
-    return columns.map((col) => obj[col])
-  })
+    return columns.map((col) => obj[col]);
+  });
 }
 
 function matrixToObjects(matrix, columns) {
   return matrix.map((record) => {
-    const obj = {}
+    const obj = {};
     for (let i = 0; i < columns.length; i++) {
-      obj[columns[i]] = record[i]
+      obj[columns[i]] = record[i];
     }
-    return obj
-  })
+    return obj;
+  });
 }
 
 export function serializeProject(
@@ -39,16 +39,16 @@ export function serializeProject(
 ) {
   const project = {
     version: '1',
-  }
+  };
 
   /* First stage: user input */
-  project.userInput = userInput
-  project.userInputFormat = userDataType
-  project.dataSource = dataSource
+  project.userInput = userInput;
+  project.userInputFormat = userDataType;
+  project.dataSource = dataSource;
 
   /* Second stage: parsed */
-  project.rawData = objectsToMatrix(userData, Object.keys(data.dataTypes))
-  project.parseError = parseError
+  project.rawData = objectsToMatrix(userData, Object.keys(data.dataTypes));
+  project.parseError = parseError;
   project.parseOptions = {
     separator,
     thousandsSeparator,
@@ -57,37 +57,37 @@ export function serializeProject(
     stackDimension,
     unstackedData,
     unstackedColumns,
-  }
+  };
 
   /* Third stage: typed data ready for chart */
-  project.dataTypes = data.dataTypes
+  project.dataTypes = data.dataTypes;
 
   /* Chart: mapping and visual options */
-  project.chart = currentChart.metadata.name
-  project.mapping = mapping
-  project.visualOptions = visualOptions
+  project.chart = currentChart.metadata.name;
+  project.mapping = mapping;
+  project.visualOptions = visualOptions;
 
-  return project
+  return project;
 }
 
 function getOrError(object, path) {
   if (!has(object, path)) {
-    throw new Error('Selected project is not valid')
+    throw new Error('Selected project is not valid');
   }
-  return get(object, path)
+  return get(object, path);
 }
 
 export function deserializeProject(project) {
   if (project.version !== '1') {
     throw new Error(
       'Invalid version number, please use a suitable deserializer'
-    )
+    );
   }
 
-  const chartName = getOrError(project, 'chart')
-  const chart = charts.find((c) => c.metadata.name === chartName)
+  const chartName = getOrError(project, 'chart');
+  const chart = charts.find((c) => c.metadata.name === chartName);
   if (!chart) {
-    throw new Error('Unknown chart!')
+    throw new Error('Unknown chart!');
   }
 
   return {
@@ -110,5 +110,5 @@ export function deserializeProject(project) {
     currentChart: chart,
     mapping: getOrError(project, 'mapping'),
     visualOptions: getOrError(project, 'visualOptions'),
-  }
+  };
 }

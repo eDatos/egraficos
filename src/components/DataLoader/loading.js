@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from './DataLoader.module.scss'
+import React from 'react';
+import styles from './DataLoader.module.scss';
 
 export default function Loading() {
   return (
@@ -7,5 +7,5 @@ export default function Loading() {
       <div className={styles['bg-animated']} />
       <p>loading...</p>
     </div>
-  )
+  );
 }

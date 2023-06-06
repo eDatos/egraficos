@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react'
-import { map } from 'lodash'
-import './JsonViewer.scss'
+import React, { useCallback, useState } from 'react';
+import { map } from 'lodash';
+import './JsonViewer.scss';
 
 const JsonViewerRecursive = ({
   contextName,
@@ -10,9 +10,9 @@ const JsonViewerRecursive = ({
   onSelect,
   path,
 }) => {
-  const isSelectable = selectFilter(context)
-  const contextType = typeof context
-  const [mouseOver, setMouseOver] = useState(false)
+  const isSelectable = selectFilter(context);
+  const contextType = typeof context;
+  const [mouseOver, setMouseOver] = useState(false);
 
   const classes = [
     'json-nested',
@@ -20,40 +20,40 @@ const JsonViewerRecursive = ({
     mouseOver ? 'hover' : null,
   ]
     .filter((i) => i !== null)
-    .join(' ')
+    .join(' ');
 
   const handleSelect = useCallback(
     (e) => {
       if (isSelectable) {
-        e.stopPropagation()
-        e.preventDefault()
-        if (onSelect) onSelect(context, path.join('.'))
+        e.stopPropagation();
+        e.preventDefault();
+        if (onSelect) onSelect(context, path.join('.'));
       }
     },
     [context, isSelectable, onSelect, path]
-  )
+  );
 
   const handleMouseOver = useCallback(
     (e) => {
       if (isSelectable) {
-        e.stopPropagation()
-        e.preventDefault()
-        setMouseOver(true)
+        e.stopPropagation();
+        e.preventDefault();
+        setMouseOver(true);
       }
     },
     [isSelectable]
-  )
+  );
 
   const handleMouseOut = useCallback(
     (e) => {
       if (isSelectable) {
-        e.stopPropagation()
-        e.preventDefault()
-        setMouseOver(false)
+        e.stopPropagation();
+        e.preventDefault();
+        setMouseOver(false);
       }
     },
     [isSelectable]
-  )
+  );
 
   if (contextType === 'object' && contextType !== null) {
     return (
@@ -93,7 +93,7 @@ const JsonViewerRecursive = ({
           <span className="square-bracket close-bracket">{']'}</span>
         )}
       </div>
-    )
+    );
   } else {
     return (
       <div
@@ -134,9 +134,9 @@ const JsonViewerRecursive = ({
           </>
         )}
       </div>
-    )
+    );
   }
-}
+};
 
 const JsonViewer = ({ context, selectFilter, onSelect }) => {
   return (
@@ -150,7 +150,7 @@ const JsonViewer = ({ context, selectFilter, onSelect }) => {
         path={[]}
       />
     </pre>
-  )
-}
+  );
+};
 
-export default JsonViewer
+export default JsonViewer;

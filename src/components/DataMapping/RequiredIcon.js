@@ -1,6 +1,6 @@
-import React from 'react'
-import { ReactComponent as Asterisk } from './asterisk.svg'
-import { Tooltip, OverlayTrigger } from 'react-bootstrap'
+import React from 'react';
+import { ReactComponent as Asterisk } from './asterisk.svg';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 function RequiredIcon() {
   return (
@@ -11,7 +11,7 @@ function RequiredIcon() {
     >
       <Asterisk style={{ marginRight: '2px' }} />
     </OverlayTrigger>
-  )
+  );
 }
 
-export default RequiredIcon
+export default RequiredIcon;

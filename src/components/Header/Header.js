@@ -1,29 +1,29 @@
-import React, { useEffect, useRef } from 'react'
-import applicationConfig from '../../application.json'
-import { useTranslation } from 'react-i18next'
+import React, { useEffect, useRef } from 'react';
+import applicationConfig from '../../application.json';
+import { useTranslation } from 'react-i18next';
 
 export default function Header(props) {
-  const divRef = useRef(null)
-  const { t } = useTranslation(['translation'])
-  const appName = t('global.appName')
+  const divRef = useRef(null);
+  const { t } = useTranslation(['translation']);
+  const appName = t('global.appName');
 
   useEffect(() => {
-    let isSubscribed = true
-    const { current } = divRef
+    let isSubscribed = true;
+    const { current } = divRef;
 
     // declare the async data fetching function
     const fetchData = async () => {
       const requestOptions = {
         method: 'GET',
         headers: { Accept: 'application/json' },
-      }
+      };
       const responseHeaderURL = await fetch(
         applicationConfig['metadata']['endpoint'] +
           '/properties/' +
           applicationConfig['metadata']['navbarPathKey'],
         requestOptions
-      )
-      const headerUrlData = await responseHeaderURL.json()
+      );
+      const headerUrlData = await responseHeaderURL.json();
       return await (
         await fetch(
           headerUrlData['value'] +
@@ -33,20 +33,20 @@ export default function Header(props) {
             props.value,
           requestOptions
         )
-      ).text()
-    }
+      ).text();
+    };
 
     fetchData().then((htmlContent) => {
       if (isSubscribed) {
         const slotHtml = document
           .createRange()
-          .createContextualFragment(htmlContent) // Create a 'tiny' document and parse the html string
-        current.innerHTML = '' // Clear the container
-        current.append(slotHtml) // Append the new content
+          .createContextualFragment(htmlContent); // Create a 'tiny' document and parse the html string
+        current.innerHTML = ''; // Clear the container
+        current.append(slotHtml); // Append the new content
       }
-    })
+    });
 
-    return () => (isSubscribed = false)
-  }, [props.value, appName])
-  return <div ref={divRef}></div>
+    return () => (isSubscribed = false);
+  }, [props.value, appName]);
+  return <div ref={divRef}></div>;
 }

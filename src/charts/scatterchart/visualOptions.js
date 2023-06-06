@@ -1,4 +1,4 @@
-import { baseVisualOptions } from '../baseVisualOptions'
+import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
   ...baseVisualOptions,
@@ -139,4 +139,4 @@ export const visualOptions = {
     },
     group: 'colors',
   },
-}
+};

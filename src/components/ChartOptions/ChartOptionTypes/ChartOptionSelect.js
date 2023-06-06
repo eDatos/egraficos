@@ -1,7 +1,7 @@
-import React from 'react'
-import { Row, Col } from 'react-bootstrap'
-import isObject from 'lodash/isObject'
-import { useTranslation } from 'react-i18next'
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import isObject from 'lodash/isObject';
+import { useTranslation } from 'react-i18next';
 
 const ChartOptionSelect = ({
   options = [],
@@ -12,7 +12,7 @@ const ChartOptionSelect = ({
   label,
   ...props
 }) => {
-  const { t } = useTranslation(['visualoptions'])
+  const { t } = useTranslation(['visualoptions']);
   return (
     <Row className={props.className}>
       <Col xs={6} className="d-flex align-items-center nowrap">
@@ -23,10 +23,10 @@ const ChartOptionSelect = ({
           className="custom-select raw-select"
           value={value ?? defaultValue}
           onChange={(e) => {
-            const stringValue = e.target.value
+            const stringValue = e.target.value;
             const value =
-              props.type === 'number' ? Number(stringValue) : stringValue
-            onChange(value)
+              props.type === 'number' ? Number(stringValue) : stringValue;
+            onChange(value);
           }}
         >
           {options.map((option) =>
@@ -48,7 +48,7 @@ const ChartOptionSelect = ({
         )}
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default React.memo(ChartOptionSelect)
+export default React.memo(ChartOptionSelect);

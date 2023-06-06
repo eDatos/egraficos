@@ -1,22 +1,22 @@
-import React, { useCallback, useState, useMemo } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import React, { useCallback, useState, useMemo } from 'react';
+import { Row, Col } from 'react-bootstrap';
 import {
   getOptionsConfig,
   getContainerOptions,
   getDefaultOptionsValues,
   getEnabledOptions,
   getTypeName,
-} from '@rawgraphs/rawgraphs-core'
-import ChartOptionNumber from './ChartOptionTypes/ChartOptionNumber'
-import ChartOptionText from './ChartOptionTypes/ChartOptionText'
-import ChartOptionColor from './ChartOptionTypes/ChartOptionColor'
-import ChartOptionColorScaleWrapper from './ChartOptionTypes/ChartOptionColorScaleWrapper'
-import ChartOptionBoolean from './ChartOptionTypes/ChartOptionBoolean'
-import get from 'lodash/get'
-import map from 'lodash/map'
-import styles from './ChartOptions.module.scss'
-import omit from 'lodash/omit'
-import { useTranslation } from 'react-i18next'
+} from '@rawgraphs/rawgraphs-core';
+import ChartOptionNumber from './ChartOptionTypes/ChartOptionNumber';
+import ChartOptionText from './ChartOptionTypes/ChartOptionText';
+import ChartOptionColor from './ChartOptionTypes/ChartOptionColor';
+import ChartOptionColorScaleWrapper from './ChartOptionTypes/ChartOptionColorScaleWrapper';
+import ChartOptionBoolean from './ChartOptionTypes/ChartOptionBoolean';
+import get from 'lodash/get';
+import map from 'lodash/map';
+import styles from './ChartOptions.module.scss';
+import omit from 'lodash/omit';
+import { useTranslation } from 'react-i18next';
 
 const CHART_OPTION_COMPONENTS = {
   number: ChartOptionNumber,
@@ -24,24 +24,24 @@ const CHART_OPTION_COMPONENTS = {
   color: ChartOptionColor,
   colorScale: ChartOptionColorScaleWrapper,
   boolean: ChartOptionBoolean,
-}
+};
 
 function getPartialMapping(mapping, dimension, repeatIndex) {
-  const nv = get(mapping[dimension], `value[${repeatIndex}]`)
+  const nv = get(mapping[dimension], `value[${repeatIndex}]`);
   return {
     ...mapping,
     [dimension]: {
       ...mapping[dimension],
       value: [nv],
     },
-  }
+  };
 }
 
 function getDefaultForRepeat(def, index) {
   if (Array.isArray(def.repeatDefault)) {
-    return get(def.repeatDefault, `[${index}]`, def.default)
+    return get(def.repeatDefault, `[${index}]`, def.default);
   }
-  return def.default
+  return def.default;
 }
 
 function WrapControlComponent({
@@ -52,85 +52,85 @@ function WrapControlComponent({
   repeatIndex,
   ...props
 }) {
-  const Component = CHART_OPTION_COMPONENTS[type]
-  const { t } = useTranslation(['visualoptions'])
+  const Component = CHART_OPTION_COMPONENTS[type];
+  const { t } = useTranslation(['visualoptions']);
 
   const remainingOptions = useMemo(() => {
     if (type !== 'colorScale') {
-      return null
+      return null;
     }
 
     return Object.keys(omit(props.visualOptions, optionId))
       .map((k) => JSON.stringify(get(props.visualOptions, k, '')))
-      .join('-')
-  }, [type, props.visualOptions, optionId])
+      .join('-');
+  }, [type, props.visualOptions, optionId]);
 
   const domainFromChart = useMemo(() => {
     if (type !== 'colorScale') {
-      return null
+      return null;
     }
     if (props.domain && props.chart[props.domain]) {
       //as sometimes the current chart is not in synch with current options (chart is set before options, we just handle an exception)
       //everything should be ok on the next render.
       try {
-        const domain = props.chart[props.domain](props.dataset, props.mapping)
-        return domain
+        const domain = props.chart[props.domain](props.dataset, props.mapping);
+        return domain;
       } catch (e) {
-        return null
+        return null;
       }
     } else {
-      return null
+      return null;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, props.chart, props.domain, props.mapping, remainingOptions])
+  }, [type, props.chart, props.domain, props.mapping, remainingOptions]);
 
   const mappingValue = useMemo(() => {
     if (type !== 'colorScale') {
-      return null
+      return null;
     }
     return domainFromChart
       ? '__custom__'
-      : get(props.mapping, `[${props.dimension}].value`)
-  }, [domainFromChart, props.dimension, props.mapping, type])
+      : get(props.mapping, `[${props.dimension}].value`);
+  }, [domainFromChart, props.dimension, props.mapping, type]);
 
   const colorDataType = useMemo(() => {
     if (type !== 'colorScale') {
-      return null
+      return null;
     }
     if (domainFromChart) {
-      return domainFromChart.type
+      return domainFromChart.type;
     }
     return props.dataTypes[mappingValue]
       ? getTypeName(props.dataTypes[mappingValue])
-      : 'string'
-  }, [type, props.dataTypes, domainFromChart, mappingValue])
+      : 'string';
+  }, [type, props.dataTypes, domainFromChart, mappingValue]);
 
   const colorDataset = useMemo(() => {
     if (type !== 'colorScale') {
-      return null
+      return null;
     }
     if (domainFromChart) {
-      return domainFromChart.domain
+      return domainFromChart.domain;
     }
-    return []
-  }, [type, /*props.dimension, */ domainFromChart])
+    return [];
+  }, [type, /*props.dimension, */ domainFromChart]);
 
   const handleControlChange = useCallback(
     (nextValue) => {
       setVisualOptions((visualOptions) => {
-        let newValue = nextValue
+        let newValue = nextValue;
         if (repeatIndex !== undefined) {
-          newValue = visualOptions[optionId] || []
-          newValue[repeatIndex] = nextValue
+          newValue = visualOptions[optionId] || [];
+          newValue[repeatIndex] = nextValue;
         }
         return {
           ...visualOptions,
           [optionId]: newValue,
-        }
-      })
+        };
+      });
     },
     [optionId, repeatIndex, setVisualOptions]
-  )
+  );
 
   return (
     <Component
@@ -158,7 +158,7 @@ function WrapControlComponent({
       ])}
       onChange={handleControlChange}
     />
-  )
+  );
 }
 
 const ChartOptions = ({
@@ -170,26 +170,26 @@ const ChartOptions = ({
   setVisualOptions,
   error,
 }) => {
-  const { t } = useTranslation(['visualoptions'])
+  const { t } = useTranslation(['visualoptions']);
 
   const optionsConfig = useMemo(() => {
-    return getOptionsConfig(chart?.visualOptions)
-  }, [chart])
+    return getOptionsConfig(chart?.visualOptions);
+  }, [chart]);
 
   const [collapseStatus, setCollapseStatus] = useState(() => {
-    const groups = {}
+    const groups = {};
     for (const option in optionsConfig) {
-      const group = optionsConfig[option].group
+      const group = optionsConfig[option].group;
       if (!groups.hasOwnProperty(group)) {
-        groups[group] = true
+        groups[group] = true;
       }
     }
-    return groups
-  })
+    return groups;
+  });
 
   const enabledOptions = useMemo(() => {
-    return getEnabledOptions(optionsConfig, visualOptions, mapping)
-  }, [optionsConfig, visualOptions, mapping])
+    return getEnabledOptions(optionsConfig, visualOptions, mapping);
+  }, [optionsConfig, visualOptions, mapping]);
 
   // const enabledGroupsByName = useMemo(() => {
   //   const enabledGroupsNames = Object.keys(optionsConfig).map(optionName => enabledOptions[optionName] ? optionsConfig[optionName].group : null).filter(x => !!x)
@@ -200,33 +200,36 @@ const ChartOptions = ({
   const optionsDefinitionsByGroup = useMemo(() => {
     // update "collapseStatus" state
     // add/remove options groups when selected charts changes
-    const groups = {}
+    const groups = {};
     for (const option in optionsConfig) {
-      const group = optionsConfig[option].group
+      const group = optionsConfig[option].group;
       if (!groups.hasOwnProperty(group)) {
-        groups[group] = group === 'artboard' ? false : true
+        groups[group] = group === 'artboard' ? false : true;
       }
     }
-    setCollapseStatus(groups)
+    setCollapseStatus(groups);
     return Object.keys(optionsConfig).reduce((acc, optionId) => {
-      const option = optionsConfig[optionId]
-      const group = option?.group || ''
+      const option = optionsConfig[optionId];
+      const group = option?.group || '';
       if (!acc[group]) {
-        acc[group] = {}
+        acc[group] = {};
       }
-      acc[group][optionId] = option
-      return acc
-    }, {})
-  }, [optionsConfig])
+      acc[group][optionId] = option;
+      return acc;
+    }, {});
+  }, [optionsConfig]);
 
   const containerOptions = useMemo(() => {
-    const defaultOptionsValues = getDefaultOptionsValues(optionsConfig, mapping)
+    const defaultOptionsValues = getDefaultOptionsValues(
+      optionsConfig,
+      mapping
+    );
     const opts = {
       ...defaultOptionsValues,
       ...visualOptions,
-    }
-    return getContainerOptions(optionsConfig, opts)
-  }, [mapping, optionsConfig, visualOptions])
+    };
+    return getContainerOptions(optionsConfig, opts);
+  }, [mapping, optionsConfig, visualOptions]);
 
   return (
     <div className={[styles['chart-options'], 'col-4', 'col-xl-3'].join(' ')}>
@@ -317,7 +320,7 @@ const ChartOptions = ({
                   setVisualOptions={setVisualOptions}
                   isEnabled={enabledOptions[optionId]}
                 />
-              )
+              );
             })}
             {groupName === 'artboard' && visualOptions.showLegend && (
               <p className="small">
@@ -326,10 +329,10 @@ const ChartOptions = ({
               </p>
             )}
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default ChartOptions
+export default ChartOptions;

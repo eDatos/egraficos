@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import ReactECharts from 'echarts-for-react'
-import charts from '../../../charts'
-import { parseAndCheckData } from '../../../hooks/useDataLoaderUtils/parser'
+import React, { useEffect, useState } from 'react';
+import ReactECharts from 'echarts-for-react';
+import charts from '../../../charts';
+import { parseAndCheckData } from '../../../hooks/useDataLoaderUtils/parser';
 import {
   colorPresets,
   dateFormats,
   parseDataset,
-} from '@rawgraphs/rawgraphs-core'
-import { get } from 'lodash'
-import { defaultPalette, grayPalette, localeList } from '../../../constants'
+} from '@rawgraphs/rawgraphs-core';
+import { get } from 'lodash';
+import { defaultPalette, grayPalette, localeList } from '../../../constants';
 
 //add custom date formats
-dateFormats['YYYY-MMM'] = '%Y-M%m'
+dateFormats['YYYY-MMM'] = '%Y-M%m';
 //Custom colors
 colorPresets.ordinal.defaultPalette = {
   value: defaultPalette,
   label: 'Default Palette',
-}
+};
 colorPresets.ordinal.grayPalette = {
   value: grayPalette,
   label: 'Gray Palette',
-}
+};
 
 const EDatosGraph = (props) => {
-  const [options, setOptions] = useState({})
+  const [options, setOptions] = useState({});
 
   useEffect(() => {
     const fetchData = async (source) => {
-      const response = await fetch(source.url)
-      return await response.text()
-    }
+      const response = await fetch(source.url);
+      return await response.text();
+    };
 
     const getChartOptions = (data) => {
       const parsedDataset = parseDataset(data, props.dataTypes, {
@@ -37,41 +37,41 @@ const EDatosGraph = (props) => {
         decimal: props.decimalsSeparator,
         group: props.thousandsSeparator,
         dateLocale: get(localeList, props.locale),
-      })
+      });
       return chart.getChartOptions(
         props.visualOptions,
         parsedDataset.dataset,
         props.mapping,
         props.dataTypes,
         chart.dimensions
-      )
-    }
+      );
+    };
 
-    const chart = charts[props.chartIndex]
+    const chart = charts[props.chartIndex];
 
     const fetchOptions = async () => {
-      const data = await fetchData(props.source)
+      const data = await fetchData(props.source);
       const [dataType, parsedUserData, error, extra] = parseAndCheckData(data, {
         separator: null,
-      })
-      return getChartOptions(parsedUserData)
-    }
+      });
+      return getChartOptions(parsedUserData);
+    };
 
     if (props.data) {
-      setOptions(getChartOptions(props.data))
+      setOptions(getChartOptions(props.data));
     } else {
       fetchOptions(props).then((options) => {
-        setOptions(options)
-      })
+        setOptions(options);
+      });
     }
-  }, [props])
+  }, [props]);
 
   return (
     <ReactECharts
       option={options}
       opts={{ renderer: props.visualOptions.renderer }}
     />
-  )
-}
+  );
+};
 
-export default EDatosGraph
+export default EDatosGraph;

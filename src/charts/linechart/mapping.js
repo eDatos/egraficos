@@ -1,7 +1,7 @@
-import * as d3 from 'd3'
-import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
-import _ from 'lodash'
-import { parseObject } from '../utils/parseUtils'
+import * as d3 from 'd3';
+import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
+import _ from 'lodash';
+import { parseObject } from '../utils/parseUtils';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   const yAggregator = getDimensionAggregator(
@@ -9,15 +9,15 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     mapping,
     dataTypes,
     dimensions
-  )
+  );
   if (mapping.lines === undefined) {
     mapping.lines = {
       value: undefined,
-    }
+    };
   }
 
-  const multiplesLines = mapping.lines.value?.length > 0
-  let results = []
+  const multiplesLines = mapping.lines.value?.length > 0;
+  let results = [];
 
   d3.rollups(
     data,
@@ -31,38 +31,38 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
             lines: multiplesLines
               ? parseObject(vv[0][mapping.lines.value])
               : 'y', //get the first one since it's grouped
-          }
-          results.push(item)
+          };
+          results.push(item);
         },
         (d) => d[mapping.x.value].toString() // sub-group functions. toString() to enable grouping on dates
       ),
     (d) => parseObject(d[mapping.lines.value]) // group functions
-  )
+  );
 
-  return results
-}
+  return results;
+};
 function getDimensions(resultMap, mapping) {
   if (mapping.lines.value === undefined || mapping.lines.value.length === 0) {
-    return ['x', 'y']
+    return ['x', 'y'];
   } else {
     var dimensions = resultMap
       .map((res) => parseObject(res.lines))
       .filter((value, index, self) => self.indexOf(value) === index)
-      .sort()
-    dimensions.unshift('x')
-    return dimensions
+      .sort();
+    dimensions.unshift('x');
+    return dimensions;
   }
 }
 
 function getXData(resultMap) {
-  let xData = []
+  let xData = [];
   resultMap.forEach((e) => {
-    let value = e.x
+    let value = e.x;
     if (xData.indexOf(value) === -1) {
-      xData.push(value)
+      xData.push(value);
     }
-  })
-  return xData.sort((a, b) => a - b)
+  });
+  return xData.sort((a, b) => a - b);
 }
 
 const getXAxis = (visualOptions, xData, name) => {
@@ -78,8 +78,8 @@ const getXAxis = (visualOptions, xData, name) => {
       fontSize: visualOptions.showXaxisLabelsFontSize,
     },
     data: xData.map((data) => parseObject(data)),
-  }
-}
+  };
+};
 
 const getYAxis = (visualOptions, name) => {
   return {
@@ -91,8 +91,8 @@ const getYAxis = (visualOptions, name) => {
       rotate: visualOptions.showYaxisLabelsRotate,
       fontSize: visualOptions.showYaxisLabelsFontSize,
     },
-  }
-}
+  };
+};
 
 export function getChartOptions(
   visualOptions,
@@ -101,31 +101,31 @@ export function getChartOptions(
   dataTypes,
   dimensions
 ) {
-  const resultMap = mapData(datachart, mapping, dataTypes, dimensions)
-  const xData = getXData(resultMap)
+  const resultMap = mapData(datachart, mapping, dataTypes, dimensions);
+  const xData = getXData(resultMap);
 
-  let data = _.groupBy(resultMap, 'lines')
+  let data = _.groupBy(resultMap, 'lines');
 
   const lineSeries = getDimensions(resultMap, mapping)
     .filter((dimension) => dimension !== 'x')
     .map(function (item, index) {
-      let colorValue
+      let colorValue;
       if (visualOptions.colorScale.userScaleValues?.length === 1) {
-        colorValue = visualOptions.colorScale.userScaleValues[0].range
+        colorValue = visualOptions.colorScale.userScaleValues[0].range;
       } else {
         colorValue = visualOptions.colorScale.userScaleValues.find(
           (e) => e.domain === item
-        )?.range
+        )?.range;
       }
-      let lineData = []
+      let lineData = [];
       xData.forEach((e) => {
-        let value = _.find(data[item], ['x', e], 0)
+        let value = _.find(data[item], ['x', e], 0);
         if (value) {
-          lineData.push(value.y)
+          lineData.push(value.y);
         } else {
-          lineData.push('')
+          lineData.push('');
         }
-      })
+      });
       return {
         name: item,
         type: 'line',
@@ -136,8 +136,8 @@ export function getChartOptions(
         symbolSize: visualOptions.dotsDiameter,
         color: colorValue,
         data: lineData,
-      }
-    })
+      };
+    });
 
   return {
     legend: {
@@ -171,5 +171,5 @@ export function getChartOptions(
     xAxis: getXAxis(visualOptions, xData, mapping.x.value),
     yAxis: getYAxis(visualOptions, mapping.y.value),
     series: [...lineSeries],
-  }
+  };
 }

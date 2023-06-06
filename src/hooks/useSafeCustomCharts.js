@@ -1,34 +1,34 @@
-import { useCallback, useState } from 'react'
-import useCustomCharts from './useCustomCharts'
-import './chart-types'
+import { useCallback, useState } from 'react';
+import useCustomCharts from './useCustomCharts';
+import './chart-types';
 
 // NOTE: ... FUTURE PALCE 2 RAW APPROVED CHARTS FROM USERS <3
 // At this point we can mark some npm accounts or special cdn hosts to have secure
 // and quailty raw charts ... so we can then skip the security advisor
 
-const HOSTS_WHITELIST = ['localhost']
+const HOSTS_WHITELIST = ['localhost'];
 
 /**
  * @param {URL} url
  */
 function isUrlAllowed(url) {
   if (HOSTS_WHITELIST.includes(url.hostname)) {
-    return true
+    return true;
   }
-  return false
+  return false;
 }
 
 /**
  * @param {string} name
  */
 function isNpmPkgAllowed(name) {
-  return false
+  return false;
 }
 
 class UserAbortError extends Error {
   constructor(...args) {
-    super(...args)
-    this.isAbortByUser = true
+    super(...args);
+    this.isAbortByUser = true;
   }
 }
 
@@ -59,21 +59,21 @@ export default function useSafeCustomCharts() {
       importCustomChartFromProject: unsafeImportCustomChartFromProject,
       ...methods
     },
-  ] = useCustomCharts()
+  ] = useCustomCharts();
 
-  const [toConfirmCustomChart, setToConfirmCustomChartLoad] = useState(null)
+  const [toConfirmCustomChart, setToConfirmCustomChartLoad] = useState(null);
 
   const loadCustomChartsFromUrl = useCallback(
     (url) => {
-      let parsedUrl
+      let parsedUrl;
       try {
-        parsedUrl = new URL(url)
+        parsedUrl = new URL(url);
       } catch (err) {
         // Invalid url
-        return Promise.resolve([])
+        return Promise.resolve([]);
       }
       if (isUrlAllowed(parsedUrl)) {
-        return unsafeLoadCustomChartsFromUrl(String(parsedUrl))
+        return unsafeLoadCustomChartsFromUrl(String(parsedUrl));
       } else {
         return new Promise((resolve, reject) => {
           setToConfirmCustomChartLoad({
@@ -81,21 +81,21 @@ export default function useSafeCustomCharts() {
             value: String(parsedUrl),
             resolve,
             reject,
-          })
-        })
+          });
+        });
       }
     },
     [unsafeLoadCustomChartsFromUrl]
-  )
+  );
 
   const loadCustomChartsFromNpm = useCallback(
     (inputName) => {
-      const name = inputName.trim()
+      const name = inputName.trim();
       if (name.trim() === '') {
-        return
+        return;
       }
       if (isNpmPkgAllowed(name)) {
-        unsafeLoadCustomChartsFromNpm(name)
+        unsafeLoadCustomChartsFromNpm(name);
       } else {
         return new Promise((resolve, reject) => {
           setToConfirmCustomChartLoad({
@@ -103,12 +103,12 @@ export default function useSafeCustomCharts() {
             value: name,
             resolve,
             reject,
-          })
-        })
+          });
+        });
       }
     },
     [unsafeLoadCustomChartsFromNpm]
-  )
+  );
 
   const uploadCustomCharts = useCallback((file) => {
     return new Promise((resolve, reject) => {
@@ -117,24 +117,24 @@ export default function useSafeCustomCharts() {
         value: file,
         resolve,
         reject,
-      })
-    })
-  }, [])
+      });
+    });
+  }, []);
 
   const importCustomChartFromProject = useCallback(
     (projectChart) => {
-      const { source } = projectChart.rawCustomChart
-      let askConfirm = false
+      const { source } = projectChart.rawCustomChart;
+      let askConfirm = false;
       if (source.indexOf('url:') === 0) {
         if (!isUrlAllowed(new URL(source.replace('url:', '')))) {
-          askConfirm = true
+          askConfirm = true;
         }
       } else if (source.indexOf('npm:') === 0) {
         if (!isNpmPkgAllowed(source.replace('npm:', ''))) {
-          askConfirm = true
+          askConfirm = true;
         }
       } else if (source.indexOf('file:') === 0) {
-        askConfirm = true
+        askConfirm = true;
       }
       if (askConfirm) {
         return new Promise((resolve, reject) => {
@@ -143,41 +143,41 @@ export default function useSafeCustomCharts() {
             value: projectChart,
             resolve,
             reject,
-          })
-        })
+          });
+        });
       } else {
-        return unsafeImportCustomChartFromProject(projectChart)
+        return unsafeImportCustomChartFromProject(projectChart);
       }
     },
     [unsafeImportCustomChartFromProject]
-  )
+  );
 
   const confirmCustomChartLoad = useCallback(() => {
-    const { type, value, resolve, reject } = toConfirmCustomChart
+    const { type, value, resolve, reject } = toConfirmCustomChart;
     if (type === 'file') {
-      unsafeUploadCustomCharts(value).then(resolve, reject)
+      unsafeUploadCustomCharts(value).then(resolve, reject);
     } else if (type === 'url') {
-      unsafeLoadCustomChartsFromUrl(value).then(resolve, reject)
+      unsafeLoadCustomChartsFromUrl(value).then(resolve, reject);
     } else if (type === 'npm') {
-      unsafeLoadCustomChartsFromNpm(value).then(resolve, reject)
+      unsafeLoadCustomChartsFromNpm(value).then(resolve, reject);
     } else if (type === 'project') {
-      unsafeImportCustomChartFromProject(value).then(resolve, reject)
+      unsafeImportCustomChartFromProject(value).then(resolve, reject);
     }
-    setToConfirmCustomChartLoad(null)
+    setToConfirmCustomChartLoad(null);
   }, [
     toConfirmCustomChart,
     unsafeImportCustomChartFromProject,
     unsafeLoadCustomChartsFromNpm,
     unsafeLoadCustomChartsFromUrl,
     unsafeUploadCustomCharts,
-  ])
+  ]);
 
   const abortCustomChartLoad = useCallback(() => {
     if (toConfirmCustomChart) {
-      toConfirmCustomChart.reject(new UserAbortError())
+      toConfirmCustomChart.reject(new UserAbortError());
     }
-    setToConfirmCustomChartLoad(null)
-  }, [toConfirmCustomChart])
+    setToConfirmCustomChartLoad(null);
+  }, [toConfirmCustomChart]);
 
   return [
     customCharts,
@@ -191,5 +191,5 @@ export default function useSafeCustomCharts() {
       importCustomChartFromProject,
       ...methods,
     },
-  ]
+  ];
 }

@@ -1,1 +1,1 @@
-export { default } from './ChartSelector'
+export { default } from './ChartSelector';

@@ -1,10 +1,10 @@
-import React from 'react'
-import { Typeahead } from 'react-bootstrap-typeahead'
-import { Form } from 'react-bootstrap'
-import applicationConfig from '../../../application.json'
-import { Translation } from 'react-i18next'
+import React from 'react';
+import { Typeahead } from 'react-bootstrap-typeahead';
+import { Form } from 'react-bootstrap';
+import applicationConfig from '../../../application.json';
+import { Translation } from 'react-i18next';
 
-import 'react-bootstrap-typeahead/css/Typeahead.css'
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const SelectionCombo = (props) => {
   return (
@@ -15,16 +15,16 @@ const SelectionCombo = (props) => {
       options={props.options}
       placeholder={props.placeholder}
     />
-  )
-}
+  );
+};
 
 class DataSetTypeahead extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       collection: [],
       value: '',
-    }
+    };
   }
   componentDidMount() {
     fetch(
@@ -54,25 +54,25 @@ class DataSetTypeahead extends React.Component {
               .map((o) => {
                 const localizedName = o.name.text?.filter(
                   (text) => text.lang === this.props.language
-                )[0]?.value
+                )[0]?.value;
                 return {
                   id: o.id,
                   name: localizedName ? localizedName : o.name.text[0]?.value,
                   url:
                     o.selfLink.href.slice(0, o.selfLink.href.lastIndexOf('/')) +
                     '/~latest',
-                }
+                };
               })
-              .sort((a, b) => a.name.localeCompare(b.name))
+              .sort((a, b) => a.name.localeCompare(b.name));
 
-            this.setState({ collection })
-          })
-      })
+            this.setState({ collection });
+          });
+      });
   }
   onChange = (event) => {
-    this.setState({ value: event[0] })
-    this.props.handleOnChangeDataSet(event[0]?.url)
-  }
+    this.setState({ value: event[0] });
+    this.props.handleOnChangeDataSet(event[0]?.url);
+  };
   render() {
     return (
       <Form.Group>
@@ -86,17 +86,17 @@ class DataSetTypeahead extends React.Component {
           onChange={this.onChange}
         />
       </Form.Group>
-    )
+    );
   }
 }
 
 class OperationTypeahead extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       collection: [],
       value: '',
-    }
+    };
   }
   componentDidMount() {
     fetch(
@@ -121,21 +121,21 @@ class OperationTypeahead extends React.Component {
                 .map((o) => {
                   const localizedName = o.name.text?.filter(
                     (text) => text.lang === this.props.language
-                  )[0]?.value
+                  )[0]?.value;
                   return {
                     id: o.id,
                     name: localizedName ? localizedName : o.name.text[0]?.value,
-                  }
+                  };
                 })
                 .sort((a, b) => a.name.localeCompare(b.name)),
             })
-          )
-      })
+          );
+      });
   }
   onChange = (event) => {
-    this.setState({ value: event[0] })
-    this.props.handleOnChangeOperation(event[0]?.id)
-  }
+    this.setState({ value: event[0] });
+    this.props.handleOnChangeOperation(event[0]?.id);
+  };
   render() {
     return (
       <Form.Group>
@@ -149,41 +149,41 @@ class OperationTypeahead extends React.Component {
           onChange={this.onChange}
         />
       </Form.Group>
-    )
+    );
   }
 }
 
 export default class EDatosFetch extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       url: '',
       operationId: null,
       loading: false,
-    }
+    };
   }
   handleOnChangeOperation = (operationId) => {
-    this.setState({ operationId: operationId })
-  }
+    this.setState({ operationId: operationId });
+  };
   handleOnChangeDataSet = (url) => {
-    this.setState({ url: url })
-  }
+    this.setState({ url: url });
+  };
 
   handleSubmit = (event) => {
-    event.stopPropagation()
-    event.preventDefault()
-    this.setState({ loading: true })
+    event.stopPropagation();
+    event.preventDefault();
+    this.setState({ loading: true });
     const source = {
       type: 'url',
       url: this.state.url,
-    }
+    };
     fetch(this.state.url)
       .then((response) => response.text())
       .then((data) => {
-        this.props.setUserInput(data, source)
+        this.props.setUserInput(data, source);
       })
-      .finally(() => this.setState({ loading: false }))
-  }
+      .finally(() => this.setState({ loading: false }));
+  };
 
   render() {
     return (
@@ -215,6 +215,6 @@ export default class EDatosFetch extends React.Component {
           </Form>
         )}
       </Translation>
-    )
+    );
   }
 }

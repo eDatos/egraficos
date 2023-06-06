@@ -1,4 +1,4 @@
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap';
 
 export default function CustomChartWarnModal({
   toConfirmCustomChart,
@@ -43,7 +43,7 @@ export default function CustomChartWarnModal({
         <Button
           variant="light"
           onClick={() => {
-            abortCustomChartLoad()
+            abortCustomChartLoad();
           }}
         >
           Don't execute
@@ -51,12 +51,12 @@ export default function CustomChartWarnModal({
         <Button
           variant="primary"
           onClick={() => {
-            confirmCustomChartLoad()
+            confirmCustomChartLoad();
           }}
         >
           Continue
         </Button>
       </Modal.Footer>
     </Modal>
-  )
+  );
 }
