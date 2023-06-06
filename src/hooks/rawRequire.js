@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals */
-import * as d3 from 'd3'
-import * as rawgraphsCore from '@rawgraphs/rawgraphs-core'
-import LRU from 'lru-cache'
+import * as d3 from 'd3';
+import * as rawgraphsCore from '@rawgraphs/rawgraphs-core';
+import LRU from 'lru-cache';
 
-export const NPM_CDN = 'https://cdn.jsdelivr.net/npm/'
+export const NPM_CDN = 'https://cdn.jsdelivr.net/npm/';
 
 /**
  * NOTE: In a perfect we got type definition from core
@@ -13,14 +13,14 @@ export const NPM_CDN = 'https://cdn.jsdelivr.net/npm/'
  * }} ChartContract
  */
 
-const queue = []
-const cacheChartsPkg = new LRU(50)
-const cacheDependenciesTree = new LRU(400)
+const queue = [];
+const cacheChartsPkg = new LRU(50);
+const cacheDependenciesTree = new LRU(400);
 
 const DEPENDENCIES_ALIAS = {
   d3,
   '@rawgraphs/rawgraphs-core': rawgraphsCore,
-}
+};
 
 /**
  * Reauire a dependency in the DOM Context and cache it
@@ -29,23 +29,23 @@ const DEPENDENCIES_ALIAS = {
  */
 async function requireDependency(name) {
   if (DEPENDENCIES_ALIAS[name]) {
-    return DEPENDENCIES_ALIAS[name]
+    return DEPENDENCIES_ALIAS[name];
   }
-  let url
+  let url;
   try {
-    url = new URL(name)
+    url = new URL(name);
   } catch (e) {
-    url = new URL(`${NPM_CDN}${name}`)
+    url = new URL(`${NPM_CDN}${name}`);
   }
-  const sUrl = url.toString()
+  const sUrl = url.toString();
   if (cacheDependenciesTree.has(sUrl)) {
-    return cacheDependenciesTree.get(sUrl)
+    return cacheDependenciesTree.get(sUrl);
   }
-  const v = await requireFromUrl(sUrl.toString())
+  const v = await requireFromUrl(sUrl.toString());
   if (v) {
-    cacheDependenciesTree.set(sUrl, v)
+    cacheDependenciesTree.set(sUrl, v);
   }
-  return v
+  return v;
 }
 
 /**
@@ -55,51 +55,51 @@ function defineDOM(...params) {
   /**
    * @type {(dependencies: string[]) void}
    */
-  let factory
+  let factory;
   /**
    * @type string[]
    */
-  let dependencies
+  let dependencies;
   // Adjust various AMD callding patterhns
   if (params.length < 2) {
-    factory = params[0]
-    dependencies = []
+    factory = params[0];
+    dependencies = [];
   } else {
     if (params.length >= 3) {
-      params = params.slice(1)
+      params = params.slice(1);
     }
-    dependencies = params[0]
-    factory = params[1]
+    dependencies = params[0];
+    factory = params[1];
   }
   // Instance dependencies
-  const exports = {}
-  const module = { exports }
+  const exports = {};
+  const module = { exports };
   const rutimeDepenciesPromises = dependencies.map((dep) =>
     dep === 'exports'
       ? Promise.resolve(exports)
       : dep === 'module'
       ? Promise.resolve(module)
       : requireDependency(dep)
-  )
+  );
   queue.push(
     Promise.all(rutimeDepenciesPromises).then((rutimeDepencies) => {
       // Run factory ... This will (maybe) write into exports
-      const outFactory = factory(...rutimeDepencies)
+      const outFactory = factory(...rutimeDepencies);
       if (
         !dependencies.includes('exports') &&
         !dependencies.includes('module') &&
         outFactory
       ) {
         // NOTE: In this case the factory return module
-        return outFactory
+        return outFactory;
       }
       // Push filled exports
-      return exports
+      return exports;
     })
-  )
+  );
 }
 
-defineDOM.amd = {}
+defineDOM.amd = {};
 
 /**
  * Reauire a dependency in Web Worker Context
@@ -108,23 +108,23 @@ defineDOM.amd = {}
  */
 function requireDependencyWebWorker(name) {
   if (DEPENDENCIES_ALIAS[name]) {
-    return DEPENDENCIES_ALIAS[name]
+    return DEPENDENCIES_ALIAS[name];
   }
-  let url
+  let url;
   try {
-    url = new URL(name)
+    url = new URL(name);
   } catch (e) {
-    url = new URL(`${NPM_CDN}${name}`)
+    url = new URL(`${NPM_CDN}${name}`);
   }
-  const sUrl = url.toString()
+  const sUrl = url.toString();
   if (cacheDependenciesTree.has(sUrl)) {
-    return cacheDependenciesTree.get(sUrl)
+    return cacheDependenciesTree.get(sUrl);
   }
-  const v = requireFromUrlWebWorker(sUrl.toString())
+  const v = requireFromUrlWebWorker(sUrl.toString());
   if (v) {
-    cacheDependenciesTree.set(sUrl, v)
+    cacheDependenciesTree.set(sUrl, v);
   }
-  return v
+  return v;
 }
 
 /**
@@ -134,46 +134,46 @@ function defineWebWorker(...params) {
   /**
    * @type {(dependencies: string[]) void}
    */
-  let factory
+  let factory;
   /**
    * @type string[]
    */
-  let dependencies
+  let dependencies;
   // Adjust various AMD callding patterhns
   if (params.length < 2) {
-    factory = params[0]
-    dependencies = []
+    factory = params[0];
+    dependencies = [];
   } else {
     if (params.length >= 3) {
-      params = params.slice(1)
+      params = params.slice(1);
     }
-    dependencies = params[0]
-    factory = params[1]
+    dependencies = params[0];
+    factory = params[1];
   }
   // Instance dependencies
-  const exports = {}
-  const module = { exports }
+  const exports = {};
+  const module = { exports };
   const rutimeDepencies = dependencies.map((dep) =>
     dep === 'exports'
       ? exports
       : dep === 'module'
       ? module
       : requireDependencyWebWorker(dep)
-  )
+  );
   // Run factory ... This will (maybe) write into exports
-  const outFactory = factory(...rutimeDepencies)
+  const outFactory = factory(...rutimeDepencies);
   if (
     !dependencies.includes('exports') &&
     !dependencies.includes('module') &&
     outFactory
   ) {
     // NOTE: In this case the factory return module
-    queue.push(outFactory)
+    queue.push(outFactory);
   } else {
-    queue.push(exports)
+    queue.push(exports);
   }
 }
-defineWebWorker.amd = {}
+defineWebWorker.amd = {};
 
 /**
  * Require from URL in the DOM
@@ -182,54 +182,54 @@ defineWebWorker.amd = {}
  */
 function requireFromUrl(url) {
   return new Promise((resolve, reject) => {
-    window.define = defineDOM
-    const scriptTag = document.createElement('script')
-    scriptTag.src = url
-    scriptTag.async = true
+    window.define = defineDOM;
+    const scriptTag = document.createElement('script');
+    scriptTag.src = url;
+    scriptTag.async = true;
     scriptTag.addEventListener(
       'load',
       () => {
         // Pop last exports
-        const promiseFinalExports = queue.pop()
+        const promiseFinalExports = queue.pop();
         if (!promiseFinalExports) {
-          reject(`Problem during the execution of ${url}`)
-          return
+          reject(`Problem during the execution of ${url}`);
+          return;
         }
         return promiseFinalExports
           .then(() => {
-            scriptTag.remove()
-            resolve(promiseFinalExports)
+            scriptTag.remove();
+            resolve(promiseFinalExports);
           })
           .catch((err) => {
-            scriptTag.remove()
-            reject(err)
-          })
+            scriptTag.remove();
+            reject(err);
+          });
       },
       {
         once: true,
       }
-    )
+    );
     scriptTag.addEventListener(
       'error',
       () => {
-        scriptTag.remove()
-        reject(`Cannot import url ${url}`)
+        scriptTag.remove();
+        reject(`Cannot import url ${url}`);
       },
       {
         once: true,
       }
-    )
-    document.head.append(scriptTag)
-  })
+    );
+    document.head.append(scriptTag);
+  });
 }
 
 function isRawChartLike(obj) {
   if (typeof obj === 'object' && obj !== null) {
     return (
       typeof obj.render === 'function' && typeof obj.metadata.id === 'string'
-    )
+    );
   }
-  return false
+  return false;
 }
 
 /**
@@ -238,18 +238,18 @@ function isRawChartLike(obj) {
  */
 export async function requireRawChartsFromUrl(url) {
   if (cacheChartsPkg.get(url)) {
-    return Promise.resolve(cacheChartsPkg.get(url))
+    return Promise.resolve(cacheChartsPkg.get(url));
   }
-  const daExports = await requireFromUrl(url)
+  const daExports = await requireFromUrl(url);
   if (!daExports) {
-    return []
+    return [];
   }
-  const charts = Object.values(daExports).filter(isRawChartLike)
+  const charts = Object.values(daExports).filter(isRawChartLike);
   // NOTE: Cache only relevant exports ...
   if (charts.length > 0) {
-    cacheChartsPkg.set(url, charts)
+    cacheChartsPkg.set(url, charts);
   }
-  return charts
+  return charts;
 }
 
 /**
@@ -258,18 +258,18 @@ export async function requireRawChartsFromUrl(url) {
  */
 export function requireRawChartsFromUrlWebWorker(url) {
   if (cacheChartsPkg.get(url)) {
-    return cacheChartsPkg.get(url)
+    return cacheChartsPkg.get(url);
   }
-  const daExports = requireFromUrlWebWorker(url)
+  const daExports = requireFromUrlWebWorker(url);
   if (!daExports) {
-    return []
+    return [];
   }
-  const charts = Object.values(daExports).filter(isRawChartLike)
+  const charts = Object.values(daExports).filter(isRawChartLike);
   // NOTE: Cache only relevant exports ...
   if (charts.length > 0) {
-    cacheChartsPkg.set(url, charts)
+    cacheChartsPkg.set(url, charts);
   }
-  return charts
+  return charts;
 }
 
 /**
@@ -278,8 +278,8 @@ export function requireRawChartsFromUrlWebWorker(url) {
  * @param {string} url
  */
 function requireFromUrlWebWorker(url) {
-  self.define = defineWebWorker
-  self.importScripts(url)
-  const finalExports = queue.pop()
-  return finalExports
+  self.define = defineWebWorker;
+  self.importScripts(url);
+  const finalExports = queue.pop();
+  return finalExports;
 }

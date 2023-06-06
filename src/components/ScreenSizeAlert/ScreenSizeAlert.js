@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import useWindowSize from '../../hooks/useWindowSize'
-import { Modal, Button } from 'react-bootstrap'
-import { BsEnvelopeFill } from 'react-icons/bs'
+import React, { useState, useEffect } from 'react';
+import useWindowSize from '../../hooks/useWindowSize';
+import { Modal, Button } from 'react-bootstrap';
+import { BsEnvelopeFill } from 'react-icons/bs';
 
 // import styles from './ScreenSizeAlert.module.scss'
 
 function ScreenSizeAlert() {
-  const size = useWindowSize()
-  const [showModal, setShowModal] = useState(size.width < 992)
-  const [modalWasClosed, setModalWasClosed] = useState(false)
+  const size = useWindowSize();
+  const [showModal, setShowModal] = useState(size.width < 992);
+  const [modalWasClosed, setModalWasClosed] = useState(false);
 
   const handleClose = () => {
-    setShowModal(false)
-    setModalWasClosed(true)
-  }
+    setShowModal(false);
+    setModalWasClosed(true);
+  };
 
   useEffect(() => {
     if (modalWasClosed === false) {
-      setShowModal(size.width < 992)
+      setShowModal(size.width < 992);
     }
-  }, [modalWasClosed, size])
+  }, [modalWasClosed, size]);
 
   return (
     <Modal
@@ -60,7 +60,7 @@ function ScreenSizeAlert() {
         </Button>
       </Modal.Footer>
     </Modal>
-  )
+  );
 }
 
-export default ScreenSizeAlert
+export default ScreenSizeAlert;

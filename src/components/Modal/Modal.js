@@ -1,5 +1,5 @@
-import React from 'react'
-import S from './Modal.module.scss'
+import React from 'react';
+import S from './Modal.module.scss';
 
 export default function Modal({ isOpen, toggle, children }) {
   return (
@@ -8,5 +8,5 @@ export default function Modal({ isOpen, toggle, children }) {
         {children}
       </div>
     </div>
-  )
+  );
 }

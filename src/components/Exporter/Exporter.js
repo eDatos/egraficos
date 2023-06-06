@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
-import uuid from 'react-uuid'
+import React, { useCallback, useEffect, useState } from 'react';
+import { Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap';
+import uuid from 'react-uuid';
 
 function downloadBlob(url, filename) {
   // Create a new anchor element
-  const a = document.createElement('a')
-  a.href = url
-  a.download = filename || 'download'
-  a.click()
-  return a
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename || 'download';
+  a.click();
+  return a;
 }
 
 export default function Exporter({
@@ -28,65 +28,65 @@ export default function Exporter({
 }) {
   const download = useCallback(
     (filename, format) => {
-      downloadBlob(rawViz.getDataURL({ type: format }), filename)
+      downloadBlob(rawViz.getDataURL({ type: format }), filename);
     },
     [rawViz]
-  )
+  );
 
   const downloadProject = useCallback(
     async (filename) => {
-      const project = await exportProject()
-      const str = JSON.stringify(project)
-      const blob = new Blob([str], { type: 'application/json' })
-      const DOMURL = window.URL || window.webkitURL || window
-      const url = DOMURL.createObjectURL(blob)
-      downloadBlob(url, filename)
-      DOMURL.revokeObjectURL(url)
+      const project = await exportProject();
+      const str = JSON.stringify(project);
+      const blob = new Blob([str], { type: 'application/json' });
+      const DOMURL = window.URL || window.webkitURL || window;
+      const url = DOMURL.createObjectURL(blob);
+      downloadBlob(url, filename);
+      DOMURL.revokeObjectURL(url);
     },
     [exportProject]
-  )
+  );
 
-  const [exportFormats, setExportFormats] = useState(['edatosgraphs'])
-  const [currentFormat, setCurrentFormat] = useState('edatosgraphs')
-  const [currentFile, setCurrentFile] = useState('viz')
-  const [dynamicLoadWidget, setDynamicLoadWidget] = useState(true)
-  const [position, setPosition] = useState(() => map?.getCenter())
-  const [mapZoom, setMapZoom] = useState(() => map?.getZoom())
+  const [exportFormats, setExportFormats] = useState(['edatosgraphs']);
+  const [currentFormat, setCurrentFormat] = useState('edatosgraphs');
+  const [currentFile, setCurrentFile] = useState('viz');
+  const [dynamicLoadWidget, setDynamicLoadWidget] = useState(true);
+  const [position, setPosition] = useState(() => map?.getCenter());
+  const [mapZoom, setMapZoom] = useState(() => map?.getZoom());
 
   const handleOnChangeDynamicLoadWidget = () => {
-    setDynamicLoadWidget(!dynamicLoadWidget)
-  }
+    setDynamicLoadWidget(!dynamicLoadWidget);
+  };
   const downloadViz = useCallback(() => {
     switch (currentFormat) {
       case 'svg':
-        download(`${currentFile}.svg`, 'svg')
-        break
+        download(`${currentFile}.svg`, 'svg');
+        break;
       case 'png':
-        download(`${currentFile}.png`, 'png')
-        break
+        download(`${currentFile}.png`, 'png');
+        break;
       case 'edatosgraphs':
-        downloadProject(`${currentFile}.edatosgraphs`)
-        break
+        downloadProject(`${currentFile}.edatosgraphs`);
+        break;
       default:
-        break
+        break;
     }
-  }, [currentFile, currentFormat, download, downloadProject])
+  }, [currentFile, currentFormat, download, downloadProject]);
 
   const getWidgetHeader = (generatedUUID) =>
     `<div id="chart-container-${generatedUUID}"></div>
-<script src="${window.location.href}widget/widget.js"></script>`
+<script src="${window.location.href}widget/widget.js"></script>`;
 
   function getWidget(type) {
-    const generatedUUID = uuid()
+    const generatedUUID = uuid();
 
     const props =
       type === 'wms'
         ? getWmsWidgetProps(generatedUUID)
-        : getEGraphWidgetProps(generatedUUID)
+        : getEGraphWidgetProps(generatedUUID);
     return `${getWidgetHeader(generatedUUID)}
 <script>
    EdatosGraphs.widgets.${type}.render(${JSON.stringify(props)});
-</script>`
+</script>`;
   }
 
   function getWmsWidgetProps(generatedUUID) {
@@ -97,30 +97,30 @@ export default function Exporter({
       ]),
       center: [position.lat, position.lng],
       zoom: mapZoom,
-    }
+    };
   }
 
   function getEGraphWidgetProps(generatedUUID) {
     const dataMappings = Object.keys(mapping)
       .map((key) => mapping[key].value)
       .flat(1)
-      .filter(Boolean)
+      .filter(Boolean);
 
     function getFilteredUserData() {
       return userData.map((entry) =>
         Object.keys(entry)
           .filter((key) => dataMappings.includes(key))
           .reduce((obj, key) => {
-            obj[key] = entry[key]
-            return obj
+            obj[key] = entry[key];
+            return obj;
           }, {})
-      )
+      );
     }
 
     function getFilteredDataTypes() {
       return Object.fromEntries(
         Object.entries(dataTypes).filter(([key]) => dataMappings.includes(key))
-      )
+      );
     }
 
     return {
@@ -136,35 +136,35 @@ export default function Exporter({
       dataTypes: getFilteredDataTypes(),
       dimensions: dimensions,
       data: !dynamicLoadWidget || !dataSource?.url ? getFilteredUserData() : [],
-    }
+    };
   }
 
   useEffect(() => {
-    const baseExportFormats = ['edatosgraphs', 'widget']
+    const baseExportFormats = ['edatosgraphs', 'widget'];
     const newExportFormats =
       visualOptions.render === 'svg'
         ? [...baseExportFormats, 'svg']
-        : [...baseExportFormats, 'png']
-    setExportFormats(newExportFormats)
-    setCurrentFormat('edatosgraphs')
-  }, [visualOptions.render])
+        : [...baseExportFormats, 'png'];
+    setExportFormats(newExportFormats);
+    setCurrentFormat('edatosgraphs');
+  }, [visualOptions.render]);
 
   const onMapMove = useCallback(() => {
-    setPosition(map.getCenter())
-  }, [map])
+    setPosition(map.getCenter());
+  }, [map]);
 
   const onMapZoom = useCallback(() => {
-    setMapZoom(map.getZoom())
-  }, [map])
+    setMapZoom(map.getZoom());
+  }, [map]);
 
   useEffect(() => {
-    map?.on('move', onMapMove)
-    map?.on('zoom', onMapZoom)
+    map?.on('move', onMapMove);
+    map?.on('zoom', onMapZoom);
     return () => {
-      map?.off('move', onMapMove)
-      map?.off('zoom', onMapZoom)
-    }
-  }, [map, onMapMove, onMapZoom])
+      map?.off('move', onMapMove);
+      map?.off('zoom', onMapZoom);
+    };
+  }, [map, onMapMove, onMapZoom]);
 
   return (
     <>
@@ -188,7 +188,7 @@ export default function Exporter({
                   <Dropdown.Item key={d} onClick={() => setCurrentFormat(d)}>
                     .{d}
                   </Dropdown.Item>
-                )
+                );
               })}
             </DropdownButton>
           </InputGroup>
@@ -239,5 +239,5 @@ export default function Exporter({
         </div>
       )}
     </>
-  )
+  );
 }

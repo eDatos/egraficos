@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react'
-import { Dropdown } from 'react-bootstrap'
-import { separatorsLabels } from '../../constants'
-import { useTranslation } from 'react-i18next'
+import React, { useCallback } from 'react';
+import { Dropdown } from 'react-bootstrap';
+import { separatorsLabels } from '../../constants';
+import { useTranslation } from 'react-i18next';
 
-import styles from './ParsingOptions.module.scss'
+import styles from './ParsingOptions.module.scss';
 
 export default function SeparatorSelector({
   title,
@@ -11,12 +11,12 @@ export default function SeparatorSelector({
   onChange,
   ...props
 }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const inputValue = value
     .replace(/\r/g, '\\r')
     .replace(/\n/g, '\\n')
-    .replace(/\t/g, '\\t')
+    .replace(/\t/g, '\\t');
 
   const handleChange = useCallback(
     (separator) => {
@@ -24,12 +24,12 @@ export default function SeparatorSelector({
         const nextValue = separator
           .replace(/\\r/g, '\r')
           .replace(/\\n/g, '\n')
-          .replace(/\\t/g, '\t')
-        onChange(nextValue)
+          .replace(/\\t/g, '\t');
+        onChange(nextValue);
       }
     },
     [onChange]
-  )
+  );
 
   const formatValue = (value) => {
     return (
@@ -39,8 +39,8 @@ export default function SeparatorSelector({
         </span>{' '}
         <span>{t(separatorsLabels[value])}</span>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -62,11 +62,11 @@ export default function SeparatorSelector({
                 >
                   {formatValue(key)}
                 </Dropdown.Item>
-              )
+              );
             })}
           </Dropdown.Menu>
         </Dropdown>
       </div>
     </>
-  )
+  );
 }

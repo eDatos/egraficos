@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react'
-import ChartOptionColorScale from './ChartOptionColorScale'
-import ChartOptionColorScaleDefault from './ChartOptionColorScaleDefault'
+import React, { useMemo } from 'react';
+import ChartOptionColorScale from './ChartOptionColorScale';
+import ChartOptionColorScaleDefault from './ChartOptionColorScaleDefault';
 
 const ChartOptionColorScaleWrapper = ({
   value,
@@ -11,9 +11,9 @@ const ChartOptionColorScaleWrapper = ({
   colorDataset,
 }) => {
   const hasAnyMapping = useMemo(() => {
-    return colorDataset && colorDataset.length > 0
+    return colorDataset && colorDataset.length > 0;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [colorDataset])
+  }, [colorDataset]);
 
   return (
     <>
@@ -36,7 +36,7 @@ const ChartOptionColorScaleWrapper = ({
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export default ChartOptionColorScaleWrapper
+export default ChartOptionColorScaleWrapper;

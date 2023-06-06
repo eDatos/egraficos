@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 
 function DataMismatchModal({
   replaceRequiresConfirmation,
   commitDataReplace,
   cancelDataReplace,
 }) {
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(true);
 
   const handleClose = () => {
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
   return (
     <Modal
       className="raw-modal"
@@ -77,7 +77,7 @@ function DataMismatchModal({
         <Button
           variant="warning"
           onClick={() => {
-            commitDataReplace()
+            commitDataReplace();
           }}
         >
           Load new data
@@ -85,14 +85,14 @@ function DataMismatchModal({
         <Button
           variant="secondary"
           onClick={() => {
-            cancelDataReplace()
+            cancelDataReplace();
           }}
         >
           Cancel
         </Button>
       </Modal.Footer>
     </Modal>
-  )
+  );
 }
 
-export default DataMismatchModal
+export default DataMismatchModal;

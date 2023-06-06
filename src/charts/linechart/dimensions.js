@@ -24,4 +24,4 @@ export const dimensions = [
     required: false,
     operation: 'get',
   },
-]
+];

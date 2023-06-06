@@ -1,6 +1,6 @@
-import React from 'react'
-import { Row, Col, Card } from 'react-bootstrap'
-import styles from './DataSamples.module.scss'
+import React from 'react';
+import { Row, Col, Card } from 'react-bootstrap';
+import styles from './DataSamples.module.scss';
 
 const samplesList = [
   {
@@ -36,21 +36,21 @@ const samplesList = [
     sourceName: 'EDATOS',
     sourceURL: '',
   },
-]
+];
 export default function DataSamples({ onSampleReady, setLoadingError }) {
   const select = async (sample) => {
-    const { delimiter, url } = sample
-    let response
+    const { delimiter, url } = sample;
+    let response;
     try {
-      response = await fetch(url)
+      response = await fetch(url);
     } catch (e) {
-      setLoadingError('Loading error. ' + e.message)
-      return
+      setLoadingError('Loading error. ' + e.message);
+      return;
     }
-    const text = await response.text()
-    onSampleReady(text, delimiter)
-    setLoadingError(null)
-  }
+    const text = await response.text();
+    onSampleReady(text, delimiter);
+    setLoadingError(null);
+  };
   return (
     <Row>
       {samplesList
@@ -62,7 +62,7 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
               <Card className="custom-card cursor-pointer h-100">
                 <Card.Body
                   onClick={() => {
-                    select(d)
+                    select(d);
                   }}
                   className="d-flex flex-column"
                 >
@@ -79,8 +79,8 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
                 </a>
               </Card>
             </Col>
-          )
+          );
         })}
     </Row>
-  )
+  );
 }

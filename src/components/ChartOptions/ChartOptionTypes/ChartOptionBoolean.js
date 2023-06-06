@@ -1,5 +1,5 @@
-import React from 'react'
-import { Row, Col, Form } from 'react-bootstrap'
+import React from 'react';
+import { Row, Col, Form } from 'react-bootstrap';
 
 const ChartOptionBoolean = ({
   optionId,
@@ -21,7 +21,7 @@ const ChartOptionBoolean = ({
           checked={!!value}
           disabled={!isEnabled}
           onChange={(e) => {
-            onChange(e.target.checked)
+            onChange(e.target.checked);
           }}
           id={optionId}
           label={value ? 'Yes' : 'No'}
@@ -35,7 +35,7 @@ const ChartOptionBoolean = ({
         </div>
       )}
     </Row>
-  )
-}
+  );
+};
 
-export default React.memo(ChartOptionBoolean)
+export default React.memo(ChartOptionBoolean);

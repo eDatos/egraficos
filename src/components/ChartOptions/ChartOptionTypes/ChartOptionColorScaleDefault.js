@@ -1,9 +1,9 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react'
-import InilineColorPicker from '../../InlineColorPicker'
-import { Col } from 'react-bootstrap'
-import get from 'lodash/get'
-import style from '../ChartOptions.module.scss'
-import { useTranslation } from 'react-i18next'
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import InilineColorPicker from '../../InlineColorPicker';
+import { Col } from 'react-bootstrap';
+import get from 'lodash/get';
+import style from '../ChartOptions.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const ChartOptionColorScaleDefault = ({
   value,
@@ -23,31 +23,31 @@ const ChartOptionColorScaleDefault = ({
   ...props
 }) => {
   const colorFromValue = useMemo(() => {
-    const colorFromDefault = get(defaultValue, 'defaultColor', '#cccccc')
-    return get(value, 'defaultColor', colorFromDefault)
-  }, [defaultValue, value])
+    const colorFromDefault = get(defaultValue, 'defaultColor', '#cccccc');
+    return get(value, 'defaultColor', colorFromDefault);
+  }, [defaultValue, value]);
 
-  const [defaultColor, setDefaultColor] = useState(colorFromValue)
+  const [defaultColor, setDefaultColor] = useState(colorFromValue);
 
   const handleChangeDefaultColor = useCallback(
     (nextDefaultColor) => {
-      setDefaultColor(nextDefaultColor)
+      setDefaultColor(nextDefaultColor);
       const outScaleParams = {
         ...value,
         defaultColor: nextDefaultColor,
-      }
-      onChange(outScaleParams)
+      };
+      onChange(outScaleParams);
     },
     [value, onChange]
-  )
+  );
 
   useEffect(() => {
     if (defaultValue && defaultValue.defaultColor !== defaultColor) {
-      handleChangeDefaultColor(defaultValue.defaultColor)
+      handleChangeDefaultColor(defaultValue.defaultColor);
     }
-  }, [defaultColor, defaultValue, handleChangeDefaultColor])
+  }, [defaultColor, defaultValue, handleChangeDefaultColor]);
 
-  const { t } = useTranslation(['visualoptions'])
+  const { t } = useTranslation(['visualoptions']);
 
   return (
     <>
@@ -63,7 +63,7 @@ const ChartOptionColorScaleDefault = ({
         </Col>
       </label>
     </>
-  )
-}
+  );
+};
 
-export default ChartOptionColorScaleDefault
+export default ChartOptionColorScaleDefault;

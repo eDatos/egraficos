@@ -1,11 +1,17 @@
-import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react'
-import InilineColorPicker from '../../InlineColorPicker'
-import ColorSchemesDropDown from './ColorSchemesDropDown'
-import { Row, Col, Dropdown } from 'react-bootstrap'
-import { ResetBtn, InvertBtn, LockBtn } from './ColorScaleUtils'
-import { SCALES_LABELS } from '../../../constants'
-import get from 'lodash/get'
-import keyBy from 'lodash/keyBy'
+import React, {
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
+import InilineColorPicker from '../../InlineColorPicker';
+import ColorSchemesDropDown from './ColorSchemesDropDown';
+import { Row, Col, Dropdown } from 'react-bootstrap';
+import { ResetBtn, InvertBtn, LockBtn } from './ColorScaleUtils';
+import { SCALES_LABELS } from '../../../constants';
+import get from 'lodash/get';
+import keyBy from 'lodash/keyBy';
 import {
   getInitialScaleValues,
   getColorScale,
@@ -14,24 +20,24 @@ import {
   colorPresets,
   getAvailableScaleTypes,
   getValueType,
-} from '@rawgraphs/rawgraphs-core'
-import styles from '../ChartOptions.module.scss'
-import usePrevious from '../../../hooks/usePrevious'
-import { useTranslation } from 'react-i18next'
+} from '@rawgraphs/rawgraphs-core';
+import styles from '../ChartOptions.module.scss';
+import usePrevious from '../../../hooks/usePrevious';
+import { useTranslation } from 'react-i18next';
 
 function getDatePickerValue(userValue) {
   if (userValue.userDomain === 0) {
-    return 0
+    return 0;
   }
   if (!userValue.userDomain) {
-    return ''
+    return '';
   }
 
   if (getValueType(userValue.userDomain) === 'date') {
-    return userValue.userDomain.toISOString().substring(0, 10)
+    return userValue.userDomain.toISOString().substring(0, 10);
   }
 
-  return userValue.userDomain
+  return userValue.userDomain;
 }
 
 const ChartOptionColorScale = ({
@@ -53,38 +59,38 @@ const ChartOptionColorScale = ({
   ...props
 }) => {
   // here we leverage injection of the __loaded prop in the color scale, see App.js
-  const initialValue = useRef(!!value.__loaded)
+  const initialValue = useRef(!!value.__loaded);
 
-  const { t } = useTranslation(['visualoptions'])
+  const { t } = useTranslation(['visualoptions']);
 
-  const [scaleType, setScaleType] = useState(get(value, 'scaleType'))
+  const [scaleType, setScaleType] = useState(get(value, 'scaleType'));
 
   const defaultColor = useMemo(() => {
-    const colorFromDefault = get(defaultValue, 'defaultColor', '#cccccc')
-    return get(value, 'defaultColor', colorFromDefault)
-  }, [defaultValue, value])
+    const colorFromDefault = get(defaultValue, 'defaultColor', '#cccccc');
+    return get(value, 'defaultColor', colorFromDefault);
+  }, [defaultValue, value]);
 
-  const [locked, setLocked] = useState(get(value, 'locked'))
+  const [locked, setLocked] = useState(get(value, 'locked'));
 
   const availableScaleTypes = useMemo(() => {
-    const nextTypes = getAvailableScaleTypes(colorDataType, colorDataset)
-    return nextTypes
-  }, [colorDataType, colorDataset])
+    const nextTypes = getAvailableScaleTypes(colorDataType, colorDataset);
+    return nextTypes;
+  }, [colorDataType, colorDataset]);
 
   const [interpolators, setInterpolators] = useState(
     get(value, 'scaleType')
       ? Object.keys(colorPresets[get(value, 'scaleType')])
       : []
-  )
+  );
 
-  const [interpolator, setInterpolator] = useState(get(value, 'interpolator'))
+  const [interpolator, setInterpolator] = useState(get(value, 'interpolator'));
   const [userValues, setUserValues] = useState(
     get(value, 'userScaleValues', []).map((userValue) => ({
       ...userValue,
       userDomain: userValue.domain,
       userRange: userValue.range,
     }))
-  )
+  );
 
   const getCurrentFinalScale = useCallback(
     (interpolator, scaleType, userValuesForFinalScale, defaultColor) => {
@@ -95,14 +101,14 @@ const ChartOptionColorScale = ({
         !userValuesForFinalScale ||
         !userValuesForFinalScale.length
       ) {
-        return
+        return;
       }
 
       const domains = userValuesForFinalScale
         .map((x) => x.domain)
-        .filter((x) => x !== undefined)
+        .filter((x) => x !== undefined);
       if (!domains.length) {
-        return
+        return;
       }
 
       const previewScale = getColorScale(
@@ -111,23 +117,23 @@ const ChartOptionColorScale = ({
         scaleType, //
         interpolator,
         userValuesForFinalScale
-      )
+      );
 
-      return previewScale
+      return previewScale;
     },
     [colorDataType, colorDataset]
-  )
+  );
 
   const getDefaultUserValues = useCallback(
     (interpolator, scaleType) => {
       if (!colorDataset.length || !colorDataType || !scaleType) {
-        return []
+        return [];
       }
       if (!colorPresets[scaleType][interpolator]) {
-        return []
+        return [];
       }
 
-      const domain = getColorDomain(colorDataset, colorDataType, scaleType)
+      const domain = getColorDomain(colorDataset, colorDataType, scaleType);
 
       return getInitialScaleValues(domain, scaleType, interpolator).map(
         (userValue) => ({
@@ -135,10 +141,10 @@ const ChartOptionColorScale = ({
           userRange: userValue.range,
           userDomain: userValue.domain,
         })
-      )
+      );
     },
     [colorDataType, colorDataset]
-  )
+  );
 
   const getUserValuesForFinalScale = useCallback(
     (values) => {
@@ -149,21 +155,21 @@ const ChartOptionColorScale = ({
             ? value.userDomain?.toString()
             : value.userDomain,
         // domain: value.userDomain,
-      }))
+      }));
     },
     [colorDataType]
-  )
+  );
 
   const currentFinalScale = useMemo(() => {
     if (scaleType && interpolator) {
       const currentUserValues =
         userValues && userValues.length
           ? userValues
-          : getDefaultUserValues(interpolator, scaleType)
-      const valuesForFinalScale = getUserValuesForFinalScale(currentUserValues)
-      return getCurrentFinalScale(interpolator, scaleType, valuesForFinalScale)
+          : getDefaultUserValues(interpolator, scaleType);
+      const valuesForFinalScale = getUserValuesForFinalScale(currentUserValues);
+      return getCurrentFinalScale(interpolator, scaleType, valuesForFinalScale);
     }
-    return getDefaultColorScale()
+    return getDefaultColorScale();
   }, [
     getCurrentFinalScale,
     getDefaultUserValues,
@@ -171,11 +177,11 @@ const ChartOptionColorScale = ({
     interpolator,
     scaleType,
     userValues,
-  ])
+  ]);
 
   const handleChangeValues = useCallback(
     (nextUserValues) => {
-      let valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
+      let valuesForFinalScale = getUserValuesForFinalScale(nextUserValues);
 
       //notify ui
       const outScaleParams = {
@@ -184,8 +190,8 @@ const ChartOptionColorScale = ({
         userScaleValues: valuesForFinalScale,
         defaultColor,
         locked,
-      }
-      onChange(outScaleParams)
+      };
+      onChange(outScaleParams);
     },
     [
       getUserValuesForFinalScale,
@@ -195,54 +201,54 @@ const ChartOptionColorScale = ({
       locked,
       onChange,
     ]
-  )
+  );
 
   const setUserValueRange = useCallback(
     (index, value) => {
-      const newUserValues = [...userValues]
-      newUserValues[index].userRange = value
-      setUserValues(newUserValues)
-      handleChangeValues(newUserValues)
+      const newUserValues = [...userValues];
+      newUserValues[index].userRange = value;
+      setUserValues(newUserValues);
+      handleChangeValues(newUserValues);
     },
     [handleChangeValues, userValues]
-  )
+  );
 
   const setUserValueDomain = useCallback(
     (index, value) => {
-      const newUserValues = [...userValues]
-      newUserValues[index].userDomain = value
-      setUserValues(newUserValues)
-      handleChangeValues(newUserValues)
+      const newUserValues = [...userValues];
+      newUserValues[index].userDomain = value;
+      setUserValues(newUserValues);
+      handleChangeValues(newUserValues);
     },
     [handleChangeValues, userValues]
-  )
+  );
 
   const handleChangeScaleType = useCallback(
     (nextScaleType) => {
-      setScaleType(nextScaleType)
+      setScaleType(nextScaleType);
 
       //update interpolators
       const nextInterpolators = colorPresets[nextScaleType]
         ? Object.keys(colorPresets[nextScaleType])
-        : []
+        : [];
 
       //set first interpolator
       const nextInterpolator =
         nextInterpolators.findIndex((value) => value === interpolator) >= 0
           ? interpolator
-          : nextInterpolators[0]
-      setInterpolator(nextInterpolator)
+          : nextInterpolators[0];
+      setInterpolator(nextInterpolator);
 
       //user values
       const nextUserValues = getDefaultUserValues(
         nextInterpolator,
         nextScaleType
-      )
-      setUserValues(nextUserValues)
+      );
+      setUserValues(nextUserValues);
       setInterpolators(
         nextUserValues.length > 1 ? nextInterpolators : [nextInterpolator]
-      )
-      const valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
+      );
+      const valuesForFinalScale = getUserValuesForFinalScale(nextUserValues);
 
       //notify ui
       const outScaleParams = {
@@ -251,8 +257,8 @@ const ChartOptionColorScale = ({
         userScaleValues: valuesForFinalScale,
         defaultColor,
         locked,
-      }
-      onChange(outScaleParams)
+      };
+      onChange(outScaleParams);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
@@ -262,25 +268,25 @@ const ChartOptionColorScale = ({
       onChange,
       locked,
     ]
-  )
+  );
 
   const handleSetInterpolator = useCallback(
     (nextInterpolator, customUserValues) => {
-      setInterpolator(nextInterpolator)
+      setInterpolator(nextInterpolator);
 
       //user values
-      const nextUserValues = getDefaultUserValues(nextInterpolator, scaleType)
-      setUserValues(nextUserValues)
-      let valuesForFinalScale = getUserValuesForFinalScale(nextUserValues)
+      const nextUserValues = getDefaultUserValues(nextInterpolator, scaleType);
+      setUserValues(nextUserValues);
+      let valuesForFinalScale = getUserValuesForFinalScale(nextUserValues);
 
       if (customUserValues) {
-        const byDomain = keyBy(customUserValues, 'domain')
+        const byDomain = keyBy(customUserValues, 'domain');
         valuesForFinalScale = valuesForFinalScale.map((v) => ({
           ...v,
           range: byDomain[v.domain.toString()]
             ? byDomain[v.domain.toString()].userRange
             : v.range,
-        }))
+        }));
       }
       //notify ui
       const outScaleParams = {
@@ -289,8 +295,8 @@ const ChartOptionColorScale = ({
         userScaleValues: valuesForFinalScale,
         defaultColor,
         locked,
-      }
-      onChange(outScaleParams)
+      };
+      onChange(outScaleParams);
     },
     [
       getDefaultUserValues,
@@ -300,13 +306,13 @@ const ChartOptionColorScale = ({
       defaultColor,
       locked,
     ]
-  )
+  );
 
   const handleChangeLocked = useCallback(
     (nextLocked) => {
-      setLocked(nextLocked)
+      setLocked(nextLocked);
       //this is needed for disabiling automatic scale reset
-      initialValue.current = true
+      initialValue.current = true;
 
       const outScaleParams = {
         scaleType,
@@ -314,44 +320,44 @@ const ChartOptionColorScale = ({
         userScaleValues: userValues,
         defaultColor,
         locked: nextLocked,
-      }
-      onChange(outScaleParams)
+      };
+      onChange(outScaleParams);
     },
     [scaleType, interpolator, userValues, defaultColor, onChange]
-  )
+  );
 
   const resetScale = useCallback(() => {
-    handleSetInterpolator(interpolator, userValues)
-  }, [handleSetInterpolator, interpolator, userValues])
+    handleSetInterpolator(interpolator, userValues);
+  }, [handleSetInterpolator, interpolator, userValues]);
 
   const invertScale = useCallback(() => {
-    let reversedValues = [...userValues]
-    reversedValues.reverse()
+    let reversedValues = [...userValues];
+    reversedValues.reverse();
 
     const invertedValues = userValues.map((v, i) => ({
       ...v,
       userRange: reversedValues[i].userRange,
       range: reversedValues[i].range,
-    }))
+    }));
 
-    setUserValues(invertedValues)
-    handleChangeValues(invertedValues)
-  }, [handleChangeValues, userValues])
+    setUserValues(invertedValues);
+    handleChangeValues(invertedValues);
+  }, [handleChangeValues, userValues]);
 
-  const prevMappingValue = usePrevious(mappingValue)
+  const prevMappingValue = usePrevious(mappingValue);
 
   useEffect(() => {
     if (prevMappingValue && mappingValue !== prevMappingValue) {
-      initialValue.current = false
+      initialValue.current = false;
     }
-  }, [mappingValue, prevMappingValue])
+  }, [mappingValue, prevMappingValue]);
 
   useEffect(() => {
     if (!initialValue.current && !locked) {
-      const nextScaleType = availableScaleTypes[0]
-      handleChangeScaleType(nextScaleType)
+      const nextScaleType = availableScaleTypes[0];
+      handleChangeScaleType(nextScaleType);
     }
-  }, [availableScaleTypes, handleChangeScaleType, locked])
+  }, [availableScaleTypes, handleChangeScaleType, locked]);
 
   return hasAnyMapping ? (
     <>
@@ -381,7 +387,7 @@ const ChartOptionColorScale = ({
                   >
                     {get(SCALES_LABELS, s, s)}
                   </Dropdown.Item>
-                )
+                );
               })}
             </Dropdown.Menu>
           </Dropdown>
@@ -453,9 +459,9 @@ const ChartOptionColorScale = ({
                         value={getDatePickerValue(userValue)}
                         onChange={(e) => {
                           if (colorDataType === 'date') {
-                            setUserValueDomain(i, new Date(e.target.value))
+                            setUserValueDomain(i, new Date(e.target.value));
                           } else {
-                            setUserValueDomain(i, e.target.value)
+                            setUserValueDomain(i, e.target.value);
                           }
                         }}
                       ></input>
@@ -464,7 +470,7 @@ const ChartOptionColorScale = ({
                   <InilineColorPicker
                     color={userValue.userRange}
                     onChange={(color) => {
-                      setUserValueRange(i, color)
+                      setUserValueRange(i, color);
                     }}
                   />
                 </div>
@@ -486,7 +492,7 @@ const ChartOptionColorScale = ({
         </div>
       )}
     </>
-  ) : null
-}
+  ) : null;
+};
 
-export default ChartOptionColorScale
+export default ChartOptionColorScale;

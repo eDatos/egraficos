@@ -1,10 +1,10 @@
-import React from 'react'
-import { dataTypeIcons } from '../../constants'
-import { getTypeName } from '@rawgraphs/rawgraphs-core'
+import React from 'react';
+import { dataTypeIcons } from '../../constants';
+import { getTypeName } from '@rawgraphs/rawgraphs-core';
 
-import { useDrag } from 'react-dnd'
+import { useDrag } from 'react-dnd';
 
-import styles from './DataMapping.module.scss'
+import styles from './DataMapping.module.scss';
 
 const ColumnCard = ({
   dimensionName,
@@ -19,17 +19,17 @@ const ColumnCard = ({
       isDragging: monitor.isDragging(),
     }),
     end: (item, monitor) => {
-      const didDrop = monitor.didDrop()
+      const didDrop = monitor.didDrop();
       if (didDrop) {
-        commitLocalMapping()
+        commitLocalMapping();
       } else {
-        rollbackLocalMapping()
+        rollbackLocalMapping();
       }
     },
-  })
+  });
 
-  const dimType = getTypeName(dimensionType)
-  const DataTypeIcon = dataTypeIcons[dimType]
+  const dimType = getTypeName(dimensionType);
+  const DataTypeIcon = dataTypeIcons[dimType];
 
   return (
     <div
@@ -41,7 +41,7 @@ const ColumnCard = ({
       <DataTypeIcon className={styles['data-type-icon']} />
       <span className={styles['column-title']}>{dimensionName}</span>
     </div>
-  )
-}
+  );
+};
 
-export default ColumnCard
+export default ColumnCard;

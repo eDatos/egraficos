@@ -1,6 +1,6 @@
-import React from 'react'
-import { Row, Col } from 'react-bootstrap'
-import ChartOptionSelect from './ChartOptionSelect'
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import ChartOptionSelect from './ChartOptionSelect';
 
 const ChartOptionNumber = ({
   value,
@@ -22,7 +22,7 @@ const ChartOptionNumber = ({
         label={label}
         {...props}
       />
-    )
+    );
   }
   return (
     <Row className={props.className}>
@@ -39,15 +39,15 @@ const ChartOptionNumber = ({
           max={props.max}
           disabled={!isEnabled}
           onChange={(e) => {
-            const str = e.target.value
+            const str = e.target.value;
             if (str === '') {
-              onChange(undefined)
+              onChange(undefined);
             } else {
-              const n = parseFloat(str)
+              const n = parseFloat(str);
               if (!isNaN(n)) {
-                onChange(n)
+                onChange(n);
               } else {
-                onChange(undefined)
+                onChange(undefined);
               }
             }
           }}
@@ -60,7 +60,7 @@ const ChartOptionNumber = ({
         </small>
       )}
     </Row>
-  )
-}
+  );
+};
 
-export default React.memo(ChartOptionNumber)
+export default React.memo(ChartOptionNumber);

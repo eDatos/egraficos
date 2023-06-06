@@ -1,5 +1,5 @@
-import icon from './scatterchart.svg'
-import thumbnail from './scatterchart_thumb.svg'
+import icon from './scatterchart.svg';
+import thumbnail from './scatterchart_thumb.svg';
 
 export const metadata = {
   name: 'Scatter chart',
@@ -11,4 +11,4 @@ export const metadata = {
     'The basic layout is a scatter plot, which allows to see correlations among two continuous dimensions.',
   code: '',
   tutorial: '',
-}
+};

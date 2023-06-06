@@ -1,27 +1,27 @@
-import { Card, Form } from 'react-bootstrap'
-import React, { useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Typeahead, TypeaheadInputMulti } from 'react-bootstrap-typeahead'
-import Token from '../WMSMap/Token'
-import { BsXCircle } from 'react-icons/bs'
+import { Card, Form } from 'react-bootstrap';
+import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Typeahead, TypeaheadInputMulti } from 'react-bootstrap-typeahead';
+import Token from '../WMSMap/Token';
+import { BsXCircle } from 'react-icons/bs';
 
 const SelectionLayerCombo = (props) => {
-  const { t } = useTranslation(['translation'])
-  const styleMap = { zIndex: `100${10 - props.index}` }
+  const { t } = useTranslation(['translation']);
+  const styleMap = { zIndex: `100${10 - props.index}` };
   const onMove = useCallback(
     (dragIndex, hoverIndex) => {
-      const item = props.selectedLayers[dragIndex]
+      const item = props.selectedLayers[dragIndex];
 
-      const newSelected = props.selectedLayers.slice()
-      newSelected.splice(dragIndex, 1)
-      newSelected.splice(hoverIndex, 0, item)
+      const newSelected = props.selectedLayers.slice();
+      newSelected.splice(dragIndex, 1);
+      newSelected.splice(hoverIndex, 0, item);
 
-      props.onChange(newSelected)
+      props.onChange(newSelected);
     },
     [props]
-  )
+  );
   return (
     <DndProvider backend={HTML5Backend}>
       <Form.Group className="mb-2">
@@ -55,8 +55,8 @@ const SelectionLayerCombo = (props) => {
         />
       </Form.Group>
     </DndProvider>
-  )
-}
+  );
+};
 
 function LayersOptionCard({
   title,
@@ -74,7 +74,7 @@ function LayersOptionCard({
         )
       ),
     },
-  ])
+  ]);
 
   return (
     <Card className="mt-3" bg="Primary">
@@ -103,7 +103,7 @@ function LayersOptionCard({
                     )
                   ),
                 []
-              )
+              );
             return (
               <React.Fragment key={index}>
                 {options.length > 0 && (
@@ -116,10 +116,10 @@ function LayersOptionCard({
                       id="select-style"
                       labelKey="styleTitle"
                       onChange={(stylesSelected) => {
-                        let newSelectedLayers = [...selectedLayers]
-                        layer.StyleSelected = stylesSelected[0]
-                        newSelectedLayers[index] = layer
-                        setSelectedLayers(newSelectedLayers)
+                        let newSelectedLayers = [...selectedLayers];
+                        layer.StyleSelected = stylesSelected[0];
+                        newSelectedLayers[index] = layer;
+                        setSelectedLayers(newSelectedLayers);
                       }}
                       options={options}
                       placeholder="Default style"
@@ -131,21 +131,21 @@ function LayersOptionCard({
                       type="switch"
                       checked={layer.showLegend}
                       onChange={() => {
-                        let newSelectedLayers = [...selectedLayers]
-                        layer.showLegend = !layer.showLegend
-                        newSelectedLayers[index] = layer
-                        setSelectedLayers(newSelectedLayers)
+                        let newSelectedLayers = [...selectedLayers];
+                        layer.showLegend = !layer.showLegend;
+                        newSelectedLayers[index] = layer;
+                        setSelectedLayers(newSelectedLayers);
                       }}
                     />
                   </>
                 )}
               </React.Fragment>
-            )
+            );
           })}
         </Form>
       </Card.Body>
     </Card>
-  )
+  );
 }
 
-export default LayersOptionCard
+export default LayersOptionCard;

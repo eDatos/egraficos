@@ -3,26 +3,26 @@ import React, {
   useEffect,
   useImperativeHandle,
   useState,
-} from 'react'
-import { Row, Col } from 'react-bootstrap'
-import map from 'lodash/map'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd'
-import ColumnCard from './ColumnCard'
-import ChartDimensionCard from './ChartDimensionCard'
-import get from 'lodash/get'
-import uniqueId from 'lodash/uniqueId'
-import arrayInsert from 'array-insert'
-import { getDefaultDimensionAggregation } from '@rawgraphs/rawgraphs-core'
-import { useTranslation } from 'react-i18next'
+} from 'react';
+import { Row, Col } from 'react-bootstrap';
+import map from 'lodash/map';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import ColumnCard from './ColumnCard';
+import ChartDimensionCard from './ChartDimensionCard';
+import get from 'lodash/get';
+import uniqueId from 'lodash/uniqueId';
+import arrayInsert from 'array-insert';
+import { getDefaultDimensionAggregation } from '@rawgraphs/rawgraphs-core';
+import { useTranslation } from 'react-i18next';
 
 function removeIndex(mapping, i) {
-  let nextConfig
+  let nextConfig;
   if (mapping.config) {
     nextConfig = {
       ...mapping.config,
       aggregation: mapping.config.aggregation.filter((col, j) => j !== i),
-    }
+    };
   }
 
   return {
@@ -30,11 +30,11 @@ function removeIndex(mapping, i) {
     ids: mapping.ids.filter((col, j) => j !== i),
     value: mapping.value.filter((col, j) => j !== i),
     config: nextConfig,
-  }
+  };
 }
 
 function arrayReplace(arr, i, value) {
-  return arr.map((item, j) => (j === i ? value : item))
+  return arr.map((item, j) => (j === i ? value : item));
 }
 
 function handleReplaceLocalMapping(
@@ -48,32 +48,32 @@ function handleReplaceLocalMapping(
   dataTypes,
   multiple = false
 ) {
-  const removedItem = {}
+  const removedItem = {};
   removedItem.aggregation =
-    prev[fromDimension]?.config?.aggregation?.[fromIndex]
-  removedItem.value = prev[fromDimension]?.value[fromIndex]
+    prev[fromDimension]?.config?.aggregation?.[fromIndex];
+  removedItem.value = prev[fromDimension]?.value[fromIndex];
 
-  let moveFn = multiple ? arrayInsert : arrayReplace
+  let moveFn = multiple ? arrayInsert : arrayReplace;
 
-  const prevToMapping = prev[toDimension] || {}
-  const originDimensionData = prev[fromDimension] || {}
+  const prevToMapping = prev[toDimension] || {};
+  const originDimensionData = prev[fromDimension] || {};
   const toDimensionMapping = {
     ...originDimensionData,
     config: undefined,
     ids: moveFn(prevToMapping.ids ?? [], toIndex, nextId),
     value: moveFn(prevToMapping.value ?? [], toIndex, removedItem.value),
-  }
+  };
 
-  const dimension = dimensions[toDimension]
+  const dimension = dimensions[toDimension];
   if (dimensions.aggregation) {
-    let newAggregation
+    let newAggregation;
     if (removedItem.aggregation) {
-      newAggregation = removedItem.aggregation
+      newAggregation = removedItem.aggregation;
     } else {
       newAggregation = getDefaultDimensionAggregation(
         dimension,
         dataTypes[removedItem.value]
-      )
+      );
     }
     toDimensionMapping.config = {
       aggregation: moveFn(
@@ -81,18 +81,18 @@ function handleReplaceLocalMapping(
         toIndex,
         newAggregation
       ),
-    }
+    };
   }
   const obj = {
     ...prev,
     [fromDimension]: removeIndex(prev[fromDimension], fromIndex),
     [toDimension]: toDimensionMapping,
-  }
-  return obj
+  };
+  return obj;
 }
 
 function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
-  const [localMapping, setLocalMapping] = useState(mapping)
+  const [localMapping, setLocalMapping] = useState(mapping);
 
   const updateMapping = useCallback(
     (dimension, mappingConf, isLocal) => {
@@ -100,22 +100,22 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
       setLocalMapping((prev) => ({
         ...prev,
         [dimension]: mappingConf,
-      }))
+      }));
       if (!isLocal) {
         // Gloab mapping
         setMapping((prev) => ({
           ...prev,
           [dimension]: mappingConf,
-        }))
+        }));
       }
     },
     [setMapping]
-  )
+  );
   const replaceDimension = useCallback(
     (fromDimension, toDimension, fromIndex, toIndex, multiple = false) => {
-      const nextId = uniqueId()
+      const nextId = uniqueId();
       if (multiple) {
-        setDraggingId(nextId)
+        setDraggingId(nextId);
       }
       setLocalMapping((prev) => {
         return handleReplaceLocalMapping(
@@ -128,8 +128,8 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
           dimensions,
           dataTypes,
           multiple
-        )
-      })
+        );
+      });
       if (!multiple) {
         setMapping((prev) => {
           return handleReplaceLocalMapping(
@@ -141,34 +141,34 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
             toIndex,
             dimensions,
             dataTypes
-          )
-        })
+          );
+        });
       }
     },
     [dataTypes, dimensions, setMapping]
-  )
+  );
 
-  const [draggingId, setDraggingId] = useState(null)
-  const { t } = useTranslation()
+  const [draggingId, setDraggingId] = useState(null);
+  const { t } = useTranslation();
 
   const rollbackLocalMapping = () => {
-    setLocalMapping(mapping)
-    setDraggingId(null)
-  }
+    setLocalMapping(mapping);
+    setDraggingId(null);
+  };
 
   const commitLocalMapping = () => {
-    setDraggingId(null)
-  }
+    setDraggingId(null);
+  };
 
   useEffect(() => {
-    setMapping(localMapping)
-  }, [setMapping, localMapping])
+    setMapping(localMapping);
+  }, [setMapping, localMapping]);
 
   useImperativeHandle(ref, () => ({
     clearLocalMapping: () => {
-      setLocalMapping({})
+      setLocalMapping({});
     },
-  }))
+  }));
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -186,7 +186,7 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
                 commitLocalMapping={commitLocalMapping}
                 rollbackLocalMapping={rollbackLocalMapping}
               />
-            )
+            );
           })}
         </Col>
         <Col>
@@ -210,13 +210,13 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
                   setDraggingId={setDraggingId}
                   replaceDimension={replaceDimension}
                 />
-              )
+              );
             })}
           </Row>
         </Col>
       </Row>
     </DndProvider>
-  )
+  );
 }
 
-export default React.memo(React.forwardRef(DataMapping))
+export default React.memo(React.forwardRef(DataMapping));

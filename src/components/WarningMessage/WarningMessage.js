@@ -1,5 +1,5 @@
-import React from 'react'
-import { Alert } from 'react-bootstrap'
+import React from 'react';
+import { Alert } from 'react-bootstrap';
 /**
  *
  * @param {string} type The warning type: success, secondary, warning, danger
@@ -18,7 +18,7 @@ function WarningMessage({
       {message}
       {action}
     </Alert>
-  )
+  );
 }
 
-export default WarningMessage
+export default WarningMessage;
