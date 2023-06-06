@@ -102,6 +102,15 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    setVisualOptions((visualOptions) => {
+      return {
+        ...visualOptions,
+        ...currentChart?.defaultOptionsValues(mapping),
+      };
+    });
+  }, [mapping, currentChart]);
+
   // NOTE: When we run the import we want to use the "last"
   // version of importProject callback
   const lasImportProjectRef = useRef();

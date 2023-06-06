@@ -140,30 +140,39 @@ export const getChartOptions = function (
   const resultMap = mapData(datachart, mapping, dataTypes, dimensions);
   let dimensiones = getDimensions(resultMap, mapping);
   const barSeries = dimensiones.splice(1).map(function (item, index) {
-    let colorValue;
-    if (visualOptions.colorScale.userScaleValues?.length === 1) {
-      colorValue = visualOptions.colorScale.userScaleValues[0].range;
-    } else {
-      switch (visualOptions.colorScale.scaleType) {
-        case 'ordinal':
-          colorValue = visualOptions.colorScale.userScaleValues.find(
-            (e) => e.domain === item
-          )?.range;
-          break;
-        case 'sequential':
-          colorValue = visualOptions.colorScale.userScaleValues.map(
-            (res) => res.range
-          );
-          break;
-        default:
-          colorValue = visualOptions.colorScale.defaultColor;
-      }
-    }
+    let colorValue = getColorValue();
     return {
       type: 'bar',
       datasetIndex: visualOptions.sortBarsBy !== 'original' ? 1 : 0,
       color: colorValue,
     };
+
+    function getColorValue() {
+      if (!visualOptions.colorScale.userScaleValues) {
+        return visualOptions.colorScale.defaultColor;
+      }
+      let colorValue;
+      if (visualOptions.colorScale.userScaleValues?.length === 1) {
+        colorValue = visualOptions.colorScale.userScaleValues[0].range;
+      } else {
+        switch (visualOptions.colorScale.scaleType) {
+          case 'ordinal':
+            colorValue = visualOptions.colorScale.userScaleValues.find(
+              (e) => e.domain === item
+            )?.range;
+            break;
+          case 'sequential':
+            colorValue = visualOptions.colorScale.userScaleValues.map(
+              (res) => res.range
+            );
+            break;
+          default:
+            colorValue = visualOptions.colorScale.defaultColor;
+        }
+      }
+
+      return colorValue;
+    }
   });
 
   return {
