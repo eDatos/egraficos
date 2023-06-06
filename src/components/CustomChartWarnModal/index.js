@@ -1,1 +1,1 @@
-export { default } from './CustomChartWarnModal'
+export { default } from './CustomChartWarnModal';

@@ -1,5 +1,5 @@
-import React from 'react'
-import ChartOptionSelect from './ChartOptionSelect'
+import React from 'react';
+import ChartOptionSelect from './ChartOptionSelect';
 
 const ChartOptionText = ({
   value,
@@ -20,7 +20,7 @@ const ChartOptionText = ({
         label={label}
         {...props}
       />
-    )
+    );
   }
   return (
     <label className="d-block">
@@ -32,7 +32,7 @@ const ChartOptionText = ({
         step={props.step}
         disabled={!isEnabled}
         onChange={(e) => {
-          onChange(e.target.value)
+          onChange(e.target.value);
         }}
         placeholder={defaultValue}
       />
@@ -42,7 +42,7 @@ const ChartOptionText = ({
         </small>
       )}
     </label>
-  )
-}
+  );
+};
 
-export default React.memo(ChartOptionText)
+export default React.memo(ChartOptionText);

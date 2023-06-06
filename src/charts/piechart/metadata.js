@@ -1,5 +1,5 @@
-import icon from './piechart.svg'
-import thumbnail from './piechart_thumb.svg'
+import icon from './piechart.svg';
+import thumbnail from './piechart_thumb.svg';
 
 export const metadata = {
   name: 'Pie chart',
@@ -11,4 +11,4 @@ export const metadata = {
     'It allows you to see the proportions between values that make up a whole, by using arcs composing a circle.',
   code: '',
   tutorial: '',
-}
+};

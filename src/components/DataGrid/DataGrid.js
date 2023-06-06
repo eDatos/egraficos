@@ -1,22 +1,22 @@
-import React, { useMemo, useRef, useState, useCallback } from 'react'
-import ReactDataGrid, { headerRenderer, textEditor } from 'react-data-grid'
-import { Overlay, OverlayTrigger } from 'react-bootstrap'
-import classNames from 'classnames'
-import { getTypeName, dateFormats } from '@rawgraphs/rawgraphs-core'
-import S from './DataGrid.module.scss'
-import 'react-data-grid/lib/styles.css'
-import { keyBy, get, isEqual } from 'lodash'
+import React, { useMemo, useRef, useState, useCallback } from 'react';
+import ReactDataGrid, { headerRenderer, textEditor } from 'react-data-grid';
+import { Overlay, OverlayTrigger } from 'react-bootstrap';
+import classNames from 'classnames';
+import { getTypeName, dateFormats } from '@rawgraphs/rawgraphs-core';
+import S from './DataGrid.module.scss';
+import 'react-data-grid/lib/styles.css';
+import { keyBy, get, isEqual } from 'lodash';
 import {
   dataTypeIcons,
   DateIcon,
   StringIcon,
   NumberIcon,
-} from '../../constants'
-import { BsFillCaretRightFill } from 'react-icons/bs'
+} from '../../constants';
+import { BsFillCaretRightFill } from 'react-icons/bs';
 
 //add custom date formats
-dateFormats['YYYY-MMM'] = '%Y-M%m'
-const DATE_FORMATS = Object.keys(dateFormats)
+dateFormats['YYYY-MMM'] = '%Y-M%m';
+const DATE_FORMATS = Object.keys(dateFormats);
 
 const DateFormatSelector = React.forwardRef(
   ({ currentFormat, onChange, className, ...props }, ref) => {
@@ -33,46 +33,46 @@ const DateFormatSelector = React.forwardRef(
               [S.selected]: get(currentFormat, 'dateFormat', '') === dateFmt,
             })}
             onMouseDownCapture={(e) => {
-              e.stopPropagation()
-              e.preventDefault()
+              e.stopPropagation();
+              e.preventDefault();
               onChange({
                 type: 'date',
                 dateFormat: dateFmt,
-              })
+              });
             }}
           >
             {dateFmt}
           </div>
         ))}
       </div>
-    )
+    );
   }
-)
+);
 
 function DataTypeSelector({
   currentType: typeDescriptor,
   onTypeChange,
   currentTypeComplete,
 }) {
-  const dataTypeIconDomRef = useRef(null)
-  const [showPicker, setShowPicker] = useState(false)
-  const currentType = get(typeDescriptor, 'type', typeDescriptor)
+  const dataTypeIconDomRef = useRef(null);
+  const [showPicker, setShowPicker] = useState(false);
+  const currentType = get(typeDescriptor, 'type', typeDescriptor);
 
   const handleTypeChange = useCallback(
     (e) => {
-      e.stopPropagation()
-      e.preventDefault()
-      const newType = e.target.dataset.datatype
+      e.stopPropagation();
+      e.preventDefault();
+      const newType = e.target.dataset.datatype;
       if (
         typeof onTypeChange === 'function' &&
         !isEqual(newType, typeDescriptor)
       ) {
-        onTypeChange(newType)
+        onTypeChange(newType);
       }
-      setShowPicker(false)
+      setShowPicker(false);
     },
     [typeDescriptor, onTypeChange]
-  )
+  );
 
   const handleTypeChangeDate = useCallback(
     (newType) => {
@@ -80,21 +80,21 @@ function DataTypeSelector({
         typeof onTypeChange === 'function' &&
         !isEqual(newType, typeDescriptor)
       ) {
-        onTypeChange(newType)
+        onTypeChange(newType);
       }
-      setShowPicker(false)
+      setShowPicker(false);
     },
     [typeDescriptor, onTypeChange]
-  )
+  );
 
   const handleTargetClick = useCallback(
     (e) => {
-      setShowPicker(!showPicker)
+      setShowPicker(!showPicker);
     },
     [showPicker]
-  )
+  );
 
-  const Icon = dataTypeIcons[currentType]
+  const Icon = dataTypeIcons[currentType];
 
   return (
     <>
@@ -113,7 +113,7 @@ function DataTypeSelector({
         rootClose={true}
         rootCloseEvent="click"
         onHide={() => {
-          setShowPicker(false)
+          setShowPicker(false);
         }}
         container={document.body}
       >
@@ -189,11 +189,11 @@ function DataTypeSelector({
         )}
       </Overlay>
     </>
-  )
+  );
 }
 
 function HeaderRenderer({ ...props }) {
-  const { column, sortDirection } = props
+  const { column, sortDirection } = props;
   return (
     <div
       className={classNames(
@@ -215,21 +215,21 @@ function HeaderRenderer({ ...props }) {
         {headerRenderer({ column, ...props })}
       </span>
     </div>
-  )
+  );
 }
 
 function createColumns(userDataSet, dataTypes, containerEl, coerceTypes) {
   if (!userDataSet || !dataTypes) {
-    return []
+    return [];
   }
   const idColumnWidth =
-    24 + 8 * (Math.floor(Math.log10(userDataSet.length)) + 1)
+    24 + 8 * (Math.floor(Math.log10(userDataSet.length)) + 1);
   const equalDinstribution =
     (containerEl.current?.getBoundingClientRect().width - idColumnWidth - 1) /
-    Object.keys(dataTypes).length
+    Object.keys(dataTypes).length;
   const columnWidth = equalDinstribution
     ? Math.max(equalDinstribution, 170)
-    : 170
+    : 170;
   return [
     {
       key: 'id',
@@ -252,11 +252,11 @@ function createColumns(userDataSet, dataTypes, containerEl, coerceTypes) {
           <div className={classNames({ [S['has-error']]: row?._errors?.[k] })}>
             {row[k]?.toString()}
           </div>
-        )
+        );
       },
       editor: textEditor,
     })),
-  ]
+  ];
 }
 
 export default function DataGrid({
@@ -266,28 +266,28 @@ export default function DataGrid({
   coerceTypes,
   onDataUpdate,
 }) {
-  const keyedErrors = useMemo(() => keyBy(errors, 'row'), [errors])
-  const containerEl = useRef()
+  const keyedErrors = useMemo(() => keyBy(errors, 'row'), [errors]);
+  const containerEl = useRef();
   const columns = createColumns(
     userDataset,
     dataTypes,
     containerEl,
     coerceTypes
-  )
-  const [sortColumns, setSortColumns] = useState([])
+  );
+  const [sortColumns, setSortColumns] = useState([]);
   const onSortColumnsChange = useCallback((sortColumns) => {
-    setSortColumns(sortColumns.slice(-1))
-  }, [])
+    setSortColumns(sortColumns.slice(-1));
+  }, []);
 
   const ordererColumns = useMemo(() => {
     function headerRenderer(props) {
-      return <HeaderRenderer {...props} />
+      return <HeaderRenderer {...props} />;
     }
     return columns.map((c) => {
-      if (c.key === 'id') return c
-      return { ...c, headerRenderer }
-    })
-  }, [columns])
+      if (c.key === 'id') return c;
+      return { ...c, headerRenderer };
+    });
+  }, [columns]);
 
   const sortedRows = useMemo(() => {
     let datasetWithIds = userDataset.map((item, i) => ({
@@ -296,37 +296,37 @@ export default function DataGrid({
       id: i + 1, // Give items some id to populate left-most column
       _stage3: item, // The dataset parsed by raw lib basing on data types is needed for sorting!
       _errors: keyedErrors[i]?.error, // Inject errors to format cells with parsing errors
-    }))
-    if (sortColumns.length === 0) return datasetWithIds
-    const { columnKey, direction } = sortColumns[0]
+    }));
+    if (sortColumns.length === 0) return datasetWithIds;
+    const { columnKey, direction } = sortColumns[0];
 
-    const sortColumnType = getTypeName(dataTypes[columnKey])
+    const sortColumnType = getTypeName(dataTypes[columnKey]);
 
-    let sortedRows
+    let sortedRows;
 
     switch (sortColumnType) {
       case 'number':
         sortedRows = datasetWithIds.sort(
           (a, b) => a._stage3[columnKey] - b._stage3[columnKey]
-        )
-        break
+        );
+        break;
       case 'date':
         sortedRows =
           datasetWithIds.sort(
             (a, b) =>
               a._stage3[columnKey]?.valueOf() ??
               0 - b._stage3[columnKey]?.valueOf()
-          ) ?? 0
-        break
+          ) ?? 0;
+        break;
       default:
         sortedRows = datasetWithIds.sort((a, b) =>
           a._stage3[columnKey]
             ?.toString()
             .localeCompare(b._stage3[columnKey].toString())
-        )
+        );
     }
-    return direction === 'DESC' ? sortedRows.reverse() : sortedRows
-  }, [userDataset, sortColumns, dataTypes, keyedErrors])
+    return direction === 'DESC' ? sortedRows.reverse() : sortedRows;
+  }, [userDataset, sortColumns, dataTypes, keyedErrors]);
 
   return (
     <ReactDataGrid
@@ -338,5 +338,5 @@ export default function DataGrid({
       defaultColumnOptions={{ width: '1fr' }}
       onRowsChange={(newRows) => onDataUpdate(newRows)}
     />
-  )
+  );
 }

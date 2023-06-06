@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './styles/index.scss'
-import App from './App'
-import './i18n'
-import * as serviceWorker from './serviceWorker'
-import { CookiesProvider } from 'react-cookie'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './styles/index.scss';
+import App from './App';
+import './i18n';
+import * as serviceWorker from './serviceWorker';
+import { CookiesProvider } from 'react-cookie';
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <CookiesProvider>
@@ -15,9 +15,9 @@ root.render(
       </React.Suspense>
     </CookiesProvider>
   </React.StrictMode>
-)
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()
+serviceWorker.unregister();

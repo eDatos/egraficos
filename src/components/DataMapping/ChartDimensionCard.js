@@ -1,26 +1,26 @@
-import React, { useCallback } from 'react'
-import DataTypeIcon from './DataTypeIcon'
-import RequiredIcon from './RequiredIcon'
-import { Col } from 'react-bootstrap'
-import { useDrop } from 'react-dnd'
-import get from 'lodash/get'
-import uniqueId from 'lodash/uniqueId'
-import classnames from 'classnames'
-import arrayMove from 'array-move'
-import arrayInsert from 'array-insert'
-import { useTranslation } from 'react-i18next'
+import React, { useCallback } from 'react';
+import DataTypeIcon from './DataTypeIcon';
+import RequiredIcon from './RequiredIcon';
+import { Col } from 'react-bootstrap';
+import { useDrop } from 'react-dnd';
+import get from 'lodash/get';
+import uniqueId from 'lodash/uniqueId';
+import classnames from 'classnames';
+import arrayMove from 'array-move';
+import arrayInsert from 'array-insert';
+import { useTranslation } from 'react-i18next';
 
-import { dataTypeIcons } from '../../constants'
+import { dataTypeIcons } from '../../constants';
 import {
   getTypeName,
   getAggregatorNames,
   getDefaultDimensionAggregation,
-} from '@rawgraphs/rawgraphs-core'
-import ChartDimensionItem from './ChartDimensionItem'
+} from '@rawgraphs/rawgraphs-core';
+import ChartDimensionItem from './ChartDimensionItem';
 
-import styles from './DataMapping.module.scss'
-const aggregators = getAggregatorNames()
-const emptyList = []
+import styles from './DataMapping.module.scss';
+const aggregators = getAggregatorNames();
+const emptyList = [];
 
 const ChartDimensionCard = ({
   dimension,
@@ -33,7 +33,7 @@ const ChartDimensionCard = ({
   setDraggingId,
   replaceDimension,
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [{ isOver }, drop] = useDrop({
     accept: ['column', 'card'],
     collect: (monitor) => ({
@@ -43,12 +43,12 @@ const ChartDimensionCard = ({
       if (item.type === 'column') {
         const defaultAggregation = dimension.aggregation
           ? getDefaultDimensionAggregation(dimension, dataTypes[item.id])
-          : null
+          : null;
 
-        const columnDataType = getTypeName(dataTypes[item.id])
+        const columnDataType = getTypeName(dataTypes[item.id]);
         const isValid =
           dimension.validTypes?.length === 0 ||
-          dimension.validTypes?.includes(columnDataType)
+          dimension.validTypes?.includes(columnDataType);
 
         setMapping({
           ...mapping,
@@ -64,7 +64,7 @@ const ChartDimensionCard = ({
                 ],
               }
             : undefined,
-        })
+        });
       } else if (item.dimensionId !== dimension.id) {
         replaceDimension(
           item.dimensionId,
@@ -72,42 +72,42 @@ const ChartDimensionCard = ({
           item.index,
           mapping.value ? mapping.value.length : 0,
           true
-        )
+        );
       }
     },
-  })
+  });
 
   const setAggregation = useCallback(
     (newAggregations) => {
       setMapping({
         ...mapping,
         config: { aggregation: [...newAggregations] },
-      })
+      });
     },
     [mapping, setMapping]
-  )
+  );
 
-  const idsMappedHere = get(mapping, 'ids', emptyList)
-  const columnsMappedHere = get(mapping, 'value', emptyList)
-  let aggregationsMappedHere = get(mapping, 'config.aggregation', emptyList)
+  const idsMappedHere = get(mapping, 'ids', emptyList);
+  const columnsMappedHere = get(mapping, 'value', emptyList);
+  let aggregationsMappedHere = get(mapping, 'config.aggregation', emptyList);
 
   const onChangeAggregation = useCallback(
     (i, aggregatorName) => {
-      const newAggregations = [...aggregationsMappedHere]
-      newAggregations[i] = aggregatorName
-      setAggregation(newAggregations)
+      const newAggregations = [...aggregationsMappedHere];
+      newAggregations[i] = aggregatorName;
+      setAggregation(newAggregations);
     },
     [aggregationsMappedHere, setAggregation]
-  )
+  );
 
   const onDeleteItem = useCallback(
     (i) => {
-      let nextConfig
+      let nextConfig;
       if (mapping.config) {
         nextConfig = {
           ...mapping.config,
           aggregation: mapping.config.aggregation.filter((col, j) => j !== i),
-        }
+        };
       }
 
       setMapping({
@@ -115,24 +115,24 @@ const ChartDimensionCard = ({
         ids: mapping.ids.filter((col, j) => j !== i),
         value: mapping.value.filter((col, j) => j !== i),
         config: nextConfig,
-      })
+      });
     },
     [mapping, setMapping]
-  )
+  );
 
   const onChangeDimension = useCallback(
     (i, newCol) => {
       setMapping({
         ...mapping,
         value: mapping.value.map((col, j) => (j === i ? newCol : col)),
-      })
+      });
     },
     [mapping, setMapping]
-  )
+  );
 
   const onMove = useCallback(
     (dragIndex, hoverIndex) => {
-      let nextConfig
+      let nextConfig;
       if (mapping.config) {
         nextConfig = {
           ...mapping.config,
@@ -141,7 +141,7 @@ const ChartDimensionCard = ({
             dragIndex,
             hoverIndex
           ),
-        }
+        };
       }
 
       setMapping(
@@ -152,19 +152,19 @@ const ChartDimensionCard = ({
           config: nextConfig,
         },
         true
-      )
+      );
     },
     [mapping, setMapping]
-  )
+  );
 
   const onInsertColumn = useCallback(
     (index, item) => {
       const defaulAggregation = dimension.aggregation
         ? getDefaultDimensionAggregation(dimension, dataTypes[item.id])
-        : null
+        : null;
 
-      const nextId = uniqueId()
-      setDraggingId(nextId)
+      const nextId = uniqueId();
+      setDraggingId(nextId);
       setMapping(
         {
           ...mapping,
@@ -181,10 +181,10 @@ const ChartDimensionCard = ({
             : undefined,
         },
         true
-      )
+      );
     },
     [dataTypes, dimension, mapping, setDraggingId, setMapping]
-  )
+  );
 
   return (
     <Col xs={6} lg={4} xl={4}>
@@ -195,7 +195,7 @@ const ChartDimensionCard = ({
         >
           <span className="text-left">
             {dimension.validTypes.map((t) => {
-              return <DataTypeIcon key={t} type={t} />
+              return <DataTypeIcon key={t} type={t} />;
             })}
           </span>
           <span className="text-capitalize text-center">{dimension.name}</span>
@@ -209,17 +209,17 @@ const ChartDimensionCard = ({
 
         {/* These are the columns that have been dropped on the current dimension */}
         {idsMappedHere.map((renderId, i) => {
-          const columnId = columnsMappedHere[i]
-          const columnDataType = getTypeName(dataTypes[columnId])
+          const columnId = columnsMappedHere[i];
+          const columnDataType = getTypeName(dataTypes[columnId]);
           const relatedAggregation = dimension.aggregation
             ? aggregationsMappedHere[i] ||
               getDefaultDimensionAggregation(dimension, columnDataType)
-            : undefined
+            : undefined;
           const isValid =
             dimension.validTypes?.length === 0 ||
-            dimension.validTypes?.includes(columnDataType)
+            dimension.validTypes?.includes(columnDataType);
 
-          const DataTypeIcon = dataTypeIcons[getTypeName(dataTypes[columnId])]
+          const DataTypeIcon = dataTypeIcons[getTypeName(dataTypes[columnId])];
 
           return (
             <ChartDimensionItem
@@ -242,7 +242,7 @@ const ChartDimensionCard = ({
               draggingColumn={draggingId === renderId}
               replaceDimension={replaceDimension}
             />
-          )
+          );
         })}
 
         {/* This is the dropzone */}
@@ -265,7 +265,7 @@ const ChartDimensionCard = ({
         )}
       </div>
     </Col>
-  )
-}
+  );
+};
 
-export default ChartDimensionCard
+export default ChartDimensionCard;

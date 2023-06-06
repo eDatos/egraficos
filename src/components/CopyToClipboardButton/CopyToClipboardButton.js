@@ -1,25 +1,25 @@
-import React, { useCallback, useState } from 'react'
-import { Button } from 'react-bootstrap'
-import { BsClipboard } from 'react-icons/bs'
-import { IoMdCheckmarkCircle } from 'react-icons/io'
-import { useCopyToClipboard } from '../../hooks/useCopyToClipboard'
-import style from './style.module.css'
-import { useTranslation } from 'react-i18next'
+import React, { useCallback, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { BsClipboard } from 'react-icons/bs';
+import { IoMdCheckmarkCircle } from 'react-icons/io';
+import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
+import style from './style.module.css';
+import { useTranslation } from 'react-i18next';
 
 export function CopyToClipboardButton({ content }) {
-  const copyToClipboard = useCopyToClipboard()
-  const [pending, setPending] = useState(false)
+  const copyToClipboard = useCopyToClipboard();
+  const [pending, setPending] = useState(false);
 
   const handleCopy = useCallback(() => {
     if (!pending) {
-      setPending(true)
-      copyToClipboard(content)
+      setPending(true);
+      copyToClipboard(content);
       setTimeout(() => {
-        setPending(false)
-      }, 3000)
+        setPending(false);
+      }, 3000);
     }
-  }, [content, copyToClipboard, pending])
-  const { t } = useTranslation()
+  }, [content, copyToClipboard, pending]);
+  const { t } = useTranslation();
 
   return (
     <Button
@@ -43,5 +43,5 @@ export function CopyToClipboardButton({ content }) {
         </>
       )}
     </Button>
-  )
+  );
 }

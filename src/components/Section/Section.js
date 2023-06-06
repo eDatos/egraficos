@@ -1,6 +1,6 @@
-import React from 'react'
-import styles from './Section.module.scss'
-import { Container, Row, Col, Spinner } from 'react-bootstrap'
+import React from 'react';
+import styles from './Section.module.scss';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 
 export default function Section(props) {
   return (
@@ -27,5 +27,5 @@ export default function Section(props) {
         </Col>
       </Row>
     </Container>
-  )
+  );
 }

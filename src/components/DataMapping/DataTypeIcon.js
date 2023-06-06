@@ -1,21 +1,21 @@
-import React from 'react'
-import { Tooltip, OverlayTrigger } from 'react-bootstrap'
-import { dataTypeIcons } from '../../constants'
-import styles from './DataMapping.module.scss'
+import React from 'react';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { dataTypeIcons } from '../../constants';
+import styles from './DataMapping.module.scss';
 
 class DataTypeIcon extends React.Component {
   constructor(props) {
-    super(props)
-    this.iconRef = React.createRef()
+    super(props);
+    this.iconRef = React.createRef();
   }
 
   render() {
-    const DataTypeIcon = dataTypeIcons[this.props.type]
+    const DataTypeIcon = dataTypeIcons[this.props.type];
     const renderTooltip = (props) => (
       <Tooltip id={`tooltip-top`} {...props}>
         Accepts {this.props.type}s
       </Tooltip>
-    )
+    );
 
     return (
       <span>
@@ -25,8 +25,8 @@ class DataTypeIcon extends React.Component {
           </div>
         </OverlayTrigger>
       </span>
-    )
+    );
   }
 }
 
-export default DataTypeIcon
+export default DataTypeIcon;

@@ -1,11 +1,11 @@
-import React from 'react'
-import { Tooltip, OverlayTrigger } from 'react-bootstrap'
+import React from 'react';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import {
   BsArrowCounterclockwise,
   BsArrowLeftRight,
   BsLockFill,
   BsUnlockFill,
-} from 'react-icons/bs'
+} from 'react-icons/bs';
 
 function ResetBtn({ resetScale }) {
   return (
@@ -18,7 +18,7 @@ function ResetBtn({ resetScale }) {
         <BsArrowCounterclockwise width="16" height="16" />
       </span>
     </OverlayTrigger>
-  )
+  );
 }
 
 function InvertBtn({ invertScale }) {
@@ -32,7 +32,7 @@ function InvertBtn({ invertScale }) {
         <BsArrowLeftRight width="16" height="16" />
       </span>
     </OverlayTrigger>
-  )
+  );
 }
 
 function LockBtn({ handleChangeLocked, locked }) {
@@ -56,7 +56,7 @@ function LockBtn({ handleChangeLocked, locked }) {
         )}
       </span>
     </OverlayTrigger>
-  )
+  );
 }
 
-export { ResetBtn, InvertBtn, LockBtn }
+export { ResetBtn, InvertBtn, LockBtn };

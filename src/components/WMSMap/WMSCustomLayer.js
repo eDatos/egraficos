@@ -1,39 +1,39 @@
-import { useEffect, useRef } from 'react'
-import { useLeafletContext } from '@react-leaflet/core'
-import * as WMS from 'leaflet.wms'
+import { useEffect, useRef } from 'react';
+import { useLeafletContext } from '@react-leaflet/core';
+import * as WMS from 'leaflet.wms';
 
 const WMSCustomLayer = ({ layer, url }) => {
-  const context = useLeafletContext()
-  const layerRef = useRef()
-  const layerName = layer['Name']
+  const context = useLeafletContext();
+  const layerRef = useRef();
+  const layerName = layer['Name'];
   var MySource = WMS.Source.extend({
     showFeatureInfo: function (latlng, info) {
       if (!this._map || !info) {
-        return
+        return;
       }
-      this._map.openPopup(info, latlng)
+      this._map.openPopup(info, latlng);
     },
-  })
+  });
 
   useEffect(() => {
-    const selectedStyles = layer.StyleSelected?.styleName ?? []
-    const container = context.layerContainer || context.map
+    const selectedStyles = layer.StyleSelected?.styleName ?? [];
+    const container = context.layerContainer || context.map;
 
     const source = new MySource(url, {
       format: 'image/png',
       transparent: 'true',
       styles: selectedStyles,
-    })
+    });
 
-    layerRef.current = source.getLayer(layerName)
-    container.addLayer(layerRef.current)
+    layerRef.current = source.getLayer(layerName);
+    container.addLayer(layerRef.current);
     return () => {
-      source.removeSubLayer(layerName)
-      container.removeLayer(layerRef.current)
-    }
-  })
+      source.removeSubLayer(layerName);
+      container.removeLayer(layerRef.current);
+    };
+  });
 
-  return null
-}
+  return null;
+};
 
-export default WMSCustomLayer
+export default WMSCustomLayer;

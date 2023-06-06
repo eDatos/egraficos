@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react'
-import classNames from 'classnames'
-import S from './UrlFetch.module.scss'
-import { useTranslation } from 'react-i18next'
+import React, { useCallback, useState } from 'react';
+import classNames from 'classnames';
+import S from './UrlFetch.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export async function fetchData(source) {
-  const response = await fetch(source.url)
-  return await response.text()
+  const response = await fetch(source.url);
+  return await response.text();
 }
 
 export default function UrlFetch({
@@ -14,36 +14,36 @@ export default function UrlFetch({
   setLoadingError,
   initialState = null,
 }) {
-  const [url, setUrl] = useState(initialState?.url)
-  const [loading, setLoading] = useState(false)
-  const { t } = useTranslation(['translation'])
+  const [url, setUrl] = useState(initialState?.url);
+  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation(['translation']);
 
   const fetchUrl = useCallback(
     async (url) => {
-      const source = { type: 'url', url }
-      setLoading(true)
-      let data
+      const source = { type: 'url', url };
+      setLoading(true);
+      let data;
       try {
-        data = await fetchData(source)
-        setUserInput(data, source)
-        setLoadingError(null)
+        data = await fetchData(source);
+        setUserInput(data, source);
+        setLoadingError(null);
       } catch (e) {
-        setLoadingError('Loading error. ' + e.message)
+        setLoadingError('Loading error. ' + e.message);
       }
-      setLoading(false)
+      setLoading(false);
     },
     [setLoadingError, setUserInput]
-  )
+  );
 
   const handleSubmit = useCallback(
     (e) => {
-      e.stopPropagation()
-      e.preventDefault()
-      fetchUrl(url)
-      return false
+      e.stopPropagation();
+      e.preventDefault();
+      fetchUrl(url);
+      return false;
     },
     [url, fetchUrl]
-  )
+  );
 
   return (
     <form onSubmit={handleSubmit}>
@@ -51,7 +51,7 @@ export default function UrlFetch({
         className={classNames('w-100', S['url-input'])}
         value={url}
         onChange={(e) => {
-          setUrl(e.target.value)
+          setUrl(e.target.value);
         }}
       />
       <div className="text-right">
@@ -64,5 +64,5 @@ export default function UrlFetch({
         </button>
       </div>
     </form>
-  )
+  );
 }

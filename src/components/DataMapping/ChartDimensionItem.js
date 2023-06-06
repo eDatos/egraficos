@@ -1,11 +1,11 @@
-import React, { useRef } from 'react'
-import { Dropdown } from 'react-bootstrap'
-import classnames from 'classnames'
-import styles from './DataMapping.module.scss'
-import { BsX } from 'react-icons/bs'
-import { useDrag, useDrop } from 'react-dnd'
-import get from 'lodash/get'
-import { AGGREGATIONS_LABELS } from '../../constants'
+import React, { useRef } from 'react';
+import { Dropdown } from 'react-bootstrap';
+import classnames from 'classnames';
+import styles from './DataMapping.module.scss';
+import { BsX } from 'react-icons/bs';
+import { useDrag, useDrop } from 'react-dnd';
+import get from 'lodash/get';
+import { AGGREGATIONS_LABELS } from '../../constants';
 
 export default function ChartDimensionItem({
   draggingColumn,
@@ -27,64 +27,64 @@ export default function ChartDimensionItem({
   onInsertColumn,
   replaceDimension,
 }) {
-  const ref = useRef(null)
+  const ref = useRef(null);
 
   const [{ isOver }, drop] = useDrop({
     accept: ['column', 'card'],
     collect: (monitor) => {
       return {
         isOver: monitor.isOver() && monitor.getItem().type === 'column',
-      }
+      };
     },
     hover(item, monitor) {
       if (!dimension.multiple) {
-        return
+        return;
       }
       if (!ref.current) {
-        return
+        return;
       }
 
-      const hoverIndex = index
+      const hoverIndex = index;
 
       //#TODO: for now we allow only dropping on "drop another dimension here" in case of multiple dimensions
       if (false && item.type === 'column') {
-        onInsertColumn(hoverIndex, item)
-        item.type = 'card'
-        item.dimensionId = dimension.id
-        item.index = hoverIndex
-        return
+        onInsertColumn(hoverIndex, item);
+        item.type = 'card';
+        item.dimensionId = dimension.id;
+        item.index = hoverIndex;
+        return;
       } else if (item.dimensionId === dimension.id) {
-        const dragIndex = item.index
+        const dragIndex = item.index;
         // Don't replace items with themselves
         if (dragIndex === hoverIndex) {
-          return
+          return;
         }
         // Determine rectangle on screen
-        const hoverBoundingRect = ref.current?.getBoundingClientRect()
+        const hoverBoundingRect = ref.current?.getBoundingClientRect();
         // Get vertical middle
         const hoverMiddleY =
-          (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+          (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
         // Determine mouse position
-        const clientOffset = monitor.getClientOffset()
+        const clientOffset = monitor.getClientOffset();
         // Get pixels to the top
-        const hoverClientY = clientOffset.y - hoverBoundingRect.top
+        const hoverClientY = clientOffset.y - hoverBoundingRect.top;
         // Only perform the move when the mouse has crossed half of the items height
         // When dragging downwards, only move when the cursor is below 50%
         // When dragging upwards, only move when the cursor is above 50%
         // Dragging downwards
         if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-          return
+          return;
         }
         // Dragging upwards
         if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-          return
+          return;
         }
-        onMove(dragIndex, hoverIndex)
+        onMove(dragIndex, hoverIndex);
         // Note: we're mutating the monitor item here!
         // Generally it's better to avoid mutations,
         // but it's good here for the sake of performance
         // to avoid expensive index searches.
-        item.index = hoverIndex
+        item.index = hoverIndex;
       } else {
         //#TODO: for now we allow only dropping on "drop another dimension here" in case of multiple dimensions
 
@@ -97,19 +97,19 @@ export default function ChartDimensionItem({
         // )
         // item.dimensionId = dimension.id
         // item.index = hoverIndex
-        return
+        return;
       }
     },
     drop: (item, monitor) => {
       if (!dimension.multiple) {
         if (item.type === 'column') {
-          onChangeDimension(index, item.id)
+          onChangeDimension(index, item.id);
         } else {
-          replaceDimension(item.dimensionId, dimension.id, item.index, index)
+          replaceDimension(item.dimensionId, dimension.id, item.index, index);
         }
       }
     },
-  })
+  });
 
   const [{ isDragging }, drag] = useDrag({
     type: 'card',
@@ -123,16 +123,16 @@ export default function ChartDimensionItem({
       isDragging: monitor.isDragging(),
     }),
     end: (dropResult, monitor) => {
-      const didDrop = monitor.didDrop()
+      const didDrop = monitor.didDrop();
       if (didDrop) {
-        commitLocalMapping()
+        commitLocalMapping();
       } else {
-        rollbackLocalMapping()
+        rollbackLocalMapping();
       }
     },
-  })
+  });
 
-  drag(drop(ref))
+  drag(drop(ref));
 
   return (
     <div
@@ -185,5 +185,5 @@ export default function ChartDimensionItem({
         <BsX />
       </button>
     </div>
-  )
+  );
 }

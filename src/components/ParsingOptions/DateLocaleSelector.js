@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react'
-import { Dropdown } from 'react-bootstrap'
-import { localeList } from '../../constants'
+import React, { useCallback } from 'react';
+import { Dropdown } from 'react-bootstrap';
+import { localeList } from '../../constants';
 
 export default function DateLocaleSelector({
   title,
@@ -11,12 +11,12 @@ export default function DateLocaleSelector({
   const handleChange = useCallback(
     (locale) => {
       if (onChange) {
-        const nextLocale = locale
-        onChange(nextLocale)
+        const nextLocale = locale;
+        onChange(nextLocale);
       }
     },
     [onChange]
-  )
+  );
 
   return (
     <div className="option">
@@ -43,10 +43,10 @@ export default function DateLocaleSelector({
               <Dropdown.Item key={d} onSelect={() => handleChange(d)}>
                 {d}
               </Dropdown.Item>
-            )
+            );
           })}
         </Dropdown.Menu>
       </Dropdown>
     </div>
-  )
+  );
 }

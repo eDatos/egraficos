@@ -1,12 +1,12 @@
-import React from 'react'
-import { LayersControl, MapContainer, TileLayer } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
-import Legend from '../../../components/WMSMap/Legend'
-import WMSCustomLayer from '../../../components/WMSMap/WMSCustomLayer'
-import * as WMS from 'leaflet.wms'
+import React from 'react';
+import { LayersControl, MapContainer, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import Legend from '../../../components/WMSMap/Legend';
+import WMSCustomLayer from '../../../components/WMSMap/WMSCustomLayer';
+import * as WMS from 'leaflet.wms';
 
 const EDatosWMS = (props) => {
-  const styleMap = { width: '100%', height: '80vh' }
+  const styleMap = { width: '100%', height: '80vh' };
   return (
     <MapContainer
       center={props.center}
@@ -51,7 +51,7 @@ const EDatosWMS = (props) => {
         ))
       )}
     </MapContainer>
-  )
-}
+  );
+};
 
-export default EDatosWMS
+export default EDatosWMS;

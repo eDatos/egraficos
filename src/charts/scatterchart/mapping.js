@@ -1,5 +1,5 @@
-import _ from 'lodash'
-import { parseObjectToValue } from '../utils/parseUtils'
+import _ from 'lodash';
+import { parseObjectToValue } from '../utils/parseUtils';
 
 const getAxis = (
   showName,
@@ -26,13 +26,13 @@ const getAxis = (
       fontSize: showaxisLabelsFontSize,
     },
     scale: scale,
-  }
-}
+  };
+};
 
 const getSeries = (visualOptions, data, mapping) => {
   let grouped = mapping.labels?.value[0]
     ? _.groupBy(data, mapping.labels.value[0])
-    : data
+    : data;
   return [...new Set(data.map((item) => item[mapping.labels?.value]))].map(
     (item) => {
       const myData = (item ? grouped[item] : grouped)
@@ -43,14 +43,14 @@ const getSeries = (visualOptions, data, mapping) => {
         .reduce((accumulator, currentValue) => {
           let findIndex = accumulator.findIndex(
             (d) => d[0] === currentValue[0] && d[1] === currentValue[1]
-          )
+          );
           if (findIndex < 0) {
-            return [...accumulator, [currentValue[0], currentValue[1], 1]]
+            return [...accumulator, [currentValue[0], currentValue[1], 1]];
           } else {
-            accumulator[findIndex][2] += 1
+            accumulator[findIndex][2] += 1;
           }
-          return accumulator
-        }, [])
+          return accumulator;
+        }, []);
       return {
         name: item ? item : mapping.y.value[0],
         type: 'scatter',
@@ -69,10 +69,10 @@ const getSeries = (visualOptions, data, mapping) => {
             position: 'top',
           },
         },
-      }
+      };
     }
-  )
-}
+  );
+};
 
 export const getChartOptions = function (visualOptions, datachart, mapping) {
   return {
@@ -124,5 +124,5 @@ export const getChartOptions = function (visualOptions, datachart, mapping) {
       visualOptions.showYaxisLabelsFontSize
     ),
     series: getSeries(visualOptions, datachart, mapping),
-  }
-}
+  };
+};

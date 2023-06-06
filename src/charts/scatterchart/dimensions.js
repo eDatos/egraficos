@@ -20,4 +20,4 @@ export const dimensions = [
     required: false,
     validTypes: ['string'],
   },
-]
+];

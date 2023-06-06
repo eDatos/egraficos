@@ -1,7 +1,7 @@
-import React from 'react'
-import { useTable, useBlockLayout, useFlexLayout } from 'react-table'
-import { FixedSizeList } from 'react-window'
-import './DataTable.scss'
+import React from 'react';
+import { useTable, useBlockLayout, useFlexLayout } from 'react-table';
+import { FixedSizeList } from 'react-window';
+import './DataTable.scss';
 
 export default function DataTable({ columns, data }) {
   const defaultColumn = React.useMemo(
@@ -9,7 +9,7 @@ export default function DataTable({ columns, data }) {
       width: 200,
     }),
     []
-  )
+  );
 
   const {
     getTableProps,
@@ -26,12 +26,12 @@ export default function DataTable({ columns, data }) {
     },
     useBlockLayout
     // useFlexLayout
-  )
+  );
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {
-      const row = rows[index]
-      prepareRow(row)
+      const row = rows[index];
+      prepareRow(row);
       return (
         <tr
           {...row.getRowProps({
@@ -44,13 +44,13 @@ export default function DataTable({ columns, data }) {
               <td {...cell.getCellProps()} className="datatable-cell">
                 {cell.render('Cell')}
               </td>
-            )
+            );
           })}
         </tr>
-      )
+      );
     },
     [prepareRow, rows]
-  )
+  );
 
   // Render the UI for your table
   return (
@@ -83,5 +83,5 @@ export default function DataTable({ columns, data }) {
         </tbody>
       </table>
     </div>
-  )
+  );
 }

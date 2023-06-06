@@ -1,30 +1,30 @@
-import React, { useCallback } from 'react'
-import { Button } from 'react-bootstrap'
-import { useDropzone } from 'react-dropzone'
-import classNames from 'classnames'
-import S from './UploadFile.module.scss'
+import React, { useCallback } from 'react';
+import { Button } from 'react-bootstrap';
+import { useDropzone } from 'react-dropzone';
+import classNames from 'classnames';
+import S from './UploadFile.module.scss';
 
 export default function UploadFile({ setUserInput, setLoadingError }) {
   const onDrop = useCallback(
     (acceptedFiles) => {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.addEventListener('load', (e) => {
-        setUserInput(e.target.result)
-        setLoadingError(null)
-      })
+        setUserInput(e.target.result);
+        setLoadingError(null);
+      });
       if (acceptedFiles.length) {
-        reader.readAsText(acceptedFiles[0])
+        reader.readAsText(acceptedFiles[0]);
       }
     },
     [setLoadingError, setUserInput]
-  )
+  );
   const { getRootProps, getInputProps, isDragReject, isDragAccept } =
     useDropzone({
       onDrop,
       accept:
         'text/csv,text/plain,application/json,application/vnd.ms-excel,text/tsv,text/tab-separated-values',
       maxFiles: 1,
-    })
+    });
   return (
     <div
       className={classNames(S.dropzone, {
@@ -42,5 +42,5 @@ export default function UploadFile({ setUserInput, setLoadingError }) {
       {isDragAccept && <p>All files will be accepted</p>}
       {isDragReject && <p>Some files will be rejected</p>}
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react'
-import { Dropdown } from 'react-bootstrap'
-import { Trans } from 'react-i18next'
+import React, { useCallback } from 'react';
+import { Dropdown } from 'react-bootstrap';
+import { Trans } from 'react-i18next';
 
 export default function StackSelector({
   title,
@@ -12,11 +12,11 @@ export default function StackSelector({
   const handleChange = useCallback(
     (nextDimension) => {
       if (onChange) {
-        onChange(nextDimension)
+        onChange(nextDimension);
       }
     },
     [onChange]
-  )
+  );
 
   return (
     <div className="option">
@@ -40,10 +40,10 @@ export default function StackSelector({
               <Dropdown.Item key={d} onSelect={() => handleChange(d)}>
                 {d}
               </Dropdown.Item>
-            )
+            );
           })}
         </Dropdown.Menu>
       </Dropdown>
     </div>
-  )
+  );
 }
