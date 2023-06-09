@@ -177,7 +177,10 @@ export default class EDatosFetch extends React.Component {
       type: 'url',
       url: this.state.url,
     };
-    fetch(this.state.url)
+    fetch(this.state.url, {
+        method: 'GET',
+        headers: { Accept: 'text/csv' },
+    })
       .then((response) => response.text())
       .then((data) => {
         this.props.setUserInput(data, source);
