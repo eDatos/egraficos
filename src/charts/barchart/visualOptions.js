@@ -41,16 +41,6 @@ export const visualOptions = {
     ],
     default: 'name',
   },
-  colorScale: {
-    type: 'colorScale',
-    domain: 'colorDomain',
-    default: {
-      scaleType: 'ordinal',
-      interpolator: 'defaultPalette',
-      defaultColor: '#009BD7',
-    },
-    group: 'colors',
-  },
   // labels
   showXaxisName: {
     type: 'boolean',

@@ -34,17 +34,6 @@ export const visualOptions = {
     default: false,
     group: 'chart',
   },
-  // colors
-  colorScale: {
-    type: 'colorScale',
-    label: 'Color scale',
-    domain: 'colorDomain',
-    default: {
-      scaleType: 'ordinal',
-      interpolator: 'defaultPalette',
-    },
-    group: 'colors',
-  },
   // labels
   showSeriesLabels: {
     type: 'boolean',

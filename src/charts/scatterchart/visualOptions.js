@@ -129,14 +129,4 @@ export const visualOptions = {
     },
     default: 12,
   },
-  colorScale: {
-    type: 'colorScale',
-    domain: 'colorDomain',
-    default: {
-      scaleType: 'ordinal',
-      interpolator: 'defaultPalette',
-      defaultColor: '#009BD7',
-    },
-    group: 'colors',
-  },
 };
