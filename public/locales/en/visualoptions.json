@@ -64,5 +64,8 @@
     "center": "Center",
     "Svg": "Svg",
     "Canvas": "Canvas",
-    "showpercentage": "Show percentages"
+    "showpercentage": "Show percentages",
+    "showLabel": "Show label",
+    "showUpperLabel": "Show upper label",
+    "gapWidth": "Gap"
 }

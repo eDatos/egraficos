@@ -5,6 +5,7 @@ export const dimensions = [
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',
+    multiple: true,
   },
   {
     id: 'size',

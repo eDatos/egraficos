@@ -13,31 +13,106 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
     mapping.size = {
       value: undefined,
     };
-  }  
+  }
 
-  let results = [];
-  d3.rollups(
-    data, (v) => {
-      const item = {
-        name: parseObject(v[0][mapping.hierarchy.value]),
-        value: mapping.size.value ? sizeAggregator[0](v.map((d) => d[mapping.size.value])) : v.length
-      };
-      results.push(item);
-      return item;
-    },
-    (d) => parseObject(d[mapping.hierarchy.value]) //hierarchy grouping
-  );    
+  function getLevelOption() {
+    return [
+      {
+        color: visualOptions.colorScale.userScaleValues.map((v) => v.range),
+        itemStyle: {
+          borderColor: '#777',
+          borderWidth: 0,
+          gapWidth: visualOptions.gapWidth,
+        },
+        upperLabel: {
+          show: false,
+        },
+      },
+      {
+        itemStyle: {
+          borderColor: '#555',
+          borderWidth: 5,
+          gapWidth: visualOptions.gapWidth,
+        },
+        emphasis: {
+          itemStyle: {
+            borderColor: '#ddd',
+          },
+        },
+      },
+      {
+        colorSaturation: [0.35, 0.5],
+        itemStyle: {
+          borderWidth: 5,
+          gapWidth: visualOptions.gapWidth,
+          borderColorSaturation: 0.6,
+        },
+      },
+    ];
+  }
+
+  function dataHierarchy(index, data) {
+    const allValues = [...mapping.hierarchy.value];
+    const hierarchy = allValues.splice(0, index + 1);
+    let results = [];
+    d3.rollups(
+      data,
+      (v) => {
+        const item = {
+          name: parseObject(v[0][hierarchy[index]]),
+          value: mapping.size.value
+            ? sizeAggregator(v.map((d) => d[mapping.size.value]))
+            : v.length,
+          path: hierarchy.reduce(
+            (acc, curr) => (acc === '' ? curr : `${acc} - ${curr}`),
+            ''
+          ),
+          children:
+            index < mapping.hierarchy.value.length - 1
+              ? dataHierarchy(
+                  index + 1,
+                  data.filter((d) => {
+                    return d[hierarchy[index]] === v[0][hierarchy[index]];
+                  })
+                )
+              : [],
+        };
+        results.push(item);
+        return item;
+      },
+      ...hierarchy.map((level) => (d) => d[level])
+    );
+    return results;
+  }
 
   return [
     {
       type: 'treemap',
-      data: results
-    }
+      name: mapping.hierarchy.value[0],
+      label: {
+        show: visualOptions.showLabel,
+        formatter: '{b}',
+      },
+      upperLabel: {
+        show: visualOptions.showUpperLabel,
+        height: 30,
+      },
+      itemStyle: {
+        borderColor: '#fff',
+      },
+      levels: getLevelOption(),
+      data: dataHierarchy(0, data),
+    },
   ];
-}
+};
 
-export const getChartOptions = function (visualOptions, datachart, mapping, dataTypes,
-  dimensions) {
+export const getChartOptions = function (
+  visualOptions,
+  datachart,
+  mapping,
+  dataTypes,
+  dimensions
+) {
   return {
     legend: {
       show: visualOptions.showLegend,
@@ -59,7 +134,6 @@ export const getChartOptions = function (visualOptions, datachart, mapping, data
         restore: {},
       },
     },
-    series: getSeries(visualOptions, datachart, mapping, dataTypes,
-      dimensions)
+    series: getSeries(visualOptions, datachart, mapping, dataTypes, dimensions),
   };
 };
