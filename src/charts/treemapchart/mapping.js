@@ -58,24 +58,23 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
     d3.rollups(
       data,
       (v) => {
+        let children = [];
+        if (index < mapping.hierarchy.value.length - 1) {
+          const childrenData = data.filter(
+            (d) => d[hierarchy[index]] === v[0][hierarchy[index]]
+          );
+          children = dataHierarchy(index + 1, childrenData);
+        }
         const item = {
           name: parseObject(v[0][hierarchy[index]]),
           value: mapping.size.value
             ? sizeAggregator(v.map((d) => d[mapping.size.value]))
             : v.length,
           path: hierarchy.reduce(
-            (acc, curr) => (acc === '' ? curr : `${acc} - ${curr}`),
+            (acc, curr) => (acc === '' ? curr : `${acc}/${curr}`),
             ''
           ),
-          children:
-            index < mapping.hierarchy.value.length - 1
-              ? dataHierarchy(
-                  index + 1,
-                  data.filter((d) => {
-                    return d[hierarchy[index]] === v[0][hierarchy[index]];
-                  })
-                )
-              : [],
+          children: children,
         };
         results.push(item);
         return item;
