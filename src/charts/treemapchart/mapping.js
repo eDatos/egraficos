@@ -37,9 +37,9 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
         },
         emphasis: {
           itemStyle: {
-            borderColor: grayPalette[2]
-          }
-        }        
+            borderColor: grayPalette[2],
+          },
+        },
       },
       {
         colorSaturation: [0.35, 0.5],

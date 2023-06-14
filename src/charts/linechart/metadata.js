@@ -7,8 +7,7 @@ export const metadata = {
   thumbnail,
   icon,
   categories: ['time series', 'correlations'],
-  description:
-    'It displays a quantitative dimension over a continuous interval or time period. Colour can be optionally used to encode an additional quantitative or categorical dimension.',
+  description: 'global.section.chartselection.linechart.description',
   code: '',
   tutorial: '',
 };

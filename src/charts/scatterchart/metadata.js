@@ -7,8 +7,7 @@ export const metadata = {
   icon,
   id: 'scatter',
   categories: ['correlations'],
-  description:
-    'The basic layout is a scatter plot, which allows to see correlations among two continuous dimensions.',
+  description: 'global.section.chartselection.scatterchart.description',
   code: '',
   tutorial: '',
 };
