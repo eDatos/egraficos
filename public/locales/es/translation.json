@@ -91,6 +91,19 @@
             "loadrows": {
                 "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han sido correctamente parseadas, ahora puedes elegir un gráfico!</p>"
             }
+        },
+        "screenSizeAlert": {
+            "gotIt": "¡Entendido!",
+            "header": "¡Bienvenido al Sistema de gráficos a medida!",
+            "body": {
+                "header": "!El Sistema de gráficos a medida está diseñado para pantallas mayores!",
+                "text": {
+                    "1": "Redimensiona la pantalla de tu navegador o ",
+                    "2": "envíe a si mismo un recordatorio ",
+                    "3": "para regresar en un mejor momento."
+                },
+                "footer": "Los dispositivos táctiles aún no son totalmente compatibles."
+            }
         }
     },         
     "separator" : {
