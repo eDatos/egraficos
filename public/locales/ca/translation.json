@@ -91,6 +91,19 @@
             "loadrows": {
                 "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han estat correctament parsejades, ara pots triar un gràfic!</p>"
             }
+        },
+        "screenSizeAlert": {
+            "gotIt": "Ho tinc!",
+            "header": "Benvingut al Sistema de gràfics a mida!",
+            "body": {
+                "header": "Sistema de gràfics a mida està dissenyat per a pantalles més grans!",
+                "text": {
+                    "1": "Canvia la mida de la finestra del navegador o ",
+                    "2": "envia't un recordatori ",
+                    "3": "per tornar en un moment millor."
+                },
+                "footer": "Els dispositius tàctils encara no són totalment compatibles."
+            }
         }
     },         
     "separator" : {
