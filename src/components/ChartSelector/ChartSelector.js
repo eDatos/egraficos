@@ -2,10 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import { Row, Col, Card } from 'react-bootstrap';
 import styles from './ChartSelector.module.scss';
+import { useTranslation } from 'react-i18next';
+
 
 function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
   const charts = availableCharts;
-
+  const {t} = useTranslation(['translation']);
   return (
     <>
       <Row>
@@ -20,7 +22,7 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
                 <Card.Subtitle className="m-0">
                   <h4 className="mb-2">{currentChart.metadata.category}</h4>
                 </Card.Subtitle>
-                <Card.Text>{currentChart.metadata.description}</Card.Text>
+                <Card.Text>{t(currentChart.metadata.description)}</Card.Text>
               </Card.Body>
             </Card>
           )}

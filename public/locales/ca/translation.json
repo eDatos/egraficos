@@ -49,7 +49,22 @@
                 "tittle": "Seleccioneu municipi"
             },
             "chartselection": {
-                "tittle": "2. Seleccioneu gràfic"
+                "tittle": "2. Seleccioneu gràfic",
+                "barchart": {
+                    "description": "Mostra una dimensió categòrica i quantitats relacionades. Cada barra representa una categoria, l'amplada és proporcional a la dimensió quantitativa."
+                },
+                "linechart": {
+                    "description": "Mostra una dimensió quantitativa durant un interval continu o període de temps. El color es pot utilitzar opcionalment per codificar una dimensió quantitativa o categòrica addicional."
+                },
+                "piechart": {
+                    "description": "Permet veure les proporcions entre els valors que formen un tot, utilitzant arcs que componen un cercle."
+                },
+                "scatterchart": {
+                    "description": "El disseny bàsic és un diagrama de dispersió, que permet veure correlacions entre dues dimensions contínues."
+                },
+                "treemapchart": {
+                    "description": "Mostra dades estructurades jeràrquicament i una dimensió quantitativa relacionada. Està compost per una zona dividida en petits rectangles, que representen l'últim nivell de l'estructura arbòria. La mida dels rectangles depèn de la dimensió quantitativa."
+                }
             },
             "mapping": {
                 "tittle": "3. Mapejos",

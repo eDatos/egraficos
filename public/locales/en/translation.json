@@ -47,7 +47,22 @@
                 "tittle": "Choose municipality"
             },
             "chartselection": {
-                "tittle": "2. Choose a chart"
+                "tittle": "2. Choose a chart",
+                "barchart": {
+                    "description": "It displays a categorical dimension and related amounts. Each bar represents a category, width is proportional to the quantitative dimension."
+                },
+                "linechart": {
+                    "description": "It displays a quantitative dimension over a continuous interval or time period. Colour can be optionally used to encode an additional quantitative or categorical dimension."
+                },
+                "piechart": {
+                    "description": "It allows you to see the proportions between values that make up a whole, by using arcs composing a circle."
+                },
+                "scatterchart": {
+                    "description": "The basic layout is a scatter plot, which allows to see correlations among two continuous dimensions."
+                },
+                "treemapchart": {
+                    "description": "It displays hierarchically structured data and a related quantitative dimension. It is composed of an area divided into small rectangles, representing the last level of the tree structure. The rectangles’ size depends on the quantitative dimension."
+                }
             },
             "mapping": {
                 "tittle": "3. Mapping",

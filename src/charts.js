@@ -1,5 +1,11 @@
-import { barchart, piechart, linechart, scatterchart } from './charts/index.js';
+import {
+  barchart,
+  piechart,
+  linechart,
+  scatterchart,
+  treemapchart,
+} from './charts/index.js';
 
-let charts = [barchart, piechart, linechart, scatterchart];
+let charts = [barchart, piechart, linechart, scatterchart, treemapchart];
 
 export default charts;

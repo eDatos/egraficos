@@ -34,17 +34,6 @@ export const visualOptions = {
     default: false,
     group: 'chart',
   },
-  // colors
-  colorScale: {
-    type: 'colorScale',
-    label: 'Color scale',
-    domain: 'colorDomain',
-    default: {
-      scaleType: 'ordinal',
-      interpolator: 'defaultPalette',
-    },
-    group: 'colors',
-  },
   // labels
   showSeriesLabels: {
     type: 'boolean',
@@ -72,5 +61,15 @@ export const visualOptions = {
       },
     ],
     default: 'inside',
+  },
+  colorScale: {
+    type: 'colorScale',
+    domain: 'colorDomain',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'defaultPalette',
+      defaultColor: '#009BD7',
+    },
+    group: 'colors',
   },
 };

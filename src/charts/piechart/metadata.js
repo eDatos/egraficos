@@ -7,8 +7,7 @@ export const metadata = {
   thumbnail,
   icon,
   categories: ['proportions'],
-  description:
-    'It allows you to see the proportions between values that make up a whole, by using arcs composing a circle.',
+  description: 'global.section.chartselection.piechart.description',
   code: '',
   tutorial: '',
 };

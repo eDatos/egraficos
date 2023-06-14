@@ -49,7 +49,22 @@
                 "tittle": "Seleccione municipio"
             },
             "chartselection": {
-                "tittle": "2. Seleccione gráfico"
+                "tittle": "2. Seleccione gráfico",
+                "barchart": {
+                    "description": "Muestra una dimensión categórica y cantidades relacionadas. Cada barra representa una categoría, el ancho es proporcional a la dimensión cuantitativa."
+                },
+                "linechart": {
+                    "description": "Muestra una dimensión cuantitativa sobre un intervalo continuo o período de tiempo. El color se puede usar opcionalmente para codificar una dimensión cuantitativa o categórica adicional."
+                },
+                "piechart": {
+                    "description": "Te permite ver las proporciones entre los valores que forman un todo, mediante el uso de arcos que componen un círculo."
+                },
+                "scatterchart": {
+                    "description": "El diseño básico es un gráfico de dispersión, que permite ver las correlaciones entre dos dimensiones continuas."
+                },
+                "treemapchart": {
+                    "description": "Muestra datos estructurados jerárquicamente y una dimensión cuantitativa relacionada. Está compuesto por un área dividida en pequeños rectángulos, que representan el último nivel de la estructura de árbol. El tamaño de los rectángulos depende de la dimensión cuantitativa."
+                }
             },
             "mapping": {
                 "tittle": "3. Mapping",
