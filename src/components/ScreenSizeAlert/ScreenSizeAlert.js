@@ -10,7 +10,7 @@ function ScreenSizeAlert() {
   const size = useWindowSize();
   const [showModal, setShowModal] = useState(size.width < 992);
   const [modalWasClosed, setModalWasClosed] = useState(false);
-  const {t} = useTranslation(['translation']);
+  const { t } = useTranslation(['translation']);
 
   const handleClose = () => {
     setShowModal(false);
@@ -43,9 +43,7 @@ function ScreenSizeAlert() {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className="big">
-        {t('global.screenSizeAlert.body.header')}
-        </p>
+        <p className="big">{t('global.screenSizeAlert.body.header')}</p>
         <p>
           {t('global.screenSizeAlert.body.text.1')}
           <a href="mailto:?subject=Visit+RAWGraphs+2.0&body=Hello%21%0D%0APlease+do+not+forget+to+take+a+look+at+the+new+version+of+RAWGraphs%21%0D%0A%0D%0AVisit%3A+https%3A%2F%2Fdev.rawgraphs.io%2F%0D%0A%0D%0ASee+you+later%2C%0D%0AThe+RAWGraphs+Team">
@@ -57,7 +55,7 @@ function ScreenSizeAlert() {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={handleClose}>
-        {t('global.screenSizeAlert.gotIt')}
+          {t('global.screenSizeAlert.gotIt')}
         </Button>
       </Modal.Footer>
     </Modal>

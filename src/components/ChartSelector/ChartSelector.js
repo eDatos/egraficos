@@ -4,10 +4,9 @@ import { Row, Col, Card } from 'react-bootstrap';
 import styles from './ChartSelector.module.scss';
 import { useTranslation } from 'react-i18next';
 
-
 function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
   const charts = availableCharts;
-  const {t} = useTranslation(['translation']);
+  const { t } = useTranslation(['translation']);
   return (
     <>
       <Row>
