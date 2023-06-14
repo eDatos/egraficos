@@ -7,6 +7,11 @@ export const visualOptions = {
     default: 1,
     group: 'chart',
   },
+  borderWidth: {
+    type: 'number',
+    default: 5,
+    group: 'chart',
+  },
   showLegend: {
     type: 'boolean',
     default: false,

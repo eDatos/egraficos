@@ -65,5 +65,6 @@
     "showpercentage": "Mostrar porcentajes",
     "showLabel": "Mostrar etiquetas",
     "showUpperLabel": "Mostrar etiqueta superior",
-    "gapWidth": "Espacio"
+    "gapWidth": "Espacio",
+    "borderWidth": "Ancho de Borde"
 }
