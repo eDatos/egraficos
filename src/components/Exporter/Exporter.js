@@ -140,14 +140,19 @@ export default function Exporter({
   }
 
   useEffect(() => {
-    const baseExportFormats = ['edatosgraphs', 'widget'];
-    const newExportFormats =
-      visualOptions.render === 'svg'
-        ? [...baseExportFormats, 'svg']
-        : [...baseExportFormats, 'png'];
-    setExportFormats(newExportFormats);
-    setCurrentFormat('edatosgraphs');
-  }, [visualOptions.render]);
+    if (dataSource.type !== 'wms') {
+      const baseExportFormats = ['edatosgraphs', 'widget'];
+      const newExportFormats =
+        visualOptions.render === 'svg'
+          ? [...baseExportFormats, 'svg']
+          : [...baseExportFormats, 'png'];
+      setExportFormats(newExportFormats);
+      setCurrentFormat(newExportFormats[0]);
+    } else {
+      setExportFormats(['widget']);
+      setCurrentFormat('widget');
+    }
+  }, [visualOptions.render, dataSource.type]);
 
   const onMapMove = useCallback(() => {
     setPosition(map.getCenter());
