@@ -4,8 +4,16 @@ import {
   linechart,
   scatterchart,
   treemapchart,
+  stackedbarchart,
 } from './charts/index.js';
 
-let charts = [barchart, piechart, linechart, scatterchart, treemapchart];
+let charts = [
+  barchart,
+  stackedbarchart,
+  piechart,
+  linechart,
+  scatterchart,
+  treemapchart,
+];
 
 export default charts;

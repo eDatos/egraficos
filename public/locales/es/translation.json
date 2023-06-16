@@ -64,6 +64,9 @@
                 },
                 "treemapchart": {
                     "description": "Muestra datos estructurados jerárquicamente y una dimensión cuantitativa relacionada. Está compuesto por un área dividida en pequeños rectángulos, que representan el último nivel de la estructura de árbol. El tamaño de los rectángulos depende de la dimensión cuantitativa."
+                },
+                "stackedbarchart": {
+                    "description": "Muestra múltiples dimensiones cuantitativas relacionadas con categorías. las barras se apilan visualmente de acuerdo con la dimensión categórica, cada barra representa una dimensión cuantitativa, mapeada en su altura."
                 }
             },
             "mapping": {

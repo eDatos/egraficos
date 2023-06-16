@@ -64,6 +64,9 @@
                 },
                 "treemapchart": {
                     "description": "Mostra dades estructurades jeràrquicament i una dimensió quantitativa relacionada. Està compost per una zona dividida en petits rectangles, que representen l'últim nivell de l'estructura arbòria. La mida dels rectangles depèn de la dimensió quantitativa."
+                },
+                "stackedbarchart": {
+                    "description": "Mostra múltiples dimensions quantitatives relacionades amb categories. les barres s'apilen visualment segons la dimensió categòrica, cada barra representa una dimensió quantitativa, mapejada a la seva alçada."
                 }
             },
             "mapping": {
