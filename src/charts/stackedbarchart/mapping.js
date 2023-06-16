@@ -22,10 +22,7 @@ const getxAxis = (mapData, name, visualOptions) => {
   ];
 };
 
-const colorValue = function (visualOptions, item) {
-  if (visualOptions.colorScale.userScaleValues?.length === 1) {
-    return visualOptions.colorScale.userScaleValues[0].range;
-  }
+const colorValue = function (visualOptions, item) {  
   return visualOptions.colorScale.userScaleValues.find((e) => e.domain === item)
     ?.range;
 };

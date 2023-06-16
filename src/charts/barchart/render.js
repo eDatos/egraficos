@@ -1,6 +1,6 @@
 export function colorDomain(data, mapping) {
   let domain = '';
-  if (data && mapping.series?.value && mapping.series.value?.length > 0) {
+  if (data && mapping.series?.value?.length > 0) {
     domain = data
       .map((item) => item[mapping.series.value])
       .filter((value, index, self) => self.indexOf(value) === index);

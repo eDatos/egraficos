@@ -1,6 +1,6 @@
 export function colorDomain(data, mapping) {
   let domain = '';
-  if (data && mapping.series?.value && mapping.series.value?.length > 0) {
+  if (data && mapping.series?.value?.length > 0) {
     domain = [];
     let stacks = data
       .map((item) => item[mapping.series.value])
