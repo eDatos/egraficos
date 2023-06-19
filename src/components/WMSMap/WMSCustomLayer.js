@@ -12,7 +12,7 @@ const WMSCustomLayer = ({ layer, url }) => {
         return;
       }
       if (this._map._popup?.isOpen()) {
-        let content = this._map._popup.getContent();
+        const content = this._map._popup.getContent();
         this._map._popup.setContent(`${info}<br><br>${content}`);
       } else {
         this._map.openPopup(info, latlng);
