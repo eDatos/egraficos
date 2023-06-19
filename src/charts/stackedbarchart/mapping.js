@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import { parseObject } from '../utils/parseUtils';
+import { white } from '../../constants';
 
 const getxAxis = (mapData, name, visualOptions) => {
   let xData = mapData
@@ -44,6 +45,10 @@ const getSeries = (mapData, bars, visualOptions) => {
         stack: stack ? stack : 'default',
         emphasis: {
           focus: 'series',
+        },
+        itemStyle: {
+          borderRadius: [2, 0, 0, 0],
+          borderColor: white,
         },
         data: myData.filter((d) => d.series === stack).map((d) => d.size),
         color: colorValue(visualOptions, name),

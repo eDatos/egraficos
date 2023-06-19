@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
+import { white } from '../../constants';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   // define aggregators
@@ -131,6 +132,11 @@ export function getChartOptions(
       name: item.series,
       type: 'pie',
       id: item.series,
+      avoidLabelOverlap: false,
+      itemStyle: {
+        borderColor: white,
+        borderWidth: 2,
+      },
       title: {
         text: item.series,
         show: true,

@@ -145,3 +145,5 @@ export const grayPalette = [
   '#CCCCCC',
   '#F2F2F2',
 ];
+
+export const white = '#FFFFFF';
