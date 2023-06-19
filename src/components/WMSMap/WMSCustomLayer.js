@@ -11,7 +11,12 @@ const WMSCustomLayer = ({ layer, url }) => {
       if (!this._map || !info) {
         return;
       }
-      this._map.openPopup(info, latlng);
+      if (this._map._popup?.isOpen()) {
+        const content = this._map._popup.getContent();
+        this._map._popup.setContent(`${info}<br><br>${content}`);
+      } else {
+        this._map.openPopup(info, latlng);
+      }
     },
   });
 
