@@ -1,4 +1,4 @@
-import { baseVisualOptions } from '../baseVisualOptions';
+import { baseVisualOptions } from '../../baseVisualOptions';
 
 export const visualOptions = {
   ...baseVisualOptions,
@@ -8,19 +8,6 @@ export const visualOptions = {
     group: 'artboard',
   },
   // chart
-  drawDonut: {
-    type: 'boolean',
-    default: true,
-    group: 'chart',
-  },
-  halfDonut: {
-    type: 'boolean',
-    default: false,
-    group: 'chart',
-    disabled: {
-      drawDonut: false,
-    },
-  },
   arcTichkness: {
     type: 'number',
     default: 25,

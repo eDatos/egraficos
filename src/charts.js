@@ -1,6 +1,8 @@
 import {
   barchart,
   piechart,
+  donut,
+  halfdonut,
   linechart,
   scatterchart,
   treemapchart,
@@ -11,6 +13,8 @@ let charts = [
   barchart,
   stackedbarchart,
   piechart,
+  donut,
+  halfdonut,
   linechart,
   scatterchart,
   treemapchart,
