@@ -119,7 +119,7 @@ export const COLOR_SCHEMES_LABELS = {
 };
 
 export const defaultPalette = [
-  '#009BD7',
+  defaultColor,
   '#F0A82D',
   '#E95000',
   '#AF46A8',
@@ -147,3 +147,5 @@ export const grayPalette = [
 ];
 
 export const white = '#FFFFFF';
+
+export const defaultColor = '#009BD7';

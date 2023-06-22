@@ -1,3 +1,4 @@
+import { defaultColor } from '../../constants';
 import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
@@ -33,7 +34,7 @@ export const visualOptions = {
     default: {
       scaleType: 'ordinal',
       interpolator: 'defaultPalette',
-      defaultColor: '#009BD7',
+      defaultColor: defaultColor,
     },
     group: 'colors',
   },

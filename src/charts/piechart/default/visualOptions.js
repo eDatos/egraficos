@@ -1,4 +1,5 @@
-import { baseVisualOptions } from '../baseVisualOptions';
+import { defaultColor } from '../../../constants';
+import { baseVisualOptions } from '../../baseVisualOptions';
 
 export const visualOptions = {
   ...baseVisualOptions,
@@ -6,28 +7,6 @@ export const visualOptions = {
     type: 'number',
     default: 15,
     group: 'artboard',
-  },
-  // chart
-  drawDonut: {
-    type: 'boolean',
-    default: true,
-    group: 'chart',
-  },
-  halfDonut: {
-    type: 'boolean',
-    default: false,
-    group: 'chart',
-    disabled: {
-      drawDonut: false,
-    },
-  },
-  arcTichkness: {
-    type: 'number',
-    default: 25,
-    group: 'chart',
-    disabled: {
-      drawDonut: false,
-    },
   },
   showpercentage: {
     type: 'boolean',
@@ -68,7 +47,7 @@ export const visualOptions = {
     default: {
       scaleType: 'ordinal',
       interpolator: 'defaultPalette',
-      defaultColor: '#009BD7',
+      defaultColor: defaultColor,
     },
     group: 'colors',
   },

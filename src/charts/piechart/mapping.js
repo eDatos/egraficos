@@ -157,6 +157,7 @@ export function getChartOptions(
       top: visualOptions.marginTop,
       left: visualOptions.marginLeft,
       right: visualOptions.marginRight,
+      bottom: visualOptions.marginBottom,
       color: visualOptions.colorScale.userScaleValues.map((res) => res.range),
     };
   });
