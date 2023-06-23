@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './InlineColorPicker.module.scss';
 import CustomColorPicker from './CustomPicker/CustomColorPicker';
-import { islandPalette, sexPalette, territoryPalette } from '../../constants';
+import { defaultPalette, islandPalette, sexPalette, territoryPalette } from '../../constants';
 import { useTranslation } from 'react-i18next';
 
 export default function InlineColorPicker({
@@ -13,6 +13,7 @@ export default function InlineColorPicker({
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const color = maybeColor ?? '#000000'; // Same as <input type='color' />
   const presetPalettes = [
+    { name: '', value: defaultPalette },
     { name: t('palettes.sex.name'), value: sexPalette },
     { name: t('palettes.island.name'), value: islandPalette },
     { name: t('palettes.territory.name'), value: territoryPalette },
