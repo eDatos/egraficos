@@ -114,5 +114,22 @@
         "Semicolon":"Punt i coma",
         "Comma":"Coma",
         "Pipe":"Barra"
+    },
+    "palettes": {
+        "sex": {
+            "name": "Sexe",
+            "men": "Homes",
+            "women": "Dones",
+            "total": "Total"
+        },
+        "island": {
+            "name": "Illes"            
+        },
+        "territory": {
+            "name": "Territoris",
+            "canary": "Canàries",
+            "spain": "Espanya",
+            "others": "Altres"
+        }
     }
 } 

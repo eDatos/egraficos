@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import styles from './InlineColorPicker.module.scss';
-import { SketchPicker } from 'react-color';
+import CustomColorPicker from './CustomPicker/CustomColorPicker';
+import { defaultPalette, islandPalette, sexPalette, territoryPalette } from '../../constants';
+import { useTranslation } from 'react-i18next';
 
 export default function InlineColorPicker({
   color: maybeColor,
   onChange,
   disabled,
 }) {
+  const { t } = useTranslation(['translation']);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const color = maybeColor ?? '#000000'; // Same as <input type='color' />
+  const presetPalettes = [
+    { name: '', value: defaultPalette },
+    { name: t('palettes.sex.name'), value: sexPalette },
+    { name: t('palettes.island.name'), value: islandPalette },
+    { name: t('palettes.territory.name'), value: territoryPalette },
+  ];
 
   return (
     <>
@@ -25,11 +34,12 @@ export default function InlineColorPicker({
             className={styles.cover}
             onClick={() => setDisplayColorPicker(false)}
           />
-          <SketchPicker
+          <CustomColorPicker
             disabled={disabled}
             disableAlpha
             color={color}
             onChangeComplete={(color) => onChange(color.hex)}
+            presetPalettes={presetPalettes}
           />
         </div>
       )}

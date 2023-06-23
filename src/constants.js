@@ -118,6 +118,10 @@ export const COLOR_SCHEMES_LABELS = {
   grayPalette: 'Gray Palette',
 };
 
+export const white = '#FFFFFF';
+
+export const defaultColor = '#009BD7';
+
 export const defaultPalette = [
   defaultColor,
   '#F0A82D',
@@ -146,6 +150,24 @@ export const grayPalette = [
   '#F2F2F2',
 ];
 
-export const white = '#FFFFFF';
+export const sexPalette = [
+  { color: '#009BD7', title: 'palettes.sex.men' },
+  { color: '#E95000', title: 'palettes.sex.women' },
+  { color: '#004678', title: 'palettes.sex.total' },
+];
 
-export const defaultColor = '#009BD7';
+export const territoryPalette = [
+  { color: '#004678', title: 'palettes.territory.canary' },
+  { color: '#E95000', title: 'palettes.territory.spain' },
+  { color: '#CCCCCC', title: 'palettes.territory.others' },
+];
+
+export const islandPalette = [
+  { color: '#009245', title: 'El Hierro' },
+  { color: '#66BE8F', title: 'Fuerteventura' },
+  { color: '#F0A82D', title: 'Gran Canaria' },
+  { color: '#E95000', title: 'La Gomera' },
+  { color: '#66C3E7', title: 'La Palma' },
+  { color: '#AF46A8', title: 'Lanzarote' },
+  { color: '#009BD7', title: 'Tenerife' },
+];
