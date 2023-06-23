@@ -113,5 +113,22 @@
         "Semicolon":"Semicolon",
         "Comma":"Comma",
         "Pipe":"Pipe"
+    },
+    "palettes": {
+        "sex": {
+            "name": "Sex",
+            "men": "Men",
+            "women": "Women",
+            "total": "Total"
+        },
+        "island": {
+            "name": "Islands"            
+        },
+        "territory": {
+            "name": "Territories",
+            "canary": "Canary Islands",
+            "spain": "Spain",
+            "others": "Others"
+        }
     }
 } 
