@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import styles from './InlineColorPicker.module.scss';
 import CustomColorPicker from './CustomPicker/CustomColorPicker';
-import { defaultPalette, islandPalette, sexPalette, territoryPalette } from '../../constants';
+import {
+  defaultPalette,
+  islandPalette,
+  sexPalette,
+  territoryPalette,
+} from '../../constants';
 import { useTranslation } from 'react-i18next';
 
 export default function InlineColorPicker({
