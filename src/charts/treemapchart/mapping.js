@@ -68,9 +68,10 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
         }
         const item = {
           name: parseObject(v[0][hierarchy[index]]),
-          value: mapping.size.value
-            ? sizeAggregator(v.map((d) => d[mapping.size.value]))
-            : v.length,
+          value:
+            mapping.size.value && sizeAggregator[0]
+              ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
+              : v.length,
           path: hierarchy.reduce(
             (acc, curr) => (acc === '' ? curr : `${acc}/${curr}`),
             ''

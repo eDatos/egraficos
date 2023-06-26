@@ -12,10 +12,10 @@ import {
 let charts = [
   barchart,
   stackedbarchart,
+  linechart,
   piechart,
   donut,
   halfdonut,
-  linechart,
   scatterchart,
   treemapchart,
 ];
