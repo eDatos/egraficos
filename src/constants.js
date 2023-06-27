@@ -115,7 +115,7 @@ export const COLOR_SCHEMES_LABELS = {
   interpolateTurbo: 'Turbo discrete',
   interpolateSpectral: 'Spectral discrete',
   defaultPalette: 'Default palette',
-  grayPalette: 'Gray Palette',
+  grayPalette: 'Gray palette',
 };
 
 export const white = '#FFFFFF';

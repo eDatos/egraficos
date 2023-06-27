@@ -135,7 +135,7 @@ export function getChartOptions(
       avoidLabelOverlap: false,
       itemStyle: {
         borderColor: white,
-        borderWidth: 2,
+        borderWidth: visualOptions.borderWidth,
       },
       title: {
         text: item.series,

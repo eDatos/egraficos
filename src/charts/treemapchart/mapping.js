@@ -1,7 +1,7 @@
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import { parseObject } from '../utils/parseUtils';
 import * as d3 from 'd3';
-import { grayPalette } from '../../constants';
+import { grayPalette, white } from '../../constants';
 
 const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
   const sizeAggregator = getDimensionAggregator(
@@ -21,7 +21,7 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
       {
         color: visualOptions.colorScale.userScaleValues.map((v) => v.range),
         itemStyle: {
-          borderColor: grayPalette[3],
+          borderColor: white,
           borderWidth: 0,
           gapWidth: visualOptions.gapWidth,
         },
@@ -99,7 +99,7 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
         height: 30,
       },
       itemStyle: {
-        borderColor: '#fff',
+        borderColor: white,
       },
       levels: getLevelOption(),
       data: dataHierarchy(0, data),
