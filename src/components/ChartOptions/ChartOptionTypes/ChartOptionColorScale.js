@@ -9,7 +9,7 @@ import InilineColorPicker from '../../InlineColorPicker';
 import ColorSchemesDropDown from './ColorSchemesDropDown';
 import { Row, Col, Dropdown } from 'react-bootstrap';
 import { ResetBtn, InvertBtn, LockBtn } from './ColorScaleUtils';
-import { SCALES_LABELS } from '../../../constants';
+import { SCALES_LABELS, defaultPalette } from '../../../constants';
 import get from 'lodash/get';
 import keyBy from 'lodash/keyBy';
 import {
@@ -24,6 +24,8 @@ import {
 import styles from '../ChartOptions.module.scss';
 import usePrevious from '../../../hooks/usePrevious';
 import { useTranslation } from 'react-i18next';
+import * as d3Interpolate from 'd3-interpolate';
+import * as d3Scale from 'd3-scale';
 
 function getDatePickerValue(userValue) {
   if (userValue.userDomain === 0) {
@@ -359,6 +361,17 @@ const ChartOptionColorScale = ({
     }
   }, [availableScaleTypes, handleChangeScaleType, locked]);
 
+  const presetPalette = useMemo(() => {
+    const interpolatorValue = colorPresets[scaleType][interpolator]
+      ? colorPresets[scaleType][interpolator].value
+      : defaultPalette;
+    const scaleRange = Array.isArray(interpolatorValue)
+      ? interpolatorValue
+      : d3Interpolate.quantize(interpolatorValue, userValues.length);
+    const colorScale = d3Scale.scaleOrdinal().range(scaleRange);
+    return scaleRange.map((_, index) => colorScale(index));
+  }, [interpolator, scaleType, userValues]);
+
   return hasAnyMapping ? (
     <>
       <Row
@@ -472,6 +485,7 @@ const ChartOptionColorScale = ({
                     onChange={(color) => {
                       setUserValueRange(i, color);
                     }}
+                    presetPalette={presetPalette}
                   />
                 </div>
               </Col>
