@@ -361,7 +361,7 @@ const ChartOptionColorScale = ({
     }
   }, [availableScaleTypes, handleChangeScaleType, locked]);
 
-  const presetPalette = useMemo(() => {
+  let presetPalette = useMemo(() => {
     const interpolatorValue = colorPresets[scaleType][interpolator]
       ? colorPresets[scaleType][interpolator].value
       : defaultPalette;
