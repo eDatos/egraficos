@@ -9,6 +9,11 @@ export const visualOptions = {
     group: 'artboard',
   },
   // chart
+  borderWidth: {
+    type: 'number',
+    default: 2,
+    group: 'chart',
+  },
   arcTichkness: {
     type: 'number',
     default: 25,
@@ -43,12 +48,8 @@ export const visualOptions = {
         label: 'inside',
         value: 'inside',
       },
-      {
-        label: 'center',
-        value: 'center',
-      },
     ],
-    default: 'inside',
+    default: 'outside',
   },
   colorScale: {
     type: 'colorScale',

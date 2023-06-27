@@ -8,6 +8,11 @@ export const visualOptions = {
     default: 15,
     group: 'artboard',
   },
+  borderWidth: {
+    type: 'number',
+    default: 2,
+    group: 'chart',
+  },
   showpercentage: {
     type: 'boolean',
     default: false,
@@ -34,12 +39,8 @@ export const visualOptions = {
         label: 'inside',
         value: 'inside',
       },
-      {
-        label: 'center',
-        value: 'center',
-      },
     ],
-    default: 'inside',
+    default: 'outside',
   },
   colorScale: {
     type: 'colorScale',
