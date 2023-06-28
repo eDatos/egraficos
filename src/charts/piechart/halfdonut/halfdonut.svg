@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg id="rawgraphs-icons" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
   <defs>
-    <style>       
+    <style>
       .cls-1 {
-        fill: #95e5c0;
+        fill: #66C3E7;
       }
-
       .cls-2 {
-        fill: #06c26c;
+        fill: #009BD7;
       }
     </style>
   </defs>
