@@ -12,21 +12,13 @@ const samplesList = [
     sourceURL: 'https://data.world/mattschroyer/netflix-original-series',
   },
   {
-    name: 'GDP sector composition',
-    category: 'Pie chart, Scatter Chart',
-    url: './sample-datasets/Stacked barchart - GDP sector composition.tsv',
-    delimiter: '\t',
-    sourceName: 'Wikipedia',
+    name: 'Tasa de participación de los jóvenes y adultos en la enseñanza y formación académica y no académica.',
+    category: 'Bar chart',
+    url: './sample-datasets/Tasa Insercion.csv',
+    delimiter: ',',
+    sourceName: 'ISTAC',
     sourceURL:
-      'https://en.wikipedia.org/w/index.php?title=List_of_countries_by_GDP_sector_composition&oldid=1022131842',
-  },
-  {
-    name: 'Revenues per Music format',
-    category: 'Line chart, Scatter Chart, Pie Chart',
-    url: './sample-datasets/Line chart - RIAA Music format revenues.tsv',
-    delimiter: '\t',
-    sourceName: 'RIAA',
-    sourceURL: 'https://www.riaa.com/u-s-sales-database/',
+      'https://www3.gobiernodecanarias.org/aplicaciones/appsistac/ods/4-3-1/',
   },
   {
     name: 'EDATOS EXAMPLE',

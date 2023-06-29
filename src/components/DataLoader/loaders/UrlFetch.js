@@ -4,7 +4,10 @@ import S from './UrlFetch.module.scss';
 import { useTranslation } from 'react-i18next';
 
 export async function fetchData(source) {
-  const response = await fetch(source.url);
+  const response = await fetch(source.url, {
+    method: 'GET',
+    headers: { Accept: 'text/csv' },
+  });
   return await response.text();
 }
 
