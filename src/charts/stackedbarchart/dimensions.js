@@ -1,9 +1,9 @@
 export const dimensions = [
   {
     id: 'stacks',
-    name: 'X Axis',
+    name: 'Axis',
     validTypes: ['number', 'string', 'date'],
-    required: true,
+    required: false,
     operation: 'get',
   },
 

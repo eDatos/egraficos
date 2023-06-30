@@ -66,5 +66,8 @@
     "showLabel": "Mostrar etiquetas",
     "showUpperLabel": "Mostrar etiqueta superior",
     "gapWidth": "Espai",
-    "borderWidth": "Ample de vora"
+    "borderWidth": "Ample de vora",
+    "showAxisName": "Mostrar nom eix",
+    "axisNamePosition": "Posició nom eix",
+    "axisNameGap": "Espai nom eix"
 }
