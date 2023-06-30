@@ -3,9 +3,24 @@ import { baseVisualOptions } from '../../baseVisualOptions';
 
 export const visualOptions = {
   ...baseVisualOptions,
+  marginTop: {
+    type: 'number',
+    default: -50,
+    group: 'artboard',
+  },
+  marginRight: {
+    type: 'number',
+    default: -5,
+    group: 'artboard',
+  },
+  marginBottom: {
+    type: 'number',
+    default: -40,
+    group: 'artboard',
+  },
   marginLeft: {
     type: 'number',
-    default: 15,
+    default: -5,
     group: 'artboard',
   },
   // chart
@@ -22,12 +37,26 @@ export const visualOptions = {
       drawDonut: false,
     },
   },
-  showpercentage: {
-    type: 'boolean',
-    default: false,
-    group: 'chart',
-  },
   // labels
+  showValueAndPercentage: {
+    type: 'text',
+    group: 'labels',
+    options: [
+      {
+        label: 'value',
+        value: 'value',
+      },
+      {
+        label: 'percentage',
+        value: 'percentage',
+      },
+      {
+        label: 'both',
+        value: 'both',
+      },
+    ],
+    default: 'value',
+  },
   showSeriesLabels: {
     type: 'boolean',
     default: true,
@@ -50,6 +79,14 @@ export const visualOptions = {
       },
     ],
     default: 'outside',
+  },
+  showValueOnSeriesLabels: {
+    type: 'boolean',
+    group: 'labels',
+    disabled: {
+      showSeriesLabels: false,
+    },
+    default: false,
   },
   colorScale: {
     type: 'colorScale',

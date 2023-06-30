@@ -19,6 +19,21 @@ export const visualOptions = {
     ],
     default: 'vertical',
   },
+  sortBarsBy: {
+    type: 'text',
+    group: 'chart',
+    options: [
+      {
+        label: 'name',
+        value: 'name',
+      },
+      {
+        label: 'original',
+        value: 'original',
+      },
+    ],
+    default: 'name',
+  },
   // labels
   showAxisName: {
     type: 'boolean',
