@@ -161,7 +161,6 @@ export function getChartOptions(
         show: visualOptions.showSeriesLabels,
         position: visualOptions.showSeriesLabelsPosition,
         formatter(param) {
-          // correct the percentage
           const value = visualOptions.showValueOnSeriesLabels
             ? `(${labelValue(visualOptions, param.value, param.percent)})`
             : '';
