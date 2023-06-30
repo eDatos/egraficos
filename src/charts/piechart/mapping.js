@@ -102,12 +102,10 @@ export function getChartOptions(
   const pieSeries = resultMap.map(function (item, index) {
     countreg = countreg + 1;
     const map2 = new Map(Object.entries(item));
-    var valuedentro = mapping.arcs.value.map((arc) => {
-      return {
-        name: arc,
-        value: map2.get(arc),
-      };
-    });
+    var valuedentro = mapping.arcs.value.map((arc) => ({
+      name: arc,
+      value: map2.get(arc),
+    }));
     if (visualOptions.halfDonut) {
       const totalValue = valuedentro.reduce((acc, curr) => acc + curr.value, 0);
       valuedentro = [
