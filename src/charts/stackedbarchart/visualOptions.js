@@ -3,17 +3,33 @@ import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
   ...baseVisualOptions,
+  barsOrientation: {
+    type: 'text',
+    label: 'Bars orientation',
+    group: 'chart',
+    options: [
+      {
+        label: 'vertical',
+        value: 'vertical',
+      },
+      {
+        label: 'horizontal',
+        value: 'horizontal',
+      },
+    ],
+    default: 'vertical',
+  },
   // labels
-  showXaxisName: {
+  showAxisName: {
     type: 'boolean',
     default: false,
     group: 'labels',
   },
-  xAxisNamePosition: {
+  axisNamePosition: {
     type: 'text',
     group: 'labels',
     disabled: {
-      showXaxisName: false,
+      showAxisName: false,
     },
     options: [
       {
@@ -31,11 +47,11 @@ export const visualOptions = {
     ],
     default: 'middle',
   },
-  xAxisNameGap: {
+  axisNameGap: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showXaxisName: false,
+      showAxisName: false,
     },
     default: 25,
   },
