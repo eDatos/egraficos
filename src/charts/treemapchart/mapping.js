@@ -21,7 +21,7 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
       {
         color: visualOptions.colorScale.userScaleValues.map((v) => v.range),
         itemStyle: {
-          borderColor: white,
+          borderColor: visualOptions.gapColor,
           borderWidth: 0,
           gapWidth: visualOptions.gapWidth,
         },
@@ -31,7 +31,7 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
       },
       {
         itemStyle: {
-          borderColor: grayPalette[4],
+          borderColor: visualOptions.borderColor,
           borderWidth: visualOptions.borderWidth,
           gapWidth: visualOptions.gapWidth,
         },
