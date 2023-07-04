@@ -87,6 +87,18 @@ export function getChartOptions(
     }
   }
 
+  const labelValue = (visualOptions, value, percent) => {
+    let percentValue = (visualOptions.halfDonut ? percent * 2 : percent) + '%';
+    switch (visualOptions.showValueAndPercentage) {
+      case 'both':
+        return `${value} - ${percentValue}`;
+      case 'percentage':
+        return percentValue;
+      default:
+        return value;
+    }
+  };
+
   const pieSeries = resultMap.map(function (item, index) {
     countreg = countreg + 1;
     const map2 = new Map(Object.entries(item));
@@ -148,6 +160,12 @@ export function getChartOptions(
       label: {
         show: visualOptions.showSeriesLabels,
         position: visualOptions.showSeriesLabelsPosition,
+        formatter(param) {
+          const value = visualOptions.showValueOnSeriesLabels
+            ? `(${labelValue(visualOptions, param.value, param.percent)})`
+            : '';
+          return `${param.name} ${value}`;
+        },
       },
       emphasis: {
         focus: 'series',
@@ -176,10 +194,7 @@ export function getChartOptions(
           '<span class="tooltip-circle" style="background-color:' +
           color +
           '"></span>';
-        const value = visualOptions.showpercentage
-          ? (visualOptions.halfDonut ? params.percent * 2 : params.percent) +
-            '%'
-          : params.value;
+        const value = labelValue(visualOptions, params.value, params.percent);
         return `${colorSpan(params.color)} ${params.name} <b>${value}</b>`;
       },
     }, //añadir a las opciones

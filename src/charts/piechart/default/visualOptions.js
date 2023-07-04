@@ -13,12 +13,26 @@ export const visualOptions = {
     default: 2,
     group: 'chart',
   },
-  showpercentage: {
-    type: 'boolean',
-    default: false,
-    group: 'chart',
-  },
   // labels
+  showValueAndPercentage: {
+    type: 'text',
+    group: 'labels',
+    options: [
+      {
+        label: 'value',
+        value: 'value',
+      },
+      {
+        label: 'percentage',
+        value: 'percentage',
+      },
+      {
+        label: 'both',
+        value: 'both',
+      },
+    ],
+    default: 'value',
+  },
   showSeriesLabels: {
     type: 'boolean',
     default: true,
@@ -41,6 +55,14 @@ export const visualOptions = {
       },
     ],
     default: 'outside',
+  },
+  showValueOnSeriesLabels: {
+    type: 'boolean',
+    group: 'labels',
+    disabled: {
+      showSeriesLabels: false,
+    },
+    default: false,
   },
   colorScale: {
     type: 'colorScale',

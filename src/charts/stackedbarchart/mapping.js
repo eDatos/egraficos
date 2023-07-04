@@ -3,6 +3,16 @@ import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import { parseObject } from '../utils/parseUtils';
 import { white } from '../../constants';
 
+const sortFunction = (a, b, sortBarsBy) => {
+  switch (sortBarsBy) {
+    case 'original':
+      return 0;
+    case 'name':
+    default:
+      return a.stacks ? a.stacks - b.stacks : a - b;
+  }
+};
+
 var getXAxisItem = (name, visualOptions) => {
   const type =
     visualOptions.barsOrientation === 'vertical' ? 'category' : 'value';
@@ -35,12 +45,12 @@ var getYAxisItem = (name, visualOptions) => {
   };
 };
 
-const getAxis = (mapData, item) => {
+const getAxis = (mapData, item, sortBarsBy) => {
   if (item.type === 'category') {
     let data = mapData
       .map((item) => item.stacks)
       .filter((value, index, self) => self.indexOf(value) === index);
-    item.data = data.sort();
+    item.data = data.sort((a, b) => sortFunction(a, b, sortBarsBy));
   }
   return [item];
 };
@@ -55,7 +65,7 @@ const getSeries = (mapData, bars, visualOptions) => {
   bars.forEach((bar) => {
     let myData = mapData
       .filter((d) => d.bars === bar)
-      .sort((a, b) => a.stacks - b.stacks);
+      .sort((a, b) => sortFunction(a, b, visualOptions.sortBarsBy));
     let myStacks = myData
       .map((item) => item.series)
       .filter((value, index, self) => self.indexOf(value) === index);
@@ -168,8 +178,16 @@ export const getChartOptions = function (
       top: visualOptions.marginTop,
       containLabel: true,
     },
-    xAxis: getAxis(resultMap, getXAxisItem(axisName, visualOptions)),
-    yAxis: getAxis(resultMap, getYAxisItem(axisName, visualOptions)),
+    xAxis: getAxis(
+      resultMap,
+      getXAxisItem(axisName, visualOptions),
+      visualOptions.sortBarsBy
+    ),
+    yAxis: getAxis(
+      resultMap,
+      getYAxisItem(axisName, visualOptions),
+      visualOptions.sortBarsBy
+    ),
     series: [...series],
   };
 };
