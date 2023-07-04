@@ -14,6 +14,11 @@ export const visualOptions = {
     group: 'chart',
   },
   // labels
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+  },
   showValueAndPercentage: {
     type: 'text',
     group: 'labels',
