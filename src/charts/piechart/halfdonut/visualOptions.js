@@ -41,6 +41,11 @@ export const visualOptions = {
     },
   },
   //labels
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+  },
   showValueAndPercentage: {
     type: 'text',
     group: 'labels',

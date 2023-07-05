@@ -68,9 +68,15 @@
     "showValueOnSeriesLabels": "Extended info",
     "showLabel": "Show label",
     "showUpperLabel": "Show upper label",
+    "gapColor": "Gap color",
     "gapWidth": "Gap",
+    "borderColor": "Border color",
     "borderWidth": "Border width",
     "showAxisName": "Show axis Name",
     "axisNamePosition": "Axis Name Position",
-    "axisNameGap": "Axis Name Gap"
+    "axisNameGap": "Axis Name Gap",
+    "value": "Value",
+    "percentage": "Percentage",
+    "both": "Both",
+    "units": "Units"
 }

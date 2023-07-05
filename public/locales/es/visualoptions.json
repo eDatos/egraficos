@@ -66,9 +66,15 @@
     "showValueOnSeriesLabels": "Información extendida",
     "showLabel": "Mostrar etiquetas",
     "showUpperLabel": "Mostrar etiqueta superior",
+    "gapColor": "Color de espacio",
     "gapWidth": "Espacio",
-    "borderWidth": "Ancho de Borde",
+    "borderColor": "Color de borde",    
+    "borderWidth": "Ancho de borde",
     "showAxisName": "Mostrar nombre eje",
     "axisNamePosition": "Posición nombre eje",
-    "axisNameGap": "Espacio de nombre eje"
+    "axisNameGap": "Espacio de nombre eje",
+    "value": "Valor",
+    "percentage": "Porcentaje",
+    "both": "Ambos",
+    "units": "Unidades"
 }
