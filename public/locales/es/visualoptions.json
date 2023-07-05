@@ -72,5 +72,9 @@
     "borderWidth": "Ancho de borde",
     "showAxisName": "Mostrar nombre eje",
     "axisNamePosition": "Posición nombre eje",
-    "axisNameGap": "Espacio de nombre eje"
+    "axisNameGap": "Espacio de nombre eje",
+    "value": "Valor",
+    "percentage": "Porcentaje",
+    "both": "Ambos",
+    "units": "Unidades"
 }

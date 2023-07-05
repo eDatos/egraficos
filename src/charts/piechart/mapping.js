@@ -91,11 +91,11 @@ export function getChartOptions(
     let percentValue = (visualOptions.halfDonut ? percent * 2 : percent) + '%';
     switch (visualOptions.showValueAndPercentage) {
       case 'both':
-        return `${value} - ${percentValue}`;
+        return `${value}${visualOptions.units} - ${percentValue}`;
       case 'percentage':
         return percentValue;
       default:
-        return value;
+        return value + visualOptions.units;
     }
   };
 

@@ -72,5 +72,9 @@
     "borderWidth": "Ample de vora",    
     "showAxisName": "Mostrar nom eix",
     "axisNamePosition": "Posició nom eix",
-    "axisNameGap": "Espai nom eix"
+    "axisNameGap": "Espai nom eix",
+    "value": "Valor",
+    "percentage": "Percentatge",
+    "both": "Tots dos",
+    "units": "Unitats"
 }
