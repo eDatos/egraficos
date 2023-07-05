@@ -15,7 +15,7 @@ function WMSMap(props) {
   return (
     <>
       <Row>
-        <Col xs={3} className="pt-3">
+        <Col xs={3} className="pt-3 mb-3">
           <Municipalities
             onChange={(municipality) => {
               if (municipality[0]) {
@@ -30,6 +30,8 @@ function WMSMap(props) {
             }}
           />
         </Col>
+      </Row>
+      <Row>
         <Col>
           <MapContainer
             center={center}

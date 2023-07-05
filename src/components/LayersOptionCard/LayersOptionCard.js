@@ -1,5 +1,5 @@
 import { Card, Form } from 'react-bootstrap';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -9,7 +9,7 @@ import { BsXCircle } from 'react-icons/bs';
 
 const SelectionLayerCombo = (props) => {
   const { t } = useTranslation(['translation']);
-  const styleMap = { zIndex: `100${10 - props.index}` };
+  const styleMap = { zIndex: `10${10 - props.index}` };
   const onMove = useCallback(
     (dragIndex, hoverIndex) => {
       const item = props.selectedLayers[dragIndex];
@@ -58,6 +58,53 @@ const SelectionLayerCombo = (props) => {
   );
 };
 
+const SelectionStyle = ({
+  options,
+  layer,
+  selectedLayers,
+  setSelectedLayers,
+  index,
+}) => {
+  const [styleSelected, setStyleSelected] = useState([]);
+  return (
+    <>
+      <Card.Subtitle className="mt-3 mb-2">
+        <b>Selecciona estilo para capa: </b>
+        {layer.Title}
+      </Card.Subtitle>
+      <Typeahead
+        clearButton
+        id="select-style"
+        labelKey="styleTitle"
+        onChange={(stylesSelected) => {
+          let newSelectedLayers = [...selectedLayers];
+          layer.StyleSelected = stylesSelected[0];
+          newSelectedLayers[index] = layer;
+          setSelectedLayers(newSelectedLayers);
+          setStyleSelected(stylesSelected);
+        }}
+        options={options}
+        placeholder="Select style..."
+        selected={styleSelected}
+      />
+      <Form.Check
+        disabled={styleSelected.length === 0}
+        id="showLegend"
+        className="mt-2"
+        label="Show Legend"
+        type="switch"
+        checked={layer.showLegend}
+        onChange={() => {
+          let newSelectedLayers = [...selectedLayers];
+          layer.showLegend = !layer.showLegend;
+          newSelectedLayers[index] = layer;
+          setSelectedLayers(newSelectedLayers);
+        }}
+      />
+    </>
+  );
+};
+
 function LayersOptionCard({
   title,
   layers,
@@ -70,7 +117,7 @@ function LayersOptionCard({
     {
       [layer.Name]: Object.fromEntries(
         Object.entries(layer).filter(
-          ([key]) => key !== 'Name' && key !== 'Title'
+          ([key]) => key !== 'Name' && key !== 'Title' && key !== 'showLegend'
         )
       ),
     },
@@ -107,37 +154,13 @@ function LayersOptionCard({
             return (
               <React.Fragment key={index}>
                 {options.length > 0 && (
-                  <>
-                    <Card.Subtitle className="mt-3">
-                      <b>Selecciona estilo para capa: </b>
-                      {layer.Title}
-                    </Card.Subtitle>
-                    <Typeahead
-                      id="select-style"
-                      labelKey="styleTitle"
-                      onChange={(stylesSelected) => {
-                        let newSelectedLayers = [...selectedLayers];
-                        layer.StyleSelected = stylesSelected[0];
-                        newSelectedLayers[index] = layer;
-                        setSelectedLayers(newSelectedLayers);
-                      }}
-                      options={options}
-                      placeholder="Default style"
-                    />
-                    <Form.Check
-                      id="showLegend"
-                      className="mt-2"
-                      label="Show Legend"
-                      type="switch"
-                      checked={layer.showLegend}
-                      onChange={() => {
-                        let newSelectedLayers = [...selectedLayers];
-                        layer.showLegend = !layer.showLegend;
-                        newSelectedLayers[index] = layer;
-                        setSelectedLayers(newSelectedLayers);
-                      }}
-                    />
-                  </>
+                  <SelectionStyle
+                    options={options}
+                    layer={layer}
+                    selectedLayers={selectedLayers}
+                    setSelectedLayers={setSelectedLayers}
+                    index={index}
+                  />
                 )}
               </React.Fragment>
             );
