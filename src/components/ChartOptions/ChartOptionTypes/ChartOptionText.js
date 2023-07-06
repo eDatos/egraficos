@@ -29,22 +29,22 @@ const ChartOptionText = ({
         {label}
       </Col>
       <Col xs={6}>
-      <input
-        className="w-100 form-control text-field"
-        type="text"
-        value={value ?? ''}
-        step={props.step}
-        disabled={!isEnabled}
-        onChange={(e) => {
-          onChange(e.target.value);
-        }}
-        placeholder={defaultValue}
-      />
-      {error && (
-        <small>
-          <i>{error}</i>
-        </small>
-      )}
+        <input
+          className="w-100 form-control text-field"
+          type="text"
+          value={value ?? ''}
+          step={props.step}
+          disabled={!isEnabled}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
+          placeholder={defaultValue}
+        />
+        {error && (
+          <small>
+            <i>{error}</i>
+          </small>
+        )}
       </Col>
     </Row>
   );
