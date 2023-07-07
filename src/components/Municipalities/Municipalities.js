@@ -28,7 +28,7 @@ function Municipalities(props) {
       labelKey="etiqueta"
       onChange={props.onChange}
       options={municipalities}
-      placeholder={t('global.section.wmsmunicipalityselection.tittle')}
+      placeholder={t('global.section.wmsmunicipalityselection.title')}
     />
   );
 }

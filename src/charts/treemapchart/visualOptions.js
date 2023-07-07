@@ -2,7 +2,7 @@ import { defaultColor, white } from '../../constants';
 import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
-  ...baseVisualOptions,  
+  ...baseVisualOptions,
   gapColor: {
     type: 'color',
     default: white,

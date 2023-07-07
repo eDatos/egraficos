@@ -35,7 +35,7 @@ export default function ParsingOptions(props) {
   return (
     <Row>
       <Col className={styles.parsingOptions}>
-        <b>{t('separator.tittle')}</b>
+        <b>{t('separator.title')}</b>
         {props.userDataType === 'csv' && (
           <SeparatorSelector
             title={t('separator.column.name')}
@@ -80,7 +80,7 @@ export default function ParsingOptions(props) {
         )}
 
         <div className="divider mb-3 mt-0" />
-        <b>{t('datatransform.tittle')}</b>
+        <b>{t('datatransform.title')}</b>
         <b>DATA TRANSFORMATION</b>
 
         <StackSelector

@@ -15,7 +15,10 @@ const WMSCustomLayer = ({ layer, url }) => {
         const content = this._map._popup.getContent();
         this._map._popup.setContent(`${info}<br><br>${content}`);
       } else {
-        this._map.openPopup(info, latlng);
+        this._map.openPopup(info, latlng, {
+          maxWidth: '1600',
+          keepInView: true,
+        });
       }
     },
   });
@@ -28,6 +31,7 @@ const WMSCustomLayer = ({ layer, url }) => {
       format: 'image/png',
       transparent: 'true',
       styles: selectedStyles,
+      info_format: 'text/html',
     });
 
     layerRef.current = source.getLayer(layerName);
