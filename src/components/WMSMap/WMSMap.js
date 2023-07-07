@@ -8,12 +8,14 @@ import Legend from './Legend';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import WMSCustomLayer from './WMSCustomLayer';
 import Municipalities from '../Municipalities/Municipalities';
-import { access_token, bing_key } from '../../constants';
+import applicationConfig from '../../application.json';
 
 function WMSMap(props) {
   const center = [28.2, -16.5];
   const zoom = 8;
   const styleMap = { width: '100%', height: '80vh' };
+  const bing_key = applicationConfig['maps']['bing_key'];
+  const access_token = applicationConfig['maps']['mapbox_token'];
 
   return (
     <>

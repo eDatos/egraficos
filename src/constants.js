@@ -171,8 +171,3 @@ export const islandPalette = [
   { color: '#AF46A8', title: 'Lanzarote' },
   { color: '#009BD7', title: 'Tenerife' },
 ];
-
-export const bing_key =
-  'ApzG8h1sQqyEW-bdAWhNQ8g3ZVfxX_q5HsepUWacOJXXQmCYzkm2Np3ydSQrqrtO';
-export const access_token =
-  'pk.eyJ1IjoiaXN0YWMiLCJhIjoiY2p1Y21zenNiMG53MDQ0cGk1OGtzczl1MCJ9.Yp_T9Jf8_bHI2j0FsGXiKw';

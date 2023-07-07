@@ -7,7 +7,7 @@ import { Typeahead, TypeaheadInputMulti } from 'react-bootstrap-typeahead';
 import Token from '../WMSMap/Token';
 import { BsXCircle } from 'react-icons/bs';
 
-const SelectionLayerCombo = (props) => {  
+const SelectionLayerCombo = (props) => {
   const { t } = useTranslation(['translation']);
   const styleMap = { zIndex: `10${10 - props.index}` };
   const onMove = useCallback(
