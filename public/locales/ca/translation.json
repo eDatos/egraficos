@@ -3,7 +3,7 @@
         "appName": "Sistema de gràfics a mida",
         "section": {
             "loaddata": {
-                "tittle": "1. Carregar dades",
+                "title": "1. Carregar dades",
                 "paste": {
                     "name": "Enganxar dades",
                     "message": "Copieu i enganxeu les dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON."
@@ -43,13 +43,18 @@
                 }
             },
             "wmslayerselection": {
-                "tittle": "Seleccioneu capes"
+                "title": "Seleccioneu capes",
+                "style":  {
+                    "placeholder": "Seleccioneu l'estil...",
+                    "title": "Seleccioneu l'estil per a la capa",
+                    "legend": "Mostra llegenda"                    
+                }
             },
             "wmsmunicipalityselection": {
-                "tittle": "Seleccioneu municipi"
+                "title": "Seleccioneu municipi"
             },
             "chartselection": {
-                "tittle": "2. Seleccioneu gràfic",
+                "title": "2. Seleccioneu gràfic",
                 "barchart": {
                     "description": "Mostra una dimensió categòrica i quantitats relacionades. Cada barra representa una categoria, l'amplada és proporcional a la dimensió quantitativa."
                 },

@@ -7,7 +7,7 @@ import { Typeahead, TypeaheadInputMulti } from 'react-bootstrap-typeahead';
 import Token from '../WMSMap/Token';
 import { BsXCircle } from 'react-icons/bs';
 
-const SelectionLayerCombo = (props) => {
+const SelectionLayerCombo = (props) => {  
   const { t } = useTranslation(['translation']);
   const styleMap = { zIndex: `10${10 - props.index}` };
   const onMove = useCallback(
@@ -31,7 +31,7 @@ const SelectionLayerCombo = (props) => {
           multiple
           onChange={props.onChange}
           options={props.layers}
-          placeholder={t('global.section.wmslayerselection.tittle')}
+          placeholder={t('global.section.wmslayerselection.title')}
           style={styleMap}
           renderInput={(inputProps, childProps) => (
             <TypeaheadInputMulti
@@ -66,10 +66,11 @@ const SelectionStyle = ({
   index,
 }) => {
   const [styleSelected, setStyleSelected] = useState([]);
+  const { t } = useTranslation(['translation']);
   return (
     <>
       <Card.Subtitle className="mt-3 mb-2">
-        <b>Selecciona estilo para capa: </b>
+        <b>{t('global.section.wmslayerselection.style.title')}: </b>
         {layer.Title}
       </Card.Subtitle>
       <Typeahead
@@ -84,14 +85,14 @@ const SelectionStyle = ({
           setStyleSelected(stylesSelected);
         }}
         options={options}
-        placeholder="Select style..."
+        placeholder={t('global.section.wmslayerselection.style.placeholder')}
         selected={styleSelected}
       />
       <Form.Check
         disabled={styleSelected.length === 0}
         id="showLegend"
         className="mt-2"
-        label="Show Legend"
+        label={t('global.section.wmslayerselection.style.legend')}
         type="switch"
         checked={layer.showLegend}
         onChange={() => {
