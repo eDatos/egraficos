@@ -49,7 +49,7 @@ export default class WMSFetch extends React.Component {
       const styleTitle = children.children
         .filter((element) => element.name === 'Title')
         .map((e) => e.value)[0];
-      return styleTitle !== '' ? styleTitle : 'Default';
+      return styleTitle || 'Default';
     }
 
     function getURL(legendURL) {
