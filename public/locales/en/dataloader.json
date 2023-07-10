@@ -1,6 +1,6 @@
 {
     "separator": {
-        "tittle" : "DATA PARSING OPTIONS",
+        "title" : "DATA PARSING OPTIONS",
         "column" :  {
             "name": "Column separator"
         },
@@ -13,7 +13,7 @@
     },
     "datelocale":"Date Locale",
     "datatransform": {
-        "tittle": "DATA TRANSFORMATION",
+        "title": "DATA TRANSFORMATION",
         "stack": "Stack on"
     }  
 }
