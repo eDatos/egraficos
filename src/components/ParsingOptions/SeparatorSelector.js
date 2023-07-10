@@ -58,7 +58,7 @@ export default function SeparatorSelector({
               return (
                 <Dropdown.Item
                   key={separatorsLabels[key]}
-                  onSelect={() => handleChange(key)}
+                  onClick={() => handleChange(key)}
                 >
                   {formatValue(key)}
                 </Dropdown.Item>

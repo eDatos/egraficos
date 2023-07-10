@@ -31,13 +31,13 @@ export default function StackSelector({
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {value && (
-            <Dropdown.Item onSelect={() => handleChange(null)}>
+            <Dropdown.Item onClick={() => handleChange(null)}>
               {'Do not stack'}
             </Dropdown.Item>
           )}
           {Object.keys(list).map((d) => {
             return (
-              <Dropdown.Item key={d} onSelect={() => handleChange(d)}>
+              <Dropdown.Item key={d} onClick={() => handleChange(d)}>
                 {d}
               </Dropdown.Item>
             );

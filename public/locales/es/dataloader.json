@@ -1,6 +1,6 @@
 {
     "separator": {
-        "tittle" : "OPCIONES ANÁLISIS DE DATOS",
+        "title" : "OPCIONES ANÁLISIS DE DATOS",
         "column" :  {
             "name": "Separador columna"
         },
@@ -13,7 +13,7 @@
     },
     "datelocale":"Local Fecha",
     "datatransform": {
-        "tittle": "TRANSFORMACIÓN DATOS",
+        "title": "TRANSFORMACIÓN DATOS",
         "stack": "Agrupar"
     }    
 }

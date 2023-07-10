@@ -81,7 +81,6 @@ export default function ParsingOptions(props) {
 
         <div className="divider mb-3 mt-0" />
         <b>{t('datatransform.title')}</b>
-        <b>DATA TRANSFORMATION</b>
 
         <StackSelector
           title={t('datatransform.stack')}
