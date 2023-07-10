@@ -292,7 +292,7 @@ function App() {
         abortCustomChartLoad={abortCustomChartLoad}
       />
       <div className="app-sections">
-        <Section title={t('global.section.loaddata.tittle')} loading={loading}>
+        <Section title={t('global.section.loaddata.title')} loading={loading}>
           <DataLoader {...dataLoader} hydrateFromProject={importProject} />
         </Section>
         {dataLoader.dataSource?.type === 'wms' && !data && (
@@ -305,7 +305,7 @@ function App() {
           </Section>
         )}
         {data && (
-          <Section title={t('global.section.chartselection.tittle')}>
+          <Section title={t('global.section.chartselection.title')}>
             <ChartSelector
               availableCharts={charts}
               currentChart={currentChart}
@@ -315,7 +315,7 @@ function App() {
         )}
         {data && currentChart && (
           <Section
-            title={t('global.section.mapping.tittle')}
+            title={t('global.section.mapping.title')}
             loading={mappingLoading}
           >
             <DataMapping
@@ -328,7 +328,7 @@ function App() {
           </Section>
         )}
         {data && currentChart && (
-          <Section title={t('global.section.customize.tittle')}>
+          <Section title={t('global.section.customize.title')}>
             <ChartPreviewWithOptions
               chart={currentChart}
               dataset={data.dataset}
@@ -342,7 +342,7 @@ function App() {
           </Section>
         )}
         {((data && rawViz) || map) && dataLoader.dataSource && (
-          <Section title={t('global.section.export.tittle')}>
+          <Section title={t('global.section.export.title')}>
             <Exporter
               rawViz={rawViz}
               exportProject={exportProject}

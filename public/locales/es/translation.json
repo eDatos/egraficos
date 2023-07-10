@@ -3,7 +3,7 @@
         "appName": "Sistema de gráficos a medida",
         "section": {
             "loaddata": {
-                "tittle": "1. Cargar datos",
+                "title": "1. Cargar datos",
                 "paste": {
                     "name": "Pegar datos",
                     "message": "Copie y pegue sus datos de otras aplicaciones o sitios web. Puede usar datos tabulares (TSV, CSV, DSV) o JSON."
@@ -43,13 +43,18 @@
                 }
             },
             "wmslayerselection": {
-                "tittle": "Seleccione capas"
+                "title": "Seleccione capas",
+                "style":  {
+                    "placeholder": "Selecciona estilo...",
+                    "title": "Selecciona estilo para capa",
+                    "legend": "Mostrar leyenda"                    
+                }
             },
             "wmsmunicipalityselection": {
-                "tittle": "Seleccione municipio"
+                "title": "Seleccione municipio"
             },
             "chartselection": {
-                "tittle": "2. Seleccione gráfico",
+                "title": "2. Seleccione gráfico",
                 "barchart": {
                     "description": "Muestra una dimensión categórica y cantidades relacionadas. Cada barra representa una categoría, el ancho es proporcional a la dimensión cuantitativa."
                 },
@@ -70,7 +75,7 @@
                 }
             },
             "mapping": {
-                "tittle": "3. Mapping",
+                "title": "3. Mapping",
                 "chartvariables":{
                     "dimensions": "DIMENSIONES",
                     "variables": "VARIABLES GRÁFICO",
@@ -79,10 +84,10 @@
                 }
             },
             "customize": {
-                "tittle": "4. Personalizar"
+                "title": "4. Personalizar"
             },
             "export": {
-                "tittle": "5. Exportar"
+                "title": "5. Exportar"
             }
         },
         "reset": "Reiniciar",
