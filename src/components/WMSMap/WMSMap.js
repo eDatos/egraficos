@@ -1,6 +1,5 @@
 import React from 'react';
 import { LayersControl, MapContainer, TileLayer } from 'react-leaflet';
-import { BingLayer } from 'react-leaflet-bing-v2';
 import 'leaflet/dist/leaflet.css';
 import { Col, Row } from 'react-bootstrap';
 import Legend from './Legend';
@@ -9,6 +8,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import WMSCustomLayer from './WMSCustomLayer';
 import Municipalities from '../Municipalities/Municipalities';
 import applicationConfig from '../../application.json';
+import BingTileLayer from './BingTileLayer';
 
 function WMSMap(props) {
   const center = [28.2, -16.5];
@@ -53,13 +53,16 @@ function WMSMap(props) {
                 />
               </LayersControl.BaseLayer>
               <LayersControl.BaseLayer name="Bing Maps Aerial With Labels">
-                <BingLayer bingkey={bing_key} type="AerialWithLabels" />
+                <BingTileLayer
+                  bingMapsKey={bing_key}
+                  imagerySet="AerialWithLabels"
+                />
               </LayersControl.BaseLayer>
               <LayersControl.BaseLayer name="Bing Maps Aerial">
-                <BingLayer bingkey={bing_key} type="Aerial" />
+                <BingTileLayer bingMapsKey={bing_key} imagerySet="Aerial" />
               </LayersControl.BaseLayer>
               <LayersControl.BaseLayer name="Bing Maps Roads">
-                <BingLayer bingkey={bing_key} type="Road" />
+                <BingTileLayer bingMapsKey={bing_key} imagerySet="Road" />
               </LayersControl.BaseLayer>
               <LayersControl.BaseLayer name="Positron (Light)">
                 <TileLayer
