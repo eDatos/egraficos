@@ -36,6 +36,7 @@
     "lodash": "^4.17.15",
     "louvain": "^1.2.0",
     "lru-cache": "^6.0.0",
+    "moment": "^2.29.4",
     "papaparse": "^5.4.1",
     "rdf-literal": "^1.2.0",
     "react": "^18.2.0",

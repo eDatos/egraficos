@@ -171,3 +171,10 @@ export const islandPalette = [
   { color: '#AF46A8', title: 'Lanzarote' },
   { color: '#009BD7', title: 'Tenerife' },
 ];
+
+export const dateParsersPatterns = {
+  year: 'YYYY',
+  month: 'MMMM',
+  dayOfWeek: 'dddd',
+  original: null,
+};
