@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import EDatosGraph from './components/echart';
 import EDatosWMS from './components/wms';
+import './index.css';
 
 export default {
   widgets: {

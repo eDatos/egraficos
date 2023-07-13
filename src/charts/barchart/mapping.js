@@ -1,8 +1,15 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
-import { parseObject } from '../utils/parseUtils';
+import { format, parseObject } from '../utils/parseUtils';
 
-const mapData = function (data, mapping, dataTypes, dimensions) {
+const mapData = function (
+  data,
+  mapping,
+  dataTypes,
+  dimensions,
+  xAxisFormat,
+  locale
+) {
   const sizeAggregator = getDimensionAggregator(
     'size',
     mapping,
@@ -36,13 +43,13 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
       return item;
     },
     (d) => parseObject(d[mapping.series.value]), //series grouping
-    (d) => parseObject(d[mapping.bars.value]) // bars grouping
+    (d) => format(d[mapping.bars.value], xAxisFormat, locale) // bars grouping
   );
 
   return results;
 };
 
-function categoryOptions(visualOptions, name) {
+function categoryOptions(visualOptions, name, locale) {
   return {
     name: visualOptions.showXaxisName ? name : '',
     nameLocation: visualOptions.xAxisNamePosition,
@@ -52,6 +59,9 @@ function categoryOptions(visualOptions, name) {
       show: visualOptions.showXaxisLabels,
       rotate: visualOptions.showXaxisLabelsRotate,
       fontSize: visualOptions.showXaxisLabelsFontSize,
+      formatter: (param) => {
+        return format(param, visualOptions.xAxisFormat, locale);
+      },
     },
   };
 }
@@ -70,16 +80,16 @@ function valueOptions(visualOptions, name) {
   };
 }
 
-const getxAxis = (visualOptions, name) => {
+const getxAxis = (visualOptions, name, locale) => {
   if ('vertical' === visualOptions.barsOrientation) {
-    return categoryOptions(visualOptions, name);
+    return categoryOptions(visualOptions, name, locale);
   } else {
     return valueOptions(visualOptions, name);
   }
 };
-const getyAxis = (visualOptions, name) => {
+const getyAxis = (visualOptions, name, locale) => {
   if ('horizontal' === visualOptions.barsOrientation) {
-    return categoryOptions(visualOptions, name);
+    return categoryOptions(visualOptions, name, locale);
   } else {
     return valueOptions(visualOptions, name);
   }
@@ -110,7 +120,7 @@ function getSorterConfig(visualOptions, dimensions) {
   return {
     transform: {
       type: 'sort',
-      config: { dimension, order },
+      config: { dimension, order, parser: 'time' },
     },
   };
 }
@@ -135,9 +145,17 @@ export const getChartOptions = function (
   datachart,
   mapping,
   dataTypes,
-  dimensions
+  dimensions,
+  locale
 ) {
-  const resultMap = mapData(datachart, mapping, dataTypes, dimensions);
+  const resultMap = mapData(
+    datachart,
+    mapping,
+    dataTypes,
+    dimensions,
+    visualOptions.xAxisFormat,
+    locale
+  );
   let dimensiones = getDimensions(resultMap, mapping);
   const barSeries = dimensiones.splice(1).map(function (item, index) {
     let colorValue = getColorValue();
@@ -184,7 +202,19 @@ export const getChartOptions = function (
       top: visualOptions.legendMarginTop,
     },
     backgroundColor: visualOptions.background,
-    tooltip: {}, //añadir a las opciones
+    tooltip: {
+      formatter: function (params) {
+        var colorSpan = (color) =>
+          '<span class="tooltip-circle" style="background-color:' +
+          color +
+          '"></span>';
+        return `${params.seriesName}<br/>${colorSpan(params.color)} ${format(
+          params.name,
+          visualOptions.xAxisFormat,
+          locale
+        )}&nbsp;&nbsp;&nbsp;<b>${params.value[params.seriesName]}</b>`;
+      },
+    },
     toolbox: {
       show: visualOptions.showToolbox,
       feature: {
@@ -204,8 +234,8 @@ export const getChartOptions = function (
       top: visualOptions.marginTop,
       containLabel: true,
     },
-    xAxis: getxAxis(visualOptions, mapping.bars.value),
-    yAxis: getyAxis(visualOptions, mapping.size.value),
+    xAxis: getxAxis(visualOptions, mapping.bars.value, locale),
+    yAxis: getyAxis(visualOptions, mapping.size.value, locale),
     series: [...barSeries],
   };
 };

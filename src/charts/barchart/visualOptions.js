@@ -100,6 +100,32 @@ export const visualOptions = {
     },
     default: 12,
   },
+  xAxisFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'original',
+    options: [
+      {
+        label: 'original',
+        value: 'original',
+      },
+      {
+        label: 'year',
+        value: 'year',
+      },
+      {
+        label: 'month',
+        value: 'month',
+      },
+      {
+        label: 'dayOfWeek',
+        value: 'dayOfWeek',
+      },
+    ],
+    disabled: {
+      showXaxisLabels: false,
+    },
+  },
   showYaxisName: {
     type: 'boolean',
     default: false,

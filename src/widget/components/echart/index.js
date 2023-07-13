@@ -43,7 +43,8 @@ const EDatosGraph = (props) => {
         parsedDataset.dataset,
         props.mapping,
         props.dataTypes,
-        chart.dimensions
+        chart.dimensions,
+        props.locale
       );
     };
 

@@ -76,5 +76,9 @@
     "value": "Valor",
     "percentage": "Porcentaje",
     "both": "Ambos",
-    "units": "Unidades"
+    "units": "Unidades",
+    "xAxisFormat": "Formato eje X",
+    "year": "Año",
+    "month": "Mes",
+    "dayOfWeek": "Día de la semana"
 }

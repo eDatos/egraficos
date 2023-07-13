@@ -76,5 +76,9 @@
     "value": "Valor",
     "percentage": "Percentatge",
     "both": "Tots dos",
-    "units": "Unitats"
+    "units": "Unitats",
+    "xAxisFormat": "Format eix X",
+    "year": "Any",
+    "month": "Mes",
+    "dayOfWeek": "Dia de la setmana"
 }
