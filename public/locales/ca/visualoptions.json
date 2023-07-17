@@ -80,5 +80,20 @@
     "xAxisFormat": "Format eix X",
     "year": "Any",
     "month": "Mes",
-    "dayOfWeek": "Dia de la setmana"
+    "dayOfWeek": "Dia de la setmana",
+    "showBarsName": "Mostra el nom de les barres",
+    "barsNameLocation": "Posició del nom de les barres",
+    "barsNameGap": "Gap de nom de barres",
+    "showBarsLabels": "Mostra l'etiqueta de les barres",
+    "barsLabelsRotate": "Rotació d'etiquetes de barres",
+    "barsLabelsFontSize": "Tamaño de les etiquetes de barras",
+    "barsLabelsFormat": "Format d'etiqueta de barres",
+    "showBarsSizeName": "Mostra el nom de valors",
+    "barsSizeNameLocation": "Posició del nom de valors",
+    "showBarsSizeLabels": "Mostra les etiquetes de valors",
+    "barsSizeNameGap": "Interval de nom de valors",
+    "barsSizeLabelsRotate": "Rotació d'etiquetes de valors",
+    "barsSizeLabelsFontSize": "Mida d'etiquetes de valors",
+    "customBarsName": "Nom de barres",
+    "customBarsSizeName": "Nom de valors"
 }

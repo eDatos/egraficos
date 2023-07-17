@@ -25,7 +25,7 @@ const ChartOptionText = ({
   }
   return (
     <Row className={props.className}>
-      <Col xs={6} className="d-flex align-items-center nowrap">
+      <Col xs={6} className="d-flex align-items-center">
         {label}
       </Col>
       <Col xs={6}>

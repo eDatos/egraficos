@@ -78,9 +78,24 @@
     "value": "Value",
     "percentage": "Percentage",
     "both": "Both",
-    "units": "Units",
-    "xAxisFormat": "X axis format",
+    "units": "Units",    
     "year": "Year",
     "month": "Month",
-    "dayOfWeek": "Day of Week"
+    "dayOfWeek": "Day of Week",
+    "showBarsName": "Show bars name",
+    "barsNameLocation": "Bars name position",
+    "barsNameGap": "Bars name gap",
+    "showBarsLabels": "Show bars labels",
+    "barsLabelsRotate": "Bars labels rotation",
+    "barsLabelsFontSize": "Bars labels fontsize",
+    "barsLabelsFormat": "Bars labels format",
+    "showBarsSizeName": "Show bars size name",
+    "barsSizeNameLocation": "Bars size name position",
+    "barsSizeNameGap": "Bars size name gap",
+    "showBarsSizeLabels": "Show bars size labels",
+    "barsSizeLabelsRotate": "Bars size labels rotation",
+    "barsSizeLabelsFontSize": "Bars size label fontsize",
+    "customBarsName": "Custom bars name",
+    "customBarsSizeName": "Custom bars size name"
+
 }

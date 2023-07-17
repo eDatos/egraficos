@@ -12,7 +12,7 @@ const ChartOptionBoolean = ({
 }) => {
   return (
     <Row className={className}>
-      <Col xs={6} className="d-flex align-items-center nowrap">
+      <Col xs={6} className="d-flex align-items-center">
         {label}
       </Col>
       <Form className="col-6 d-flex align-items-center">
