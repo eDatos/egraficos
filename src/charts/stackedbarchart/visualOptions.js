@@ -35,16 +35,24 @@ export const visualOptions = {
     default: 'name',
   },
   // labels
-  showAxisName: {
+  showBarsName: {
     type: 'boolean',
     default: false,
     group: 'labels',
   },
-  axisNamePosition: {
+  customBarsName: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+    disabled: {
+      showBarsName: false,
+    },
+  },
+  barsNameLocation: {
     type: 'text',
     group: 'labels',
     disabled: {
-      showAxisName: false,
+      showBarsName: false,
     },
     options: [
       {
@@ -62,17 +70,44 @@ export const visualOptions = {
     ],
     default: 'middle',
   },
-  axisNameGap: {
+  barsNameGap: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showAxisName: false,
+      showBarsName: false,
     },
     default: 25,
   },
+  barsLabelsFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'original',
+    options: [
+      {
+        label: 'original',
+        value: 'original',
+      },
+      {
+        label: 'year',
+        value: 'year',
+      },
+      {
+        label: 'month',
+        value: 'month',
+      },
+      {
+        label: 'dayOfWeek',
+        value: 'dayOfWeek',
+      },
+    ],
+  },
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+  },
   showXaxisLabels: {
     type: 'boolean',
-    label: 'Show axis Label',
     default: true,
     group: 'labels',
   },
