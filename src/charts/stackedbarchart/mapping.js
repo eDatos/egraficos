@@ -1,56 +1,88 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
-import { parseObject } from '../utils/parseUtils';
+import { diff, format, parseObject } from '../utils/parseUtils';
 import { white } from '../../constants';
 
-const sortFunction = (a, b, sortBarsBy) => {
+const sortFunction = (a, b, sortBarsBy, type) => {
   switch (sortBarsBy) {
     case 'original':
       return 0;
     case 'name':
     default:
-      return a.stacks ? a.stacks - b.stacks : a - b;
+      return a.stacks ? diff(a.stacks, b.stacks, type) : diff(a, b, type);
   }
 };
 
-var getXAxisItem = (name, visualOptions) => {
+var getAxisItem = (
+  name,
+  type,
+  axisLabel,
+  axisLabelRotate,
+  axisLabelFontSize,
+  visualOptions,
+  stacks,
+  locale
+) => {
+  return {
+    name: visualOptions.showBarsName && type === 'category' ? name : '',
+    nameLocation: visualOptions.barsNameLocation,
+    nameGap: visualOptions.barsNameGap,
+    type: type,
+    axisLabel: {
+      show: axisLabel,
+      rotate: axisLabelRotate,
+      fontSize: axisLabelFontSize,
+      formatter: (param) => {
+        if (type === 'category') {
+          return format(
+            param,
+            visualOptions.barsLabelsFormat,
+            locale,
+            stacks?.mappedType
+          );
+        }
+        return param;
+      },
+    },
+  };
+};
+
+var getXAxisItem = (name, visualOptions, stacks, locale) => {
   const type =
     visualOptions.barsOrientation === 'vertical' ? 'category' : 'value';
-  return {
-    name: visualOptions.showAxisName && type === 'category' ? name : '',
-    nameLocation: visualOptions.axisNamePosition,
-    nameGap: visualOptions.axisNameGap,
-    type: type,
-    axisLabel: {
-      show: visualOptions.showXaxisLabels,
-      rotate: visualOptions.showXaxisLabelsRotate,
-      fontSize: visualOptions.showXaxisLabelsFontSize,
-    },
-  };
+  return getAxisItem(
+    name,
+    type,
+    visualOptions.showXaxisLabels,
+    visualOptions.showXaxisLabelsRotate,
+    visualOptions.showXaxisLabelsFontSize,
+    visualOptions,
+    stacks,
+    locale
+  );
 };
 
-var getYAxisItem = (name, visualOptions) => {
+var getYAxisItem = (name, visualOptions, stacks, locale) => {
   const type =
     visualOptions.barsOrientation === 'vertical' ? 'value' : 'category';
-  return {
-    name: visualOptions.showAxisName && type === 'category' ? name : '',
-    nameLocation: visualOptions.axisNamePosition,
-    nameGap: visualOptions.axisNameGap,
-    type: type,
-    axisLabel: {
-      show: visualOptions.showYaxisLabels,
-      rotate: visualOptions.showYaxisLabelsRotate,
-      fontSize: visualOptions.showYaxisLabelsFontSize,
-    },
-  };
+  return getAxisItem(
+    name,
+    type,
+    visualOptions.showYaxisLabels,
+    visualOptions.showYaxisLabelsRotate,
+    visualOptions.showYaxisLabelsFontSize,
+    visualOptions,
+    stacks,
+    locale
+  );
 };
 
-const getAxis = (mapData, item, sortBarsBy) => {
+const getAxis = (mapData, item, sortBarsBy, stacksType) => {
   if (item.type === 'category') {
     let data = mapData
-      .map((item) => item.stacks)
+      .map((item) => item.stacks ?? '')
       .filter((value, index, self) => self.indexOf(value) === index);
-    item.data = data.sort((a, b) => sortFunction(a, b, sortBarsBy));
+    item.data = data.sort((a, b) => sortFunction(a, b, sortBarsBy, stacksType));
   }
   return [item];
 };
@@ -60,12 +92,12 @@ const colorValue = function (visualOptions, item) {
     ?.range;
 };
 
-const getSeries = (mapData, bars, visualOptions) => {
+const getSeries = (mapData, bars, visualOptions, stacksType) => {
   let series = [];
   bars.forEach((bar) => {
     let myData = mapData
       .filter((d) => d.bars === bar)
-      .sort((a, b) => sortFunction(a, b, visualOptions.sortBarsBy));
+      .sort((a, b) => sortFunction(a, b, visualOptions.sortBarsBy, stacksType));
     let myStacks = myData
       .map((item) => item.series)
       .filter((value, index, self) => self.indexOf(value) === index);
@@ -91,7 +123,14 @@ const getSeries = (mapData, bars, visualOptions) => {
   return series;
 };
 
-const mapData = function (data, mapping, dataTypes, dimensions) {
+const mapData = function (
+  data,
+  mapping,
+  dataTypes,
+  dimensions,
+  barsLabelsFormat,
+  locale
+) {
   // as we are working on a multiple dimension (bars), `getDimensionAggregator` will return an array of aggregator functions
   // the order of aggregators is the same as the value of the mapping
   const barsAggregators = getDimensionAggregator(
@@ -131,7 +170,13 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
       });
     },
     (d) => d[mapping.series.value], // series grouping
-    (d) => parseObject(d[mapping.stacks?.value]) // stacks grouping.
+    (d) =>
+      format(
+        d[mapping.stacks?.value],
+        barsLabelsFormat,
+        locale,
+        mapping.stacks?.mappedType
+      ) // stacks grouping.
   );
   return results;
 };
@@ -141,11 +186,26 @@ export const getChartOptions = function (
   datachart,
   mapping,
   dataTypes,
-  dimensions
+  dimensions,
+  locale
 ) {
-  let resultMap = mapData(datachart, mapping, dataTypes, dimensions);
-  let series = getSeries(resultMap, mapping.bars.value, visualOptions);
-  let axisName = mapping.stacks ? mapping.stacks.value : 'Size';
+  let resultMap = mapData(
+    datachart,
+    mapping,
+    dataTypes,
+    dimensions,
+    visualOptions.barsLabelsFormat,
+    locale
+  );
+  let series = getSeries(
+    resultMap,
+    mapping.bars.value,
+    visualOptions,
+    mapping.stacks?.mappedType
+  );
+  let categoryName = visualOptions.customBarsName
+    ? visualOptions.customBarsName
+    : mapping.stacks?.value ?? 'Size';
   return {
     legend: {
       show: visualOptions.showLegend,
@@ -158,6 +218,18 @@ export const getChartOptions = function (
     tooltip: {
       axisPointer: {
         type: 'shadow',
+      },
+      formatter: function (params) {
+        var colorSpan = (color) =>
+          '<span class="tooltip-circle" style="background-color:' +
+          color +
+          '"></span>';
+        return `${params.seriesName}<br/>${colorSpan(params.color)} ${format(
+          params.name,
+          visualOptions.barsLabelsFormat,
+          locale,
+          mapping.stacks?.mappedType
+        )}&nbsp;&nbsp;&nbsp;<b>${params.value}${visualOptions.units}</b>`;
       },
     },
     toolbox: {
@@ -180,13 +252,15 @@ export const getChartOptions = function (
     },
     xAxis: getAxis(
       resultMap,
-      getXAxisItem(axisName, visualOptions),
-      visualOptions.sortBarsBy
+      getXAxisItem(categoryName, visualOptions, mapping.stacks, locale),
+      visualOptions.sortBarsBy,
+      mapping.stacks?.mappedType
     ),
     yAxis: getAxis(
       resultMap,
-      getYAxisItem(axisName, visualOptions),
-      visualOptions.sortBarsBy
+      getYAxisItem(categoryName, visualOptions, mapping.stacks, locale),
+      visualOptions.sortBarsBy,
+      mapping.stacks?.mappedType
     ),
     series: [...series],
   };

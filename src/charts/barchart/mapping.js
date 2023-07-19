@@ -238,7 +238,9 @@ export const getChartOptions = function (
           visualOptions.barsLabelsFormat,
           locale,
           mapping.bars?.mappedType
-        )}&nbsp;&nbsp;&nbsp;<b>${params.value[params.seriesName]}</b>`;
+        )}&nbsp;&nbsp;&nbsp;<b>${params.value[params.seriesName]}${
+          visualOptions.units
+        }</b>`;
       },
     },
     toolbox: {

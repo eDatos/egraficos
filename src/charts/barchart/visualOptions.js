@@ -88,7 +88,6 @@ export const visualOptions = {
   },
   showBarsLabels: {
     type: 'boolean',
-    label: 'Show axis Label',
     default: true,
     group: 'labels',
   },
@@ -176,6 +175,11 @@ export const visualOptions = {
       showBarsSizeName: false,
     },
     default: 35,
+  },
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
   },
   showBarsSizeLabels: {
     type: 'boolean',

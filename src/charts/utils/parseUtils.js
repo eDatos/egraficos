@@ -22,3 +22,12 @@ export const format = (data, format, locale, type) => {
       return data;
   }
 };
+
+export const diff = (a, b, type) => {
+  switch (type) {
+    case 'date':
+      return moment(a).diff(b);
+    default:
+      return a - b;
+  }
+};
