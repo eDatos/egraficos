@@ -99,13 +99,25 @@ export function getChartOptions(
     }
   };
 
-  const pieSeries = resultMap.map(function (item, index) {
-    countreg = countreg + 1;
+  const data = (item, mapping, visualOptions) => {
     const map2 = new Map(Object.entries(item));
-    var valuedentro = mapping.arcs.value.map((arc) => ({
-      name: arc,
-      value: map2.get(arc),
-    }));
+    var valuedentro = mapping.arcs.value
+      .map((arc) => ({
+        name: arc,
+        value: map2.get(arc),
+      }))
+      .sort((a, b) => {
+        switch (visualOptions.sortBy) {
+          case 'totalDescending':
+            return b.value - a.value;
+          case 'totalAscending':
+            return a.value - b.value;
+          case 'name':
+            return a.name.localeCompare(b.name);
+          default:
+            return 0;
+        }
+      });
     if (visualOptions.halfDonut) {
       const totalValue = valuedentro.reduce((acc, curr) => acc + curr.value, 0);
       valuedentro = [
@@ -125,7 +137,11 @@ export function getChartOptions(
         },
       ];
     }
+    return valuedentro;
+  };
 
+  const pieSeries = resultMap.map(function (item, index) {
+    countreg = countreg + 1;
     var total = resultMap.length;
     var radius = spam;
     if (countreg <= regforraw) {
@@ -171,7 +187,7 @@ export function getChartOptions(
         focus: 'series',
         blurScope: 'coordinateSystem',
       },
-      data: valuedentro,
+      data: data(item, mapping, visualOptions),
       top: visualOptions.marginTop,
       left: visualOptions.marginLeft,
       right: visualOptions.marginRight,

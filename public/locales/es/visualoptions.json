@@ -95,5 +95,6 @@
     "barsSizeLabelsRotate": "Rotación de etiquetas de valores",
     "barsSizeLabelsFontSize": "Tamaño de etiquetas de valores",
     "customBarsName": "Nombre de barras",
-    "customBarsSizeName": "Nombre de valores"
+    "customBarsSizeName": "Nombre de valores",
+    "sortBy": "Ordenar por"
 }
