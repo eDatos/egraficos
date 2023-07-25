@@ -13,6 +13,29 @@ export const visualOptions = {
     default: 2,
     group: 'chart',
   },
+  sortBy: {
+    type: 'text',
+    group: 'chart',
+    options: [
+      {
+        label: 'totalDescending',
+        value: 'totalDescending',
+      },
+      {
+        label: 'totalAscending',
+        value: 'totalAscending',
+      },
+      {
+        label: 'name',
+        value: 'name',
+      },
+      {
+        label: 'original',
+        value: 'original',
+      },
+    ],
+    default: 'totalDescending',
+  },
   // labels
   units: {
     type: 'text',

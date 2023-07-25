@@ -27,8 +27,7 @@
     "showXaxisLabelsFontSize": "Label X size",
     "showSeriesLabels": "Show pies titles",
     "showSeriesLabelsPosition": "Titles position",
-    "rowsNumber": "Grid rows",
-    "sortArcsBy": "Sort arcs by",
+    "rowsNumber": "Grid rows",    
     "drawDonut": "Draw as donuts",
     "halfDonut": "Half donut",
     "arcTichkness": "Donut thickness",
@@ -96,6 +95,6 @@
     "barsSizeLabelsRotate": "Bars size labels rotation",
     "barsSizeLabelsFontSize": "Bars size label fontsize",
     "customBarsName": "Custom bars name",
-    "customBarsSizeName": "Custom bars size name"
-
+    "customBarsSizeName": "Custom bars size name",    
+    "sortBy": "Sort by"
 }

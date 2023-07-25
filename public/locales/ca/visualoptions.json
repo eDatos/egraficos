@@ -95,5 +95,6 @@
     "barsSizeLabelsRotate": "Rotació d'etiquetes de valors",
     "barsSizeLabelsFontSize": "Mida d'etiquetes de valors",
     "customBarsName": "Nom de barres",
-    "customBarsSizeName": "Nom de valors"
+    "customBarsSizeName": "Nom de valors",
+    "sortBy": "Ordenar per"
 }
