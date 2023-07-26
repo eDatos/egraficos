@@ -33,6 +33,8 @@ import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import WMSMap from './components/WMSMap/WMSMap';
 import { defaultPalette, grayPalette } from './constants';
+import axios from 'axios';
+import { applicationConfig } from './components/ApplicationConfig/ApplicationConfig';
 
 //Custom colors
 colorPresets.ordinal.defaultPalette = {
@@ -102,6 +104,17 @@ function App() {
     }
   }, []);
 
+  const faviconURL = async () => {
+    const favicon = document.getElementById('favicon');
+    const applicationConfigJson = await applicationConfig();
+    const response = await axios.get(
+      applicationConfigJson['metadata']['endpoint'] +
+        '/properties/' +
+        applicationConfigJson['metadata']['favicon']
+    );
+    favicon.href = response.data['value'];
+  };
+
   useEffect(() => {
     setVisualOptions((visualOptions) => {
       return {
@@ -118,6 +131,7 @@ function App() {
     lasImportProjectRef.current = importProject;
   });
   useEffect(() => {
+    faviconURL();
     const projectUrlStr = new URLSearchParams(window.location.search).get(
       'url'
     );
