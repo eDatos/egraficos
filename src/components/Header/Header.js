@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import applicationConfig from '../../application.json';
 import { useTranslation } from 'react-i18next';
+import { applicationConfig } from '../ApplicationConfig/ApplicationConfig';
 
 export default function Header(props) {
   const divRef = useRef(null);
@@ -17,10 +17,11 @@ export default function Header(props) {
         method: 'GET',
         headers: { Accept: 'application/json' },
       };
+      const applicationConfigJson = await applicationConfig();
       const responseHeaderURL = await fetch(
-        applicationConfig['metadata']['endpoint'] +
+        applicationConfigJson['metadata']['endpoint'] +
           '/properties/' +
-          applicationConfig['metadata']['navbarPathKey'],
+          applicationConfigJson['metadata']['navbarPathKey'],
         requestOptions
       );
       const headerUrlData = await responseHeaderURL.json();
