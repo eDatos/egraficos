@@ -302,8 +302,11 @@ function App() {
 
   const handleLogin = useCallback(() => {
     window.Edatos.UserManagement.login()
-      .then((data) => setLogged(true))
-      .catch((error) => console.log(error));
+      .then(() => setLogged(true))
+      .catch((error) => {
+        setLogged(false);
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -317,7 +320,7 @@ function App() {
       <div className="app-sections">
         {!logged && (
           <Section>
-            <div class="text-center">
+            <div className="text-center">
               <Button variant="primary" onClick={handleLogin}>
                 {t('global.section.login.title')}
               </Button>

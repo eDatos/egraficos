@@ -41,12 +41,13 @@ export default function Header({ value, setLogged }) {
         current.innerHTML = ''; // Clear the container
         current.append(slotHtml); // Append the new content
         window.Edatos.UserManagement.getAccount()
-          .then((data) => {
-            setLogged(true);
-          })
+          .then(() => setLogged(true))
           .catch(() => {
-            window.Edatos.UserManagement.login().then(() => setLogged(true));
+            window.Edatos.UserManagement.login().then(() => setLogged(false));
           });
+        window.Edatos.UserManagement.addOnLogoutListener(() => {
+          setLogged(false);
+        });
       }
     });
 
