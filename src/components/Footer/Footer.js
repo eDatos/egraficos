@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import applicationConfig from '../../application.json';
+import { applicationConfig } from '../ApplicationConfig/ApplicationConfig';
 
 export default function Footer(props) {
   const divRef = useRef(null);
@@ -9,10 +9,11 @@ export default function Footer(props) {
       method: 'GET',
       headers: { Accept: 'application/json' },
     };
+    const applicationConfigJson = await applicationConfig();
     const responseFooterURL = await fetch(
-      applicationConfig['metadata']['endpoint'] +
+      applicationConfigJson['metadata']['endpoint'] +
         '/properties/' +
-        applicationConfig['metadata']['footerPathKey'],
+        applicationConfigJson['metadata']['footerPathKey'],
       requestOptions
     );
     const footerUrlData = await responseFooterURL.json();
