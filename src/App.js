@@ -110,7 +110,7 @@ function App() {
     const response = await axios.get(
       applicationConfigJson['metadata']['endpoint'] +
         '/properties/' +
-        applicationConfigJson['metadata']['favicon']
+        applicationConfigJson['metadata']['faviconPathKey']
     );
     favicon.href = response.data['value'];
   };
