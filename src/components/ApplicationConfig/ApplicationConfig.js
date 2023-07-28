@@ -1,5 +1,5 @@
 const readConfig = async () => {
-  const res = await fetch('/application.json');
+  const res = await fetch('application.json');
   return await res.json();
 };
 
