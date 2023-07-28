@@ -50,6 +50,6 @@ export default function Header({ value, setLogged, handleLogin }) {
     });
 
     return () => (isSubscribed = false);
-  }, [value, setLogged, appName]);
+  }, [value, setLogged, appName, handleLogin]);
   return <div ref={divRef}></div>;
 }
