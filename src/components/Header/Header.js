@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { applicationConfig } from '../ApplicationConfig/ApplicationConfig';
 
-export default function Header(props) {
+export default function Header({ value, setLogged, handleLogin }) {
   const divRef = useRef(null);
   const { t } = useTranslation(['translation']);
   const appName = t('global.appName');
@@ -27,11 +27,7 @@ export default function Header(props) {
       const headerUrlData = await responseHeaderURL.json();
       return await (
         await fetch(
-          headerUrlData['value'] +
-            '?appName=' +
-            appName +
-            '&chosenLocale=' +
-            props.value,
+          `${headerUrlData['value']}?appName=${appName}&chosenLocale=${value}&enableAuthentication`,
           requestOptions
         )
       ).text();
@@ -44,10 +40,16 @@ export default function Header(props) {
           .createContextualFragment(htmlContent); // Create a 'tiny' document and parse the html string
         current.innerHTML = ''; // Clear the container
         current.append(slotHtml); // Append the new content
+        window.Edatos.UserManagement.getAccount()
+          .then(() => setLogged(true))
+          .catch(() => handleLogin());
+        window.Edatos.UserManagement.addOnLogoutListener(() => {
+          setLogged(false);
+        });
       }
     });
 
     return () => (isSubscribed = false);
-  }, [props.value, appName]);
+  }, [value, setLogged, appName, handleLogin]);
   return <div ref={divRef}></div>;
 }

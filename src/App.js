@@ -33,6 +33,7 @@ import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import WMSMap from './components/WMSMap/WMSMap';
 import { defaultPalette, grayPalette } from './constants';
+import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { applicationConfig } from './components/ApplicationConfig/ApplicationConfig';
 
@@ -291,24 +292,47 @@ function App() {
   );
 
   useEffect(() => {
-    setCookie();
     i18n.changeLanguage(cookies.chosenLocale);
   }, [setCookie, i18n, cookies.chosenLocale]);
+
+  const [logged, setLogged] = useState(false);
+
   const chartIndex = charts.findIndex((c) => c === currentChart);
   const [map, setMap] = useState(null);
 
+  const handleLogin = useCallback(() => {
+    window.Edatos.UserManagement.login()
+      .then(() => setLogged(true))
+      .catch((error) => {
+        setLogged(false);
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="App">
-      <Header value={i18n.language} />
+      <Header value={i18n.language} setLogged={setLogged} handleLogin={handleLogin} />
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}
         abortCustomChartLoad={abortCustomChartLoad}
       />
       <div className="app-sections">
-        <Section title={t('global.section.loaddata.title')} loading={loading}>
-          <DataLoader {...dataLoader} hydrateFromProject={importProject} />
-        </Section>
+        {!logged && (
+          <Section>
+            <div className="text-center">
+              <Button variant="primary" onClick={handleLogin}>
+                {t('global.section.login.title')}
+              </Button>
+              <p className="mt-3">{t('global.section.login.description')}</p>
+            </div>
+          </Section>
+        )}
+        {logged && (
+          <Section title={t('global.section.loaddata.title')} loading={loading}>
+            <DataLoader {...dataLoader} hydrateFromProject={importProject} />
+          </Section>
+        )}
         {dataLoader.dataSource?.type === 'wms' && !data && (
           <Section title="WMS Map">
             <WMSMap

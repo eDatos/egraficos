@@ -88,6 +88,10 @@
             },
             "export": {
                 "tittle": "5. Exportar"
+            },
+            "login": {
+                "title": "Accedir",
+                "description": "Cal tenir un usuari registrat per accedir a l'aplicació"
             }
         },
         "reset": "Reiniciar",

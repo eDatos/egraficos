@@ -86,6 +86,10 @@
             },
             "export": {
                 "tittle": "5. Export"
+            },
+            "login": {
+                "title": "Login",
+                "description": "It is necessary to have a registered user to access the application"
             }
         },
         "reset": "Reset",
