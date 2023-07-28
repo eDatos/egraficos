@@ -43,7 +43,7 @@ export default function Header({ value, setLogged }) {
         window.Edatos.UserManagement.getAccount()
           .then(() => setLogged(true))
           .catch(() => {
-            window.Edatos.UserManagement.login().then(() => setLogged(false));
+            window.Edatos.UserManagement.login().then(() => setLogged(true));
           });
         window.Edatos.UserManagement.addOnLogoutListener(() => {
           setLogged(false);
