@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { applicationConfig } from '../ApplicationConfig/ApplicationConfig';
 
-export default function Header({ value, setLogged }) {
+export default function Header({ value, setLogged, handleLogin }) {
   const divRef = useRef(null);
   const { t } = useTranslation(['translation']);
   const appName = t('global.appName');
@@ -42,9 +42,7 @@ export default function Header({ value, setLogged }) {
         current.append(slotHtml); // Append the new content
         window.Edatos.UserManagement.getAccount()
           .then(() => setLogged(true))
-          .catch(() => {
-            window.Edatos.UserManagement.login().then(() => setLogged(true));
-          });
+          .catch(() => handleLogin());
         window.Edatos.UserManagement.addOnLogoutListener(() => {
           setLogged(false);
         });
