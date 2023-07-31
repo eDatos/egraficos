@@ -1,11 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { applicationConfig } from '../ApplicationConfig/ApplicationConfig';
 
-export default function Header({ value, setLogged, handleLogin }) {
+export default function Header({ value, setLogged }) {
   const divRef = useRef(null);
   const { t } = useTranslation(['translation']);
   const appName = t('global.appName');
+
+  const handleLogin = useCallback(() => {
+    window.Edatos.UserManagement.login()
+      .then(() => setLogged(true))
+      .catch((error) => {
+        setLogged(false);
+        console.log(error);
+      });
+  }, [setLogged]);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -45,6 +54,7 @@ export default function Header({ value, setLogged, handleLogin }) {
           .catch(() => handleLogin());
         window.Edatos.UserManagement.addOnLogoutListener(() => {
           setLogged(false);
+          handleLogin();
         });
       }
     });

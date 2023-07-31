@@ -33,7 +33,6 @@ import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import WMSMap from './components/WMSMap/WMSMap';
 import { defaultPalette, grayPalette } from './constants';
-import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { applicationConfig } from './components/ApplicationConfig/ApplicationConfig';
 
@@ -300,44 +299,21 @@ function App() {
   const chartIndex = charts.findIndex((c) => c === currentChart);
   const [map, setMap] = useState(null);
 
-  const handleLogin = useCallback(() => {
-    window.Edatos.UserManagement.login()
-      .then(() => setLogged(true))
-      .catch((error) => {
-        setLogged(false);
-        console.log(error);
-      });
-  }, []);
-
   return (
     <div className="App">
-      <Header
-        value={i18n.language}
-        setLogged={setLogged}
-        handleLogin={handleLogin}
-      />
+      <Header value={i18n.language} setLogged={setLogged} />
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}
         abortCustomChartLoad={abortCustomChartLoad}
       />
       <div className="app-sections">
-        {!logged && (
-          <Section>
-            <div className="text-center">
-              <Button variant="primary" onClick={handleLogin}>
-                {t('global.section.login.title')}
-              </Button>
-              <p className="mt-3">{t('global.section.login.description')}</p>
-            </div>
-          </Section>
-        )}
         {logged && (
           <Section title={t('global.section.loaddata.title')} loading={loading}>
             <DataLoader {...dataLoader} hydrateFromProject={importProject} />
           </Section>
         )}
-        {dataLoader.dataSource?.type === 'wms' && !data && (
+        {dataLoader.dataSource?.type === 'wms' && !data && logged && (
           <Section title="WMS Map">
             <WMSMap
               sources={dataLoader.dataSource?.sources}
@@ -355,7 +331,7 @@ function App() {
             />
           </Section>
         )}
-        {data && currentChart && (
+        {data && currentChart && logged && (
           <Section
             title={t('global.section.mapping.title')}
             loading={mappingLoading}
@@ -369,7 +345,7 @@ function App() {
             />
           </Section>
         )}
-        {data && currentChart && (
+        {data && currentChart && logged && (
           <Section title={t('global.section.customize.title')}>
             <ChartPreviewWithOptions
               chart={currentChart}
@@ -383,7 +359,7 @@ function App() {
             />
           </Section>
         )}
-        {((data && rawViz) || map) && dataLoader.dataSource && (
+        {((data && rawViz) || map) && dataLoader.dataSource && logged && (
           <Section title={t('global.section.export.title')}>
             <Exporter
               rawViz={rawViz}
