@@ -198,7 +198,9 @@ const ChartDimensionCard = ({
               return <DataTypeIcon key={t} type={t} />;
             })}
           </span>
-          <span className="text-capitalize text-center">{dimension.name}</span>
+          <span className="text-capitalize text-center">
+            {t(dimension.name)}
+          </span>
           <span
             className={styles['dimension-required'] + ' text-right'}
             style={{ opacity: dimension.required ? 1 : 0 }}

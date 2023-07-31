@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'stacks',
-    name: 'Axis',
+    name: 'global.section.chartselection.stackedbarchart.dimensions.axis',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',
@@ -9,7 +9,7 @@ export const dimensions = [
 
   {
     id: 'bars',
-    name: 'Size',
+    name: 'global.section.chartselection.stackedbarchart.dimensions.size',
     validTypes: ['number'],
     required: true,
     multiple: true,
@@ -22,7 +22,7 @@ export const dimensions = [
 
   {
     id: 'series',
-    name: 'Series',
+    name: 'global.section.chartselection.stackedbarchart.dimensions.series',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'x',
-    name: 'X Axis',
+    name: 'global.section.chartselection.linechart.dimensions.xAxis',
     operation: 'get',
     validTypes: ['number', 'date'],
     required: true,
@@ -9,7 +9,7 @@ export const dimensions = [
 
   {
     id: 'y',
-    name: 'Y Axis',
+    name: 'global.section.chartselection.linechart.dimensions.yAxis',
     operation: 'get',
     validTypes: ['number'],
     required: true,
@@ -19,7 +19,7 @@ export const dimensions = [
 
   {
     id: 'lines',
-    name: 'Lines',
+    name: 'global.section.chartselection.linechart.dimensions.lines',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',
