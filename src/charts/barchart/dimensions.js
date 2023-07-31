@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'bars',
-    name: 'Bars',
+    name: 'global.section.chartselection.barchart.dimensions.bars',
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',
@@ -9,7 +9,7 @@ export const dimensions = [
 
   {
     id: 'size',
-    name: 'Size',
+    name: 'global.section.chartselection.barchart.dimensions.size',
     operation: 'get',
     validTypes: ['number'],
     required: false,
@@ -19,7 +19,7 @@ export const dimensions = [
 
   {
     id: 'series',
-    name: 'Series',
+    name: 'global.section.chartselection.barchart.dimensions.series',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

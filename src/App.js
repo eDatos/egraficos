@@ -311,7 +311,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header value={i18n.language} setLogged={setLogged} handleLogin={handleLogin} />
+      <Header
+        value={i18n.language}
+        setLogged={setLogged}
+        handleLogin={handleLogin}
+      />
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}

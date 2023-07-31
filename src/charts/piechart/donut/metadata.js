@@ -2,12 +2,12 @@ import icon from './donut.svg';
 import thumbnail from './donut_thumb.svg';
 
 export const metadata = {
-  name: 'Donut chart',
+  name: 'global.section.chartselection.donutchart.title',
   id: 'donutchart',
   thumbnail,
   icon,
-  categories: ['proportions'],
-  description: 'global.section.chartselection.piechart.description',
+  categories: ['categories.proportions'],
+  description: 'global.section.chartselection.donutchart.description',
   code: '',
   tutorial: '',
 };

@@ -1,21 +1,21 @@
 export const dimensions = [
   {
     id: 'x',
-    name: 'X Axis',
+    name: 'global.section.chartselection.scatterchart.dimensions.xAxis',
     operation: 'get',
     validTypes: ['number', 'date'],
     required: true,
   },
   {
     id: 'y',
-    name: 'Y Axis',
+    name: 'global.section.chartselection.scatterchart.dimensions.yAxis',
     operation: 'get',
     validTypes: ['number', 'date'],
     required: true,
   },
   {
     id: 'labels',
-    name: 'Labels',
+    name: 'global.section.chartselection.scatterchart.dimensions.labels',
     operation: 'get',
     required: false,
     validTypes: ['string'],

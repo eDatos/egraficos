@@ -2,11 +2,11 @@ import icon from './scatterchart.svg';
 import thumbnail from './scatterchart_thumb.svg';
 
 export const metadata = {
-  name: 'Scatter chart',
+  name: 'global.section.chartselection.scatterchart.title',
   thumbnail,
   icon,
   id: 'scatter',
-  categories: ['correlations'],
+  categories: ['categories.correlations'],
   description: 'global.section.chartselection.scatterchart.description',
   code: '',
   tutorial: '',

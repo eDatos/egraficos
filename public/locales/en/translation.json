@@ -54,22 +54,63 @@
             "chartselection": {
                 "title": "2. Choose a chart",
                 "barchart": {
-                    "description": "It displays a categorical dimension and related amounts. Each bar represents a category, width is proportional to the quantitative dimension."
+                    "title": "Bar chart",
+                    "description": "It displays a categorical dimension and related amounts. Each bar represents a category, width is proportional to the quantitative dimension.",
+                    "dimensions": {
+                        "bars": "Bars",
+                        "size": "Size",
+                        "series": "Series"
+                    }
                 },
                 "linechart": {
-                    "description": "It displays a quantitative dimension over a continuous interval or time period. Colour can be optionally used to encode an additional quantitative or categorical dimension."
+                    "title": "Line chart",
+                    "description": "It displays a quantitative dimension over a continuous interval or time period. Colour can be optionally used to encode an additional quantitative or categorical dimension.",
+                    "dimensions": {
+                        "xAxis": "X Axis",
+                        "yAxis": "Y Axis",
+                        "lines": "Lines"
+                    }
                 },
                 "piechart": {
+                    "title": "Pie chart",
+                    "description": "It allows you to see the proportions between values that make up a whole, by using arcs composing a circle.",
+                    "dimensions": {
+                        "arcs": "Arcs"                        
+                    }
+                },
+                "donutchart": {
+                    "title": "Donut chart",
+                    "description": "It allows you to see the proportions between values that make up a whole, by using arcs composing a circle."
+                },
+                "halfdonutchart": {
+                    "title": "Half donut chart",
                     "description": "It allows you to see the proportions between values that make up a whole, by using arcs composing a circle."
                 },
                 "scatterchart": {
-                    "description": "The basic layout is a scatter plot, which allows to see correlations among two continuous dimensions."
+                    "title": "Scatter chart",
+                    "description": "The basic layout is a scatter plot, which allows to see correlations among two continuous dimensions.",
+                    "dimensions": {
+                        "xAxis": "X Axis",
+                        "yAxis": "Y Axis",
+                        "labels": "Labels"
+                    }
                 },
                 "treemapchart": {
-                    "description": "It displays hierarchically structured data and a related quantitative dimension. It is composed of an area divided into small rectangles, representing the last level of the tree structure. The rectangles’ size depends on the quantitative dimension."
+                    "title": "Tree map chart",
+                    "description": "It displays hierarchically structured data and a related quantitative dimension. It is composed of an area divided into small rectangles, representing the last level of the tree structure. The rectangles’ size depends on the quantitative dimension.",                    
+                    "dimensions": {
+                        "hierarchy": "Hierarchy",
+                        "size": "Size"                        
+                    }
                 },
                 "stackedbarchart": {
-                    "description": "It displays multiple quantitative dimensions related to categories. bars are visually stacked according to the categorical dimension, each bar represents a quantitative dimension, mapped on its height."
+                    "title": "Stacked bar chart",
+                    "description": "It displays multiple quantitative dimensions related to categories. bars are visually stacked according to the categorical dimension, each bar represents a quantitative dimension, mapped on its height.",
+                    "dimensions": {
+                        "axis": "Axis",
+                        "size": "Size",
+                        "series": "Series"
+                    }
                 }
             },
             "mapping": {
@@ -139,5 +180,11 @@
             "spain": "Spain",
             "others": "Others"
         }
+    },
+    "categories": {
+        "timeseries": "time series",
+        "correlations": "correlations",
+        "proportions": "proportions",
+        "hierarchy": "hierarchy"
     }
 } 
