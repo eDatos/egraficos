@@ -299,6 +299,22 @@ function App() {
   const chartIndex = charts.findIndex((c) => c === currentChart);
   const [map, setMap] = useState(null);
 
+  const showWMSMap = useCallback(() => {
+    return dataLoader.dataSource?.type === 'wms' && !data && logged;
+  }, [dataLoader.dataSource, data, logged]);
+
+  const showChartSelector = useCallback(() => {
+    return data && logged;
+  }, [data, logged]);
+
+  const showChartConfigurator = useCallback(() => {
+    return data && currentChart && logged;
+  }, [data, currentChart, logged]);
+
+  const showExportOptions = useCallback(() => {
+    return ((data && rawViz) || map) && dataLoader.dataSource && logged;
+  }, [data, rawViz, map, dataLoader.dataSource, logged]);
+
   return (
     <div className="App">
       <Header value={i18n.language} setLogged={setLogged} />
@@ -313,7 +329,7 @@ function App() {
             <DataLoader {...dataLoader} hydrateFromProject={importProject} />
           </Section>
         )}
-        {dataLoader.dataSource?.type === 'wms' && !data && logged && (
+        {showWMSMap() && (
           <Section title="WMS Map">
             <WMSMap
               sources={dataLoader.dataSource?.sources}
@@ -322,7 +338,7 @@ function App() {
             />
           </Section>
         )}
-        {data && (
+        {showChartSelector() && (
           <Section title={t('global.section.chartselection.title')}>
             <ChartSelector
               availableCharts={charts}
@@ -331,7 +347,7 @@ function App() {
             />
           </Section>
         )}
-        {data && currentChart && logged && (
+        {showChartConfigurator() && (
           <Section
             title={t('global.section.mapping.title')}
             loading={mappingLoading}
@@ -345,7 +361,7 @@ function App() {
             />
           </Section>
         )}
-        {data && currentChart && logged && (
+        {showChartConfigurator() && (
           <Section title={t('global.section.customize.title')}>
             <ChartPreviewWithOptions
               chart={currentChart}
@@ -359,7 +375,7 @@ function App() {
             />
           </Section>
         )}
-        {((data && rawViz) || map) && dataLoader.dataSource && logged && (
+        {showExportOptions() && (
           <Section title={t('global.section.export.title')}>
             <Exporter
               rawViz={rawViz}
