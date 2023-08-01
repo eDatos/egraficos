@@ -305,7 +305,7 @@ function App() {
 
   const showChartSelector = useCallback(() => {
     return data;
-  }, [data, logged]);
+  }, [data]);
 
   const showChartConfigurator = useCallback(() => {
     return data && currentChart;
