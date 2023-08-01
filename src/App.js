@@ -300,20 +300,20 @@ function App() {
   const [map, setMap] = useState(null);
 
   const showWMSMap = useCallback(() => {
-    return dataLoader.dataSource?.type === 'wms' && !data && logged;
-  }, [dataLoader.dataSource, data, logged]);
+    return dataLoader.dataSource?.type === 'wms' && !data;
+  }, [dataLoader.dataSource, data]);
 
   const showChartSelector = useCallback(() => {
-    return data && logged;
+    return data;
   }, [data, logged]);
 
   const showChartConfigurator = useCallback(() => {
-    return data && currentChart && logged;
-  }, [data, currentChart, logged]);
+    return data && currentChart;
+  }, [data, currentChart]);
 
   const showExportOptions = useCallback(() => {
-    return ((data && rawViz) || map) && dataLoader.dataSource && logged;
-  }, [data, rawViz, map, dataLoader.dataSource, logged]);
+    return ((data && rawViz) || map) && dataLoader.dataSource;
+  }, [data, rawViz, map, dataLoader.dataSource]);
 
   return (
     <div className="App">
@@ -325,74 +325,76 @@ function App() {
       />
       <div className="app-sections">
         {logged && (
-          <Section title={t('global.section.loaddata.title')} loading={loading}>
-            <DataLoader {...dataLoader} hydrateFromProject={importProject} />
-          </Section>
-        )}
-        {showWMSMap() && (
-          <Section title="WMS Map">
-            <WMSMap
-              sources={dataLoader.dataSource?.sources}
-              setMap={setMap}
-              map={map}
-            />
-          </Section>
-        )}
-        {showChartSelector() && (
-          <Section title={t('global.section.chartselection.title')}>
-            <ChartSelector
-              availableCharts={charts}
-              currentChart={currentChart}
-              setCurrentChart={handleChartChange}
-            />
-          </Section>
-        )}
-        {showChartConfigurator() && (
-          <Section
-            title={t('global.section.mapping.title')}
-            loading={mappingLoading}
-          >
-            <DataMapping
-              ref={dataMappingRef}
-              dimensions={currentChart.dimensions}
-              dataTypes={data.dataTypes}
-              mapping={mapping}
-              setMapping={setMapping}
-            />
-          </Section>
-        )}
-        {showChartConfigurator() && (
-          <Section title={t('global.section.customize.title')}>
-            <ChartPreviewWithOptions
-              chart={currentChart}
-              dataset={data.dataset}
-              dataTypes={data.dataTypes}
-              mapping={mapping}
-              visualOptions={visualOptions}
-              setVisualOptions={setVisualOptions}
-              setRawViz={setRawViz}
-              setMappingLoading={setMappingLoading}
-            />
-          </Section>
-        )}
-        {showExportOptions() && (
-          <Section title={t('global.section.export.title')}>
-            <Exporter
-              rawViz={rawViz}
-              exportProject={exportProject}
-              userData={dataLoader.userData}
-              dataSource={dataLoader.dataSource}
-              chartIndex={chartIndex}
-              mapping={mapping}
-              visualOptions={visualOptions}
-              dataTypes={data?.dataTypes}
-              dimensions={currentChart.dimensions}
-              locale={dataLoader.locale}
-              decimalsSeparator={dataLoader.decimalsSeparator}
-              thousandsSeparator={dataLoader.thousandsSeparator}
-              map={map}
-            />
-          </Section>
+          <>
+            <Section title={t('global.section.loaddata.title')} loading={loading}>
+              <DataLoader {...dataLoader} hydrateFromProject={importProject} />
+            </Section>                  
+            {showWMSMap() && (
+              <Section title="WMS Map">
+                <WMSMap
+                  sources={dataLoader.dataSource?.sources}
+                  setMap={setMap}
+                  map={map}
+                />
+              </Section>
+            )}
+            {showChartSelector() && (
+              <Section title={t('global.section.chartselection.title')}>
+                <ChartSelector
+                  availableCharts={charts}
+                  currentChart={currentChart}
+                  setCurrentChart={handleChartChange}
+                />
+              </Section>
+            )}
+            {showChartConfigurator() && (
+              <Section
+                title={t('global.section.mapping.title')}
+                loading={mappingLoading}
+              >
+                <DataMapping
+                  ref={dataMappingRef}
+                  dimensions={currentChart.dimensions}
+                  dataTypes={data.dataTypes}
+                  mapping={mapping}
+                  setMapping={setMapping}
+                />
+              </Section>
+            )}
+            {showChartConfigurator() && (
+              <Section title={t('global.section.customize.title')}>
+                <ChartPreviewWithOptions
+                  chart={currentChart}
+                  dataset={data.dataset}
+                  dataTypes={data.dataTypes}
+                  mapping={mapping}
+                  visualOptions={visualOptions}
+                  setVisualOptions={setVisualOptions}
+                  setRawViz={setRawViz}
+                  setMappingLoading={setMappingLoading}
+                />
+              </Section>
+            )}
+            {showExportOptions() && (
+              <Section title={t('global.section.export.title')}>
+                <Exporter
+                  rawViz={rawViz}
+                  exportProject={exportProject}
+                  userData={dataLoader.userData}
+                  dataSource={dataLoader.dataSource}
+                  chartIndex={chartIndex}
+                  mapping={mapping}
+                  visualOptions={visualOptions}
+                  dataTypes={data?.dataTypes}
+                  dimensions={currentChart.dimensions}
+                  locale={dataLoader.locale}
+                  decimalsSeparator={dataLoader.decimalsSeparator}
+                  thousandsSeparator={dataLoader.thousandsSeparator}
+                  map={map}
+                />
+              </Section>
+            )}
+          </>
         )}
         <Footer value={i18n.language} />
       </div>
