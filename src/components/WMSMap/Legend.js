@@ -5,7 +5,7 @@ import styles from './WMSMap.module.scss';
 
 export default function Legend(props) {
   const map = useMap();
-  const legend = L.control({ position: 'bottomright' });
+  const legend = L.control({ position: 'bottomleft' });
   const [isLegendHovering, setIsLegendHovering] = useState(false);
 
   useEffect(() => {

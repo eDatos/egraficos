@@ -33,7 +33,6 @@ import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import WMSMap from './components/WMSMap/WMSMap';
 import { defaultPalette, grayPalette } from './constants';
-import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { applicationConfig } from './components/ApplicationConfig/ApplicationConfig';
 
@@ -300,107 +299,102 @@ function App() {
   const chartIndex = charts.findIndex((c) => c === currentChart);
   const [map, setMap] = useState(null);
 
-  const handleLogin = useCallback(() => {
-    window.Edatos.UserManagement.login()
-      .then(() => setLogged(true))
-      .catch((error) => {
-        setLogged(false);
-        console.log(error);
-      });
-  }, []);
+  const showWMSMap = useCallback(() => {
+    return dataLoader.dataSource?.type === 'wms' && !data;
+  }, [dataLoader.dataSource, data]);
+
+  const showChartSelector = useCallback(() => {
+    return data;
+  }, [data]);
+
+  const showChartConfigurator = useCallback(() => {
+    return data && currentChart;
+  }, [data, currentChart]);
+
+  const showExportOptions = useCallback(() => {
+    return ((data && rawViz) || map) && dataLoader.dataSource;
+  }, [data, rawViz, map, dataLoader.dataSource]);
 
   return (
     <div className="App">
-      <Header
-        value={i18n.language}
-        setLogged={setLogged}
-        handleLogin={handleLogin}
-      />
+      <Header value={i18n.language} setLogged={setLogged} />
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}
         abortCustomChartLoad={abortCustomChartLoad}
       />
       <div className="app-sections">
-        {!logged && (
-          <Section>
-            <div className="text-center">
-              <Button variant="primary" onClick={handleLogin}>
-                {t('global.section.login.title')}
-              </Button>
-              <p className="mt-3">{t('global.section.login.description')}</p>
-            </div>
-          </Section>
-        )}
         {logged && (
-          <Section title={t('global.section.loaddata.title')} loading={loading}>
-            <DataLoader {...dataLoader} hydrateFromProject={importProject} />
-          </Section>
-        )}
-        {dataLoader.dataSource?.type === 'wms' && !data && (
-          <Section title="WMS Map">
-            <WMSMap
-              sources={dataLoader.dataSource?.sources}
-              setMap={setMap}
-              map={map}
-            />
-          </Section>
-        )}
-        {data && (
-          <Section title={t('global.section.chartselection.title')}>
-            <ChartSelector
-              availableCharts={charts}
-              currentChart={currentChart}
-              setCurrentChart={handleChartChange}
-            />
-          </Section>
-        )}
-        {data && currentChart && (
-          <Section
-            title={t('global.section.mapping.title')}
-            loading={mappingLoading}
-          >
-            <DataMapping
-              ref={dataMappingRef}
-              dimensions={currentChart.dimensions}
-              dataTypes={data.dataTypes}
-              mapping={mapping}
-              setMapping={setMapping}
-            />
-          </Section>
-        )}
-        {data && currentChart && (
-          <Section title={t('global.section.customize.title')}>
-            <ChartPreviewWithOptions
-              chart={currentChart}
-              dataset={data.dataset}
-              dataTypes={data.dataTypes}
-              mapping={mapping}
-              visualOptions={visualOptions}
-              setVisualOptions={setVisualOptions}
-              setRawViz={setRawViz}
-              setMappingLoading={setMappingLoading}
-            />
-          </Section>
-        )}
-        {((data && rawViz) || map) && dataLoader.dataSource && (
-          <Section title={t('global.section.export.title')}>
-            <Exporter
-              rawViz={rawViz}
-              exportProject={exportProject}
-              userData={dataLoader.userData}
-              dataSource={dataLoader.dataSource}
-              chartIndex={chartIndex}
-              mapping={mapping}
-              visualOptions={visualOptions}
-              dataTypes={data?.dataTypes}
-              dimensions={currentChart.dimensions}
-              locale={dataLoader.locale}
-              decimalsSeparator={dataLoader.decimalsSeparator}
-              thousandsSeparator={dataLoader.thousandsSeparator}
-              map={map}
-            />
-          </Section>
+          <>
+            <Section title={t('global.section.loaddata.title')} loading={loading}>
+              <DataLoader {...dataLoader} hydrateFromProject={importProject} />
+            </Section>                  
+            {showWMSMap() && (
+              <Section title="WMS Map">
+                <WMSMap
+                  sources={dataLoader.dataSource?.sources}
+                  setMap={setMap}
+                  map={map}
+                />
+              </Section>
+            )}
+            {showChartSelector() && (
+              <Section title={t('global.section.chartselection.title')}>
+                <ChartSelector
+                  availableCharts={charts}
+                  currentChart={currentChart}
+                  setCurrentChart={handleChartChange}
+                />
+              </Section>
+            )}
+            {showChartConfigurator() && (
+              <Section
+                title={t('global.section.mapping.title')}
+                loading={mappingLoading}
+              >
+                <DataMapping
+                  ref={dataMappingRef}
+                  dimensions={currentChart.dimensions}
+                  dataTypes={data.dataTypes}
+                  mapping={mapping}
+                  setMapping={setMapping}
+                />
+              </Section>
+            )}
+            {showChartConfigurator() && (
+              <Section title={t('global.section.customize.title')}>
+                <ChartPreviewWithOptions
+                  chart={currentChart}
+                  dataset={data.dataset}
+                  dataTypes={data.dataTypes}
+                  mapping={mapping}
+                  visualOptions={visualOptions}
+                  setVisualOptions={setVisualOptions}
+                  setRawViz={setRawViz}
+                  setMappingLoading={setMappingLoading}
+                />
+              </Section>
+            )}
+            {showExportOptions() && (
+              <Section title={t('global.section.export.title')}>
+                <Exporter
+                  rawViz={rawViz}
+                  exportProject={exportProject}
+                  userData={dataLoader.userData}
+                  dataSource={dataLoader.dataSource}
+                  chartIndex={chartIndex}
+                  mapping={mapping}
+                  visualOptions={visualOptions}
+                  dataTypes={data?.dataTypes}
+                  dimensions={currentChart.dimensions}
+                  locale={dataLoader.locale}
+                  decimalsSeparator={dataLoader.decimalsSeparator}
+                  thousandsSeparator={dataLoader.thousandsSeparator}
+                  map={map}
+                />
+              </Section>
+            )}
+          </>
         )}
         <Footer value={i18n.language} />
       </div>
