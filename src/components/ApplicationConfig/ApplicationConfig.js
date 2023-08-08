@@ -1,8 +1,8 @@
-const readConfig = async (href) => {
-  const res = await fetch(`${href ?? ''}application.json`);
+const readConfig = async (baseUrl) => {
+  const res = await fetch(`${baseUrl}application.json`);
   return await res.json();
 };
 
-export const applicationConfig = (href) => {
-  return readConfig(href);
+export const applicationConfig = (baseUrl = '') => {
+  return readConfig(baseUrl);
 };

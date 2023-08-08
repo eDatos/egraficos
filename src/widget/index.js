@@ -46,7 +46,7 @@ export default {
               sources={config.sources}
               center={config.center}
               zoom={config.zoom}
-              href={config.href}
+              baseUrl={config.baseUrl}
             />
           </React.StrictMode>
         );

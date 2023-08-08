@@ -10,7 +10,7 @@ export default function EgraphMapContainer(props) {
   const styleMap = { width: '100%', height: '80vh' };
   const [bingKey, setBingKey] = useState(null);
   const [accessToken, setAccesToken] = useState(null);
-  applicationConfig(props.href).then((applicationConfigJson) => {
+  applicationConfig(props.baseUrl).then((applicationConfigJson) => {
     setBingKey(applicationConfigJson['maps']['bing_key']);
     setAccesToken(applicationConfigJson['maps']['mapbox_token']);
   });

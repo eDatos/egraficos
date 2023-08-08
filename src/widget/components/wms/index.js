@@ -7,7 +7,7 @@ const EDatosWMS = (props) => {
       center={props.center}
       zoom={props.zoom}
       sources={props.sources}
-      href={props.href}
+      baseUrl={props.baseUrl}
     />
   );
 };
