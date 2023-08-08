@@ -159,7 +159,8 @@ function LayersOptionCard({
             key !== 'Name' &&
             key !== 'Title' &&
             key !== 'showLegend' &&
-            key !== 'showLayerName'
+            key !== 'showLayerName' && 
+            key !== 'hideStyleName'
         )
       ),
     },
