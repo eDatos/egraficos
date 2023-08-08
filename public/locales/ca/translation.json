@@ -47,7 +47,9 @@
                 "style":  {
                     "placeholder": "Seleccioneu l'estil...",
                     "title": "Seleccioneu l'estil per a la capa",
-                    "legend": "Mostra llegenda"                    
+                    "legend": "Mostra llegenda",
+                    "showlayer": "Mostra nom de capa",
+                    "hidestyle": "Oculta nom de l'estil"
                 }
             },
             "wmsmunicipalityselection": {

@@ -1,8 +1,8 @@
-const readConfig = async () => {
-  const res = await fetch('application.json');
+const readConfig = async (baseUrl) => {
+  const res = await fetch(`${baseUrl}application.json`);
   return await res.json();
 };
 
-export const applicationConfig = () => {
-  return readConfig();
+export const applicationConfig = (baseUrl = '') => {
+  return readConfig(baseUrl);
 };

@@ -47,7 +47,9 @@
                 "style":  {
                     "placeholder": "Selecciona estilo...",
                     "title": "Selecciona estilo para capa",
-                    "legend": "Mostrar leyenda"                    
+                    "legend": "Mostrar leyenda",
+                    "showlayer": "Mostrar nombre de capa",
+                    "hidestyle": "Ocultar nombre de estilo"
                 }
             },
             "wmsmunicipalityselection": {

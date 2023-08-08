@@ -1,4 +1,4 @@
-import { Card, Form } from 'react-bootstrap';
+import { Card, Form, Row } from 'react-bootstrap';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DndProvider } from 'react-dnd';
@@ -67,6 +67,26 @@ const SelectionStyle = ({
 }) => {
   const [styleSelected, setStyleSelected] = useState([]);
   const { t } = useTranslation(['translation']);
+
+  const handleShowLayerNameChange = () => {
+    let newSelectedLayers = [...selectedLayers];
+    layer.showLayerName = !layer.showLayerName;
+    if (!layer.showLayerName) {
+      layer.hideStyleName = false;
+    }
+    newSelectedLayers[index] = layer;
+    setSelectedLayers(newSelectedLayers);
+  };
+  const handleStyleChange = (stylesSelected) => {
+    let newSelectedLayers = [...selectedLayers];
+    layer.StyleSelected = stylesSelected;
+    newSelectedLayers[index] = layer;
+    if (stylesSelected.length !== 1) {
+      layer.hideStyleName = false;
+    }
+    setSelectedLayers(newSelectedLayers);
+    setStyleSelected(stylesSelected);
+  };
   return (
     <>
       <Card.Subtitle className="mt-3 mb-2">
@@ -77,31 +97,52 @@ const SelectionStyle = ({
         clearButton
         id="select-style"
         labelKey="styleTitle"
-        onChange={(stylesSelected) => {
-          let newSelectedLayers = [...selectedLayers];
-          layer.StyleSelected = stylesSelected[0];
-          newSelectedLayers[index] = layer;
-          setSelectedLayers(newSelectedLayers);
-          setStyleSelected(stylesSelected);
-        }}
+        multiple
+        onChange={handleStyleChange}
         options={options}
         placeholder={t('global.section.wmslayerselection.style.placeholder')}
         selected={styleSelected}
       />
-      <Form.Check
-        disabled={styleSelected.length === 0}
-        id="showLegend"
-        className="mt-2"
-        label={t('global.section.wmslayerselection.style.legend')}
-        type="switch"
-        checked={layer.showLegend}
-        onChange={() => {
-          let newSelectedLayers = [...selectedLayers];
-          layer.showLegend = !layer.showLegend;
-          newSelectedLayers[index] = layer;
-          setSelectedLayers(newSelectedLayers);
-        }}
-      />
+      <Card.Body>
+        <Row>
+          <Form.Check
+            disabled={styleSelected.length === 0}
+            id="showLegend"
+            className="mr-4"
+            label={t('global.section.wmslayerselection.style.legend')}
+            type="switch"
+            checked={layer.showLegend}
+            onChange={() => {
+              let newSelectedLayers = [...selectedLayers];
+              layer.showLegend = !layer.showLegend;
+              newSelectedLayers[index] = layer;
+              setSelectedLayers(newSelectedLayers);
+            }}
+          />
+          <Form.Check
+            disabled={styleSelected.length === 0}
+            id="showLayerName"
+            className="mr-4"
+            label={t('global.section.wmslayerselection.style.showlayer')}
+            type="switch"
+            checked={layer.showLayerName}
+            onChange={handleShowLayerNameChange}
+          />
+          <Form.Check
+            disabled={styleSelected.length !== 1 || !layer.showLayerName}
+            id="hideStyleName"
+            label={t('global.section.wmslayerselection.style.hidestyle')}
+            type="switch"
+            checked={layer.hideStyleName}
+            onChange={() => {
+              let newSelectedLayers = [...selectedLayers];
+              layer.hideStyleName = !layer.hideStyleName;
+              newSelectedLayers[index] = layer;
+              setSelectedLayers(newSelectedLayers);
+            }}
+          />
+        </Row>
+      </Card.Body>
     </>
   );
 };
@@ -118,7 +159,12 @@ function LayersOptionCard({
     {
       [layer.Name]: Object.fromEntries(
         Object.entries(layer).filter(
-          ([key]) => key !== 'Name' && key !== 'Title' && key !== 'showLegend'
+          ([key]) =>
+            key !== 'Name' &&
+            key !== 'Title' &&
+            key !== 'showLegend' &&
+            key !== 'showLayerName' &&
+            key !== 'hideStyleName'
         )
       ),
     },

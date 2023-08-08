@@ -45,7 +45,9 @@
                 "style":  {
                     "placeholder": "Select style...",
                     "title": "Select style for layer",
-                    "legend": "Show legend"
+                    "legend": "Show legend",
+                    "showlayer": "Show layer name",
+                    "hidestyle": "Hide style name"
                 }
             },
             "wmsmunicipalityselection": {

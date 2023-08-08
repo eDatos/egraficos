@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useLeafletContext } from '@react-leaflet/core';
 import * as WMS from 'leaflet.wms';
 
-const WMSCustomLayer = ({ layer, url }) => {
+const WMSCustomLayer = ({ layer, url, style, identify }) => {
   const context = useLeafletContext();
   const layerRef = useRef();
   const layerName = layer['Name'];
@@ -24,14 +24,14 @@ const WMSCustomLayer = ({ layer, url }) => {
   });
 
   useEffect(() => {
-    const selectedStyles = layer.StyleSelected?.styleName ?? [];
     const container = context.layerContainer || context.map;
 
     const source = new MySource(url, {
       format: 'image/png',
       transparent: 'true',
-      styles: selectedStyles,
+      styles: style,
       info_format: 'text/html',
+      identify,
     });
 
     layerRef.current = source.getLayer(layerName);
