@@ -68,7 +68,7 @@ const SelectionStyle = ({
   const [styleSelected, setStyleSelected] = useState([]);
   const { t } = useTranslation(['translation']);
 
-  const handleStyleChange = () => {
+  const handleShowLayerNameChange = () => {
     let newSelectedLayers = [...selectedLayers];
     layer.showLayerName = !layer.showLayerName;
     if (!layer.showLayerName) {
@@ -122,7 +122,7 @@ const SelectionStyle = ({
             label={t('global.section.wmslayerselection.style.showlayer')}
             type="switch"
             checked={layer.showLayerName}
-            onChange={handleStyleChange}
+            onChange={handleShowLayerNameChange}
           />
           <Form.Check
             disabled={styleSelected.length === 0 || !layer.showLayerName}
