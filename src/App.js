@@ -326,9 +326,12 @@ function App() {
       <div className="app-sections">
         {logged && (
           <>
-            <Section title={t('global.section.loaddata.title')} loading={loading}>
+            <Section
+              title={t('global.section.loaddata.title')}
+              loading={loading}
+            >
               <DataLoader {...dataLoader} hydrateFromProject={importProject} />
-            </Section>                  
+            </Section>
             {showWMSMap() && (
               <Section title="WMS Map">
                 <WMSMap
