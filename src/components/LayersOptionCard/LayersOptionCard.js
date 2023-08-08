@@ -77,6 +77,16 @@ const SelectionStyle = ({
     newSelectedLayers[index] = layer;
     setSelectedLayers(newSelectedLayers);
   };
+  const handleStyleChange = (stylesSelected) => {
+    let newSelectedLayers = [...selectedLayers];
+    layer.StyleSelected = stylesSelected;
+    newSelectedLayers[index] = layer;
+    if (stylesSelected.length !== 1) {
+      layer.hideStyleName = false;
+    }
+    setSelectedLayers(newSelectedLayers);
+    setStyleSelected(stylesSelected);
+  };
   return (
     <>
       <Card.Subtitle className="mt-3 mb-2">
@@ -88,13 +98,7 @@ const SelectionStyle = ({
         id="select-style"
         labelKey="styleTitle"
         multiple
-        onChange={(stylesSelected) => {
-          let newSelectedLayers = [...selectedLayers];
-          layer.StyleSelected = stylesSelected;
-          newSelectedLayers[index] = layer;
-          setSelectedLayers(newSelectedLayers);
-          setStyleSelected(stylesSelected);
-        }}
+        onChange={handleStyleChange}
         options={options}
         placeholder={t('global.section.wmslayerselection.style.placeholder')}
         selected={styleSelected}
@@ -125,7 +129,7 @@ const SelectionStyle = ({
             onChange={handleShowLayerNameChange}
           />
           <Form.Check
-            disabled={styleSelected.length === 0 || !layer.showLayerName}
+            disabled={styleSelected.length !== 1 || !layer.showLayerName}
             id="hideStyleName"
             label={t('global.section.wmslayerselection.style.hidestyle')}
             type="switch"
@@ -159,7 +163,7 @@ function LayersOptionCard({
             key !== 'Name' &&
             key !== 'Title' &&
             key !== 'showLegend' &&
-            key !== 'showLayerName' && 
+            key !== 'showLayerName' &&
             key !== 'hideStyleName'
         )
       ),
