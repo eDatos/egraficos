@@ -8,6 +8,9 @@ module.exports = {
                     process: 'process/browser',
                 })
             ]
+        },
+        headers: {
+            'Access-Control-Allow-Origin': '*'
         }
     },
 };
