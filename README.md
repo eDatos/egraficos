@@ -1,118 +1,79 @@
-## About
+## Acerca de
 
-**RAWGraphs** is an open web tool to create custom vector-based visualizations on top of the amazing [d3.js](https://github.com/mbostock/d3) library.
-It has been developed by [DensityDesign Research Lab](http://www.densitydesign.org/) ([Politecnico di Milano](http://www.polimi.it/)), [Calibro](http://calib.ro/) and [INMAGIK](https://inmagik.com/).
+**Egraficos** es una aplicación web para crear graficos y mapas personalizados usando las librerías [echarts]() y [leaflet]() respectivamente.
 
-Primarily conceived as a tool for designers and vis geeks, RAWGraphs aims at providing a missing link between spreadsheet applications (e.g., LibreOffice Calc, Microsoft Excel, Apple Numbers, Google Docs) and vector graphics editors (e.g., Inkscape, Adobe Illustrator).
+A parte de poder descargar los gráficos en formatos svg o png, también permite crear widgets que pueden ser incrustados en caulquier servicio web.
 
-RAWGraphs works with [tabular data](<https://en.wikipedia.org/wiki/Table_(information)>) (e.g., spreadsheets and comma-separated values) as well as with copied-and-pasted texts from other applications. Based on the [SVG](http://en.wikipedia.org/wiki/Svg) format, visualizations can be easily edited with vector graphics applications for further refinements or directly embedded into web pages.
+Conociendo la necesidad de trabajar con información sencible, los datos inyectados en Egraficos es procesada únicamente en el navegador: **no existen operaciones ni almacenamiento de información en el lado del servidor**. Es decir, nadie puede ver, tocar o copiar los datos.
 
-Knowing the need to work with sensitive information, the data injected into RAWGraphs is processed only by the web browser: **no server-side operations or storages are performed**. No one will see, touch or copy your data!
+## Uso
 
-RAWGraphs is also highly customizable and extensible, accepting new custom layouts defined by users. For more information about adding or editing layouts, see the [Developer Guide](https://github.com/rawgraphs/raw/wiki/Developer-Guide).
+La forma más sencilla de probar la aplicación es accediendo a la url de [desarrollo](https://estadisticas.arte-consultores.com/egraficos). Aunque si se desea ejecutar localmente puede seguir las instrucciones descritas a continuación en el apartado de instalación.
 
-- App page: [app.rawgraphs.io](http://app.rawgraphs.io)
-- Project official page: [rawgraphs.io](http://rawgraphs.io)
-- Google group: [groups.google.com/forum/#!forum/densitydesign-raw](https://groups.google.com/forum/#!forum/densitydesign-raw)
+## Instalación
 
-## Usage
+### Requerimientos
 
-The easiest way to use RAWGraphs is by accessing the most updated version on the **[official app page](http://app.rawgraphs.io)**. However, RAWGraphs can also run locally on your machine: see the installation instructions below for know-how.
+Es necesario tener **maven** instalado, el resto de componentes, npm y node se instalarán automáticamente.
 
-## Installation
+### Instrucciones de instalación
 
-If you want to run your instance of RAWGraphs locally on your machine, be sure you have the following requirements installed. The following guide is for intermediate users (you will have to open your console and type some commands, it's better if you know what you are doing).
-
-### Requirements
-
-If you want to run your instance of RAWGraphs locally on your machine, be sure you have the following requirements installed.
-
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (it could be used through the interface of [GitHub Desktop](https://desktop.github.com/))
-- [Node.js](https://nodejs.org/en/)
-- [Yarn](https://yarnpkg.com/getting-started/install)
-
-### Instructions (macOS)
-
-In the terminal, navigate to the folder where you want to install the app and clone the `RAWGraphs-app` GitHub repository:
+El siguiente script descargará todos los módulos necesarios para la compilación del proyecto y a continuación generará en la carpeta build el ejecutable:
 
 ```shell
-git clone https://github.com/rawgraphs/rawgraphs-app.git
+mvn clean install
 ```
 
-Browse the folder containing the repository:
+Una vez con todos los módulos descargados podremos ejecutar en local con el siguiente script:
 
 ```shell
-cd rawgraphs-app
+npm start
 ```
 
-Install the needed dependencies through Yarn:
+Si queremos generar el build para producción manualmente:
 
 ```shell
-yarn install
+npm run build:all
 ```
 
-Now you can run the project locally in development mode with the command:
+Si regenerar el widget:
 
 ```shell
-yarn start
+npm run build:widget
 ```
 
-You can also build your own version and upload it on your server by running the command:
+Si queremos regenerar el build para producción sin regenerar el widget:
 
 ```shell
-yarn build
+npm run build
 ```
 
-## Contributing
+### Modificaciones a tener en cuenta en función del entorno
 
-Want to contribute to RAWGraphs's development? You are more than welcome! Start by forking the repository (the "Fork" button at the top-right corner of this page) and follow the instructions above to clone it and install dependencies. Then you can use Github's issues and pull requests to discuss and share your work.
-You will need to sign a [Contributor License Agreement (CLA)](https://en.wikipedia.org/wiki/Contributor_License_Agreement) before submitting. We adopted CLA to be sure that the project will remain open source. For more information, write us: <hello@rawgraphs.io>.
+En función del entorno en el que despleguemos la aplicación existen una serie de variables que pueden modificiarse y son aquellas que se incluyen en el fichero public/application.json
 
-## Publications / Citing RAWGraphs
+Para que el widget funcione correctamente necesitamos definir la propiedad Access-Control-Allow-Origin en la respuesta a las peticiones que se hagan a la aplicación.
 
-If you have found RAWGraphs helpful in your research, or if you want to reference it in your work, please consider citing the paper we presented at [CHItaly 2017](http://sites.unica.it/chitaly2017/).
+#### Ejemplo en un apache genérico
 
-you can read the full article in Green Open Access at the following link:
-
-![oa icon](http://dl.acm.org/images/oa.gif) [RAWGraphs: A Visualisation Platform to Create Open Outputs](http://rawgraphs.io/about/#cite)
-
-Cite RAWGraphs:
-
-> Mauri, M., Elli, T., Caviglia, G., Uboldi, G., & Azzi, M. (2017). RAWGraphs: A Visualisation Platform to Create Open Outputs. In _Proceedings of the 12th Biannual Conference on Italian SIGCHI Chapter_ (p. 28:1–28:5). New York, NY, USA: ACM. https://doi.org/10.1145/3125571.3125585
-
-Bibtex:
+Incluir la siguiente línea en la difinición del directorio dónde se encuentra la aplicación:
 
 ```
-@inproceedings{Mauri:2017:RVP:3125571.3125585,
- author = {Mauri, Michele and Elli, Tommaso and Caviglia, Giorgio and Uboldi, Giorgio and Azzi, Matteo},
- title = {RAWGraphs: A Visualisation Platform to Create Open Outputs},
- booktitle = {Proceedings of the 12th Biannual Conference on Italian SIGCHI Chapter},
- series = {CHItaly '17},
- year = {2017},
- isbn = {978-1-4503-5237-6},
- location = {Cagliari, Italy},
- pages = {28:1--28:5},
- articleno = {28},
- numpages = {5},
- url = {http://doi.acm.org/10.1145/3125571.3125585},
- doi = {10.1145/3125571.3125585},
- acmid = {3125585},
- publisher = {ACM},
- address = {New York, NY, USA},
- keywords = {Visualization tools, data visualization, open output, visual interface},
-}
+<Directory /.../egraficos>
+   ...
+   Header set Access-Control-Allow-Origin "*"
+   ...
+</Directory>
 ```
 
-## License
+#### Ejemplo para el apache de estadisticas.arte-consultores.com
 
-RAWGraphs is provided under the [Apache License 2.0](https://github.com/rawgraphs/rawgraphs-app/blob/master/LICENSE):
+Incluir en el fichero de configuración estadisticas.arte-consultores.com.conf la siguiente regla:
 
-    Copyright (c), 2013-2021 DensityDesign Lab, Calibro, INMAGIK <hello@rawgraphs.io>
-    
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    
-    	http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and limitations under the License.
+```
+###########################################################
+# egraficos
+###########################################################
+
+RewriteRule ^/egraficos(.*) - [ENV=SET_ACCESS_CONTROL_ALLOW_ORIGIN]
+```
