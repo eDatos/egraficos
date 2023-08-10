@@ -4,7 +4,7 @@
 
 A parte de poder descargar los gráficos en formatos svg o png, también permite crear widgets que pueden ser incrustados en caulquier servicio web.
 
-Conociendo la necesidad de trabajar con información sencible, los datos inyectados en Egraficos es procesada únicamente en el navegador: **no existen operaciones ni almacenamiento de información en el lado del servidor**. Es decir, nadie puede ver, tocar o copiar los datos.
+Conociendo la necesidad de trabajar con información sensible, los datos inyectados en Egraficos son procesados únicamente en el navegador: **no existen operaciones ni almacenamiento de información en el lado del servidor**. Es decir, nadie puede ver, tocar o copiar los datos.
 
 ## Uso
 
@@ -12,7 +12,7 @@ La forma más sencilla de probar la aplicación es accediendo a la url de [desar
 
 ## Instalación
 
-### Requerimientos
+### Requisitos
 
 Es necesario tener **maven** instalado, el resto de componentes, npm y node se instalarán automáticamente.
 
@@ -36,7 +36,7 @@ Si queremos generar el build para producción manualmente:
 npm run build:all
 ```
 
-Si regenerar el widget:
+Si queremos regenerar el widget:
 
 ```shell
 npm run build:widget
@@ -56,7 +56,7 @@ Para que el widget funcione correctamente necesitamos definir la propiedad Acces
 
 #### Ejemplo en un apache genérico
 
-Incluir la siguiente línea en la difinición del directorio dónde se encuentra la aplicación:
+Incluir la siguiente línea en la definición del directorio dónde se encuentra la aplicación:
 
 ```
 <Directory /.../egraficos>
@@ -64,16 +64,4 @@ Incluir la siguiente línea en la difinición del directorio dónde se encuentra
    Header set Access-Control-Allow-Origin "*"
    ...
 </Directory>
-```
-
-#### Ejemplo para el apache de estadisticas.arte-consultores.com
-
-Incluir en el fichero de configuración estadisticas.arte-consultores.com.conf la siguiente regla:
-
-```
-###########################################################
-# egraficos
-###########################################################
-
-RewriteRule ^/egraficos(.*) - [ENV=SET_ACCESS_CONTROL_ALLOW_ORIGIN]
 ```
