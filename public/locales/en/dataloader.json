@@ -12,6 +12,7 @@
         }   
     },
     "datelocale":"Date Locale",
+    "refreshdata": "Refresh data from url",
     "datatransform": {
         "title": "DATA TRANSFORMATION",
         "stack": "Stack on"

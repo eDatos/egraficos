@@ -8,7 +8,6 @@ import React, {
 import {
   getOptionsConfig,
   getDefaultOptionsValues,
-  deserializeProject,
   colorPresets,
 } from '@rawgraphs/rawgraphs-core';
 import Header from './components/Header';
@@ -104,17 +103,6 @@ function App() {
     }
   }, []);
 
-  const faviconURL = async () => {
-    const favicon = document.getElementById('favicon');
-    const applicationConfigJson = await applicationConfig();
-    const response = await axios.get(
-      applicationConfigJson['metadata']['endpoint'] +
-        '/properties/' +
-        applicationConfigJson['metadata']['faviconPathKey']
-    );
-    favicon.href = response.data['value'];
-  };
-
   useEffect(() => {
     setVisualOptions((visualOptions) => {
       return {
@@ -124,38 +112,18 @@ function App() {
     });
   }, [mapping, currentChart]);
 
-  // NOTE: When we run the import we want to use the "last"
-  // version of importProject callback
-  const lasImportProjectRef = useRef();
   useEffect(() => {
-    lasImportProjectRef.current = importProject;
-  });
-  useEffect(() => {
-    faviconURL();
-    const projectUrlStr = new URLSearchParams(window.location.search).get(
-      'url'
-    );
-    let projectUrl;
-    try {
-      projectUrl = new URL(projectUrlStr);
-    } catch (e) {
-      // BAD URL
-      return;
-    }
-    fetch(projectUrl)
-      .then((r) => (r.ok ? r.text() : Promise.reject(r)))
-      .then(
-        (projectStr) => {
-          const project = deserializeProject(projectStr, baseCharts);
-          const lastImportProject = lasImportProjectRef.current;
-          if (lastImportProject) {
-            lastImportProject(project, true);
-          }
-        },
-        (err) => {
-          console.log(`Can't load ${projectUrl}`, err);
-        }
+    const faviconURL = async () => {
+      const favicon = document.getElementById('favicon');
+      const applicationConfigJson = await applicationConfig();
+      const response = await axios.get(
+        applicationConfigJson['metadata']['endpoint'] +
+          '/properties/' +
+          applicationConfigJson['metadata']['faviconPathKey']
       );
+      favicon.href = response.data['value'];
+    };
+    faviconURL();
   }, []);
 
   //resetting mapping when column names changes (ex: separator change in parsing)

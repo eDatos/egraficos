@@ -12,6 +12,7 @@
         }   
     },
     "datelocale":"Local Data",
+    "refreshdata": "Recarregar dades des d'url",
     "datatransform": {
         "title": "TRANSFORMACIÓ DADES",
         "stack": "Agrupar"
