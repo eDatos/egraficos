@@ -1,6 +1,6 @@
 ## Acerca de
 
-**Egraficos** es una aplicación web para crear graficos y mapas personalizados usando las librerías [echarts]() y [leaflet]() respectivamente.
+**Egraficos** es una aplicación web para crear graficos y mapas personalizados usando las librerías [echarts](https://echarts.apache.org/) y [leaflet](https://leafletjs.com/) respectivamente.
 
 A parte de poder descargar los gráficos en formatos svg o png, también permite crear widgets que pueden ser incrustados en caulquier servicio web.
 
