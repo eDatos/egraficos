@@ -97,6 +97,7 @@ export default function Exporter({
       ]),
       center: [position.lat, position.lng],
       zoom: mapZoom,
+      baseUrl: window.location.href,
     };
   }
 

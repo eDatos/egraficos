@@ -3,17 +3,56 @@ import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
   ...baseVisualOptions,
+  barsOrientation: {
+    type: 'text',
+    label: 'Bars orientation',
+    group: 'chart',
+    options: [
+      {
+        label: 'vertical',
+        value: 'vertical',
+      },
+      {
+        label: 'horizontal',
+        value: 'horizontal',
+      },
+    ],
+    default: 'vertical',
+  },
+  sortBarsBy: {
+    type: 'text',
+    group: 'chart',
+    options: [
+      {
+        label: 'name',
+        value: 'name',
+      },
+      {
+        label: 'original',
+        value: 'original',
+      },
+    ],
+    default: 'name',
+  },
   // labels
-  showXaxisName: {
+  showBarsName: {
     type: 'boolean',
     default: false,
     group: 'labels',
   },
-  xAxisNamePosition: {
+  customBarsName: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+    disabled: {
+      showBarsName: false,
+    },
+  },
+  barsNameLocation: {
     type: 'text',
     group: 'labels',
     disabled: {
-      showXaxisName: false,
+      showBarsName: false,
     },
     options: [
       {
@@ -31,17 +70,44 @@ export const visualOptions = {
     ],
     default: 'middle',
   },
-  xAxisNameGap: {
+  barsNameGap: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showXaxisName: false,
+      showBarsName: false,
     },
     default: 25,
   },
+  barsLabelsFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'original',
+    options: [
+      {
+        label: 'original',
+        value: 'original',
+      },
+      {
+        label: 'year',
+        value: 'year',
+      },
+      {
+        label: 'month',
+        value: 'month',
+      },
+      {
+        label: 'dayOfWeek',
+        value: 'dayOfWeek',
+      },
+    ],
+  },
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+  },
   showXaxisLabels: {
     type: 'boolean',
-    label: 'Show axis Label',
     default: true,
     group: 'labels',
   },

@@ -33,6 +33,8 @@ import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import WMSMap from './components/WMSMap/WMSMap';
 import { defaultPalette, grayPalette } from './constants';
+import axios from 'axios';
+import { applicationConfig } from './components/ApplicationConfig/ApplicationConfig';
 
 //Custom colors
 colorPresets.ordinal.defaultPalette = {
@@ -102,6 +104,17 @@ function App() {
     }
   }, []);
 
+  const faviconURL = async () => {
+    const favicon = document.getElementById('favicon');
+    const applicationConfigJson = await applicationConfig();
+    const response = await axios.get(
+      applicationConfigJson['metadata']['endpoint'] +
+        '/properties/' +
+        applicationConfigJson['metadata']['faviconPathKey']
+    );
+    favicon.href = response.data['value'];
+  };
+
   useEffect(() => {
     setVisualOptions((visualOptions) => {
       return {
@@ -118,6 +131,7 @@ function App() {
     lasImportProjectRef.current = importProject;
   });
   useEffect(() => {
+    faviconURL();
     const projectUrlStr = new URLSearchParams(window.location.search).get(
       'url'
     );
@@ -277,88 +291,113 @@ function App() {
   );
 
   useEffect(() => {
-    setCookie();
     i18n.changeLanguage(cookies.chosenLocale);
   }, [setCookie, i18n, cookies.chosenLocale]);
+
+  const [logged, setLogged] = useState(false);
+
   const chartIndex = charts.findIndex((c) => c === currentChart);
   const [map, setMap] = useState(null);
 
+  const showWMSMap = useCallback(() => {
+    return dataLoader.dataSource?.type === 'wms' && !data;
+  }, [dataLoader.dataSource, data]);
+
+  const showChartSelector = useCallback(() => {
+    return data;
+  }, [data]);
+
+  const showChartConfigurator = useCallback(() => {
+    return data && currentChart;
+  }, [data, currentChart]);
+
+  const showExportOptions = useCallback(() => {
+    return ((data && rawViz) || map) && dataLoader.dataSource;
+  }, [data, rawViz, map, dataLoader.dataSource]);
+
   return (
     <div className="App">
-      <Header value={i18n.language} />
+      <Header value={i18n.language} setLogged={setLogged} />
       <CustomChartWarnModal
         toConfirmCustomChart={toConfirmCustomChart}
         confirmCustomChartLoad={confirmCustomChartLoad}
         abortCustomChartLoad={abortCustomChartLoad}
       />
       <div className="app-sections">
-        <Section title={t('global.section.loaddata.tittle')} loading={loading}>
-          <DataLoader {...dataLoader} hydrateFromProject={importProject} />
-        </Section>
-        {dataLoader.dataSource?.type === 'wms' && !data && (
-          <Section title="WMS Map">
-            <WMSMap
-              sources={dataLoader.dataSource?.sources}
-              setMap={setMap}
-              map={map}
-            />
-          </Section>
-        )}
-        {data && (
-          <Section title={t('global.section.chartselection.tittle')}>
-            <ChartSelector
-              availableCharts={charts}
-              currentChart={currentChart}
-              setCurrentChart={handleChartChange}
-            />
-          </Section>
-        )}
-        {data && currentChart && (
-          <Section
-            title={t('global.section.mapping.tittle')}
-            loading={mappingLoading}
-          >
-            <DataMapping
-              ref={dataMappingRef}
-              dimensions={currentChart.dimensions}
-              dataTypes={data.dataTypes}
-              mapping={mapping}
-              setMapping={setMapping}
-            />
-          </Section>
-        )}
-        {data && currentChart && (
-          <Section title={t('global.section.customize.tittle')}>
-            <ChartPreviewWithOptions
-              chart={currentChart}
-              dataset={data.dataset}
-              dataTypes={data.dataTypes}
-              mapping={mapping}
-              visualOptions={visualOptions}
-              setVisualOptions={setVisualOptions}
-              setRawViz={setRawViz}
-              setMappingLoading={setMappingLoading}
-            />
-          </Section>
-        )}
-        {((data && rawViz) || map) && dataLoader.dataSource && (
-          <Section title={t('global.section.export.tittle')}>
-            <Exporter
-              rawViz={rawViz}
-              exportProject={exportProject}
-              userData={dataLoader.userData}
-              dataSource={dataLoader.dataSource}
-              chartIndex={chartIndex}
-              mapping={mapping}
-              visualOptions={visualOptions}
-              dataTypes={data?.dataTypes}
-              dimensions={currentChart.dimensions}
-              locale={dataLoader.locale}
-              decimalsSeparator={dataLoader.decimalsSeparator}
-              thousandsSeparator={dataLoader.thousandsSeparator}
-              map={map}
-            />
-          </Section>
+        {logged && (
+          <>
+            <Section
+              title={t('global.section.loaddata.title')}
+              loading={loading}
+            >
+              <DataLoader {...dataLoader} hydrateFromProject={importProject} />
+            </Section>
+            {showWMSMap() && (
+              <Section title="WMS Map">
+                <WMSMap
+                  sources={dataLoader.dataSource?.sources}
+                  setMap={setMap}
+                  map={map}
+                />
+              </Section>
+            )}
+            {showChartSelector() && (
+              <Section title={t('global.section.chartselection.title')}>
+                <ChartSelector
+                  availableCharts={charts}
+                  currentChart={currentChart}
+                  setCurrentChart={handleChartChange}
+                />
+              </Section>
+            )}
+            {showChartConfigurator() && (
+              <Section
+                title={t('global.section.mapping.title')}
+                loading={mappingLoading}
+              >
+                <DataMapping
+                  ref={dataMappingRef}
+                  dimensions={currentChart.dimensions}
+                  dataTypes={data.dataTypes}
+                  mapping={mapping}
+                  setMapping={setMapping}
+                />
+              </Section>
+            )}
+            {showChartConfigurator() && (
+              <Section title={t('global.section.customize.title')}>
+                <ChartPreviewWithOptions
+                  chart={currentChart}
+                  dataset={data.dataset}
+                  dataTypes={data.dataTypes}
+                  mapping={mapping}
+                  visualOptions={visualOptions}
+                  setVisualOptions={setVisualOptions}
+                  setRawViz={setRawViz}
+                  setMappingLoading={setMappingLoading}
+                />
+              </Section>
+            )}
+            {showExportOptions() && (
+              <Section title={t('global.section.export.title')}>
+                <Exporter
+                  rawViz={rawViz}
+                  exportProject={exportProject}
+                  userData={dataLoader.userData}
+                  dataSource={dataLoader.dataSource}
+                  chartIndex={chartIndex}
+                  mapping={mapping}
+                  visualOptions={visualOptions}
+                  dataTypes={data?.dataTypes}
+                  dimensions={currentChart.dimensions}
+                  locale={dataLoader.locale}
+                  decimalsSeparator={dataLoader.decimalsSeparator}
+                  thousandsSeparator={dataLoader.thousandsSeparator}
+                  map={map}
+                />
+              </Section>
+            )}
+          </>
         )}
         <Footer value={i18n.language} />
       </div>

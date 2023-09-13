@@ -3,7 +3,7 @@
         "appName": "Sistema de gràfics a mida",
         "section": {
             "loaddata": {
-                "tittle": "1. Carregar dades",
+                "title": "1. Carregar dades",
                 "paste": {
                     "name": "Enganxar dades",
                     "message": "Copieu i enganxeu les dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON."
@@ -43,30 +43,78 @@
                 }
             },
             "wmslayerselection": {
-                "tittle": "Seleccioneu capes"
+                "title": "Seleccioneu capes",
+                "style":  {
+                    "placeholder": "Seleccioneu l'estil...",
+                    "title": "Seleccioneu l'estil per a la capa",
+                    "legend": "Mostra llegenda",
+                    "showlayer": "Mostra nom de capa",
+                    "hidestyle": "Oculta nom de l'estil"
+                }
             },
             "wmsmunicipalityselection": {
-                "tittle": "Seleccioneu municipi"
+                "title": "Seleccioneu municipi"
             },
             "chartselection": {
-                "tittle": "2. Seleccioneu gràfic",
+                "title": "2. Seleccioneu gràfic",
                 "barchart": {
-                    "description": "Mostra una dimensió categòrica i quantitats relacionades. Cada barra representa una categoria, l'amplada és proporcional a la dimensió quantitativa."
+                    "title": "Diagrama de barres",
+                    "description": "Mostra una dimensió categòrica i quantitats relacionades. Cada barra representa una categoria, l'amplada és proporcional a la dimensió quantitativa.",
+                    "dimensions": {
+                        "bars": "Bars",
+                        "size": "Mida",
+                        "series": "Sèries"
+                    }
                 },
                 "linechart": {
-                    "description": "Mostra una dimensió quantitativa durant un interval continu o període de temps. El color es pot utilitzar opcionalment per codificar una dimensió quantitativa o categòrica addicional."
+                    "title": "Diagrama de línies",
+                    "description": "Mostra una dimensió quantitativa durant un interval continu o període de temps. El color es pot utilitzar opcionalment per codificar una dimensió quantitativa o categòrica addicional.",
+                    "dimensions": {
+                        "xAxis": "Eix X",
+                        "yAxis": "Eix Y",
+                        "lines": "Línies"
+                    }
                 },
                 "piechart": {
-                    "description": "Permet veure les proporcions entre els valors que formen un tot, utilitzant arcs que componen un cercle."
+                    "title": "Diagrama de sectors",
+                    "description": "Permet veure les proporcions entre els valors que formen un tot, utilitzant arcs que componen un cercle.",
+                    "dimensions": {
+                        "arcs": "Arcs"                        
+                    }
                 },
+                "donutchart": {
+                    "title": "Diagrama de donut",
+                    "description": "Te permite ver las proporciones entre los valores que forman un todo, mediante el uso de arcos que componen un donut."
+                },
+                "halfdonutchart": {
+                    "title": "Diagrama de mig donut",
+                    "description": "Te permite ver las proporciones entre los valores que forman un todo, mediante el uso de arcos que componen medio donut."
+                },                
                 "scatterchart": {
-                    "description": "El disseny bàsic és un diagrama de dispersió, que permet veure correlacions entre dues dimensions contínues."
+                    "title": "Diagrama de dispersió",
+                    "description": "El disseny bàsic és un diagrama de dispersió, que permet veure correlacions entre dues dimensions contínues.",
+                    "dimensions": {
+                        "xAxis": "Eix X",
+                        "yAxis": "Eix Y",
+                        "labels": "Etiquetes"
+                    }
                 },
                 "treemapchart": {
-                    "description": "Mostra dades estructurades jeràrquicament i una dimensió quantitativa relacionada. Està compost per una zona dividida en petits rectangles, que representen l'últim nivell de l'estructura arbòria. La mida dels rectangles depèn de la dimensió quantitativa."
+                    "title": "Diagrama de mapa d'arbre",
+                    "description": "Mostra dades estructurades jeràrquicament i una dimensió quantitativa relacionada. Està compost per una zona dividida en petits rectangles, que representen l'últim nivell de l'estructura arbòria. La mida dels rectangles depèn de la dimensió quantitativa.",                    
+                    "dimensions": {
+                        "hierarchy": "Jerarquia",
+                        "size": "Mida"                        
+                    }
                 },
                 "stackedbarchart": {
-                    "description": "Mostra múltiples dimensions quantitatives relacionades amb categories. les barres s'apilen visualment segons la dimensió categòrica, cada barra representa una dimensió quantitativa, mapejada a la seva alçada."
+                    "title": "Diagrama de barres apilades",
+                    "description": "Mostra múltiples dimensions quantitatives relacionades amb categories. les barres s'apilen visualment segons la dimensió categòrica, cada barra representa una dimensió quantitativa, mapejada a la seva alçada.",
+                    "dimensions": {
+                        "axis": "Eix",
+                        "size": "Mida",
+                        "series": "Sèries"
+                    }
                 }
             },
             "mapping": {
@@ -83,6 +131,10 @@
             },
             "export": {
                 "tittle": "5. Exportar"
+            },
+            "login": {
+                "title": "Accedir",
+                "description": "Cal tenir un usuari registrat per accedir a l'aplicació"
             }
         },
         "reset": "Reiniciar",
@@ -131,5 +183,11 @@
             "spain": "Espanya",
             "others": "Altres"
         }
+    },
+    "categories": {
+        "timeseries": "sèries temporals",
+        "correlations": "correlacions",
+        "proportions": "proporcions",
+        "hierarchy": "jerarquia"
     }
 } 

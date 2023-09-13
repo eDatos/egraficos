@@ -87,13 +87,37 @@ export function getChartOptions(
     }
   }
 
-  const pieSeries = resultMap.map(function (item, index) {
-    countreg = countreg + 1;
+  const labelValue = (visualOptions, value, percent) => {
+    let percentValue = (visualOptions.halfDonut ? percent * 2 : percent) + '%';
+    switch (visualOptions.showValueAndPercentage) {
+      case 'both':
+        return `${value}${visualOptions.units} - ${percentValue}`;
+      case 'percentage':
+        return percentValue;
+      default:
+        return value + visualOptions.units;
+    }
+  };
+
+  const data = (item, mapping, visualOptions) => {
     const map2 = new Map(Object.entries(item));
-    var valuedentro = mapping.arcs.value.map((arc) => ({
-      name: arc,
-      value: map2.get(arc),
-    }));
+    var valuedentro = mapping.arcs.value
+      .map((arc) => ({
+        name: arc,
+        value: map2.get(arc),
+      }))
+      .sort((a, b) => {
+        switch (visualOptions.sortBy) {
+          case 'totalDescending':
+            return b.value - a.value;
+          case 'totalAscending':
+            return a.value - b.value;
+          case 'name':
+            return a.name.localeCompare(b.name);
+          default:
+            return 0;
+        }
+      });
     if (visualOptions.halfDonut) {
       const totalValue = valuedentro.reduce((acc, curr) => acc + curr.value, 0);
       valuedentro = [
@@ -113,7 +137,11 @@ export function getChartOptions(
         },
       ];
     }
+    return valuedentro;
+  };
 
+  const pieSeries = resultMap.map(function (item, index) {
+    countreg = countreg + 1;
     var total = resultMap.length;
     var radius = spam;
     if (countreg <= regforraw) {
@@ -148,12 +176,18 @@ export function getChartOptions(
       label: {
         show: visualOptions.showSeriesLabels,
         position: visualOptions.showSeriesLabelsPosition,
+        formatter(param) {
+          const value = visualOptions.showValueOnSeriesLabels
+            ? `(${labelValue(visualOptions, param.value, param.percent)})`
+            : '';
+          return `${param.name} ${value}`;
+        },
       },
       emphasis: {
         focus: 'series',
         blurScope: 'coordinateSystem',
       },
-      data: valuedentro,
+      data: data(item, mapping, visualOptions),
       top: visualOptions.marginTop,
       left: visualOptions.marginLeft,
       right: visualOptions.marginRight,
@@ -176,10 +210,7 @@ export function getChartOptions(
           '<span class="tooltip-circle" style="background-color:' +
           color +
           '"></span>';
-        const value = visualOptions.showpercentage
-          ? (visualOptions.halfDonut ? params.percent * 2 : params.percent) +
-            '%'
-          : params.value;
+        const value = labelValue(visualOptions, params.value, params.percent);
         return `${colorSpan(params.color)} ${params.name} <b>${value}</b>`;
       },
     }, //añadir a las opciones

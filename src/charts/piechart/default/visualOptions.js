@@ -13,12 +13,54 @@ export const visualOptions = {
     default: 2,
     group: 'chart',
   },
-  showpercentage: {
-    type: 'boolean',
-    default: false,
+  sortBy: {
+    type: 'text',
     group: 'chart',
+    options: [
+      {
+        label: 'totalDescending',
+        value: 'totalDescending',
+      },
+      {
+        label: 'totalAscending',
+        value: 'totalAscending',
+      },
+      {
+        label: 'name',
+        value: 'name',
+      },
+      {
+        label: 'original',
+        value: 'original',
+      },
+    ],
+    default: 'totalDescending',
   },
   // labels
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+  },
+  showValueAndPercentage: {
+    type: 'text',
+    group: 'labels',
+    options: [
+      {
+        label: 'value',
+        value: 'value',
+      },
+      {
+        label: 'percentage',
+        value: 'percentage',
+      },
+      {
+        label: 'both',
+        value: 'both',
+      },
+    ],
+    default: 'value',
+  },
   showSeriesLabels: {
     type: 'boolean',
     default: true,
@@ -41,6 +83,14 @@ export const visualOptions = {
       },
     ],
     default: 'outside',
+  },
+  showValueOnSeriesLabels: {
+    type: 'boolean',
+    group: 'labels',
+    disabled: {
+      showSeriesLabels: false,
+    },
+    default: false,
   },
   colorScale: {
     type: 'colorScale',

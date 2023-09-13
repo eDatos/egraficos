@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import EDatosGraph from './components/echart';
 import EDatosWMS from './components/wms';
+import './index.css';
 
 export default {
   widgets: {
@@ -45,6 +46,7 @@ export default {
               sources={config.sources}
               center={config.center}
               zoom={config.zoom}
+              baseUrl={config.baseUrl}
             />
           </React.StrictMode>
         );

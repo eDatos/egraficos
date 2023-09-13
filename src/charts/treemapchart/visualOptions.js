@@ -1,11 +1,21 @@
-import { defaultColor } from '../../constants';
+import { defaultColor, white } from '../../constants';
 import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
   ...baseVisualOptions,
+  gapColor: {
+    type: 'color',
+    default: white,
+    group: 'chart',
+  },
   gapWidth: {
     type: 'number',
     default: 1,
+    group: 'chart',
+  },
+  borderColor: {
+    type: 'color',
+    default: white,
     group: 'chart',
   },
   borderWidth: {

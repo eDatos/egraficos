@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useLeafletContext } from '@react-leaflet/core';
 import * as WMS from 'leaflet.wms';
 
-const WMSCustomLayer = ({ layer, url }) => {
+const WMSCustomLayer = ({ layer, url, style, identify }) => {
   const context = useLeafletContext();
   const layerRef = useRef();
   const layerName = layer['Name'];
@@ -15,19 +15,23 @@ const WMSCustomLayer = ({ layer, url }) => {
         const content = this._map._popup.getContent();
         this._map._popup.setContent(`${info}<br><br>${content}`);
       } else {
-        this._map.openPopup(info, latlng);
+        this._map.openPopup(info, latlng, {
+          maxWidth: '1600',
+          keepInView: true,
+        });
       }
     },
   });
 
   useEffect(() => {
-    const selectedStyles = layer.StyleSelected?.styleName ?? [];
     const container = context.layerContainer || context.map;
 
     const source = new MySource(url, {
       format: 'image/png',
       transparent: 'true',
-      styles: selectedStyles,
+      styles: style,
+      info_format: 'text/html',
+      identify,
     });
 
     layerRef.current = source.getLayer(layerName);

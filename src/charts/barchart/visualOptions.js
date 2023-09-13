@@ -43,16 +43,24 @@ export const visualOptions = {
     default: 'name',
   },
   // labels
-  showXaxisName: {
+  showBarsName: {
     type: 'boolean',
     default: false,
     group: 'labels',
   },
-  xAxisNamePosition: {
+  customBarsName: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+    disabled: {
+      showBarsName: false,
+    },
+  },
+  barsNameLocation: {
     type: 'text',
     group: 'labels',
     disabled: {
-      showXaxisName: false,
+      showBarsName: false,
     },
     options: [
       {
@@ -70,46 +78,79 @@ export const visualOptions = {
     ],
     default: 'middle',
   },
-  xAxisNameGap: {
+  barsNameGap: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showXaxisName: false,
+      showBarsName: false,
     },
     default: 25,
   },
-  showXaxisLabels: {
+  showBarsLabels: {
     type: 'boolean',
-    label: 'Show axis Label',
     default: true,
     group: 'labels',
   },
-  showXaxisLabelsRotate: {
+  barsLabelsRotate: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showXaxisLabels: false,
+      showBarsLabels: false,
     },
     default: 0,
   },
-  showXaxisLabelsFontSize: {
+  barsLabelsFontSize: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showXaxisLabels: false,
+      showBarsLabels: false,
     },
     default: 12,
   },
-  showYaxisName: {
+  barsLabelsFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'original',
+    options: [
+      {
+        label: 'original',
+        value: 'original',
+      },
+      {
+        label: 'year',
+        value: 'year',
+      },
+      {
+        label: 'month',
+        value: 'month',
+      },
+      {
+        label: 'dayOfWeek',
+        value: 'dayOfWeek',
+      },
+    ],
+    disabled: {
+      showBarsLabels: false,
+    },
+  },
+  showBarsSizeName: {
     type: 'boolean',
     default: false,
     group: 'labels',
   },
-  yAxisNamePosition: {
+  customBarsSizeName: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+    disabled: {
+      showBarsSizeName: false,
+    },
+  },
+  barsSizeNameLocation: {
     type: 'text',
     group: 'labels',
     disabled: {
-      showYaxisName: false,
+      showBarsSizeName: false,
     },
     options: [
       {
@@ -127,32 +168,37 @@ export const visualOptions = {
     ],
     default: 'middle',
   },
-  yAxisNameGap: {
+  barsSizeNameGap: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showYaxisName: false,
+      showBarsSizeName: false,
     },
     default: 35,
   },
-  showYaxisLabels: {
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+  },
+  showBarsSizeLabels: {
     type: 'boolean',
     default: true,
     group: 'labels',
   },
-  showYaxisLabelsRotate: {
+  barsSizeLabelsRotate: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showYaxisLabels: false,
+      showBarsSizeName: false,
     },
     default: 0,
   },
-  showYaxisLabelsFontSize: {
+  barsSizeLabelsFontSize: {
     type: 'number',
     group: 'labels',
     disabled: {
-      showYaxisLabels: false,
+      showBarsSizeName: false,
     },
     default: 12,
   },

@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'arcs',
-    name: 'Arcs',
+    name: 'global.section.chartselection.piechart.dimensions.arcs',
     validTypes: ['number'],
     required: true,
     multiple: true,

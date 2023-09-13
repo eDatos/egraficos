@@ -1,5 +1,5 @@
-import { Card, Form } from 'react-bootstrap';
-import React, { useCallback } from 'react';
+import { Card, Form, Row } from 'react-bootstrap';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -9,7 +9,7 @@ import { BsXCircle } from 'react-icons/bs';
 
 const SelectionLayerCombo = (props) => {
   const { t } = useTranslation(['translation']);
-  const styleMap = { zIndex: `100${10 - props.index}` };
+  const styleMap = { zIndex: `10${10 - props.index}` };
   const onMove = useCallback(
     (dragIndex, hoverIndex) => {
       const item = props.selectedLayers[dragIndex];
@@ -31,7 +31,7 @@ const SelectionLayerCombo = (props) => {
           multiple
           onChange={props.onChange}
           options={props.layers}
-          placeholder={t('global.section.wmslayerselection.tittle')}
+          placeholder={t('global.section.wmslayerselection.title')}
           style={styleMap}
           renderInput={(inputProps, childProps) => (
             <TypeaheadInputMulti
@@ -58,6 +58,95 @@ const SelectionLayerCombo = (props) => {
   );
 };
 
+const SelectionStyle = ({
+  options,
+  layer,
+  selectedLayers,
+  setSelectedLayers,
+  index,
+}) => {
+  const [styleSelected, setStyleSelected] = useState([]);
+  const { t } = useTranslation(['translation']);
+
+  const handleShowLayerNameChange = () => {
+    let newSelectedLayers = [...selectedLayers];
+    layer.showLayerName = !layer.showLayerName;
+    if (!layer.showLayerName) {
+      layer.hideStyleName = false;
+    }
+    newSelectedLayers[index] = layer;
+    setSelectedLayers(newSelectedLayers);
+  };
+  const handleStyleChange = (stylesSelected) => {
+    let newSelectedLayers = [...selectedLayers];
+    layer.StyleSelected = stylesSelected;
+    newSelectedLayers[index] = layer;
+    if (stylesSelected.length !== 1) {
+      layer.hideStyleName = false;
+    }
+    setSelectedLayers(newSelectedLayers);
+    setStyleSelected(stylesSelected);
+  };
+  return (
+    <>
+      <Card.Subtitle className="mt-3 mb-2">
+        <b>{t('global.section.wmslayerselection.style.title')}: </b>
+        {layer.Title}
+      </Card.Subtitle>
+      <Typeahead
+        clearButton
+        id="select-style"
+        labelKey="styleTitle"
+        multiple
+        onChange={handleStyleChange}
+        options={options}
+        placeholder={t('global.section.wmslayerselection.style.placeholder')}
+        selected={styleSelected}
+      />
+      <Card.Body>
+        <Row>
+          <Form.Check
+            disabled={styleSelected.length === 0}
+            id="showLegend"
+            className="mr-4"
+            label={t('global.section.wmslayerselection.style.legend')}
+            type="switch"
+            checked={layer.showLegend}
+            onChange={() => {
+              let newSelectedLayers = [...selectedLayers];
+              layer.showLegend = !layer.showLegend;
+              newSelectedLayers[index] = layer;
+              setSelectedLayers(newSelectedLayers);
+            }}
+          />
+          <Form.Check
+            disabled={styleSelected.length === 0}
+            id="showLayerName"
+            className="mr-4"
+            label={t('global.section.wmslayerselection.style.showlayer')}
+            type="switch"
+            checked={layer.showLayerName}
+            onChange={handleShowLayerNameChange}
+          />
+          <Form.Check
+            disabled={styleSelected.length !== 1 || !layer.showLayerName}
+            id="hideStyleName"
+            label={t('global.section.wmslayerselection.style.hidestyle')}
+            type="switch"
+            checked={layer.hideStyleName}
+            onChange={() => {
+              let newSelectedLayers = [...selectedLayers];
+              layer.hideStyleName = !layer.hideStyleName;
+              newSelectedLayers[index] = layer;
+              setSelectedLayers(newSelectedLayers);
+            }}
+          />
+        </Row>
+      </Card.Body>
+    </>
+  );
+};
+
 function LayersOptionCard({
   title,
   layers,
@@ -70,7 +159,12 @@ function LayersOptionCard({
     {
       [layer.Name]: Object.fromEntries(
         Object.entries(layer).filter(
-          ([key]) => key !== 'Name' && key !== 'Title'
+          ([key]) =>
+            key !== 'Name' &&
+            key !== 'Title' &&
+            key !== 'showLegend' &&
+            key !== 'showLayerName' &&
+            key !== 'hideStyleName'
         )
       ),
     },
@@ -107,37 +201,13 @@ function LayersOptionCard({
             return (
               <React.Fragment key={index}>
                 {options.length > 0 && (
-                  <>
-                    <Card.Subtitle className="mt-3">
-                      <b>Selecciona estilo para capa: </b>
-                      {layer.Title}
-                    </Card.Subtitle>
-                    <Typeahead
-                      id="select-style"
-                      labelKey="styleTitle"
-                      onChange={(stylesSelected) => {
-                        let newSelectedLayers = [...selectedLayers];
-                        layer.StyleSelected = stylesSelected[0];
-                        newSelectedLayers[index] = layer;
-                        setSelectedLayers(newSelectedLayers);
-                      }}
-                      options={options}
-                      placeholder="Default style"
-                    />
-                    <Form.Check
-                      id="showLegend"
-                      className="mt-2"
-                      label="Show Legend"
-                      type="switch"
-                      checked={layer.showLegend}
-                      onChange={() => {
-                        let newSelectedLayers = [...selectedLayers];
-                        layer.showLegend = !layer.showLegend;
-                        newSelectedLayers[index] = layer;
-                        setSelectedLayers(newSelectedLayers);
-                      }}
-                    />
-                  </>
+                  <SelectionStyle
+                    options={options}
+                    layer={layer}
+                    selectedLayers={selectedLayers}
+                    setSelectedLayers={setSelectedLayers}
+                    index={index}
+                  />
                 )}
               </React.Fragment>
             );

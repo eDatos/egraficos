@@ -1,8 +1,15 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
-import { parseObject } from '../utils/parseUtils';
+import { format, parseObject } from '../utils/parseUtils';
 
-const mapData = function (data, mapping, dataTypes, dimensions) {
+const mapData = function (
+  data,
+  mapping,
+  dataTypes,
+  dimensions,
+  barsLabelsFormat,
+  locale
+) {
   const sizeAggregator = getDimensionAggregator(
     'size',
     mapping,
@@ -28,81 +35,107 @@ const mapData = function (data, mapping, dataTypes, dimensions) {
       const item = {
         series: v[0][mapping.series.value], //get the first one since it's grouped
         bars: parseObject(v[0][mapping.bars.value]), // get the first one since it's grouped
-        size: mapping.size.value
-          ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
-          : v.length, // aggregate. If not mapped, give 1 as size
+        size:
+          mapping.size.value && mapping.size.value.length > 0
+            ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
+            : v.length, // aggregate. If not mapped, give 1 as size
       };
       results.push(item);
       return item;
     },
     (d) => parseObject(d[mapping.series.value]), //series grouping
-    (d) => parseObject(d[mapping.bars.value]) // bars grouping
+    (d) =>
+      format(
+        d[mapping.bars.value],
+        barsLabelsFormat,
+        locale,
+        mapping.bars.mappedType
+      ) // bars grouping
   );
 
   return results;
 };
 
-function categoryOptions(visualOptions, name) {
+function categoryOptions(visualOptions, bars, locale) {
+  const categoryName = visualOptions.customBarsName
+    ? visualOptions.customBarsName
+    : bars.value;
   return {
-    name: visualOptions.showXaxisName ? name : '',
-    nameLocation: visualOptions.xAxisNamePosition,
-    nameGap: visualOptions.xAxisNameGap,
+    name: visualOptions.showBarsName ? categoryName : '',
+    nameLocation: visualOptions.barsNameLocation,
+    nameGap: visualOptions.barsNameGap,
     type: 'category',
     axisLabel: {
-      show: visualOptions.showXaxisLabels,
-      rotate: visualOptions.showXaxisLabelsRotate,
-      fontSize: visualOptions.showXaxisLabelsFontSize,
+      show: visualOptions.showBarsLabels,
+      rotate: visualOptions.barsLabelsRotate,
+      fontSize: visualOptions.barsLabelsFontSize,
+      formatter: (param) => {
+        return format(
+          param,
+          visualOptions.barsLabelsFormat,
+          locale,
+          bars.mappedType
+        );
+      },
     },
   };
 }
 
 function valueOptions(visualOptions, name) {
+  const valueName = visualOptions.customBarsSizeName
+    ? visualOptions.customBarsSizeName
+    : name;
   return {
-    name: visualOptions.showYaxisName ? name : '',
-    nameLocation: visualOptions.yAxisNamePosition,
-    nameGap: visualOptions.yAxisNameGap,
+    name: visualOptions.showBarsSizeName ? valueName : '',
+    nameLocation: visualOptions.barsSizeNameLocation,
+    nameGap: visualOptions.barsSizeNameGap,
     type: 'value',
     axisLabel: {
-      show: visualOptions.showYaxisLabels,
-      rotate: visualOptions.showYaxisLabelsRotate,
-      fontSize: visualOptions.showYaxisLabelsFontSize,
+      show: visualOptions.showBarsSizeLabels,
+      rotate: visualOptions.barsSizeLabelsRotate,
+      fontSize: visualOptions.barsSizeLabelsFontSize,
     },
   };
 }
 
-const getxAxis = (visualOptions, name) => {
+const getxAxis = (visualOptions, mapping, locale) => {
   if ('vertical' === visualOptions.barsOrientation) {
-    return categoryOptions(visualOptions, name);
+    return categoryOptions(visualOptions, mapping.bars, locale);
   } else {
-    return valueOptions(visualOptions, name);
+    return valueOptions(visualOptions, mapping.size?.value ?? '');
   }
 };
-const getyAxis = (visualOptions, name) => {
+
+const getyAxis = (visualOptions, mapping, locale) => {
   if ('horizontal' === visualOptions.barsOrientation) {
-    return categoryOptions(visualOptions, name);
+    return categoryOptions(visualOptions, mapping.bars, locale);
   } else {
-    return valueOptions(visualOptions, name);
+    return valueOptions(visualOptions, mapping.size?.value ?? '');
   }
 };
 
 function getDimensions(resultMap, mapping) {
-  if (mapping.series.value === undefined || mapping.series.value.length === 0) {
-    return ['bars', 'size'];
-  } else {
+  if (mapping.series?.value?.length > 0) {
     const dimensions = resultMap
       .map((res) => parseObject(res.series))
       .filter((value, index, self) => self.indexOf(value) === index)
       .sort();
     dimensions.unshift('bars');
     return dimensions;
+  } else {
+    const sizeName = mapping.size.value
+      ? mapping.size.value[0] ?? 'Size'
+      : 'Size';
+    return ['bars', sizeName];
   }
 }
 
 function getSorterConfig(visualOptions, dimensions) {
-  let sortBySize =
-    'name' !== visualOptions.sortBarsBy &&
-    dimensions.findIndex((d) => d === 'size') >= 0;
-  let dimension = sortBySize ? 'size' : 'bars';
+  const dimension =
+    'name' !== visualOptions.sortBarsBy && dimensions.length < 3
+      ? dimensions.slice(-1)
+      : 'bars';
+  let sortBySize = dimension !== 'bars';
   let order =
     sortBySize && 'totalDescending' === visualOptions.sortBarsBy
       ? 'desc'
@@ -110,7 +143,7 @@ function getSorterConfig(visualOptions, dimensions) {
   return {
     transform: {
       type: 'sort',
-      config: { dimension, order },
+      config: { dimension, order, parser: 'time' },
     },
   };
 }
@@ -123,8 +156,10 @@ function getDataset(resultMap, mapping, visualOptions) {
       source: resultMap.map((res) => {
         if (res.series) {
           return { bars: res.bars, [parseObject(res.series)]: res.size };
+        } else {
+          const sizeName = mapping.size.value ?? 'Size';
+          return { bars: res.bars, [sizeName]: res.size };
         }
-        return res;
       }),
     },
     getSorterConfig(visualOptions, dimensions),
@@ -135,9 +170,17 @@ export const getChartOptions = function (
   datachart,
   mapping,
   dataTypes,
-  dimensions
+  dimensions,
+  locale
 ) {
-  const resultMap = mapData(datachart, mapping, dataTypes, dimensions);
+  const resultMap = mapData(
+    datachart,
+    mapping,
+    dataTypes,
+    dimensions,
+    visualOptions.barsLabelsFormat,
+    locale
+  );
   let dimensiones = getDimensions(resultMap, mapping);
   const barSeries = dimensiones.splice(1).map(function (item, index) {
     let colorValue = getColorValue();
@@ -184,7 +227,22 @@ export const getChartOptions = function (
       top: visualOptions.legendMarginTop,
     },
     backgroundColor: visualOptions.background,
-    tooltip: {}, //añadir a las opciones
+    tooltip: {
+      formatter: function (params) {
+        var colorSpan = (color) =>
+          '<span class="tooltip-circle" style="background-color:' +
+          color +
+          '"></span>';
+        return `${params.seriesName}<br/>${colorSpan(params.color)} ${format(
+          params.name,
+          visualOptions.barsLabelsFormat,
+          locale,
+          mapping.bars?.mappedType
+        )}&nbsp;&nbsp;&nbsp;<b>${params.value[params.seriesName]}${
+          visualOptions.units
+        }</b>`;
+      },
+    },
     toolbox: {
       show: visualOptions.showToolbox,
       feature: {
@@ -204,8 +262,8 @@ export const getChartOptions = function (
       top: visualOptions.marginTop,
       containLabel: true,
     },
-    xAxis: getxAxis(visualOptions, mapping.bars.value),
-    yAxis: getyAxis(visualOptions, mapping.size.value),
+    xAxis: getxAxis(visualOptions, mapping, locale),
+    yAxis: getyAxis(visualOptions, mapping, locale),
     series: [...barSeries],
   };
 };

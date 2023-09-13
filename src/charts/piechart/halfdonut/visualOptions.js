@@ -3,10 +3,28 @@ import { baseVisualOptions } from '../../baseVisualOptions';
 
 export const visualOptions = {
   ...baseVisualOptions,
+  marginTop: {
+    type: 'number',
+    default: -400,
+    group: 'artboard',
+  },
+  marginBottom: {
+    type: 'number',
+    default: -600,
+    group: 'artboard',
+  },
   marginLeft: {
     type: 'number',
     default: 15,
     group: 'artboard',
+  },
+  legendMarginTop: {
+    type: 'number',
+    default: 450,
+    group: 'artboard',
+    disabled: {
+      showLegend: false,
+    },
   },
   // chart
   borderWidth: {
@@ -22,12 +40,54 @@ export const visualOptions = {
       drawDonut: false,
     },
   },
-  showpercentage: {
-    type: 'boolean',
-    default: false,
+  sortBy: {
+    type: 'text',
     group: 'chart',
+    options: [
+      {
+        label: 'totalDescending',
+        value: 'totalDescending',
+      },
+      {
+        label: 'totalAscending',
+        value: 'totalAscending',
+      },
+      {
+        label: 'name',
+        value: 'name',
+      },
+      {
+        label: 'original',
+        value: 'original',
+      },
+    ],
+    default: 'totalDescending',
   },
-  // labels
+  //labels
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+  },
+  showValueAndPercentage: {
+    type: 'text',
+    group: 'labels',
+    options: [
+      {
+        label: 'value',
+        value: 'value',
+      },
+      {
+        label: 'percentage',
+        value: 'percentage',
+      },
+      {
+        label: 'both',
+        value: 'both',
+      },
+    ],
+    default: 'value',
+  },
   showSeriesLabels: {
     type: 'boolean',
     default: true,
@@ -50,6 +110,14 @@ export const visualOptions = {
       },
     ],
     default: 'outside',
+  },
+  showValueOnSeriesLabels: {
+    type: 'boolean',
+    group: 'labels',
+    disabled: {
+      showSeriesLabels: false,
+    },
+    default: false,
   },
   colorScale: {
     type: 'colorScale',

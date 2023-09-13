@@ -1,5 +1,6 @@
 import React from 'react';
 import ChartOptionSelect from './ChartOptionSelect';
+import { Row, Col } from 'react-bootstrap';
 
 const ChartOptionText = ({
   value,
@@ -23,25 +24,29 @@ const ChartOptionText = ({
     );
   }
   return (
-    <label className="d-block">
-      <b>{label}</b>
-      <br />
-      <input
-        type="text"
-        value={value ?? ''}
-        step={props.step}
-        disabled={!isEnabled}
-        onChange={(e) => {
-          onChange(e.target.value);
-        }}
-        placeholder={defaultValue}
-      />
-      {error && (
-        <small>
-          <i>{error}</i>
-        </small>
-      )}
-    </label>
+    <Row className={props.className}>
+      <Col xs={6} className="d-flex align-items-center">
+        {label}
+      </Col>
+      <Col xs={6}>
+        <input
+          className="w-100 form-control text-field"
+          type="text"
+          value={value ?? ''}
+          step={props.step}
+          disabled={!isEnabled}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
+          placeholder={defaultValue}
+        />
+        {error && (
+          <small>
+            <i>{error}</i>
+          </small>
+        )}
+      </Col>
+    </Row>
   );
 };
 

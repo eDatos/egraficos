@@ -40,7 +40,7 @@ export default function DateLocaleSelector({
           </Dropdown.Header>
           {Object.keys(localeList).map((d) => {
             return (
-              <Dropdown.Item key={d} onSelect={() => handleChange(d)}>
+              <Dropdown.Item key={d} onClick={() => handleChange(d)}>
                 {d}
               </Dropdown.Item>
             );

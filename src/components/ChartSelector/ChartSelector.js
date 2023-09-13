@@ -16,7 +16,7 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
               <Card.Img variant="top" src={currentChart.metadata.thumbnail} />
               <Card.Body>
                 <Card.Title className="m-0">
-                  <h2 className="m-0">{currentChart.metadata.name}</h2>
+                  <h2 className="m-0">{t(currentChart.metadata.name)}</h2>
                 </Card.Title>
                 <Card.Subtitle className="m-0">
                   <h4 className="mb-2">{currentChart.metadata.category}</h4>
@@ -29,6 +29,7 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
         <Col>
           <Row>
             {charts.map((d, i) => {
+              const categories = d.metadata.categories.map((s) => t(s));
               return (
                 <Col xs={4} key={'chart-' + i} className={`p-3`}>
                   <Card
@@ -50,16 +51,13 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
                     <Card.Body className="w-75 px-2 py-3">
                       <Card.Title className="m-0">
                         <h2 className="m-0" style={{ whiteSpace: 'nowrap' }}>
-                          {d.metadata.name}
+                          {t(d.metadata.name)}
                         </h2>
                       </Card.Title>
                       <Card.Subtitle className="m-0">
                         <h4 className="m-0">
-                          {d.metadata.categories
-                            .join(', ')
-                            .charAt(0)
-                            .toUpperCase() +
-                            d.metadata.categories.join(', ').slice(1)}
+                          {categories.join(', ').charAt(0).toUpperCase() +
+                            categories.join(', ').slice(1)}
                         </h4>
                       </Card.Subtitle>
                     </Card.Body>

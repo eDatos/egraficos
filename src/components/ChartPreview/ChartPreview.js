@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import useDebounce from '../../hooks/useDebounce';
 import WarningMessage from '../WarningMessage';
 import ReactEcharts from 'echarts-for-react';
+import { useTranslation } from 'react-i18next';
 
 const ChartPreview = ({
   chart,
@@ -14,6 +15,7 @@ const ChartPreview = ({
 }) => {
   const domRef = useRef(null);
   const vizOptionsDebounced = useDebounce(visualOptions, 200);
+  const { i18n } = useTranslation();
   useEffect(() => {
     setError(null);
 
@@ -109,7 +111,8 @@ const ChartPreview = ({
             data,
             mapping,
             chart.dataTypes,
-            chart.dimensions
+            chart.dimensions,
+            i18n.language
           )
         : {};
     if (domRef && domRef.current && !error) {

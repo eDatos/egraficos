@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'hierarchy',
-    name: 'Hierarchy',
+    name: 'global.section.chartselection.treemapchart.dimensions.hierarchy',
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',
@@ -9,7 +9,7 @@ export const dimensions = [
   },
   {
     id: 'size',
-    name: 'Size',
+    name: 'global.section.chartselection.treemapchart.dimensions.size',
     operation: 'get',
     validTypes: ['number'],
     required: false,
