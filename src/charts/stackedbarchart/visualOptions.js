@@ -34,6 +34,11 @@ export const visualOptions = {
     ],
     default: 'name',
   },
+  groupSeriesInStack: {
+    type: 'boolean',
+    group: 'chart',
+    default: false,
+  },
   // labels
   showBarsName: {
     type: 'boolean',

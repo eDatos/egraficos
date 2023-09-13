@@ -40,6 +40,16 @@
                     "loadButton": "Load WMS"
                 }
             },
+            "sampleData" : {
+                "sample1": "Proportion of people who have completed studies or training in the last four weeks according to age groups. Canary Islands. 2022.",
+                "sample2": "Consumer Price Indices according to ECOICOP groups. Canary Islands. April 2023.",
+                "sample3": "Final consumption of electrical energy according to large sectors. Canary Islands. December 31, 2022.",
+                "sample4": "Expenditures according to branches of education. Canarian public universities. 2021.",
+                "sample5": "Population aged 16 and over according to smoking habit. Canary Islands. 2021.",
+                "sample6": "Results of Autonomous elections according to candidates. Regional deputies. Elections of May 28, 2023.",
+                "sample7": "Population. Canary Islands and years.",
+                "sample8": "Tourists according to sex by country of residence. Canary Islands. 2022."
+            },
             "wmslayerselection": {
                 "title": "Choose layers",
                 "style":  {
@@ -77,7 +87,8 @@
                     "title": "Pie chart",
                     "description": "It allows you to see the proportions between values that make up a whole, by using arcs composing a circle.",
                     "dimensions": {
-                        "arcs": "Arcs"                        
+                        "arcs": "Arcs",
+                        "series": "Series"                        
                     }
                 },
                 "donutchart": {
