@@ -49,26 +49,21 @@ export function getChartOptions(
   dataTypes,
   dimensions
 ) {
-  const resultMap = mapData(datachart, mapping, dataTypes, dimensions);
-  resultMap.forEach((d) => {
-    // compute the total value for each pie
-    d.totalValue = d3.sum(mapping.arcs.value.map((arc) => d[arc]));
-  });
-  // const arcsSize = mapping.arcs.value.map(arc => ({
-  //   name: arc,
-  //   value: sum(resultMap.map(d => d[arc]))
-  // })); // sort it, will be used later
-  const filas = visualOptions.rowsNumber;
-  const spam = Math.max(
-    Math.floor(100 / Math.ceil(resultMap.length / filas)) - 10,
-    6
+  if (mapping.arcs.value.length > 1 && mapping.series?.value?.length > 0) {
+    throw new Error('No more than one arc is allowed if series is selected');
+  }
+  const resultMap = mapData(datachart, mapping, dataTypes, dimensions).reduce(
+    (acc, curr) => {
+      if (curr.series) {
+        acc[curr.series] = curr[mapping.arcs.value[0]];
+      } else {
+        Object.keys(curr).forEach((key) => (acc[key] = curr[key]));
+      }
+      return acc;
+    },
+    {}
   );
-  const regforraw = Math.ceil(resultMap.length / filas);
-  var spamfilas = 100 / filas - 10;
-  var countreg = 0;
-  var left = 0;
-  var top = 0;
-  function calculoradio(radius) {
+  function calculateRadius(radius) {
     if (visualOptions.drawDonut) {
       return [
         visualOptions.arcTichkness + '%',
@@ -99,13 +94,9 @@ export function getChartOptions(
     }
   };
 
-  const data = (item, mapping, visualOptions) => {
-    const map2 = new Map(Object.entries(item));
-    var valuedentro = mapping.arcs.value
-      .map((arc) => ({
-        name: arc,
-        value: map2.get(arc),
-      }))
+  const data = (item, visualOptions) => {
+    const arcs = Object.entries(item)
+      .flatMap(([key, value]) => (value > 0 ? { name: key, value } : []))
       .sort((a, b) => {
         switch (visualOptions.sortBy) {
           case 'totalDescending':
@@ -119,11 +110,10 @@ export function getChartOptions(
         }
       });
     if (visualOptions.halfDonut) {
-      const totalValue = valuedentro.reduce((acc, curr) => acc + curr.value, 0);
-      valuedentro = [
-        ...valuedentro,
+      return [
+        ...arcs,
         {
-          value: totalValue,
+          value: arcs.reduce((acc, curr) => acc + curr.value, 0),
           itemStyle: {
             // stop the chart from rendering this piece
             color: 'none',
@@ -137,40 +127,19 @@ export function getChartOptions(
         },
       ];
     }
-    return valuedentro;
+    return arcs;
   };
 
-  const pieSeries = resultMap.map(function (item, index) {
-    countreg = countreg + 1;
-    var total = resultMap.length;
-    var radius = spam;
-    if (countreg <= regforraw) {
-      top = spamfilas;
-      left = left + spam;
-    } else {
-      top = top + spamfilas;
-      spamfilas = top;
-      countreg = 0;
-      left = spam;
-    }
-    left = total === 1 ? 50 : left;
-    top = total === 1 || filas === 1 ? 50 : top;
-    radius = total === 1 ? 95 : radius;
+  const pieSeries = () => {
+    const defaultRadius = 85;
     return {
-      name: item.series,
       type: 'pie',
-      id: item.series,
       avoidLabelOverlap: false,
       itemStyle: {
         borderColor: white,
         borderWidth: visualOptions.borderWidth,
       },
-      title: {
-        text: item.series,
-        show: true,
-      },
-      radius: calculoradio(radius),
-      center: [left + '%', top + '%'],
+      radius: calculateRadius(defaultRadius),
       startAngle: visualOptions.halfDonut ? 180 : 90,
       roseType: roseType(),
       label: {
@@ -187,14 +156,15 @@ export function getChartOptions(
         focus: 'series',
         blurScope: 'coordinateSystem',
       },
-      data: data(item, mapping, visualOptions),
+      data: data(resultMap, visualOptions),
       top: visualOptions.marginTop,
       left: visualOptions.marginLeft,
       right: visualOptions.marginRight,
       bottom: visualOptions.marginBottom,
       color: visualOptions.colorScale.userScaleValues.map((res) => res.range),
     };
-  });
+  };
+
   return {
     legend: {
       show: visualOptions.showLegend,
@@ -224,6 +194,6 @@ export function getChartOptions(
         },
       },
     },
-    series: [...pieSeries],
+    series: [pieSeries()],
   };
 }

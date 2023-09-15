@@ -15,7 +15,7 @@ const ChartPreview = ({
 }) => {
   const domRef = useRef(null);
   const vizOptionsDebounced = useDebounce(visualOptions, 200);
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   useEffect(() => {
     setError(null);
 
@@ -39,7 +39,7 @@ const ChartPreview = ({
           {requiredVariables
             .map((d, i) => (
               <span key={i} className="font-weight-bold">
-                {d.name}
+                {t(d.name)}
               </span>
             ))
             .reduce((prev, curr) => [prev, ' and ', curr])}
@@ -100,7 +100,7 @@ const ChartPreview = ({
         return;
       }
     }
-  }, [setError, vizOptionsDebounced, setRawViz, chart, mapping]);
+  }, [setError, vizOptionsDebounced, setRawViz, chart, mapping, t]);
 
   var options = {};
   try {
@@ -141,12 +141,8 @@ const ChartPreview = ({
         style={{
           width: visualOptions.width,
           height: visualOptions.height,
-          //marginTop:visualOptions.marginTop,
-          //marginLeft:visualOptions.marginLeft,
-          //marginBottom:visualOptions.marginBottom,
           backgroundColor: visualOptions.background,
         }}
-        //marginRight:visualOptions.marginRight}}
         opts={{ renderer: visualOptions.render }}
       />
     </div>

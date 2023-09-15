@@ -96,5 +96,6 @@
     "barsSizeLabelsFontSize": "Mida d'etiquetes de valors",
     "customBarsName": "Nom de barres",
     "customBarsSizeName": "Nom de valors",
-    "sortBy": "Ordenar per"
+    "sortBy": "Ordenar per",
+    "groupSeriesInStack": "Agrupar sèries"
 }

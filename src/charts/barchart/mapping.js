@@ -130,7 +130,18 @@ function getDimensions(resultMap, mapping) {
   }
 }
 
-function getSorterConfig(visualOptions, dimensions) {
+function getParser(mappedType) {
+  switch (mappedType) {
+    case 'date':
+      return 'time';
+    case 'string':
+      return 'trim';
+    default:
+      return 'number';
+  }
+}
+
+function getSorterConfig(visualOptions, dimensions, mapping) {
   const dimension =
     'name' !== visualOptions.sortBarsBy && dimensions.length < 3
       ? dimensions.slice(-1)
@@ -140,10 +151,17 @@ function getSorterConfig(visualOptions, dimensions) {
     sortBySize && 'totalDescending' === visualOptions.sortBarsBy
       ? 'desc'
       : 'asc';
+
   return {
     transform: {
       type: 'sort',
-      config: { dimension, order, parser: 'time' },
+      config: {
+        dimension,
+        order,
+        parser: getParser(
+          sortBySize ? mapping.size?.mappedType : mapping.bars?.mappedType
+        ),
+      },
     },
   };
 }
@@ -162,7 +180,7 @@ function getDataset(resultMap, mapping, visualOptions) {
         }
       }),
     },
-    getSorterConfig(visualOptions, dimensions),
+    getSorterConfig(visualOptions, dimensions, mapping),
   ];
 }
 export const getChartOptions = function (

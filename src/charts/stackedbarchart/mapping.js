@@ -102,11 +102,15 @@ const getSeries = (mapData, bars, visualOptions, stacksType) => {
       .map((item) => item.series)
       .filter((value, index, self) => self.indexOf(value) === index);
     myStacks.forEach((stack) => {
-      const name = stack ? `${bar} - ${stack}` : bar;
+      const name = stack
+        ? visualOptions.groupSeriesInStack
+          ? stack
+          : `${bar} - ${stack}`
+        : bar;
       let serie = {
         name: name,
         type: 'bar',
-        stack: stack ? stack : 'default',
+        stack: stack && !visualOptions.groupSeriesInStack ? stack : 'default',
         emphasis: {
           focus: 'series',
         },

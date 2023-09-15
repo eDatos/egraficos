@@ -96,5 +96,6 @@
     "barsSizeLabelsFontSize": "Tamaño de etiquetas de valores",
     "customBarsName": "Nombre de barras",
     "customBarsSizeName": "Nombre de valores",
-    "sortBy": "Ordenar por"
+    "sortBy": "Ordenar por",
+    "groupSeriesInStack": "Agrupar series"
 }

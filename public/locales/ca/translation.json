@@ -42,6 +42,16 @@
                     "loadButton": "Carregar WMS"
                 }
             },
+            "sampleData" : {
+                "sample1": "Proporció de persones que han finalitzat estudis o formació en les últimes quatre setmanes segons grups d'edat. Illes Canàries. 2022.",
+                "sample2": "Índexs de preus de consum segons grups ECOICOP. Illes Canàries. Abril 2023.",
+                "sample3": "Consum final d'energia elèctrica segons grans sectors. Illes Canàries. 31 de desembre de 2022.",
+                "sample4": "Despeses per branques d'educació. Universitats públiques canàries. 2021.",
+                "sample5": "Població de 16 anys i més segons l'hàbit de fumar. Illes Canàries. 2021.",
+                "sample6": "Resultats de les eleccions autonòmiques segons candidats. Diputats regionals. Eleccions del 28 de maig de 2023.",
+                "sample7": "Població. Illes Canàries i anys.",
+                "sample8": "Turistes segons el sexe per país de residència. Illes Canàries. 2022."
+            },
             "wmslayerselection": {
                 "title": "Seleccioneu capes",
                 "style":  {
@@ -79,7 +89,8 @@
                     "title": "Diagrama de sectors",
                     "description": "Permet veure les proporcions entre els valors que formen un tot, utilitzant arcs que componen un cercle.",
                     "dimensions": {
-                        "arcs": "Arcs"                        
+                        "arcs": "Arcs",
+                        "series": "Sèries"                        
                     }
                 },
                 "donutchart": {

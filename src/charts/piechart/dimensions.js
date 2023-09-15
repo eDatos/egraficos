@@ -11,4 +11,11 @@ export const dimensions = [
       number: 'sum',
     },
   },
+  {
+    id: 'series',
+    name: 'global.section.chartselection.piechart.dimensions.series',
+    validTypes: ['string'],
+    required: false,
+    operation: 'get',
+  },
 ];

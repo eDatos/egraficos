@@ -96,5 +96,6 @@
     "barsSizeLabelsFontSize": "Bars size label fontsize",
     "customBarsName": "Custom bars name",
     "customBarsSizeName": "Custom bars size name",    
-    "sortBy": "Sort by"
+    "sortBy": "Sort by",
+    "groupSeriesInStack": "Group series"
 }
