@@ -12,6 +12,7 @@
         }   
     },
     "datelocale":"Local Fecha",
+    "refreshdata": "Recargar datos desde url",
     "datatransform": {
         "title": "TRANSFORMACIÓN DATOS",
         "stack": "Agrupar"

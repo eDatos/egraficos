@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import S from './UrlFetch.module.scss';
 import { useTranslation } from 'react-i18next';
 
-export async function fetchData(source, acceptHeader) {
+export async function fetchData(source, acceptHeader = 'text/csv') {
   const response = await fetch(source.url, {
     method: 'GET',
     headers: { Accept: acceptHeader },

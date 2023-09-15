@@ -19,7 +19,7 @@ const dataRefreshWorkers = {
 };
 
 const dataRefreshCaptions = {
-  url: 'Refresh data from url',
+  url: 'refreshdata',
   sparql: 'Refresh data from query',
 };
 
@@ -71,11 +71,11 @@ export default function ParsingOptions(props) {
             onClick={() => refreshData()}
           >
             <BsArrowRepeat className="mr-2" />
-            {get(
+            {t(get(
               dataRefreshCaptions,
               get(props.dataSource, 'type', ''),
               'Refresh data'
-            )}
+            ))}
           </Button>
         )}
 
