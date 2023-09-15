@@ -32,8 +32,7 @@ import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import WMSMap from './components/WMSMap/WMSMap';
 import { defaultPalette, grayPalette } from './constants';
-import axios from 'axios';
-import { applicationConfig } from './components/ApplicationConfig/ApplicationConfig';
+import favicon from './hooks/favicon';
 
 //Custom colors
 colorPresets.ordinal.defaultPalette = {
@@ -113,17 +112,7 @@ function App() {
   }, [mapping, currentChart]);
 
   useEffect(() => {
-    const faviconURL = async () => {
-      const favicon = document.getElementById('favicon');
-      const applicationConfigJson = await applicationConfig();
-      const response = await axios.get(
-        applicationConfigJson['metadata']['endpoint'] +
-          '/properties/' +
-          applicationConfigJson['metadata']['faviconPathKey']
-      );
-      favicon.href = response.data['value'];
-    };
-    faviconURL();
+    favicon();
   }, []);
 
   //resetting mapping when column names changes (ex: separator change in parsing)
