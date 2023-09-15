@@ -63,7 +63,7 @@ export function getChartOptions(
     },
     {}
   );
-  function calculoradio(radius) {
+  function calculateRadius(radius) {
     if (visualOptions.drawDonut) {
       return [
         visualOptions.arcTichkness + '%',
@@ -131,7 +131,7 @@ export function getChartOptions(
   };
 
   const pieSeries = () => {
-    const radius = 85;
+    const defaultRadius = 85;
     return {
       type: 'pie',
       avoidLabelOverlap: false,
@@ -139,7 +139,7 @@ export function getChartOptions(
         borderColor: white,
         borderWidth: visualOptions.borderWidth,
       },
-      radius: calculoradio(radius),
+      radius: calculateRadius(defaultRadius),
       startAngle: visualOptions.halfDonut ? 180 : 90,
       roseType: roseType(),
       label: {
