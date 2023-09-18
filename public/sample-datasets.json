@@ -65,10 +65,10 @@
     {
       "name": "global.section.sampleData.sample8",
       "category": "global.section.chartselection.treemapchart.title",
-      "url": "./sample-datasets/turistas por paises - canarias.csv",
+      "url": "./sample-datasets/Relacion Evento Turistas por paises - canarias.csv",
       "delimiter": ",",
       "sourceName": "ISTAC",
       "sourceURL":
-        "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/queries/ISTAC/C00065A_000007?representation=TIME_PERIOD[2022-A1]:TERRITORIO[ES70]:MEDIDAS[PERNOCTACIONES]"
+        "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/datasets/ISTAC/C00065A_000045/~latest?representation=TIME_PERIOD[2022-A1]:TERRITORIO[ES70]:MEDIDAS[PERNOCTACIONES]"
     }
   ]
