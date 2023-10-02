@@ -38,6 +38,11 @@ export const visualOptions = {
     default: true,
     group: 'labels',
   },
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+  },
   colorScale: {
     type: 'colorScale',
     domain: 'colorDomain',

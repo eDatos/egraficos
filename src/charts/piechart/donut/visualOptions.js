@@ -61,30 +61,6 @@ export const visualOptions = {
     default: 'totalDescending',
   },
   // labels
-  units: {
-    type: 'text',
-    default: '',
-    group: 'labels',
-  },
-  showValueAndPercentage: {
-    type: 'text',
-    group: 'labels',
-    options: [
-      {
-        label: 'value',
-        value: 'value',
-      },
-      {
-        label: 'percentage',
-        value: 'percentage',
-      },
-      {
-        label: 'both',
-        value: 'both',
-      },
-    ],
-    default: 'value',
-  },
   showSeriesLabels: {
     type: 'boolean',
     default: true,
@@ -115,6 +91,53 @@ export const visualOptions = {
       showSeriesLabels: false,
     },
     default: false,
+  },
+  showValueAndPercentage: {
+    type: 'text',
+    group: 'labels',
+    options: [
+      {
+        label: 'value',
+        value: 'value',
+      },
+      {
+        label: 'percentage',
+        value: 'percentage',
+      },
+      {
+        label: 'both',
+        value: 'both',
+      },
+    ],
+    default: 'value',
+  },
+  valuesFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'standard',
+    options: [
+      {
+        label: 'standard',
+        value: 'standard',
+      },
+      {
+        label: 'scientific',
+        value: 'scientific',
+      },
+      {
+        label: 'engineering',
+        value: 'engineering',
+      },
+      {
+        label: 'compact',
+        value: 'compact',
+      },
+    ],
+  },
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
   },
   colorScale: {
     type: 'colorScale',

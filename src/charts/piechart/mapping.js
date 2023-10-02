@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import { white } from '../../constants';
+import { legend, toolbox } from '../baseChartOptions';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   // define aggregators
@@ -47,7 +48,8 @@ export function getChartOptions(
   datachart,
   mapping,
   dataTypes,
-  dimensions
+  dimensions,
+  locale
 ) {
   if (mapping.arcs.value.length > 1 && mapping.series?.value?.length > 0) {
     throw new Error('No more than one arc is allowed if series is selected');
@@ -82,15 +84,21 @@ export function getChartOptions(
     }
   }
 
-  const labelValue = (visualOptions, value, percent) => {
-    let percentValue = (visualOptions.halfDonut ? percent * 2 : percent) + '%';
+  const labelValue = (visualOptions, value, percent, locale) => {
+    let percentValue =
+      (visualOptions.halfDonut ? percent * 2 : percent).toFixed(1) + '%';
+    const valueFormat = Intl.NumberFormat(locale, {
+      notation: visualOptions.valuesFormat,
+    });
     switch (visualOptions.showValueAndPercentage) {
       case 'both':
-        return `${value}${visualOptions.units} - ${percentValue}`;
+        return `${valueFormat.format(value)}${
+          visualOptions.units
+        } - ${percentValue}`;
       case 'percentage':
         return percentValue;
       default:
-        return value + visualOptions.units;
+        return valueFormat.format(value) + visualOptions.units;
     }
   };
 
@@ -147,7 +155,12 @@ export function getChartOptions(
         position: visualOptions.showSeriesLabelsPosition,
         formatter(param) {
           const value = visualOptions.showValueOnSeriesLabels
-            ? `(${labelValue(visualOptions, param.value, param.percent)})`
+            ? `(${labelValue(
+                visualOptions,
+                param.value,
+                param.percent,
+                locale
+              )})`
             : '';
           return `${param.name} ${value}`;
         },
@@ -166,13 +179,7 @@ export function getChartOptions(
   };
 
   return {
-    legend: {
-      show: visualOptions.showLegend,
-      width: visualOptions.legendWidth,
-      orient: visualOptions.legendOrient,
-      right: visualOptions.legendMarginRight,
-      top: visualOptions.legendMarginTop,
-    },
+    legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {
       formatter: function (params) {
@@ -180,20 +187,16 @@ export function getChartOptions(
           '<span class="tooltip-circle" style="background-color:' +
           color +
           '"></span>';
-        const value = labelValue(visualOptions, params.value, params.percent);
+        const value = labelValue(
+          visualOptions,
+          params.value,
+          params.percent,
+          locale
+        );
         return `${colorSpan(params.color)} ${params.name} <b>${value}</b>`;
       },
     }, //añadir a las opciones
-    toolbox: {
-      //añadir a las opciones
-      show: visualOptions.showToolbox,
-      feature: {
-        saveAsImage: {},
-        dataView: {
-          title: 'Vista de datos',
-        },
-      },
-    },
+    toolbox: toolbox(visualOptions.showToolbox),
     series: [pieSeries()],
   };
 }

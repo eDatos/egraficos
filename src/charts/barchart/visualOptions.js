@@ -128,6 +128,22 @@ export const visualOptions = {
         label: 'dayOfWeek',
         value: 'dayOfWeek',
       },
+      {
+        label: 'standard',
+        value: 'standard',
+      },
+      {
+        label: 'scientific',
+        value: 'scientific',
+      },
+      {
+        label: 'engineering',
+        value: 'engineering',
+      },
+      {
+        label: 'compact',
+        value: 'compact',
+      },
     ],
     disabled: {
       showBarsLabels: false,
@@ -201,6 +217,32 @@ export const visualOptions = {
       showBarsSizeName: false,
     },
     default: 12,
+  },
+  barsSizeLabelsFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'standard',
+    options: [
+      {
+        label: 'standard',
+        value: 'standard',
+      },
+      {
+        label: 'scientific',
+        value: 'scientific',
+      },
+      {
+        label: 'engineering',
+        value: 'engineering',
+      },
+      {
+        label: 'compact',
+        value: 'compact',
+      },
+    ],
+    disabled: {
+      showBarsSizeLabels: false,
+    },
   },
   colorScale: {
     type: 'colorScale',

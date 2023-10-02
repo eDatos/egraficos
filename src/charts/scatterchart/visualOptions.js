@@ -23,6 +23,14 @@ export const visualOptions = {
     default: true,
     group: 'labels',
   },
+  customXaxisName: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+    disabled: {
+      showBarsName: false,
+    },
+  },
   xAxisNamePosition: {
     type: 'text',
     group: 'labels',
@@ -74,10 +82,60 @@ export const visualOptions = {
     },
     default: 12,
   },
+  xAxisFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'original',
+    options: [
+      {
+        label: 'original',
+        value: 'original',
+      },
+      {
+        label: 'year',
+        value: 'year',
+      },
+      {
+        label: 'month',
+        value: 'month',
+      },
+      {
+        label: 'dayOfWeek',
+        value: 'dayOfWeek',
+      },
+      {
+        label: 'standard',
+        value: 'standard',
+      },
+      {
+        label: 'scientific',
+        value: 'scientific',
+      },
+      {
+        label: 'engineering',
+        value: 'engineering',
+      },
+      {
+        label: 'compact',
+        value: 'compact',
+      },
+    ],
+    disabled: {
+      showXaxisLabels: false,
+    },
+  },
   showYaxisName: {
     type: 'boolean',
     default: true,
     group: 'labels',
+  },
+  customYaxisName: {
+    type: 'text',
+    default: '',
+    group: 'labels',
+    disabled: {
+      showYaxisName: false,
+    },
   },
   yAxisNamePosition: {
     type: 'text',
@@ -129,6 +187,48 @@ export const visualOptions = {
       showYaxisLabels: false,
     },
     default: 12,
+  },
+  yAxisFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'original',
+    options: [
+      {
+        label: 'original',
+        value: 'original',
+      },
+      {
+        label: 'year',
+        value: 'year',
+      },
+      {
+        label: 'month',
+        value: 'month',
+      },
+      {
+        label: 'dayOfWeek',
+        value: 'dayOfWeek',
+      },
+      {
+        label: 'standard',
+        value: 'standard',
+      },
+      {
+        label: 'scientific',
+        value: 'scientific',
+      },
+      {
+        label: 'engineering',
+        value: 'engineering',
+      },
+      {
+        label: 'compact',
+        value: 'compact',
+      },
+    ],
+    disabled: {
+      showYaxisLabels: false,
+    },
   },
   colorScale: {
     type: 'colorScale',

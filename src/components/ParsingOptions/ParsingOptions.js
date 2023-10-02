@@ -71,11 +71,13 @@ export default function ParsingOptions(props) {
             onClick={() => refreshData()}
           >
             <BsArrowRepeat className="mr-2" />
-            {t(get(
-              dataRefreshCaptions,
-              get(props.dataSource, 'type', ''),
-              'Refresh data'
-            ))}
+            {t(
+              get(
+                dataRefreshCaptions,
+                get(props.dataSource, 'type', ''),
+                'Refresh data'
+              )
+            )}
           </Button>
         )}
 

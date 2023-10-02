@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import { format, parseObject } from '../utils/parseUtils';
+import { grid, legend, toolbox } from '../baseChartOptions';
 
 const mapData = function (
   data,
@@ -81,7 +82,7 @@ function categoryOptions(visualOptions, bars, locale) {
   };
 }
 
-function valueOptions(visualOptions, name) {
+function valueOptions(visualOptions, name, locale) {
   const valueName = visualOptions.customBarsSizeName
     ? visualOptions.customBarsSizeName
     : name;
@@ -94,6 +95,11 @@ function valueOptions(visualOptions, name) {
       show: visualOptions.showBarsSizeLabels,
       rotate: visualOptions.barsSizeLabelsRotate,
       fontSize: visualOptions.barsSizeLabelsFontSize,
+      formatter: (value) => {
+        return new Intl.NumberFormat(locale, {
+          notation: visualOptions.barsSizeLabelsFormat,
+        }).format(value);
+      },
     },
   };
 }
@@ -102,7 +108,7 @@ const getxAxis = (visualOptions, mapping, locale) => {
   if ('vertical' === visualOptions.barsOrientation) {
     return categoryOptions(visualOptions, mapping.bars, locale);
   } else {
-    return valueOptions(visualOptions, mapping.size?.value ?? '');
+    return valueOptions(visualOptions, mapping.size?.value ?? '', locale);
   }
 };
 
@@ -110,7 +116,7 @@ const getyAxis = (visualOptions, mapping, locale) => {
   if ('horizontal' === visualOptions.barsOrientation) {
     return categoryOptions(visualOptions, mapping.bars, locale);
   } else {
-    return valueOptions(visualOptions, mapping.size?.value ?? '');
+    return valueOptions(visualOptions, mapping.size?.value ?? '', locale);
   }
 };
 
@@ -237,13 +243,7 @@ export const getChartOptions = function (
   });
 
   return {
-    legend: {
-      show: visualOptions.showLegend,
-      width: visualOptions.legendWidth,
-      orient: visualOptions.legendOrient,
-      right: visualOptions.legendMarginRight,
-      top: visualOptions.legendMarginTop,
-    },
+    legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {
       formatter: function (params) {
@@ -261,25 +261,9 @@ export const getChartOptions = function (
         }</b>`;
       },
     },
-    toolbox: {
-      show: visualOptions.showToolbox,
-      feature: {
-        saveAsImage: {},
-        dataView: {
-          title: 'Vista de datos',
-        },
-        dataZoom: {},
-        restore: {},
-      },
-    },
+    toolbox: toolbox(visualOptions.showToolbox),
     dataset: getDataset(resultMap, mapping, visualOptions),
-    grid: {
-      left: visualOptions.marginLeft,
-      right: visualOptions.marginRight,
-      bottom: visualOptions.marginBottom,
-      top: visualOptions.marginTop,
-      containLabel: true,
-    },
+    grid: grid(visualOptions),
     xAxis: getxAxis(visualOptions, mapping, locale),
     yAxis: getyAxis(visualOptions, mapping, locale),
     series: [...barSeries],

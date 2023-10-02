@@ -2,6 +2,7 @@ import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import { parseObject } from '../utils/parseUtils';
 import * as d3 from 'd3';
 import { grayPalette, white } from '../../constants';
+import { grid, legend, toolbox } from '../baseChartOptions';
 
 const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
   const sizeAggregator = getDimensionAggregator(
@@ -115,26 +116,21 @@ export const getChartOptions = function (
   dimensions
 ) {
   return {
-    legend: {
-      show: visualOptions.showLegend,
-      width: visualOptions.legendWidth,
-      orient: visualOptions.legendOrient,
-      right: visualOptions.legendMarginRight,
-      top: visualOptions.legendMarginTop,
-    },
+    legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
-    tooltip: {},
-    toolbox: {
-      show: visualOptions.showToolbox,
-      feature: {
-        saveAsImage: {},
-        dataView: {
-          title: 'Vista de datos',
-        },
-        dataZoom: {},
-        restore: {},
+    tooltip: {
+      formatter: function (params) {
+        var colorSpan = (color) =>
+          '<span class="tooltip-circle" style="background-color:' +
+          color +
+          '"></span>';
+        return `${colorSpan(params.color)} ${params.name} <b>${params.value}${
+          visualOptions.units
+        }</b>`;
       },
     },
+    grid: grid(visualOptions),
+    toolbox: toolbox(visualOptions.showToolbox),
     series: getSeries(visualOptions, datachart, mapping, dataTypes, dimensions),
   };
 };

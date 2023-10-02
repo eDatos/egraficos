@@ -27,6 +27,15 @@
         "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/datasets/ISTAC/C00022A_000005/~latest?representation=TERRITORIO[ES708|ES704|ES705|ES709|ES706|ES707|ES703]:TIME_PERIOD[2022-12-31]"
     },
     {
+      "name": "global.section.sampleData.sample7",
+      "category": "global.section.chartselection.linechart.title",
+      "url": "./sample-datasets/Poblacion canaria.csv",
+      "delimiter": ",",
+      "sourceName": "ISTAC",
+      "sourceURL":
+        "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/datasets/ISTAC/E30245A_000002/~latest?representation=MEDIDAS[POBLACION]:TERRITORIO[ES708|ES704|ES705|ES709|ES706|ES707|ES703]:SEXO[_T]"
+    },
+    {
       "name": "global.section.sampleData.sample4",
       "category": "global.section.chartselection.piechart.title",
       "url": "./sample-datasets/Egresos por ramas - canarias.csv",
@@ -52,16 +61,7 @@
       "sourceName": "ISTAC",
       "sourceURL":
         "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/datasets/ISTAC/C00010A_000055/1.0?dim=TERRITORIO:ES70:CANDIDATURAS:P_PSOE|P_CC|P_PP|P_VOX|P_NC_BC|P_USP|P_DVC|P_UXGC|P_PACMA|P_CS|P_ASG|P_AMF|P_PNC|P_REUNIR_CANARIAS_SOSTENIBLE|P_AHORA_CANARIAS_PCPC|P_HABLEMOS_AHORA|P_MC|P_AT|P_3E_EN_ACCION|P_AHI|P_IXLG|P_PAIS_CON_GESTORES|P_ASAMBLEA_HERRENIA|P_MAE|P_CONTIGO|P_UDC"
-    },
-    {
-      "name": "global.section.sampleData.sample7",
-      "category": "global.section.chartselection.linechart.title",
-      "url": "./sample-datasets/Poblacion canaria.csv",
-      "delimiter": ",",
-      "sourceName": "ISTAC",
-      "sourceURL":
-        "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/datasets/ISTAC/E30245A_000002/~latest?representation=MEDIDAS[POBLACION]:TERRITORIO[ES708|ES704|ES705|ES709|ES706|ES707|ES703]:SEXO[_T]"
-    },
+    },  
     {
       "name": "global.section.sampleData.sample8",
       "category": "global.section.chartselection.treemapchart.title",
