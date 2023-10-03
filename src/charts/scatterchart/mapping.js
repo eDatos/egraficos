@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import { parseObjectToValue } from '../utils/parseUtils';
+import { format, parseObjectToValue } from '../utils/parseUtils';
+import { grid, legend, toolbox } from '../baseChartOptions';
+import { dateParsersPatterns } from '../../constants';
 
 const getAxis = (
   showName,
@@ -9,7 +11,10 @@ const getAxis = (
   scale,
   showaxisLabels,
   showaxisLabelsRotate,
-  showaxisLabelsFontSize
+  showaxisLabelsFontSize,
+  axisFormat,
+  mappedType,
+  locale
 ) => {
   return {
     name: showName ? name : '',
@@ -24,6 +29,10 @@ const getAxis = (
       show: showaxisLabels,
       rotate: showaxisLabelsRotate,
       fontSize: showaxisLabelsFontSize,
+      formatter: (value) => {
+        const type = dateParsersPatterns[axisFormat] ? 'date' : mappedType;
+        return format(value, axisFormat, locale, type);
+      },
     },
     scale: scale,
   };
@@ -74,54 +83,52 @@ const getSeries = (visualOptions, data, mapping) => {
   );
 };
 
-export const getChartOptions = function (visualOptions, datachart, mapping) {
+export const getChartOptions = function (
+  visualOptions,
+  datachart,
+  mapping,
+  dataTypes,
+  dimensions,
+  locale
+) {
+  const xAxisName = visualOptions.customXaxisName
+    ? visualOptions.customXaxisName
+    : mapping.x.value;
+  const yAxisName = visualOptions.customYaxisName
+    ? visualOptions.customYaxisName
+    : mapping.y.value;
+
   return {
-    legend: {
-      show: visualOptions.showLegend,
-      width: visualOptions.legendWidth,
-      orient: visualOptions.legendOrient,
-      right: visualOptions.legendMarginRight,
-      top: visualOptions.legendMarginTop,
-    },
+    legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {},
-    toolbox: {
-      show: visualOptions.showToolbox,
-      feature: {
-        saveAsImage: {},
-        dataView: {
-          title: 'Vista de datos',
-        },
-        dataZoom: {},
-        restore: {},
-      },
-    },
-    grid: {
-      left: visualOptions.marginLeft,
-      right: visualOptions.marginRight,
-      bottom: visualOptions.marginBottom,
-      top: visualOptions.marginTop,
-      containLabel: true,
-    },
+    toolbox: toolbox(visualOptions.showToolbox),
+    grid: grid(visualOptions),
     xAxis: getAxis(
       visualOptions.showXaxisName,
-      mapping.x.value[0],
+      xAxisName,
       visualOptions.xAxisNamePosition,
       visualOptions.xAxisNameGap,
       !visualOptions.xAxisOriginTo0,
       visualOptions.showXaxisLabels,
       visualOptions.showXaxisLabelsRotate,
-      visualOptions.showXaxisLabelsFontSize
+      visualOptions.showXaxisLabelsFontSize,
+      visualOptions.xAxisFormat,
+      mapping.x.mappedType,
+      locale
     ),
     yAxis: getAxis(
       visualOptions.showYaxisName,
-      mapping.y.value[0],
+      yAxisName,
       visualOptions.yAxisNamePosition,
       visualOptions.yAxisNameGap,
       !visualOptions.yAxisOriginTo0,
       visualOptions.showYaxisLabels,
       visualOptions.showYaxisLabelsRotate,
-      visualOptions.showYaxisLabelsFontSize
+      visualOptions.showYaxisLabelsFontSize,
+      visualOptions.yAxisFormat,
+      mapping.y.mappedType,
+      locale
     ),
     series: getSeries(visualOptions, datachart, mapping),
   };

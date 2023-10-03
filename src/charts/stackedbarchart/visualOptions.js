@@ -37,7 +37,7 @@ export const visualOptions = {
   groupSeriesInStack: {
     type: 'boolean',
     group: 'chart',
-    default: false,
+    default: true,
   },
   // labels
   showBarsName: {
@@ -104,12 +104,23 @@ export const visualOptions = {
         label: 'dayOfWeek',
         value: 'dayOfWeek',
       },
+      {
+        label: 'standard',
+        value: 'standard',
+      },
+      {
+        label: 'scientific',
+        value: 'scientific',
+      },
+      {
+        label: 'engineering',
+        value: 'engineering',
+      },
+      {
+        label: 'compact',
+        value: 'compact',
+      },
     ],
-  },
-  units: {
-    type: 'text',
-    default: '',
-    group: 'labels',
   },
   showXaxisLabels: {
     type: 'boolean',
@@ -132,6 +143,75 @@ export const visualOptions = {
     },
     default: 12,
   },
+  showBarsSizeName: {
+    type: 'boolean',
+    default: false,
+    group: 'labels',
+  },
+  customBarsSizeName: {
+    type: 'text',
+    group: 'labels',
+    default: '',
+    disabled: {
+      showBarsSizeName: false,
+    },
+  },
+  barsSizeNameLocation: {
+    type: 'text',
+    group: 'labels',
+    disabled: {
+      showBarsSizeName: false,
+    },
+    options: [
+      {
+        label: 'start',
+        value: 'start',
+      },
+      {
+        label: 'middle',
+        value: 'middle',
+      },
+      {
+        label: 'end',
+        value: 'end',
+      },
+    ],
+    default: 'middle',
+  },
+  barsSizeNameGap: {
+    type: 'number',
+    group: 'labels',
+    disabled: {
+      showBarsSizeName: false,
+    },
+    default: 35,
+  },
+  barsSizeLabelsFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'standard',
+    options: [
+      {
+        label: 'standard',
+        value: 'standard',
+      },
+      {
+        label: 'scientific',
+        value: 'scientific',
+      },
+      {
+        label: 'engineering',
+        value: 'engineering',
+      },
+      {
+        label: 'compact',
+        value: 'compact',
+      },
+    ],
+    disabled: {
+      showBarsSizeLabels: false,
+    },
+  },
   showYaxisLabels: {
     type: 'boolean',
     default: true,
@@ -152,6 +232,11 @@ export const visualOptions = {
       showYaxisLabels: false,
     },
     default: 12,
+  },
+  units: {
+    type: 'text',
+    default: '',
+    group: 'labels',
   },
   colorScale: {
     type: 'colorScale',

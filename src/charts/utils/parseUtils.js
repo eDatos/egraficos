@@ -18,6 +18,10 @@ export const format = (data, format, locale, type) => {
   switch (type) {
     case 'date':
       return moment(data).locale(locale).format(dateParsersPatterns[format]);
+    case 'number':
+      return new Intl.NumberFormat(locale, {
+        notation: format ?? 'standard',
+      }).format(data);
     default:
       return data;
   }

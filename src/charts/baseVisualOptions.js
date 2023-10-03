@@ -1,3 +1,5 @@
+import { white } from '../constants';
+
 export const baseVisualOptions = {
   width: {
     type: 'number',
@@ -92,5 +94,10 @@ export const baseVisualOptions = {
       },
     ],
     default: 'svg',
+  },
+  background: {
+    type: 'color',
+    default: white,
+    group: 'colors',
   },
 };

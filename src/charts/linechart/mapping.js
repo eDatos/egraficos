@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import _ from 'lodash';
-import { parseObject } from '../utils/parseUtils';
+import { format, parseObject } from '../utils/parseUtils';
+import { grid, legend, toolbox } from '../baseChartOptions';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   const yAggregator = getDimensionAggregator(
@@ -26,7 +27,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
         v,
         (vv) => {
           const item = {
-            x: vv[0][mapping.x.value], //get the first one since it's grouped
+            x: parseObject(vv[0][mapping.x.value]), //get the first one since it's grouped
             y: yAggregator[0](vv.map((d) => d[mapping.y.value])), // aggregate
             lines: multiplesLines
               ? parseObject(vv[0][mapping.lines.value])
@@ -34,7 +35,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
           };
           results.push(item);
         },
-        (d) => d[mapping.x.value].toString() // sub-group functions. toString() to enable grouping on dates
+        (d) => parseObject(d[mapping.x.value])
       ),
     (d) => parseObject(d[mapping.lines.value]) // group functions
   );
@@ -65,7 +66,7 @@ function getXData(resultMap) {
   return xData.sort((a, b) => a - b);
 }
 
-const getXAxis = (visualOptions, xData, name) => {
+const getXAxis = (visualOptions, xData, name, locale, mappedType) => {
   return {
     name: visualOptions.showXaxisName ? name : '',
     nameLocation: visualOptions.xAxisNamePosition,
@@ -76,12 +77,15 @@ const getXAxis = (visualOptions, xData, name) => {
       show: visualOptions.showXaxisLabels,
       rotate: visualOptions.showXaxisLabelsRotate,
       fontSize: visualOptions.showXaxisLabelsFontSize,
+      formatter: (value) => {
+        return format(value, visualOptions.xAxisFormat, locale, mappedType);
+      },
     },
     data: xData.map((data) => parseObject(data)),
   };
 };
 
-const getYAxis = (visualOptions, name) => {
+const getYAxis = (visualOptions, name, locale) => {
   return {
     name: visualOptions.showYaxisName ? name : '',
     nameLocation: visualOptions.yAxisNamePosition,
@@ -90,6 +94,12 @@ const getYAxis = (visualOptions, name) => {
       show: visualOptions.showYaxisLabels,
       rotate: visualOptions.showYaxisLabelsRotate,
       fontSize: visualOptions.showYaxisLabelsFontSize,
+      formatter: (value) => {
+        return (
+          format(value, visualOptions.yAxisFormat, locale, 'number') +
+          visualOptions.units
+        );
+      },
     },
   };
 };
@@ -99,7 +109,8 @@ export function getChartOptions(
   datachart,
   mapping,
   dataTypes,
-  dimensions
+  dimensions,
+  locale
 ) {
   const resultMap = mapData(datachart, mapping, dataTypes, dimensions);
   const xData = getXData(resultMap);
@@ -139,37 +150,29 @@ export function getChartOptions(
       };
     });
 
+  const xAxisName = visualOptions.customXaxisName
+    ? visualOptions.customXaxisName
+    : mapping.x.value;
+  const yAxisName = visualOptions.customYaxisName
+    ? visualOptions.customYaxisName
+    : mapping.y.value;
+
   return {
-    legend: {
-      show: visualOptions.showLegend,
-      width: visualOptions.legendWidth,
-      orient: visualOptions.legendOrient,
-      right: visualOptions.legendMarginRight,
-      top: visualOptions.legendMarginTop,
-    },
+    legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
-    tooltip: {}, //añadir a las opciones
-    toolbox: {
-      //añadir a las opciones
-      show: visualOptions.showToolbox,
-      feature: {
-        saveAsImage: {},
-        dataView: {
-          title: 'Vista de datos',
-        },
-        dataZoom: {},
-        restore: {},
-      },
-    },
-    grid: {
-      left: visualOptions.marginLeft,
-      right: visualOptions.marginRight,
-      bottom: visualOptions.marginBottom,
-      top: visualOptions.marginTop,
-      containLabel: true,
-    },
-    xAxis: getXAxis(visualOptions, xData, mapping.x.value),
-    yAxis: getYAxis(visualOptions, mapping.y.value),
+    tooltip: {
+      trigger: 'axis',
+    }, //añadir a las opciones
+    toolbox: toolbox(visualOptions.showToolbox),
+    grid: grid(visualOptions),
+    xAxis: getXAxis(
+      visualOptions,
+      xData,
+      xAxisName,
+      locale,
+      mapping.x.mappedType
+    ),
+    yAxis: getYAxis(visualOptions, yAxisName, locale),
     series: [...lineSeries],
   };
 }
