@@ -14,9 +14,7 @@ export const toolbox = (showToolbox) => {
     show: showToolbox,
     feature: {
       saveAsImage: {},
-      dataView: {
-        title: 'Vista de datos',
-      },
+      dataView: {},
       dataZoom: {},
       restore: {},
     },
