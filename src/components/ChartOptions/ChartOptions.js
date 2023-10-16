@@ -117,7 +117,7 @@ function WrapControlComponent({
       return domainFromChart.domain;
     }
     return [];
-  }, [type, /*props.dimension, */ domainFromChart]);
+  }, [type,domainFromChart]);
 
   const handleControlChange = useCallback(
     (nextValue) => {
