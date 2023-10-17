@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import _ from 'lodash';
-import { format, parseObject } from '../utils/parseUtils';
+import { format, formatNumber, parseObject } from '../utils/parseUtils';
 import { grid, legend, toolbox } from '../baseChartOptions';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
@@ -147,6 +147,11 @@ export function getChartOptions(
         symbolSize: visualOptions.dotsDiameter,
         color: colorValue,
         data: lineData,
+        tooltip: {
+          valueFormatter: (value) =>
+            formatNumber(value, visualOptions.tooltipValueFormat, locale) +
+            visualOptions.units,
+        },
       };
     });
 

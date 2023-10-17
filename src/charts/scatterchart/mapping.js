@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { format, parseObjectToValue } from '../utils/parseUtils';
+import { format, formatNumber, parseObjectToValue } from '../utils/parseUtils';
 import { grid, legend, toolbox } from '../baseChartOptions';
 import { dateParsersPatterns } from '../../constants';
 
@@ -38,7 +38,7 @@ const getAxis = (
   };
 };
 
-const getSeries = (visualOptions, data, mapping) => {
+const getSeries = (visualOptions, data, mapping, locale) => {
   let grouped = mapping.labels?.value[0]
     ? _.groupBy(data, mapping.labels.value[0])
     : data;
@@ -77,6 +77,10 @@ const getSeries = (visualOptions, data, mapping) => {
             formatter: (param) => param.data[2],
             position: 'top',
           },
+        },
+        tooltip: {
+          valueFormatter: (value) =>
+            formatNumber(value, visualOptions.tooltipValueFormat, locale),
         },
       };
     }
@@ -130,6 +134,6 @@ export const getChartOptions = function (
       mapping.y.mappedType,
       locale
     ),
-    series: getSeries(visualOptions, datachart, mapping),
+    series: getSeries(visualOptions, datachart, mapping, locale),
   };
 };

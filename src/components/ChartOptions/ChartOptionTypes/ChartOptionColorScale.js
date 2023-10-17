@@ -184,6 +184,7 @@ const ChartOptionColorScale = ({
   const handleChangeValues = useCallback(
     (nextUserValues) => {
       let valuesForFinalScale = getUserValuesForFinalScale(nextUserValues);
+      setLocked(true);
 
       //notify ui
       const outScaleParams = {
@@ -227,6 +228,7 @@ const ChartOptionColorScale = ({
 
   const handleChangeScaleType = useCallback(
     (nextScaleType) => {
+      setLocked(false);
       setScaleType(nextScaleType);
 
       //update interpolators
