@@ -120,13 +120,7 @@ export const getChartOptions = function (
     backgroundColor: visualOptions.background,
     tooltip: {
       formatter: function (params) {
-        var colorSpan = (color) =>
-          '<span class="tooltip-circle" style="background-color:' +
-          color +
-          '"></span>';
-        return `${colorSpan(params.color)} ${params.name} <b>${params.value}${
-          visualOptions.units
-        }</b>`;
+        return `${params.name} <b>${params.value}${visualOptions.units}</b>`;
       },
     },
     grid: grid(visualOptions),

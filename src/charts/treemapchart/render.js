@@ -1,16 +1,17 @@
 export function colorDomain(data, mapping) {
-  let domain = '';
+  let names = '';
   if (data && mapping.hierarchy?.value && mapping.hierarchy.value?.length > 0) {
-    domain = [];
+    names = [];
     data.forEach((element) => {
       let value = element[mapping.hierarchy.value[0]];
-      if (domain.indexOf(value) === -1) {
-        domain.push(value);
+      if (names.indexOf(value) === -1) {
+        names.push(value);
       }
     });
   }
+  const zeroPad = (num, places) => String(num).padStart(places, '0');
   return {
-    domain,
+    domain: names.map((e, index) => `${zeroPad(index + 1, 2)}`),
     type: 'string',
   };
 }
