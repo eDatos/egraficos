@@ -233,6 +233,29 @@ export const visualOptions = {
     },
     default: 12,
   },
+  tooltipValueFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'standard',
+    options: [
+      {
+        label: 'standard',
+        value: 'standard',
+      },
+      {
+        label: 'scientific',
+        value: 'scientific',
+      },
+      {
+        label: 'engineering',
+        value: 'engineering',
+      },
+      {
+        label: 'compact',
+        value: 'compact',
+      },
+    ],
+  },
   units: {
     type: 'text',
     default: '',

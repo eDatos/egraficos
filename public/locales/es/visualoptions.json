@@ -83,6 +83,7 @@
     "xAxisFormat": "Formato eje X",
     "yAxisFormat": "Formato eje Y",
     "valuesFormat": "Formato de valores",
+    "tooltipValueFormat": "Formato descripción emergente",
     "year": "Año",
     "month": "Mes",
     "dayOfWeek": "Día de la semana",

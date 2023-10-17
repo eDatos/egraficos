@@ -1,10 +1,17 @@
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
-import { parseObject } from '../utils/parseUtils';
+import { formatNumber, parseObject } from '../utils/parseUtils';
 import * as d3 from 'd3';
 import { grayPalette, white } from '../../constants';
 import { grid, legend, toolbox } from '../baseChartOptions';
 
-const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
+const getSeries = (
+  visualOptions,
+  data,
+  mapping,
+  dataTypes,
+  dimensions,
+  locale
+) => {
   const sizeAggregator = getDimensionAggregator(
     'size',
     mapping,
@@ -104,6 +111,11 @@ const getSeries = (visualOptions, data, mapping, dataTypes, dimensions) => {
       },
       levels: getLevelOption(),
       data: dataHierarchy(0, data),
+      tooltip: {
+        valueFormatter: (value) =>
+          formatNumber(value, visualOptions.tooltipValueFormat, locale) +
+          visualOptions.units,
+      },
     },
   ];
 };
@@ -113,18 +125,22 @@ export const getChartOptions = function (
   datachart,
   mapping,
   dataTypes,
-  dimensions
+  dimensions,
+  locale
 ) {
   return {
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
-    tooltip: {
-      formatter: function (params) {
-        return `${params.name} <b>${params.value}${visualOptions.units}</b>`;
-      },
-    },
+    tooltip: {},
     grid: grid(visualOptions),
     toolbox: toolbox(visualOptions.showToolbox),
-    series: getSeries(visualOptions, datachart, mapping, dataTypes, dimensions),
+    series: getSeries(
+      visualOptions,
+      datachart,
+      mapping,
+      dataTypes,
+      dimensions,
+      locale
+    ),
   };
 };

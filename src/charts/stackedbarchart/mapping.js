@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
-import { diff, format, parseObject } from '../utils/parseUtils';
+import { diff, format, formatNumber, parseObject } from '../utils/parseUtils';
 import { white } from '../../constants';
 import { grid, legend, toolbox } from '../baseChartOptions';
 
@@ -292,7 +292,11 @@ export const getChartOptions = function (
           visualOptions.barsLabelsFormat,
           locale,
           mapping.stacks?.mappedType
-        )}&nbsp;&nbsp;&nbsp;<b>${params.value}${visualOptions.units}</b>`;
+        )}&nbsp;&nbsp;&nbsp;<b>${formatNumber(
+          params.value,
+          visualOptions.tooltipValueFormat,
+          locale
+        )}${visualOptions.units}</b>`;
       },
     },
     toolbox: toolbox(visualOptions.showToolbox),

@@ -11,16 +11,22 @@ export const parseObjectToValue = (data) => {
   return data instanceof Date ? data.getTime() : data;
 };
 
-export const format = (data, format, locale, type) => {
-  if (format === 'original') {
+export const formatNumber = (data, patternFormat, locale) => {
+  return format(data, patternFormat, locale, 'number');
+};
+
+export const format = (data, patternFormat, locale, type) => {
+  if (patternFormat === 'original') {
     return data;
   }
   switch (type) {
     case 'date':
-      return moment(data).locale(locale).format(dateParsersPatterns[format]);
+      return moment(data)
+        .locale(locale)
+        .format(dateParsersPatterns[patternFormat]);
     case 'number':
       return new Intl.NumberFormat(locale, {
-        notation: format ?? 'standard',
+        notation: patternFormat ?? 'standard',
       }).format(data);
     default:
       return data;

@@ -83,6 +83,7 @@
     "xAxisFormat": "Format eix X",    
     "yAxisFormat": "Format eix Y",
     "valuesFormat": "Format de valors",
+    "tooltipValueFormat": "Format descripció emergent",
     "year": "Any",
     "month": "Mes",
     "dayOfWeek": "Dia de la setmana",
