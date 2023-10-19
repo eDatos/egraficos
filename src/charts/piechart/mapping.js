@@ -179,6 +179,9 @@ export function getChartOptions(
   };
 
   return {
+    title: {
+      text: visualOptions.title,
+    },
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {

@@ -1,13 +1,13 @@
-MEDIDAS#es,MEDIDAS_CODE,GRUPOS_ECOICOP#es,GRUPOS_ECOICOP_CODE,TERRITORIO#es,TERRITORIO_CODE,TIME_PERIOD#es,TIME_PERIOD_CODE,OBS_VALUE,UNIDAD_MEDIDA#es,MULTIPLICADOR_UNIDAD#es,ESTADO_OBSERVACION#es,CONFIDENCIALIDAD_OBSERVACION#es,PERIODO_RECOGIDA#es
-Índice de Precios de Consumo,IPC,Alimentos y bebidas no alcohólicas,01,Canarias,ES70,04/2023,2023-M04,124.935,,,,,
-Índice de Precios de Consumo,IPC,"Bebidas alcohólicas, tabaco y estupefacientes",02,Canarias,ES70,04/2023,2023-M04,109,,,,,
-Índice de Precios de Consumo,IPC,Vestido y calzado,03,Canarias,ES70,04/2023,2023-M04,103.826,,,,,
-Índice de Precios de Consumo,IPC,"Vivienda, agua, electricidad, gas y otros combustibles",04,Canarias,ES70,04/2023,2023-M04,101.248,,,,,
-Índice de Precios de Consumo,IPC,"Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar",05,Canarias,ES70,04/2023,2023-M04,111.751,,,,,
-Índice de Precios de Consumo,IPC,Sanidad,06,Canarias,ES70,04/2023,2023-M04,103.144,,,,,
-Índice de Precios de Consumo,IPC,Transporte,07,Canarias,ES70,04/2023,2023-M04,113.145,,,,,
-Índice de Precios de Consumo,IPC,Comunicaciones,08,Canarias,ES70,04/2023,2023-M04,102.583,,,,,
-Índice de Precios de Consumo,IPC,Ocio y cultura,09,Canarias,ES70,04/2023,2023-M04,106.188,,,,,
-Índice de Precios de Consumo,IPC,Enseñanza,10,Canarias,ES70,04/2023,2023-M04,104.021,,,,,
-Índice de Precios de Consumo,IPC,Restaurantes y hoteles,11,Canarias,ES70,04/2023,2023-M04,113.771,,,,,
-Índice de Precios de Consumo,IPC,Otros bienes y servicios,12,Canarias,ES70,04/2023,2023-M04,108.462,,,,,
+MEDIDAS#es,MEDIDAS_CODE,GRUPOS_ECOICOP#es,GRUPOS_ECOICOP_CODE,TERRITORIO#es,TERRITORIO_CODE,TIME_PERIOD#es,TIME_PERIOD_CODE,OBS_VALUE
+Índice de Precios de Consumo,IPC,Alimentos y bebidas no alcohólicas,01,Canarias,ES70,04/2023,2023-M04,124.935
+Índice de Precios de Consumo,IPC,"Bebidas alcohólicas, tabaco y estupefacientes",02,Canarias,ES70,04/2023,2023-M04,109
+Índice de Precios de Consumo,IPC,Vestido y calzado,03,Canarias,ES70,04/2023,2023-M04,103.826
+Índice de Precios de Consumo,IPC,"Vivienda, agua, electricidad, gas y otros combustibles",04,Canarias,ES70,04/2023,2023-M04,101.248
+Índice de Precios de Consumo,IPC,"Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar",05,Canarias,ES70,04/2023,2023-M04,111.751
+Índice de Precios de Consumo,IPC,Sanidad,06,Canarias,ES70,04/2023,2023-M04,103.144
+Índice de Precios de Consumo,IPC,Transporte,07,Canarias,ES70,04/2023,2023-M04,113.145
+Índice de Precios de Consumo,IPC,Comunicaciones,08,Canarias,ES70,04/2023,2023-M04,102.583
+Índice de Precios de Consumo,IPC,Ocio y cultura,09,Canarias,ES70,04/2023,2023-M04,106.188
+Índice de Precios de Consumo,IPC,Enseñanza,10,Canarias,ES70,04/2023,2023-M04,104.021
+Índice de Precios de Consumo,IPC,Restaurantes y hoteles,11,Canarias,ES70,04/2023,2023-M04,113.771
+Índice de Precios de Consumo,IPC,Otros bienes y servicios,12,Canarias,ES70,04/2023,2023-M04,108.462

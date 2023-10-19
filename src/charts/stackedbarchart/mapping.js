@@ -8,6 +8,8 @@ const sortFunction = (a, b, sortBarsBy, type) => {
   switch (sortBarsBy) {
     case 'original':
       return 0;
+    case 'name(desc)':
+      return a.stacks ? diff(b.stacks, a.stacks, type) : diff(b, a, type);
     case 'name':
     default:
       return a.stacks ? diff(a.stacks, b.stacks, type) : diff(a, b, type);
@@ -276,6 +278,9 @@ export const getChartOptions = function (
     mapping.stacks?.mappedType
   );
   return {
+    title: {
+      text: visualOptions.title,
+    },
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {

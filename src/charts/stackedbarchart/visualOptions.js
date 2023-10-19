@@ -28,6 +28,10 @@ export const visualOptions = {
         value: 'name',
       },
       {
+        label: 'name(desc)',
+        value: 'name(desc)',
+      },
+      {
         label: 'original',
         value: 'original',
       },
