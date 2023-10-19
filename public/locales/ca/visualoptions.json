@@ -112,5 +112,6 @@
     "customBarsSizeName": "Nom de valors",
     "sortBy": "Ordenar per",
     "groupSeriesInStack": "Agrupar sèries",
-    "yes": "Sí"
+    "yes": "Sí",
+    "no": "No"
 }

@@ -28,7 +28,7 @@ const ChartOptionBoolean = ({
               onChange(e.target.checked);
             }}
             id={optionId}
-            label={value ? t('yes') : 'No'}
+            label={value ? t('yes') : t('no')}
           />
         </Form>
         {error && (

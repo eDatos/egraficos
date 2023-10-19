@@ -112,5 +112,6 @@
     "customBarsSizeName": "Custom bars size name",    
     "sortBy": "Sort by",
     "groupSeriesInStack": "Group series",
-    "yes": "Yes"
+    "yes": "Yes",
+    "no": "No"
 }
