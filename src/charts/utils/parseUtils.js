@@ -17,7 +17,10 @@ export const formatNumber = (data, patternFormat, locale) => {
 
 export const format = (data, patternFormat, locale, type) => {
   if (patternFormat === 'original') {
-    return data;
+    return parseObject(data);
+  }
+  if (type === undefined) {
+    type = data instanceof Date ? 'date' : '';
   }
   switch (type) {
     case 'date':
@@ -37,6 +40,8 @@ export const diff = (a, b, type) => {
   switch (type) {
     case 'date':
       return moment(a).diff(b);
+    case 'string':
+      return a.localeCompare(b);
     default:
       return a - b;
   }

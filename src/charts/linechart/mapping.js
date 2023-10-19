@@ -77,11 +77,10 @@ const getXAxis = (visualOptions, xData, name, locale, mappedType) => {
       show: visualOptions.showXaxisLabels,
       rotate: visualOptions.showXaxisLabelsRotate,
       fontSize: visualOptions.showXaxisLabelsFontSize,
-      formatter: (value) => {
-        return format(value, visualOptions.xAxisFormat, locale, mappedType);
-      },
     },
-    data: xData.map((data) => parseObject(data)),
+    data: xData.map((data) =>
+      format(data, visualOptions.xAxisFormat, locale, mappedType)
+    ),
   };
 };
 
@@ -163,6 +162,9 @@ export function getChartOptions(
     : mapping.y.value;
 
   return {
+    title: {
+      text: visualOptions.title,
+    },
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {

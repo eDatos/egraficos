@@ -27,6 +27,7 @@ export const visualOptions = {
     type: 'boolean',
     default: false,
     group: 'artboard',
+    show: false,
   },
   showLabel: {
     type: 'boolean',
@@ -37,6 +38,29 @@ export const visualOptions = {
     type: 'boolean',
     default: true,
     group: 'labels',
+  },
+  dateFormat: {
+    type: 'text',
+    group: 'labels',
+    default: 'original',
+    options: [
+      {
+        label: 'original',
+        value: 'original',
+      },
+      {
+        label: 'year',
+        value: 'year',
+      },
+      {
+        label: 'month',
+        value: 'month',
+      },
+      {
+        label: 'dayOfWeek',
+        value: 'dayOfWeek',
+      },
+    ],
   },
   tooltipValueFormat: {
     type: 'text',

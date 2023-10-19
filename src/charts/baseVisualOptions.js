@@ -1,9 +1,12 @@
 import { white } from '../constants';
 
 export const baseVisualOptions = {
+  title: {
+    type: 'text',
+    group: 'artboard',
+  },
   width: {
     type: 'number',
-    label: 'Width (px)',
     default: 1000,
     container: 'width',
     group: 'artboard',

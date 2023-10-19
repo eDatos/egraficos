@@ -103,6 +103,9 @@ export const getChartOptions = function (
     : mapping.y.value;
 
   return {
+    title: {
+      text: visualOptions.title,
+    },
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {},

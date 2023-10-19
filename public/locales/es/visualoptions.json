@@ -1,5 +1,6 @@
 {
     "artboard": "lienzo",
+    "title": "Título",
     "colors": "colores",
     "chart": "diagrama",
     "labels": "etiquetas",
@@ -43,6 +44,7 @@
     "totalDescending": "Tamaño (desc)",
     "totalAscending": "Tamaño (asc)",
     "name": "Nombre",
+    "name(desc)": "Nombre(desc)",
     "original": "Original",
     "vertical": "Vertical",
     "horizontal": "Horizontal",
@@ -83,6 +85,7 @@
     "xAxisFormat": "Formato eje X",
     "yAxisFormat": "Formato eje Y",
     "valuesFormat": "Formato de valores",
+    "dateFormat": "Formato de fecha",
     "tooltipValueFormat": "Formato descripción emergente",
     "year": "Año",
     "month": "Mes",
@@ -108,5 +111,6 @@
     "customBarsName": "Nombre de barras",
     "customBarsSizeName": "Nombre de valores",
     "sortBy": "Ordenar por",
-    "groupSeriesInStack": "Agrupar series"
+    "groupSeriesInStack": "Agrupar series",
+    "yes": "Sí"
 }

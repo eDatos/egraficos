@@ -1,5 +1,5 @@
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
-import { formatNumber, parseObject } from '../utils/parseUtils';
+import { format, formatNumber } from '../utils/parseUtils';
 import * as d3 from 'd3';
 import { grayPalette, white } from '../../constants';
 import { grid, legend, toolbox } from '../baseChartOptions';
@@ -75,7 +75,11 @@ const getSeries = (
           children = dataHierarchy(index + 1, childrenData);
         }
         const item = {
-          name: parseObject(v[0][hierarchy[index]]),
+          name: format(
+            v[0][hierarchy[index]],
+            visualOptions.dateFormat,
+            locale
+          ),
           value:
             mapping.size.value && sizeAggregator[0]
               ? sizeAggregator[0](v.map((d) => d[mapping.size.value]))
@@ -129,6 +133,9 @@ export const getChartOptions = function (
   locale
 ) {
   return {
+    title: {
+      text: visualOptions.title,
+    },
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {},

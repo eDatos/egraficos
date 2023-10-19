@@ -1,5 +1,6 @@
 {
     "artboard": "artboard",
+    "title": "Title",
     "colors": "colors",
     "chart": "chart",
     "labels": "labels",
@@ -43,6 +44,7 @@
     "totalDescending": "Size (descending)",
     "totalAscending": "Size (ascending)",
     "name": "Name",
+    "name(desc)": "Name(desc)",
     "original": "Original",
     "vertical": "Vertical",
     "horizontal": "Horizontal",
@@ -83,6 +85,7 @@
     "xAxisFormat": "X axis Format",
     "yAxisFormat": "Y axis Format",
     "valuesFormat": "Values Format",
+    "dateFormat": "Date format",
     "tooltipValueFormat": "Tooltip value Format",
     "year": "Year",
     "month": "Month",
@@ -108,5 +111,6 @@
     "customBarsName": "Custom bars name",
     "customBarsSizeName": "Custom bars size name",    
     "sortBy": "Sort by",
-    "groupSeriesInStack": "Group series"
+    "groupSeriesInStack": "Group series",
+    "yes": "Yes"
 }

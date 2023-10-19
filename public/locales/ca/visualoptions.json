@@ -1,5 +1,6 @@
 {
     "artboard": "llenç",
+    "title": "Títol",
     "colors": "colors",
     "chart": "diagrama",
     "labels": "etiquetes",
@@ -43,6 +44,7 @@
     "totalDescending": "Mida (desc)",
     "totalAscending": "Mida (asc)",
     "name": "Nom",
+    "name(desc)": "Nom(desc)",
     "original": "Original",
     "vertical": "Vertical",
     "horizontal": "Horitzontal",
@@ -83,6 +85,7 @@
     "xAxisFormat": "Format eix X",    
     "yAxisFormat": "Format eix Y",
     "valuesFormat": "Format de valors",
+    "dateFormat": "Format de data",
     "tooltipValueFormat": "Format descripció emergent",
     "year": "Any",
     "month": "Mes",
@@ -108,5 +111,6 @@
     "customBarsName": "Nom de barres",
     "customBarsSizeName": "Nom de valors",
     "sortBy": "Ordenar per",
-    "groupSeriesInStack": "Agrupar sèries"
+    "groupSeriesInStack": "Agrupar sèries",
+    "yes": "Sí"
 }
