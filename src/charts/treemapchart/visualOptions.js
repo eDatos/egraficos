@@ -29,6 +29,26 @@ export const visualOptions = {
     group: 'artboard',
     show: false,
   },
+  legendWidth: {
+    type: 'boolean',    
+    group: 'artboard',
+    show: false,
+  },
+  legendOrient: {
+    type: 'boolean',    
+    group: 'artboard',
+    show: false,
+  },
+  legendMarginRight: {
+    type: 'boolean',    
+    group: 'artboard',
+    show: false,
+  },
+  legendMarginTop: {
+    type: 'boolean',    
+    group: 'artboard',
+    show: false,
+  },
   showLabel: {
     type: 'boolean',
     default: true,
