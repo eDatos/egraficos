@@ -24,6 +24,14 @@ export const visualOptions = {
     group: 'chart',
     options: [
       {
+        label: 'totalDescending',
+        value: 'totalDescending',
+      },
+      {
+        label: 'totalAscending',
+        value: 'totalAscending',
+      },
+      {
         label: 'name',
         value: 'name',
       },
