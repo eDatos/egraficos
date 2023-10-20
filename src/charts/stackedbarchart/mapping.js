@@ -4,15 +4,48 @@ import { diff, format, formatNumber, parseObject } from '../utils/parseUtils';
 import { white } from '../../constants';
 import { grid, legend, toolbox } from '../baseChartOptions';
 
-const sortFunction = (a, b, sortBarsBy, type) => {
+const reduceDataByStacks = (mapData) => {
+  return mapData
+    .reduce((accumulator, currentValue) => {
+      let findIndex = accumulator.findIndex(
+        (d) => d.stacks === currentValue.stacks
+      );
+      if (findIndex < 0) {
+        return [
+          ...accumulator,
+          { stacks: currentValue.stacks, size: currentValue.size },
+        ];
+      } else {
+        accumulator[findIndex].size += currentValue.size;
+      }
+      return accumulator;
+    }, [])
+    .sort((a, b) => a.size - b.size);
+};
+
+const sortFunction = (a, b, sortBarsBy, type, mapData) => {
+  if (!a.stacks) {
+    return 0;
+  }
+  const dataByStacks = reduceDataByStacks(mapData);
   switch (sortBarsBy) {
     case 'original':
       return 0;
+    case 'totalAscending':
+      return diff(
+        dataByStacks.findIndex((d) => d.stacks === a.stacks),
+        dataByStacks.findIndex((d) => d.stacks === b.stacks)
+      );
+    case 'totalDescending':
+      return diff(
+        dataByStacks.findIndex((d) => d.stacks === b.stacks),
+        dataByStacks.findIndex((d) => d.stacks === a.stacks)
+      );
     case 'name(desc)':
-      return a.stacks ? diff(b.stacks, a.stacks, type) : diff(b, a, type);
+      return diff(b.stacks, a.stacks, type);
     case 'name':
     default:
-      return a.stacks ? diff(a.stacks, b.stacks, type) : diff(a, b, type);
+      return diff(a.stacks, b.stacks, type);
   }
 };
 
@@ -149,10 +182,12 @@ var getYAxisItem = (visualOptions, stacks, locale) => {
 
 const getAxis = (mapData, item, sortBarsBy, stacksType) => {
   if (item.type === 'category') {
-    let data = mapData
+    const sortedMapData = mapData.sort((a, b) =>
+      sortFunction(a, b, sortBarsBy, stacksType, mapData)
+    );
+    item.data = sortedMapData
       .map((item) => item.stacks ?? '')
       .filter((value, index, self) => self.indexOf(value) === index);
-    item.data = data.sort((a, b) => sortFunction(a, b, sortBarsBy, stacksType));
   }
   return [item];
 };
@@ -164,10 +199,11 @@ const colorValue = function (visualOptions, item) {
 
 const getSeries = (mapData, bars, visualOptions, stacksType) => {
   let series = [];
+  const sortedMapData = mapData.sort((a, b) =>
+    sortFunction(a, b, visualOptions.sortBarsBy, stacksType, mapData)
+  );
   bars.forEach((bar) => {
-    let myData = mapData
-      .filter((d) => d.bars === bar)
-      .sort((a, b) => sortFunction(a, b, visualOptions.sortBarsBy, stacksType));
+    let myData = sortedMapData.filter((d) => d.bars === bar);
     let myStacks = myData
       .map((item) => item.series)
       .filter((value, index, self) => self.indexOf(value) === index);
@@ -271,12 +307,6 @@ export const getChartOptions = function (
     visualOptions.barsLabelsFormat,
     locale
   );
-  let series = getSeries(
-    resultMap,
-    mapping.bars.value,
-    visualOptions,
-    mapping.stacks?.mappedType
-  );
   return {
     title: {
       text: visualOptions.title,
@@ -318,6 +348,11 @@ export const getChartOptions = function (
       visualOptions.sortBarsBy,
       mapping.stacks?.mappedType
     ),
-    series: [...series],
+    series: getSeries(
+      resultMap,
+      mapping.bars.value,
+      visualOptions,
+      mapping.stacks?.mappedType
+    ),
   };
 };
