@@ -1,4 +1,4 @@
-Year,Units,Territorio,Serie,Serie temporal,Edad,Value
-2022,Porcentaje,ES70,Serie B,Proporción de personas que han realizado estudios o formación en las últimas cuatro semanas según grupos de edad,De 15 a 64 años,24.06
-2022,Porcentaje,ES70,Serie C,Proporción de personas que han realizado estudios o formación en las últimas cuatro semanas según grupos de edad,De 15 a 24 años,76.34
-2022,Porcentaje,ES70,Serie D,Proporción de personas que han realizado estudios o formación en las últimas cuatro semanas según grupos de edad,De 25 a 64 años,14.75
+Edad,Value
+De 15 a 64 años,24.06
+De 15 a 24 años,76.34
+De 25 a 64 años,14.75
