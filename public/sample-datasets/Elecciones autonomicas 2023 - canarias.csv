@@ -1,27 +1,27 @@
-TERRITORIO#es,TERRITORIO_CODE,MEDIDAS#es,MEDIDAS_CODE,CANDIDATURAS#es,CANDIDATURAS_CODE,OBS_VALUE
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Partido Socialista Obrero Español (PSOE),P_PSOE,23
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Coalición Canaria (CC),P_CC,19
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Partido Popular (PP),P_PP,15
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,VOX,P_VOX,4
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Nueva Canarias - Bloque Canarista (NC-bc),P_NC_BC,5
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Unidas Sí Podemos (USP),P_USP,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Dragos Verdes Canarias (DVC),P_DVC,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Unidos por Gran Canaria (UxGC),P_UXGC,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Partido Animalista con el Medio Ambiente (PACMA),P_PACMA,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Ciudadanos - Partido de la Ciudadanía (Cs),P_CS,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Agrupación Socialista Gomera (ASG),P_ASG,3
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Asambleas Municipales de Fuerteventura (AMF),P_AMF,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Partido Nacionalista Canario (PNC),P_PNC,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Reunir Canarias Sostenible,P_REUNIR_CANARIAS_SOSTENIBLE,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Ahora Canarias - Partido Comunista del Pueblo Canario (Ahora Canarias-PCPC),P_AHORA_CANARIAS_PCPC,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Hablemos Ahora,P_HABLEMOS_AHORA,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Más Canarias (+C),P_MC,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Ahora tú (AT),P_AT,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Tercera Edad en Acción (3e en Acción),P_3E_EN_ACCION,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Agrupación Herreña Independiente (AHI),P_AHI,1
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Iniciativa por la Gomera (IxLG),P_IXLG,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,País con Gestores,P_PAIS_CON_GESTORES,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Asamblea Herreña,P_ASAMBLEA_HERRENIA,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Movimiento Alternativo Electoral (MAE),P_MAE,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Contigo Somos Democracia (Contigo),P_CONTIGO,0
-Canarias,ES70,Diputados/Diputadas autonómicos,DIPUTADOS_DIPUTADAS_AUTONOMICOS,Unión Democrática Canaria (UDC),P_UDC,0
+CANDIDATURAS#es,OBS_VALUE
+Partido Socialista Obrero Español (PSOE),23
+Coalición Canaria (CC),19
+Partido Popular (PP),15
+VOX,4
+Nueva Canarias - Bloque Canarista (NC-bc),5
+Unidas Sí Podemos (USP),0
+Dragos Verdes Canarias (DVC),0
+Unidos por Gran Canaria (UxGC),0
+Partido Animalista con el Medio Ambiente (PACMA),0
+Ciudadanos - Partido de la Ciudadanía (Cs),0
+Agrupación Socialista Gomera (ASG),3
+Asambleas Municipales de Fuerteventura (AMF),0
+Partido Nacionalista Canario (PNC),0
+Reunir Canarias Sostenible,0
+Ahora Canarias - Partido Comunista del Pueblo Canario (Ahora Canarias-PCPC),0
+Hablemos Ahora,0
+Más Canarias (+C),0
+Ahora tú (AT),0
+Tercera Edad en Acción (3e en Acción),0
+Agrupación Herreña Independiente (AHI),1
+Iniciativa por la Gomera (IxLG),0
+País con Gestores,0
+Asamblea Herreña,0
+Movimiento Alternativo Electoral (MAE),0
+Contigo Somos Democracia (Contigo),0
+Unión Democrática Canaria (UDC),0
