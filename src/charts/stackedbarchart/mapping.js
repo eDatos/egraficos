@@ -31,6 +31,8 @@ const sortFunction = (a, b, sortBarsBy, type, mapData) => {
   switch (sortBarsBy) {
     case 'original':
       return 0;
+    case 'original(desc)':
+      return 1;
     case 'totalAscending':
       return diff(
         dataByStacks.findIndex((d) => d.stacks === a.stacks),
@@ -180,11 +182,8 @@ var getYAxisItem = (visualOptions, stacks, locale) => {
   );
 };
 
-const getAxis = (mapData, item, sortBarsBy, stacksType) => {
+const getAxis = (sortedMapData, item) => {
   if (item.type === 'category') {
-    const sortedMapData = mapData.sort((a, b) =>
-      sortFunction(a, b, sortBarsBy, stacksType, mapData)
-    );
     item.data = sortedMapData
       .map((item) => item.stacks ?? '')
       .filter((value, index, self) => self.indexOf(value) === index);
@@ -197,11 +196,8 @@ const colorValue = function (visualOptions, item) {
     ?.range;
 };
 
-const getSeries = (mapData, bars, visualOptions, stacksType) => {
+const getSeries = (sortedMapData, bars, visualOptions) => {
   let series = [];
-  const sortedMapData = mapData.sort((a, b) =>
-    sortFunction(a, b, visualOptions.sortBarsBy, stacksType, mapData)
-  );
   bars.forEach((bar) => {
     let myData = sortedMapData.filter((d) => d.bars === bar);
     let myStacks = myData
@@ -307,6 +303,15 @@ export const getChartOptions = function (
     visualOptions.barsLabelsFormat,
     locale
   );
+  const sortedMapData = resultMap.sort((a, b) =>
+    sortFunction(
+      a,
+      b,
+      visualOptions.sortBarsBy,
+      mapping.stacks?.mappedType,
+      resultMap
+    )
+  );
   return {
     title: {
       text: visualOptions.title,
@@ -337,22 +342,15 @@ export const getChartOptions = function (
     toolbox: toolbox(visualOptions.showToolbox),
     grid: grid(visualOptions),
     xAxis: getAxis(
-      resultMap,
+      sortedMapData,
       getXAxisItem(visualOptions, mapping.stacks, locale),
-      visualOptions.sortBarsBy,
-      mapping.stacks?.mappedType
+      visualOptions.sortBarsBy
     ),
     yAxis: getAxis(
-      resultMap,
+      sortedMapData,
       getYAxisItem(visualOptions, mapping.stacks, locale),
-      visualOptions.sortBarsBy,
-      mapping.stacks?.mappedType
+      visualOptions.sortBarsBy
     ),
-    series: getSeries(
-      resultMap,
-      mapping.bars.value,
-      visualOptions,
-      mapping.stacks?.mappedType
-    ),
+    series: getSeries(sortedMapData, mapping.bars.value, visualOptions),
   };
 };

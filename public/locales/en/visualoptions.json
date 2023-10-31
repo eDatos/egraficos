@@ -46,6 +46,7 @@
     "name": "Name",
     "name(desc)": "Name (desc)",
     "original": "Original",
+    "original(desc)": "Original (desc)",
     "vertical": "Vertical",
     "horizontal": "Horizontal",
     "symbolSize": "Dots diameter",

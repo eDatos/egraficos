@@ -43,6 +43,10 @@ export const visualOptions = {
         label: 'original',
         value: 'original',
       },
+      {
+        label: 'original(desc)',
+        value: 'original(desc)',
+      },
     ],
     default: 'name',
   },

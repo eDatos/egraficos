@@ -30,22 +30,22 @@ export const visualOptions = {
     show: false,
   },
   legendWidth: {
-    type: 'boolean',    
+    type: 'boolean',
     group: 'artboard',
     show: false,
   },
   legendOrient: {
-    type: 'boolean',    
+    type: 'boolean',
     group: 'artboard',
     show: false,
   },
   legendMarginRight: {
-    type: 'boolean',    
+    type: 'boolean',
     group: 'artboard',
     show: false,
   },
   legendMarginTop: {
-    type: 'boolean',    
+    type: 'boolean',
     group: 'artboard',
     show: false,
   },
