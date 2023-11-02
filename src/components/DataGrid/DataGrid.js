@@ -13,6 +13,7 @@ import {
   NumberIcon,
 } from '../../constants';
 import { BsFillCaretRightFill } from 'react-icons/bs';
+import { useTranslation } from 'react-i18next';
 
 //add custom date formats
 dateFormats['YYYY-MMM'] = '%Y-M%m';
@@ -54,6 +55,7 @@ function DataTypeSelector({
   onTypeChange,
   currentTypeComplete,
 }) {
+  const { t } = useTranslation(['translation']);
   const dataTypeIconDomRef = useRef(null);
   const [showPicker, setShowPicker] = useState(false);
   const currentType = get(typeDescriptor, 'type', typeDescriptor);
@@ -138,7 +140,7 @@ function DataTypeSelector({
                 [S.selected]: currentType === 'number',
               })}
             >
-              <NumberIcon /> Number
+              <NumberIcon /> {t('global.section.loaddata.types.number')}
             </div>
             <div
               data-datatype="string"
@@ -147,7 +149,7 @@ function DataTypeSelector({
                 [S.selected]: currentType === 'string',
               })}
             >
-              <StringIcon /> String
+              <StringIcon /> {t('global.section.loaddata.types.string')}
             </div>
             <OverlayTrigger
               placement="right-start"
@@ -172,7 +174,7 @@ function DataTypeSelector({
                 >
                   <div>
                     <DateIcon />
-                    {'Date'}
+                    {t('global.section.loaddata.types.date')}
                     {currentType === 'date' && (
                       <span className={S['date-format-preview']}>
                         {' (' + currentTypeComplete.dateFormat + ')  '}

@@ -35,7 +35,8 @@ const ChartPreview = ({
     if (requiredVariables.length > 0) {
       let errorMessage = (
         <span>
-          Required chart variables: you need to map{' '}
+          {t('global.section.chartselection.warnings.required')}:{' '}
+          {t('global.section.chartselection.warnings.map')}{' '}
           {requiredVariables
             .map((d, i) => (
               <span key={i} className="font-weight-bold">

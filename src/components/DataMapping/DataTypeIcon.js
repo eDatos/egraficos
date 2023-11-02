@@ -2,6 +2,7 @@ import React from 'react';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { dataTypeIcons } from '../../constants';
 import styles from './DataMapping.module.scss';
+import { Translation } from 'react-i18next';
 
 class DataTypeIcon extends React.Component {
   constructor(props) {
@@ -11,20 +12,29 @@ class DataTypeIcon extends React.Component {
 
   render() {
     const DataTypeIcon = dataTypeIcons[this.props.type];
-    const renderTooltip = (props) => (
+    const renderTooltip = (props, t) => (
       <Tooltip id={`tooltip-top`} {...props}>
-        Accepts {this.props.type}s
+        {t('global.accepts')}{' '}
+        {t(`global.section.loaddata.types.${this.props.type}`)}s
       </Tooltip>
     );
 
     return (
-      <span>
-        <OverlayTrigger key="top" placement="top" overlay={renderTooltip}>
-          <div ref={this.iconRef} className="d-inline-block">
-            <DataTypeIcon className={styles['accepted-type-icon']} />
-          </div>
-        </OverlayTrigger>
-      </span>
+      <Translation ns={'translation'}>
+        {(t, { i18n }) => (
+          <span>
+            <OverlayTrigger
+              key="top"
+              placement="top"
+              overlay={renderTooltip(this.props, t)}
+            >
+              <div ref={this.iconRef} className="d-inline-block">
+                <DataTypeIcon className={styles['accepted-type-icon']} />
+              </div>
+            </OverlayTrigger>
+          </span>
+        )}
+      </Translation>
     );
   }
 }

@@ -1,6 +1,7 @@
 {
     "global": {
         "appName": "Sistema de gráficos a medida",
+        "accepts": "Accepta",
         "section": {
             "loaddata": {
                 "title": "1. Cargar datos",
@@ -13,12 +14,10 @@
                     "message": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON."
                 },
                 "sample": {
-                    "name": "Probar ejemplos datos",
-                    "message": ""
+                    "name": "Probar ejemplos datos"
                 },
                 "sparql": {
-                    "name" : "Consulta SPARQL",
-                    "message": ""
+                    "name" : "Consulta SPARQL"
                 },
                 "url": {
                     "name": "Desde URL",
@@ -27,7 +26,12 @@
                 },
                 "project": {
                     "name": "Abrir proyecto",
-                    "message": "Cargar un proyecto .edatosgraphs."
+                    "message": "Cargar un proyecto .edatosgraphs.",
+                    "drag": "Arrastre un archivo o",
+                    "browse": "Seleccione",
+                    "file": "un archivo local",
+                    "accepted": "Todos los ficheros han sido aceptados",
+                    "rejected": "Algunos ficheros han sido rechazados"
                 },
                 "edatos": {
                     "name": "Desde eDatos",
@@ -40,6 +44,22 @@
                     "name": "Desde un servidor WMS",
                     "message": "Introduzca una dirección web (URL) del servidor WMS",
                     "loadButton": "Cargar WMS"
+                },
+                "types": {
+                    "number": "Número",
+                    "string": "Cadena",
+                    "date": "Fecha"
+                },
+                "errors": {
+                    "check": "Por favor, revise",
+                    "row": "fila",
+                    "column": "en la columna",
+                    "issueRow": "Hay otra incidencia en la fila",
+                    "issues": "Hay incidencias en",
+                    "rows": "filas más",
+                    "remaining": "El resto de",
+                    "look": "revise",
+                    "fine": "bien"
                 }
             },
             "sampleData" : {
@@ -50,7 +70,8 @@
                 "sample5": "Población de 16 y más años según hábito tabáquico. Canarias. 2021.",
                 "sample6": "Resultados de elecciones Autonómicas según candidaturas. Diputados/Diputadas autonómicas. Elecciones de 28 de mayo de 2023.",
                 "sample7": "Población. Islas de Canarias y años.",
-                "sample8": "Viajeros alojados según principales nacionalidades y eventos. Canarias. 2022."
+                "sample8": "Viajeros alojados según principales nacionalidades y eventos. Canarias. 2022.",
+                "source": "Fuente"
             },
             "wmslayerselection": {
                 "title": "Seleccione capas",
@@ -126,6 +147,10 @@
                         "size": "Magnitud",
                         "series": "Series"
                     }
+                },
+                "warnings": {
+                    "required": "Variables requeridas",
+                    "map": "Se necesita indicar"
                 }
             },
             "mapping": {

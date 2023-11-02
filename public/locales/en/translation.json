@@ -1,6 +1,7 @@
 {
     "global": {
         "appName": "Custom graphics development system",
+        "accepts": "Accepts",
         "section": {
             "loaddata": {
                 "title": "1. Load your data",
@@ -25,7 +26,12 @@
                 },
                 "project": {
                     "name": "Open your project",
-                    "message": "Load a .edatosgraphs project."
+                    "message": "Load a .edatosgraphs project.",
+                    "drag": "Drag a file here or",
+                    "browse": "Browse",
+                    "file": "a file from your computer",
+                    "accepted": "All files will be accepted",
+                    "rejected": "Some files will be rejected"
                 },
                 "edatos": {
                     "name": "From eDatos",
@@ -38,6 +44,22 @@
                     "name": "From WMS server",
                     "message": "Enter a web address (URL) from WMS server",
                     "loadButton": "Load WMS"
+                },
+                "types": {
+                    "number": "Number",
+                    "string": "String",
+                    "date": "Date"
+                },
+                "errors": {
+                    "check": "Ops, please check",
+                    "row": "row",
+                    "column": "at column",
+                    "issueRow": "There's another issue at row",
+                    "issues": "There are issues in",
+                    "rows": "more rows",
+                    "remaining": "The remaining",
+                    "look": "look",
+                    "fine": "fine"
                 }
             },
             "sampleData" : {
@@ -48,7 +70,8 @@
                 "sample5": "Population aged 16 and over according to smoking habit. Canary Islands. 2021.",
                 "sample6": "Results of Autonomous elections according to candidates. Regional deputies. Elections of May 28, 2023.",
                 "sample7": "Population. Canary Islands and years.",
-                "sample8": "Accommodated travelers according to main nationalities and events. Canary Islands. 2022."
+                "sample8": "Accommodated travelers according to main nationalities and events. Canary Islands. 2022.",
+                "source": "Source"
             },
             "wmslayerselection": {
                 "title": "Choose layers",
@@ -124,6 +147,10 @@
                         "size": "Size",
                         "series": "Series"
                     }
+                },
+                "warnings": {
+                    "required": "Required chart variables",
+                    "map": "you need to map"
                 }
             },
             "mapping": {

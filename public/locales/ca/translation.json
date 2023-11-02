@@ -1,6 +1,7 @@
 {
     "global": {
         "appName": "Sistema de gràfics a mida",
+        "accepts": "Accepta",
         "section": {
             "loaddata": {
                 "title": "1. Carregar dades",
@@ -13,12 +14,10 @@
                     "message": "Podeu carregar dades tabulars (TSV, CSV, DSV) o JSON."
                 },
                 "sample": {
-                    "name": "Provar exemples dades",
-                    "message": ""
+                    "name": "Provar exemples dades"
                 },
                 "sparql": {
-                    "name" : "Consulta SPARQL",
-                    "message": ""
+                    "name" : "Consulta SPARQL"
                 },
                 "url": {
                     "name": "Des de URL",
@@ -27,7 +26,12 @@
                 },
                 "project": {
                     "name": "Obrir projecte",
-                    "messagge": "Carregar un projecte .edatosgraphs."
+                    "messagge": "Carregar un projecte .edatosgraphs.",
+                    "drag": "Arrossegueu un fitxer o",
+                    "browse": "Seleccioneu",
+                    "file": "un fitxer local",
+                    "accepted": "Tots els fitxers han estat acceptats",
+                    "rejected": "Alguns els fitxers han estat rebutjats"
                 },
                 "edatos": {
                     "name": "Des eDatos",
@@ -40,6 +44,22 @@
                     "name": "Des d'un servidor WMS",
                     "message": "Introduïu una adreça web (URL) del servidor WMS",
                     "loadButton": "Carregar WMS"
+                },
+                "types": {
+                    "number": "Número",
+                    "string": "Corda",
+                    "date": "Data"
+                },
+                "errors": {
+                    "check": "Si us plau, reviseu",
+                    "row": "fila",
+                    "column": "a la columna",
+                    "issueRow": "Hi ha una altra incidència a la fila",
+                    "issues": "Hi ha incidències a",
+                    "rows": "files més",
+                    "remaining": "La resta de",
+                    "look": "reviseu",
+                    "fine": "bé"
                 }
             },
             "sampleData" : {
@@ -50,7 +70,8 @@
                 "sample5": "Població de 16 anys i més segons l'hàbit de fumar. Illes Canàries. 2021.",
                 "sample6": "Resultats de les eleccions autonòmiques segons candidats. Diputats regionals. Eleccions del 28 de maig de 2023.",
                 "sample7": "Població. Illes Canàries i anys.",
-                "sample8": "Viatgers allotjats segons principals nacionalitats i esdeveniments. Canàries. 2022."
+                "sample8": "Viatgers allotjats segons principals nacionalitats i esdeveniments. Canàries. 2022.",
+                "source": "Font"
             },
             "wmslayerselection": {
                 "title": "Seleccioneu capes",
@@ -126,6 +147,10 @@
                         "size": "Mida",
                         "series": "Sèries"
                     }
+                },
+                "warnings": {
+                    "required": "Variables requerides",
+                    "map": "Cal indicar"
                 }
             },
             "mapping": {

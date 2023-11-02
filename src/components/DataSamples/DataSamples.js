@@ -45,7 +45,7 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
                 href={d.sourceURL}
                 className={[styles['dataset-source']].join(' ')}
               >
-                Source: {d.sourceName}
+                {t('global.section.sampleData.source')}: {d.sourceName}
               </a>
             </Card>
           </Col>
