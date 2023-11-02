@@ -28,7 +28,7 @@ import DataMismatchModal from './DataMismatchModal';
 import SparqlFetch from './loaders/SparqlFetch';
 import { tsvFormat } from 'd3-dsv';
 import { CopyToClipboardButton } from '../CopyToClipboardButton';
-import { Trans } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import EDatosFetch from './loaders/EDatosFetch';
 import WMSFetch from './loaders/WMSFetch';
 
@@ -186,6 +186,7 @@ function DataLoader({
   ];
   const [optionId, setOptionId] = useState('eDatos');
   const selectedOption = options.filter((option) => option.id === optionId)[0];
+  const { t } = useTranslation(['translation']);
 
   let mainContent;
   if (userData && data) {
@@ -215,14 +216,7 @@ function DataLoader({
       <>
         {selectedOption.loader}
         <p className="mt-3">
-          {selectedOption.message}
-          {/*<a
-            href="https://rawgraphs.io/learning"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Check out our guides
-          </a>*/}
+          {selectedOption.message}          
         </p>
       </>
     );
@@ -236,30 +230,37 @@ function DataLoader({
     const column = Object.keys(errors[0].error)[0];
     return (
       <span>
-        Ops, please check <span className="font-weight-bold">row {row}</span> at
-        column <span className="font-weight-bold">{column}</span>.{' '}
+        {t('global.section.loaddata.errors.check')}{' '}
+        <span className="font-weight-bold">
+          {t('global.section.loaddata.errors.row')} {row}{' '}
+        </span>
+        {t('global.section.loaddata.errors.column')}{' '}
+        <span className="font-weight-bold">{column}</span>.{' '}
         {errors.length === 2 && (
           <>
             {' '}
-            There's another issue at row{' '}
+            {t('global.section.loaddata.errors.issueRow')}{' '}
             <span className="font-weight-bold">{errors[1].row + 1}</span>.{' '}
           </>
         )}
         {errors.length > 2 && (
           <>
             {' '}
-            There are issues in{' '}
-            <span className="font-weight-bold">{errors.length - 1}</span> more
-            rows.{' '}
+            {t('global.section.loaddata.errors.issues')}{' '}
+            <span className="font-weight-bold">{errors.length - 1}</span>{' '}
+            {t('global.section.loaddata.errors.rows')}.{' '}
           </>
         )}
         {successRows > 0 && (
           <>
-            The remaining{' '}
+            {t('global.section.loaddata.errors.remaining')}{' '}
             <span className="font-weight-bold">
-              {successRows} row{successRows > 1 && <>s</>}
+              {successRows} {t('global.section.loaddata.errors.row')}
+              {successRows > 1 && <>s</>}
             </span>{' '}
-            look{successRows === 1 && <>s</>} fine.
+            {t('global.section.loaddata.errors.look')}
+            {successRows === 1 && <>s</>}{' '}
+            {t('global.section.loaddata.errors.fine')}.
           </>
         )}
       </span>

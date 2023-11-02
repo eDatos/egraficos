@@ -3,8 +3,11 @@ import { Button } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
 import classNames from 'classnames';
 import S from './UploadFile.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export default function UploadFile({ setUserInput, setLoadingError }) {
+  const { t } = useTranslation(['translation']);
+
   const onDrop = useCallback(
     (acceptedFiles) => {
       const reader = new FileReader();
@@ -34,13 +37,13 @@ export default function UploadFile({ setUserInput, setLoadingError }) {
       {...getRootProps()}
     >
       <input {...getInputProps()} />
-      <span>Drag a file here or </span>
+      <span>{t('global.section.loaddata.project.drag')} </span>
       <Button className={S['browse-button']} color="primary">
-        Browse
+        {t('global.section.loaddata.project.browse')}
       </Button>
-      <span>a file from your computer</span>
-      {isDragAccept && <p>All files will be accepted</p>}
-      {isDragReject && <p>Some files will be rejected</p>}
+      <span>{t('global.section.loaddata.project.file')}</span>
+      {isDragAccept && <p>{t('global.section.loaddata.project.accepted')}</p>}
+      {isDragReject && <p>{t('global.section.loaddata.project.rejected')}</p>}
     </div>
   );
 }
