@@ -149,8 +149,8 @@
                     }
                 },
                 "warnings": {
-                    "required": "Variables requerides",
-                    "map": "Cal indicar"
+                    "required": "Variables de gràfic requerides",
+                    "map": "necessita indicar dimensió"
                 }
             },
             "mapping": {
