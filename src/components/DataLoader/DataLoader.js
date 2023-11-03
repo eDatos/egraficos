@@ -215,9 +215,7 @@ function DataLoader({
     mainContent = (
       <>
         {selectedOption.loader}
-        <p className="mt-3">
-          {selectedOption.message}          
-        </p>
+        <p className="mt-3">{selectedOption.message}</p>
       </>
     );
   }

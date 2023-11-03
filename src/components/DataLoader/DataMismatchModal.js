@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 function DataMismatchModal({
   replaceRequiresConfirmation,
@@ -7,6 +8,7 @@ function DataMismatchModal({
   cancelDataReplace,
 }) {
   const [showModal, setShowModal] = useState(true);
+  const { t } = useTranslation(['dataloader']);
 
   const handleClose = () => {
     setShowModal(false);
@@ -24,13 +26,15 @@ function DataMismatchModal({
     >
       <Modal.Header>
         <Modal.Title as="h5">
-          Warning:{' '}
-          {replaceRequiresConfirmation === 'parse-error' && <>parsing error</>}
+          {t('datamismatch.warning')}:{' '}
+          {replaceRequiresConfirmation === 'parse-error' && (
+            <>{t('datamismatch.parsingerror')}</>
+          )}
           {replaceRequiresConfirmation.startsWith('missing-column:') && (
-            <>missing column</>
+            <>{t('datamismatch.missingcolumn')}</>
           )}
           {replaceRequiresConfirmation === 'type-mismatch' && (
-            <>data-type mismatch</>
+            <>{t('datamismatch.typemismatch')}</>
           )}
         </Modal.Title>
       </Modal.Header>
@@ -38,38 +42,26 @@ function DataMismatchModal({
       <Modal.Body>
         {replaceRequiresConfirmation === 'parse-error' && (
           <>
-            <p>There was an error while parsing new data.</p>
-            <p>
-              You can load the new data and try to fix the error or return to
-              the data previously loaded.
-            </p>
+            <p>{t('datamismatch.parsingerrortitle')}</p>
+            <p>{t('datamismatch.parsingerrordesc')}</p>
           </>
         )}
         {replaceRequiresConfirmation.startsWith('missing-column:') && (
           <>
             <p>
-              The data mapping of this project requires the dimension{' '}
+              {t('datamismatch.missingcolumntitle')}{' '}
               <span className="font-weight-bold">
                 {replaceRequiresConfirmation.split(':')[1]}
               </span>
-              , that we can't find in the new data.
+              , {t('datamismatch.missingcolumntitle2')}
             </p>
-            <p>
-              You can create a new data mapping with the new data or return to
-              the data previously loaded.
-            </p>
+            <p>{t('datamismatch.missingcolumndesc')}</p>
           </>
         )}
         {replaceRequiresConfirmation === 'type-mismatch' && (
           <>
-            <p>
-              The data-types previously set for this project can't be applied to
-              the new data.
-            </p>
-            <p>
-              You can use the new data and re-set data-types or return to the
-              data previously loaded.
-            </p>
+            <p>{t('datamismatch.typemismatchtitle')}</p>
+            <p>{t('datamismatch.typemismatchdesc')}</p>
           </>
         )}
       </Modal.Body>
@@ -80,7 +72,7 @@ function DataMismatchModal({
             commitDataReplace();
           }}
         >
-          Load new data
+          {t('datamismatch.load')}
         </Button>
         <Button
           variant="secondary"
@@ -88,7 +80,7 @@ function DataMismatchModal({
             cancelDataReplace();
           }}
         >
-          Cancel
+          {t('datamismatch.cancel')}
         </Button>
       </Modal.Footer>
     </Modal>
