@@ -150,11 +150,11 @@
                 },
                 "warnings": {
                     "required": "Variables de gráfico requeridas",
-                    "map": "necesita indicar dimensión"
+                    "map": "necesita indicar dimensiónes"
                 }
             },
             "mapping": {
-                "title": "3. Mapping",
+                "title": "3. Mapeo",
                 "chartvariables":{
                     "dimensions": "DIMENSIONES",
                     "variables": "VARIABLES GRÁFICO",

@@ -26,18 +26,6 @@ export default function DateLocaleSelector({
           {value}
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Header>
-            <span>
-              from{' '}
-              <a
-                href="https://github.com/d3/d3-time-format/tree/master/locale"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                d3-time-format
-              </a>
-            </span>
-          </Dropdown.Header>
           {Object.keys(localeList).map((d) => {
             return (
               <Dropdown.Item key={d} onClick={() => handleChange(d)}>

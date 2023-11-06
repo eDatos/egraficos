@@ -150,7 +150,7 @@
                 },
                 "warnings": {
                     "required": "Required chart variables",
-                    "map": "you need to map"
+                    "map": "you need to map dimensions"
                 }
             },
             "mapping": {
