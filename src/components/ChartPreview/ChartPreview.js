@@ -37,13 +37,6 @@ const ChartPreview = ({
         <span>
           {t('global.section.chartselection.warnings.required')}:{' '}
           {t('global.section.chartselection.warnings.map')}{' '}
-          {requiredVariables
-            .map((d, i) => (
-              <span key={i} className="font-weight-bold">
-                {t(d.name)}
-              </span>
-            ))
-            .reduce((prev, curr) => [prev, ' and ', curr])}
         </span>
       );
       setError({ variant: 'secondary', message: errorMessage });

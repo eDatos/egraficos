@@ -11,7 +11,7 @@
             "name": "Separador decimales"
         }   
     },
-    "datelocale":"Local Fecha",
+    "datelocale":"Fecha Local",
     "refreshdata": "Recargar datos desde url",
     "datatransform": {
         "title": "TRANSFORMACIÓN DATOS",

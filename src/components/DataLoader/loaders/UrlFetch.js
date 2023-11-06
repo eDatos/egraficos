@@ -57,7 +57,7 @@ export default function UrlFetch({
           <select
             className="custom-select raw-select"
             value={acceptHeader}
-            onChange={setAcceptHeader}
+            onChange={(event) => setAcceptHeader(event.target.value)}
           >
             <option key="csv" value="text/csv">
               text/csv

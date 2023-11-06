@@ -11,7 +11,7 @@
             "name": "Separador decimals"
         }   
     },
-    "datelocale":"Local Data",
+    "datelocale":"Data Local",
     "refreshdata": "Recarregar dades des d'url",
     "datatransform": {
         "title": "TRANSFORMACIÓ DADES",

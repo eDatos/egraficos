@@ -150,7 +150,7 @@
                 },
                 "warnings": {
                     "required": "Variables de gràfic requerides",
-                    "map": "necessita indicar dimensió"
+                    "map": "necessita indicar dimensions"
                 }
             },
             "mapping": {

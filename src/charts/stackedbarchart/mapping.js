@@ -32,7 +32,7 @@ const sortFunction = (a, b, sortBarsBy, type, mapData) => {
     case 'original':
       return 0;
     case 'original(desc)':
-      return 1;
+      return -1;
     case 'totalAscending':
       return diff(
         dataByStacks.findIndex((d) => d.stacks === a.stacks),
