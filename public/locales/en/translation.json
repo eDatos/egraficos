@@ -181,6 +181,10 @@
         "message": {
             "loadrows": {
                 "succes": "<p><strong>{{rowsnumber}} rows </strong>({{cellsnumber}} cells) have been successfully parsed, now you can choose a chart!</p>"
+            },
+            "sizeoutput": {
+                "part1": "The final output will be",
+                "part2": "including the legend."
             }
         },
         "screenSizeAlert": {

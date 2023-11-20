@@ -132,7 +132,7 @@
                     }
                 },
                 "treemapchart": {
-                    "title": "Diagrama de mapa de árbol",
+                    "title": "Mapa de árbol",
                     "description": "Muestra datos estructurados jerárquicamente y una dimensión cuantitativa relacionada. Está compuesto por un área dividida en pequeños rectángulos, que representan el último nivel de la estructura de árbol. El tamaño de los rectángulos depende de la dimensión cuantitativa.",                    
                     "dimensions": {
                         "hierarchy": "Jerarquía",
@@ -150,7 +150,7 @@
                 },
                 "warnings": {
                     "required": "Variables de gráfico requeridas",
-                    "map": "necesita indicar dimensiónes"
+                    "map": "necesita indicar dimensiones"
                 }
             },
             "mapping": {
@@ -181,6 +181,10 @@
         "message": {
             "loadrows": {
                 "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han sido correctamente parseadas, ahora puedes elegir un gráfico!</p>"
+            },
+            "sizeoutput": {
+                "part1": "El resultado final será de",
+                "part2": "incluida la leyenda."
             }
         },
         "screenSizeAlert": {
