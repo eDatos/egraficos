@@ -132,7 +132,7 @@
                     }
                 },
                 "treemapchart": {
-                    "title": "Diagrama de mapa d'arbre",
+                    "title": "Mapa d'arbre",
                     "description": "Mostra dades estructurades jeràrquicament i una dimensió quantitativa relacionada. Està compost per una zona dividida en petits rectangles, que representen l'últim nivell de l'estructura arbòria. La mida dels rectangles depèn de la dimensió quantitativa.",                    
                     "dimensions": {
                         "hierarchy": "Jerarquia",
@@ -181,6 +181,10 @@
         "message": {
             "loadrows": {
                 "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han estat correctament parsejades, ara pots triar un gràfic!</p>"
+            },
+            "sizeoutput": {
+                "part1": "El resultat final serà de",
+                "part2": "inclosa la llegenda."
             }
         },
         "screenSizeAlert": {
