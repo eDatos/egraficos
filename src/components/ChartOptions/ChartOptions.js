@@ -174,7 +174,7 @@ const ChartOptions = ({
   setVisualOptions,
   error,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['visualoptions', 'translation']);
 
   const optionsConfig = useMemo(() => {
     return getOptionsConfig(chart?.visualOptions);
@@ -328,9 +328,9 @@ const ChartOptions = ({
             })}
             {groupName === 'artboard' && visualOptions.showLegend && (
               <p className="small">
-                {t('global.message.sizeoutput.part1')} {containerOptions?.width}
+                {t('global.message.sizeoutput.part1', {ns: 'translation'})} {containerOptions?.width}
                 px * {containerOptions?.height}px{' '}
-                {t('global.message.sizeoutput.part2')}
+                {t('global.message.sizeoutput.part2', {ns: 'translation'})}
               </p>
             )}
           </div>
