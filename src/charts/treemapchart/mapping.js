@@ -133,6 +133,9 @@ export const getChartOptions = function (
   locale
 ) {
   return {
+    aria: {
+      show: true,
+    },
     title: {
       text: visualOptions.title,
     },

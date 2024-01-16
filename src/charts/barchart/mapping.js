@@ -243,6 +243,9 @@ export const getChartOptions = function (
   });
 
   return {
+    aria: {
+      show: true,
+    },
     title: {
       text: visualOptions.title,
     },

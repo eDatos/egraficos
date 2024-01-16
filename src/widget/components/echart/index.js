@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
+import * as echarts from 'echarts';
+import LangES from './i18n/LangES';
+import LangESCa from './i18n/LangES-ca';
 import charts from '../../../charts';
 import { parseAndCheckData } from '../../../hooks/useDataLoaderUtils/parser';
 import {
@@ -24,6 +27,8 @@ colorPresets.ordinal.grayPalette = {
 
 const EDatosGraph = (props) => {
   const [options, setOptions] = useState({});
+  echarts.registerLocale('es', LangES);
+  echarts.registerLocale('ca', LangESCa);
 
   useEffect(() => {
     const fetchData = async (source) => {
@@ -70,7 +75,7 @@ const EDatosGraph = (props) => {
   return (
     <ReactECharts
       option={options}
-      opts={{ renderer: props.visualOptions.renderer }}
+      opts={{ renderer: props.visualOptions.renderer, locale: props.locale }}
     />
   );
 };

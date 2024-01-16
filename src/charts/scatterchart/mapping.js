@@ -103,6 +103,9 @@ export const getChartOptions = function (
     : mapping.y.value;
 
   return {
+    aria: {
+      show: true,
+    },
     title: {
       text: visualOptions.title,
     },

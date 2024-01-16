@@ -162,6 +162,9 @@ export function getChartOptions(
     : mapping.y.value;
 
   return {
+    aria: {
+      show: true,
+    },
     title: {
       text: visualOptions.title,
     },
