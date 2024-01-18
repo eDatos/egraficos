@@ -82,6 +82,17 @@ export default {
       lang: ['Clic derecho para guardar imagen'],
     },
   },
+  series: {
+    typeNames: {
+      pie: 'Diagrama de sectores',
+      bar: 'Diagrama de barras',
+      line: 'Diagrama de líneas',
+      scatter: 'Diagrama de dispersión',
+      tree: 'Árbol',
+      treemap: 'Mapa de árbol',
+      lines: 'Diagrama de líneas',
+    },
+  },
   aria: {
     general: {
       withTitle: 'Este es un gráfico sobre "{title}"',

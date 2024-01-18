@@ -82,6 +82,17 @@ export default {
       lang: ['Clic dret per desar imatge'],
     },
   },
+  series: {
+    typeNames: {
+      pie: 'Diagrama de sectors',
+      bar: 'Diagrama de barres',
+      line: 'Diagrama de línies',
+      scatter: 'Diagrama de dispersió',
+      tree: 'Arbre',
+      treemap: "Mapa d'arbre",
+      lines: 'Diagrama de línies',
+    },
+  },
   aria: {
     general: {
       withTitle: 'Aquest és un gràfic sobre "{title}"',
