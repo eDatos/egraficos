@@ -347,7 +347,7 @@ function App() {
                   visualOptions={visualOptions}
                   dataTypes={data?.dataTypes}
                   dimensions={currentChart.dimensions}
-                  locale={dataLoader.locale}
+                  locale={i18n.language}
                   decimalsSeparator={dataLoader.decimalsSeparator}
                   thousandsSeparator={dataLoader.thousandsSeparator}
                   map={map}

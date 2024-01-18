@@ -179,6 +179,9 @@ export function getChartOptions(
   };
 
   return {
+    aria: {
+      show: true,
+    },
     title: {
       text: visualOptions.title,
     },

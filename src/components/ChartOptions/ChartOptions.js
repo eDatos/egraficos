@@ -328,9 +328,10 @@ const ChartOptions = ({
             })}
             {groupName === 'artboard' && visualOptions.showLegend && (
               <p className="small">
-                {t('global.message.sizeoutput.part1', {ns: 'translation'})} {containerOptions?.width}
+                {t('global.message.sizeoutput.part1', { ns: 'translation' })}{' '}
+                {containerOptions?.width}
                 px * {containerOptions?.height}px{' '}
-                {t('global.message.sizeoutput.part2', {ns: 'translation'})}
+                {t('global.message.sizeoutput.part2', { ns: 'translation' })}
               </p>
             )}
           </div>
