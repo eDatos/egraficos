@@ -183,12 +183,14 @@ export const dateParsersPatterns = {
   year: 'YYYY',
   month: 'MMMM',
   dayOfWeek: 'dddd',
+  yearmonth1: 'MM-YYYY',
+  yearmonth2: 'MM/YYYY',
+  yearmonthday1: 'DD-MM-YYYY',
+  yearmonthday2: 'DD/MM/YYYY',
   original: null,
 };
 
 export const visualOptionsDateFormat = {
-  type: 'text',
-  group: 'labels',
   default: 'original',
   options: [
     {
@@ -207,16 +209,27 @@ export const visualOptionsDateFormat = {
       label: 'dayOfWeek',
       value: 'dayOfWeek',
     },
+    {
+      label: 'MM-YYYY',
+      value: 'yearmonth1',
+    },
+    {
+      label: 'MM/YYYY',
+      value: 'yearmonth2',
+    },
+    {
+      label: 'DD-MM-YYYY',
+      value: 'yearmonthday1',
+    },
+    {
+      label: 'DD/MM/YYYY',
+      value: 'yearmonthday2',
+    },
   ],
-  disabled: {
-      showXaxisLabels: false,
-  },
-}
+};
 
 export const visualOptionsNumberFormat = {
-  type: 'text',
-  group: 'labels',
-  default: 'original',
+  default: 'standard',
   options: [
     {
       label: 'standard',
@@ -235,7 +248,4 @@ export const visualOptionsNumberFormat = {
       value: 'compact',
     },
   ],
-  disabled: {
-    showXaxisLabels: false,
-  },
-}
+};

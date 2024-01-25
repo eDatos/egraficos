@@ -1,3 +1,4 @@
+import { visualOptionsNumberFormat } from '../../constants';
 import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
@@ -33,6 +34,11 @@ export const visualOptions = {
     disabled: {
       stepCurve: false,
     },
+  },
+  reverseOrder: {
+    type: 'boolean',
+    default: false,
+    group: 'chart',
   },
   showXaxisName: {
     type: 'boolean',
@@ -180,24 +186,7 @@ export const visualOptions = {
     type: 'text',
     group: 'labels',
     default: 'standard',
-    options: [
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
-    ],
+    options: visualOptionsNumberFormat.options,
     disabled: {
       showYaxisLabels: false,
     },
@@ -206,24 +195,7 @@ export const visualOptions = {
     type: 'text',
     group: 'labels',
     default: 'standard',
-    options: [
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
-    ],
+    options: visualOptionsNumberFormat.options,
   },
   units: {
     type: 'text',

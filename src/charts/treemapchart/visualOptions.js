@@ -1,4 +1,9 @@
-import { defaultColor, white } from '../../constants';
+import {
+  defaultColor,
+  visualOptionsDateFormat,
+  visualOptionsNumberFormat,
+  white,
+} from '../../constants';
 import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
@@ -63,47 +68,13 @@ export const visualOptions = {
     type: 'text',
     group: 'labels',
     default: 'original',
-    options: [
-      {
-        label: 'original',
-        value: 'original',
-      },
-      {
-        label: 'year',
-        value: 'year',
-      },
-      {
-        label: 'month',
-        value: 'month',
-      },
-      {
-        label: 'dayOfWeek',
-        value: 'dayOfWeek',
-      },
-    ],
+    options: visualOptionsDateFormat.options,
   },
   tooltipValueFormat: {
     type: 'text',
     group: 'labels',
     default: 'standard',
-    options: [
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
-    ],
+    options: visualOptionsNumberFormat.options,
   },
   units: {
     type: 'text',

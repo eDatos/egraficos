@@ -7,20 +7,21 @@ import {
 
 export function getVisualOptionsConfig(mapping) {
   var customVisualOptions = visualOptions;
-  customVisualOptions.xAxisFormat = {
-    ...visualOptions.xAxisFormat,
-    ...axisFormat(visualOptions.xAxisFormat, mapping?.x?.mappedType),
+  customVisualOptions.barsLabelsFormat = {
+    ...visualOptions.barsLabelsFormat,
+    ...barsFormat(visualOptions.barsLabelsFormat, mapping?.stacks?.mappedType),
   };
+
   return getOptionsConfig(customVisualOptions);
 }
 
-const axisFormat = (axisFormat, type) => {
+const barsFormat = (barsFormat, type) => {
   switch (type) {
     case 'date':
       return visualOptionsDateFormat;
     case 'number':
       return visualOptionsNumberFormat;
     default:
-      return axisFormat;
+      return barsFormat;
   }
 };

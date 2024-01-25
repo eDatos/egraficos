@@ -114,5 +114,6 @@
     "sortBy": "Sort by",
     "groupSeriesInStack": "Group series",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "reverseOrder": "Reverse order"
 }

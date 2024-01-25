@@ -11,6 +11,18 @@ export function getVisualOptionsConfig(mapping) {
     ...visualOptions.xAxisFormat,
     ...axisFormat(visualOptions.xAxisFormat, mapping?.x?.mappedType),
   };
+  const yAxisFormat = axisFormat(
+    visualOptions.yAxisFormat,
+    mapping?.y?.mappedType
+  );
+  customVisualOptions.yAxisFormat = {
+    ...visualOptions.yAxisFormat,
+    ...yAxisFormat,
+  };
+  customVisualOptions.tooltipValueFormat = {
+    ...visualOptions.tooltipValueFormat,
+    ...yAxisFormat,
+  };
   return getOptionsConfig(customVisualOptions);
 }
 

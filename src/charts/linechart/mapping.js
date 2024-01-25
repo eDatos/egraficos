@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import _ from 'lodash';
-import { format, formatNumber, parseObject } from '../utils/parseUtils';
+import { diff, format, formatNumber, parseObject } from '../utils/parseUtils';
 import { grid, legend, toolbox } from '../baseChartOptions';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
@@ -55,7 +55,7 @@ function getDimensions(resultMap, mapping) {
   }
 }
 
-function getXData(resultMap) {
+function getXData(resultMap, mappedType, reverseOrder) {
   let xData = [];
   resultMap.forEach((e) => {
     let value = e.x;
@@ -63,7 +63,8 @@ function getXData(resultMap) {
       xData.push(value);
     }
   });
-  return xData.sort((a, b) => a - b);
+  xData.sort((a, b) => diff(a, b, mappedType));
+  return reverseOrder ? xData.reverse() : xData;
 }
 
 const getXAxis = (visualOptions, xData, name, locale, mappedType) => {
@@ -112,7 +113,11 @@ export function getChartOptions(
   locale
 ) {
   const resultMap = mapData(datachart, mapping, dataTypes, dimensions);
-  const xData = getXData(resultMap);
+  const xData = getXData(
+    resultMap,
+    mapping.x.mappedType,
+    visualOptions.reverseOrder
+  );
 
   let data = _.groupBy(resultMap, 'lines');
 
