@@ -34,6 +34,11 @@ export const visualOptions = {
       stepCurve: false,
     },
   },
+  reverseOrder: {
+    type: 'boolean',
+    default: false,
+    group: 'chart',
+  },
   showXaxisName: {
     type: 'boolean',
     default: false,
@@ -118,6 +123,22 @@ export const visualOptions = {
       {
         label: 'dayOfWeek',
         value: 'dayOfWeek',
+      },
+      {
+        label: 'MM-YYYY',
+        value: 'yearmonth1',
+      },
+      {
+        label: 'MM/YYYY',
+        value: 'yearmonth2',
+      },
+      {
+        label: 'DD-MM-YYYY',
+        value: 'yearmonthday1',
+      },
+      {
+        label: 'DD/MM/YYYY',
+        value: 'yearmonthday2',
       },
       {
         label: 'standard',

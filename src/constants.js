@@ -183,5 +183,9 @@ export const dateParsersPatterns = {
   year: 'YYYY',
   month: 'MMMM',
   dayOfWeek: 'dddd',
+  yearmonth1: 'MM-YYYY',
+  yearmonth2: 'MM/YYYY',
+  yearmonthday1: 'DD-MM-YYYY',
+  yearmonthday2: 'DD/MM/YYYY',
   original: null,
 };
