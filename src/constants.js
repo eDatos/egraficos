@@ -185,3 +185,57 @@ export const dateParsersPatterns = {
   dayOfWeek: 'dddd',
   original: null,
 };
+
+export const visualOptionsDateFormat = {
+  type: 'text',
+  group: 'labels',
+  default: 'original',
+  options: [
+    {
+      label: 'original',
+      value: 'original',
+    },
+    {
+      label: 'year',
+      value: 'year',
+    },
+    {
+      label: 'month',
+      value: 'month',
+    },
+    {
+      label: 'dayOfWeek',
+      value: 'dayOfWeek',
+    },
+  ],
+  disabled: {
+      showXaxisLabels: false,
+  },
+}
+
+export const visualOptionsNumberFormat = {
+  type: 'text',
+  group: 'labels',
+  default: 'original',
+  options: [
+    {
+      label: 'standard',
+      value: 'standard',
+    },
+    {
+      label: 'scientific',
+      value: 'scientific',
+    },
+    {
+      label: 'engineering',
+      value: 'engineering',
+    },
+    {
+      label: 'compact',
+      value: 'compact',
+    },
+  ],
+  disabled: {
+    showXaxisLabels: false,
+  },
+}
