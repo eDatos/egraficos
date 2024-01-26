@@ -1,4 +1,4 @@
-import { defaultColor } from '../../constants';
+import { defaultColor, visualOptionsNumberFormat } from '../../constants';
 import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
@@ -108,34 +108,6 @@ export const visualOptions = {
         label: 'original',
         value: 'original',
       },
-      {
-        label: 'year',
-        value: 'year',
-      },
-      {
-        label: 'month',
-        value: 'month',
-      },
-      {
-        label: 'dayOfWeek',
-        value: 'dayOfWeek',
-      },
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
     ],
   },
   showXaxisLabels: {
@@ -206,24 +178,7 @@ export const visualOptions = {
     type: 'text',
     group: 'labels',
     default: 'standard',
-    options: [
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
-    ],
+    options: visualOptionsNumberFormat.options,
     disabled: {
       showBarsSizeLabels: false,
     },
@@ -253,24 +208,7 @@ export const visualOptions = {
     type: 'text',
     group: 'labels',
     default: 'standard',
-    options: [
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
-    ],
+    options: visualOptionsNumberFormat.options,
   },
   units: {
     type: 'text',

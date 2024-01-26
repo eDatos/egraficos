@@ -1,4 +1,4 @@
-import { defaultColor } from '../../../constants';
+import { defaultColor, visualOptionsNumberFormat } from '../../../constants';
 import { baseVisualOptions } from '../../baseVisualOptions';
 
 export const visualOptions = {
@@ -115,24 +115,7 @@ export const visualOptions = {
     type: 'text',
     group: 'labels',
     default: 'standard',
-    options: [
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
-    ],
+    options: visualOptionsNumberFormat.options,
   },
   units: {
     type: 'text',

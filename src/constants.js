@@ -189,3 +189,63 @@ export const dateParsersPatterns = {
   yearmonthday2: 'DD/MM/YYYY',
   original: null,
 };
+
+export const visualOptionsDateFormat = {
+  default: 'original',
+  options: [
+    {
+      label: 'original',
+      value: 'original',
+    },
+    {
+      label: 'year',
+      value: 'year',
+    },
+    {
+      label: 'month',
+      value: 'month',
+    },
+    {
+      label: 'dayOfWeek',
+      value: 'dayOfWeek',
+    },
+    {
+      label: 'MM-YYYY',
+      value: 'yearmonth1',
+    },
+    {
+      label: 'MM/YYYY',
+      value: 'yearmonth2',
+    },
+    {
+      label: 'DD-MM-YYYY',
+      value: 'yearmonthday1',
+    },
+    {
+      label: 'DD/MM/YYYY',
+      value: 'yearmonthday2',
+    },
+  ],
+};
+
+export const visualOptionsNumberFormat = {
+  default: 'standard',
+  options: [
+    {
+      label: 'standard',
+      value: 'standard',
+    },
+    {
+      label: 'scientific',
+      value: 'scientific',
+    },
+    {
+      label: 'engineering',
+      value: 'engineering',
+    },
+    {
+      label: 'compact',
+      value: 'compact',
+    },
+  ],
+};

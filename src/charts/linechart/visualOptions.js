@@ -1,3 +1,4 @@
+import { visualOptionsNumberFormat } from '../../constants';
 import { baseVisualOptions } from '../baseVisualOptions';
 
 export const visualOptions = {
@@ -112,50 +113,6 @@ export const visualOptions = {
         label: 'original',
         value: 'original',
       },
-      {
-        label: 'year',
-        value: 'year',
-      },
-      {
-        label: 'month',
-        value: 'month',
-      },
-      {
-        label: 'dayOfWeek',
-        value: 'dayOfWeek',
-      },
-      {
-        label: 'MM-YYYY',
-        value: 'yearmonth1',
-      },
-      {
-        label: 'MM/YYYY',
-        value: 'yearmonth2',
-      },
-      {
-        label: 'DD-MM-YYYY',
-        value: 'yearmonthday1',
-      },
-      {
-        label: 'DD/MM/YYYY',
-        value: 'yearmonthday2',
-      },
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
     ],
     disabled: {
       showXaxisLabels: false,
@@ -229,24 +186,7 @@ export const visualOptions = {
     type: 'text',
     group: 'labels',
     default: 'standard',
-    options: [
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
-    ],
+    options: visualOptionsNumberFormat.options,
     disabled: {
       showYaxisLabels: false,
     },
@@ -255,24 +195,7 @@ export const visualOptions = {
     type: 'text',
     group: 'labels',
     default: 'standard',
-    options: [
-      {
-        label: 'standard',
-        value: 'standard',
-      },
-      {
-        label: 'scientific',
-        value: 'scientific',
-      },
-      {
-        label: 'engineering',
-        value: 'engineering',
-      },
-      {
-        label: 'compact',
-        value: 'compact',
-      },
-    ],
+    options: visualOptionsNumberFormat.options,
   },
   units: {
     type: 'text',

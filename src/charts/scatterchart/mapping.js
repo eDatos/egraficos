@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { format, formatNumber, parseObjectToValue } from '../utils/parseUtils';
+import { format, parseObjectToValue } from '../utils/parseUtils';
 import { grid, legend, toolbox } from '../baseChartOptions';
 import { dateParsersPatterns } from '../../constants';
 
@@ -80,7 +80,12 @@ const getSeries = (visualOptions, data, mapping, locale) => {
         },
         tooltip: {
           valueFormatter: (value) =>
-            formatNumber(value, visualOptions.tooltipValueFormat, locale),
+            format(
+              value,
+              visualOptions.tooltipValueFormat,
+              locale,
+              mapping.y.mappedType
+            ),
         },
       };
     }

@@ -177,8 +177,11 @@ const ChartOptions = ({
   const { t } = useTranslation(['visualoptions', 'translation']);
 
   const optionsConfig = useMemo(() => {
+    if (chart?.getVisualOptionsConfig) {
+      return chart.getVisualOptionsConfig(mapping);
+    }
     return getOptionsConfig(chart?.visualOptions);
-  }, [chart]);
+  }, [chart, mapping]);
 
   const [collapseStatus, setCollapseStatus] = useState(() => {
     const groups = {};
