@@ -62,4 +62,4 @@ const sortBarsWithSize = () => {
       value: 'original',
     },
   ];
-}
+};

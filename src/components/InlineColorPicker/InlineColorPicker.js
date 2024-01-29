@@ -41,7 +41,7 @@ export default function InlineColorPicker({
             onClick={() => setDisplayColorPicker(false)}
           />
           <CustomColorPicker
-            disabled={disabled}            
+            disabled={disabled}
             color={color}
             onChangeComplete={(color) => onChange(color.hex)}
             presetPalettes={presetPalettes}
