@@ -6,7 +6,7 @@ import {
 } from '../../constants';
 
 export function getVisualOptionsConfig(mapping) {
-  var customVisualOptions = visualOptions;
+  var customVisualOptions = { ...visualOptions };
   customVisualOptions.barsLabelsFormat = {
     ...visualOptions.barsLabelsFormat,
     ...barsFormat(visualOptions.barsLabelsFormat, mapping?.stacks?.mappedType),
