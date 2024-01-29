@@ -123,6 +123,7 @@ export const white = '#FFFFFF';
 export const defaultColor = '#009BD7';
 
 export const defaultPalette = [
+  'TRANSPARENT',
   defaultColor,
   '#F0A82D',
   '#E95000',
@@ -147,7 +148,7 @@ export const defaultPalette = [
   '#D8F0F9',
   '#CCDAE4',
   '#EBF7FC',
-  '#E5ECF1',
+  '#E5ECF1',  
 ];
 export const grayPalette = [
   '#333333',
