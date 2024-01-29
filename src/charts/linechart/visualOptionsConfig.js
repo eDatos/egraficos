@@ -6,7 +6,7 @@ import {
 } from '../../constants';
 
 export function getVisualOptionsConfig(mapping) {
-  var customVisualOptions = visualOptions;
+  var customVisualOptions = { ...visualOptions };
   customVisualOptions.xAxisFormat = {
     ...visualOptions.xAxisFormat,
     ...axisFormat(visualOptions.xAxisFormat, mapping?.x?.mappedType),
