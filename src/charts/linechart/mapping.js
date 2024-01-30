@@ -144,7 +144,7 @@ export function getChartOptions(
       return {
         name: item,
         type: 'line',
-        smooth: true,
+        smooth: visualOptions.smooth,
         step: visualOptions.stepCurve ? visualOptions.stepType : false,
         emphasis: { focus: 'series' },
         showSymbol: visualOptions.showPoints,

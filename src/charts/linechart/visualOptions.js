@@ -40,6 +40,11 @@ export const visualOptions = {
     default: false,
     group: 'chart',
   },
+  smooth: {
+    type: 'boolean',
+    default: false,
+    group: 'chart',
+  },
   showXaxisName: {
     type: 'boolean',
     default: false,
