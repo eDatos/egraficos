@@ -43,7 +43,13 @@ export default function InlineColorPicker({
           <CustomColorPicker
             disabled={disabled}
             color={color}
-            onChangeComplete={(color) => onChange(color.hex)}
+            onChangeComplete={(color) => {
+              const colorRepresentation =
+                color.rgb.a !== 1
+                  ? `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`
+                  : color.hex;
+              onChange(colorRepresentation);
+            }}
             presetPalettes={presetPalettes}
           />
         </div>
