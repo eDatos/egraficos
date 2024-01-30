@@ -115,5 +115,6 @@
     "groupSeriesInStack": "Group series",
     "yes": "Yes",
     "no": "No",
-    "reverseOrder": "Reverse order"
+    "reverseOrder": "Reverse order",
+    "smooth": "Smooth"
 }
