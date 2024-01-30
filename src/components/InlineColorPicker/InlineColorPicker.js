@@ -42,7 +42,6 @@ export default function InlineColorPicker({
           />
           <CustomColorPicker
             disabled={disabled}
-            disableAlpha
             color={color}
             onChangeComplete={(color) => onChange(color.hex)}
             presetPalettes={presetPalettes}

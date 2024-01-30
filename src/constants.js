@@ -123,6 +123,7 @@ export const white = '#FFFFFF';
 export const defaultColor = '#009BD7';
 
 export const defaultPalette = [
+  'TRANSPARENT',
   defaultColor,
   '#F0A82D',
   '#E95000',
