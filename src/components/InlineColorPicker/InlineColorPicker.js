@@ -19,7 +19,10 @@ export default function InlineColorPicker({
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const color = maybeColor ?? '#000000'; // Same as <input type='color' />
   const presetPalettes = [
-    { name: '', value: presetPalette ? presetPalette : defaultPalette },
+    {
+      name: '',
+      value: presetPalette ? presetPalette : ['TRANSPARENT', ...defaultPalette],
+    },
     { name: t('palettes.sex.name'), value: sexPalette },
     { name: t('palettes.island.name'), value: islandPalette },
     { name: t('palettes.territory.name'), value: territoryPalette },
