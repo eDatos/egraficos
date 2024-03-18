@@ -17,27 +17,6 @@
     border-color: var(--primary);
     opacity: 1;
   }
-  &:last-child {
-    // align-self: flex-end;
-    // &:hover {
-    //   background-color: var(--warning-lighter);
-    // }
-    // &:active,
-    // &.active {
-    //   border-color: var(--warning);
-    //   background-color: var(--warning-lighter);
-    // }
-  }
-  // &:last-child, &.separated {
-  //   position: relative;
-  //   &::before {
-  //     content:' ';
-  //     border-top: 1px solid var(--gray-400);
-  //     width: 100%;
-  //     position: absolute;
-  //     top: -8px;
-  //   }
-  // }
 }
 
 .start-over {
@@ -63,7 +42,6 @@
 }
 
 .loading-component {
-  // border: 1px solid var(--primary);
   border-radius: 4px;
   color: var(--primary);
   display: flex;

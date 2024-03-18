@@ -75,13 +75,14 @@ export default function UrlFetch({
           setUrl(e.target.value);
         }}
       />
-      <div className="text-right">
+      <div className="row justify-content-start ml-auto">
         <button
-          className="btn btn-sm btn-success mt-3"
+          className="text-icon-button btn-thin-first"
           disabled={!url || loading}
           type="submit"
         >
-          {t('global.section.loaddata.url.loadButton')}
+          <i className="fa-thin fa-cloud-arrow-up"></i>
+          {t('global.section.loaddata.url.loadButton').toUpperCase()}
         </button>
       </div>
     </form>

@@ -25,32 +25,37 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
     setLoadingError(null);
   };
   return (
-    <Row>
-      {samplesList.map((d, i) => {
-        return (
-          <Col xs={12} lg={6} xl={6} key={i} style={{ marginBottom: 15 }}>
-            <Card className="custom-card cursor-pointer h-100">
-              <Card.Body
-                onClick={() => {
-                  select(d);
-                }}
-                className="d-flex flex-column"
-              >
-                <Card.Title className="">
-                  <h2 className="">{t(d.name)}</h2>
-                  <h4 className="m-0">{t(d.category)}</h4>
-                </Card.Title>
-              </Card.Body>
-              <a
-                href={d.sourceURL}
-                className={[styles['dataset-source']].join(' ')}
-              >
-                {t('global.section.sampleData.source')}: {d.sourceName}
-              </a>
-            </Card>
-          </Col>
-        );
-      })}
-    </Row>
+      <>
+        <div className={[styles['container-samples']]} >
+          <p className={[styles['title-samples']]}>{t('global.section.loaddata.sample.name')}</p>
+        </div>
+        <Row>
+          {samplesList.map((d, i) => {
+            return (
+              <Col xs={12} lg={4} xl={4} key={i} className={[styles['div-samples']].join(' ')}>
+                <Card className="custom-card cursor-pointer h-100">
+                  <Card.Body
+                    onClick={() => {
+                      select(d);
+                    }}
+                    className="d-flex flex-column"
+                  >
+                    <Card.Title className="">
+                      <h2 className="">{t(d.name)}</h2>
+                      <h4 className="m-0">{t(d.category)}</h4>
+                    </Card.Title>
+                  </Card.Body>
+                  <a
+                    href={d.sourceURL}
+                    className={[styles['dataset-source']].join(' ')}
+                  >
+                    {t('global.section.sampleData.source')}: {d.sourceName}
+                  </a>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </>
   );
 }

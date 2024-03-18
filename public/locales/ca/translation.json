@@ -4,7 +4,7 @@
         "accepts": "Accepta",
         "section": {
             "loaddata": {
-                "title": "1. Carregar dades",
+                "title": "Carregar dades",
                 "paste": {
                     "name": "Enganxar dades",
                     "message": "Copieu i enganxeu les dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON."
@@ -14,7 +14,7 @@
                     "message": "Podeu carregar dades tabulars (TSV, CSV, DSV) o JSON."
                 },
                 "sample": {
-                    "name": "Provar exemples dades"
+                    "name": "Provar exemples de dades"
                 },
                 "sparql": {
                     "name" : "Consulta SPARQL"
@@ -37,7 +37,7 @@
                     "name": "Des eDatos",
                     "message": "Seleccioneu operació estadística i cub",
                     "loadButton": "Carregar dades",
-                    "statisticalOperations": "Operacions estadístiques",
+                    "statisticalOperations": "Selecciona operació estadística",
                     "cubes": "Cubs"
                 },
                 "wms": {

@@ -7,7 +7,10 @@ export default function Section(props) {
     <Container fluid className={[styles.section, props.className].join(' ')}>
       <Row>
         <Col>
-          <div className="d-flex align-items-center mb-3">
+            <div className={[styles.header, "d-flex align-items-center mb-3"].join(' ')}>
+                <div className={styles.circle}>
+                    <div className={styles.circleContent}>{props.number}</div>
+                </div>
             <h1>{props.title}</h1>
             {props.loading && (
               <Spinner

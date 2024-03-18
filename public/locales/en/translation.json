@@ -4,7 +4,7 @@
         "accepts": "Accepts",
         "section": {
             "loaddata": {
-                "title": "1. Load your data",
+                "title": "Load your data",
                 "paste": {
                     "name": "Paste your data",
                     "message": "Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data."

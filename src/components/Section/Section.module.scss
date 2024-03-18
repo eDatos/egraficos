@@ -1,6 +1,46 @@
+@import "../../styles/variables";
+
 .section {
-  border-bottom: 1px solid var(--light);
-  padding-top: 32px;
-  padding-bottom: 40px;
   max-width: 1400px;
+  background-color: $color-black-5;
+  height: 48px;
+}
+
+.header {
+  display: flex;
+  width: 1280px;
+  padding: 10px 10px 10px 20px;
+  align-items: center;
+  gap: 10px;
+
+}
+
+
+.circle {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  background-color: $color-black-100;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circleContent {
+  color: $color-black-0;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  font-feature-settings: 'clig' off, 'liga' off;
+}
+
+.title {
+  color: #000;
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
 }

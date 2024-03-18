@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { applicationConfig } from '../../ApplicationConfig/ApplicationConfig';
+import Paste from "./Paste";
 
 const SelectionCombo = (props) => {
   return (
@@ -213,17 +214,19 @@ export default class EDatosFetch extends React.Component {
                 language={i18n.language}
               />
             )}
-            <div className="text-right">
+            <div className="row justify-content-start ml-auto">
               <button
-                className="btn btn-sm btn-success mt-3"
+                className="text-icon-button btn-thin-first"
                 disabled={!this.state.url || this.state.loading}
                 type="submit"
               >
-                {t('global.section.loaddata.edatos.loadButton')}
+                <i className="fa-thin fa-cloud-arrow-up"></i>
+                {t('global.section.loaddata.edatos.loadButton').toUpperCase()}
               </button>
             </div>
           </Form>
-        )}
+        )
+        }
       </Translation>
     );
   }

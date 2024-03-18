@@ -64,6 +64,7 @@ function DataLoader({
   commitDataReplace,
   replaceRequiresConfirmation,
   hydrateFromProject,
+  initialState,
 }) {
   const [loadingError, setLoadingError] = useState();
   const [initialOptionState, setInitialOptionState] = useState(null);
@@ -72,63 +73,54 @@ function DataLoader({
     {
       id: 'eDatos',
       name: <Trans i18nKey="global.section.loaddata.edatos.name"></Trans>,
-      loader: (
-        <EDatosFetch
-          setUserInput={(rawInput, source) => setUserInput(rawInput, source)}
-        />
+      loader: ([
+          <EDatosFetch
+              setUserInput={(rawInput, source) => setUserInput(rawInput, source)}
+          />,
+          <DataSamples
+              onSampleReady={loadSample}
+              setLoadingError={setLoadingError}
+          />,
+          ]
       ),
-      message: <Trans i18nKey="global.section.loaddata.edatos.message"></Trans>,
       icon: BsCloud,
       allowedForReplace: true,
     },
     {
-      id: 'paste',
+      id: 'files',
       name: <Trans i18nKey="global.section.loaddata.paste.name"></Trans>,
-      loader: (
+      loader: ([
         <Paste
           userInput={userInput}
-          setUserInput={(rawInput) => setUserInput(rawInput, { type: 'paste' })}
+          setUserInput={(rawInput) => setUserInput(rawInput)}
           setLoadingError={setLoadingError}
+        />,
+        <UploadFile
+            userInput={userInput}
+            setUserInput={(rawInput) =>
+                setUserInput(rawInput)
+            }
+            setLoadingError={setLoadingError}
+        />,
+        <UrlFetch
+            userInput={userInput}
+            setUserInput={(rawInput, source) => setUserInput(rawInput, source)}
+            setLoadingError={setLoadingError}
+            initialState={
+              initialOptionState?.type === 'url' ? initialOptionState : null
+            }
         />
+        ]
       ),
       message: <Trans i18nKey="global.section.loaddata.paste.message"></Trans>,
       icon: BsClipboard,
       allowedForReplace: true,
     },
     {
-      id: 'upload',
-      name: <Trans i18nKey="global.section.loaddata.upload.name"></Trans>,
-      loader: (
-        <UploadFile
-          userInput={userInput}
-          setUserInput={(rawInput) =>
-            setUserInput(rawInput, { type: 'upload' })
-          }
-          setLoadingError={setLoadingError}
-        />
-      ),
-      message: <Trans i18nKey="global.section.loaddata.upload.message"></Trans>,
-      icon: BsUpload,
-      allowedForReplace: true,
-    },
-    {
-      id: 'sample',
-      name: <Trans i18nKey="global.section.loaddata.sample.name"></Trans>,
-      message: '',
-      loader: (
-        <DataSamples
-          onSampleReady={loadSample}
-          setLoadingError={setLoadingError}
-        />
-      ),
-      icon: BsGift,
-      allowedForReplace: true,
-    },
-    {
-      id: 'sparql',
+      id: 'project',
       name: <Trans i18nKey="global.section.loaddata.sparql.name"></Trans>,
       message: 'Load data with a SparQL query',
-      loader: (
+      loader: ([
         <SparqlFetch
           userInput={userInput}
           setUserInput={(rawInput, source) => setUserInput(rawInput, source)}
@@ -136,44 +128,16 @@ function DataLoader({
           initialState={
             initialOptionState?.type === 'sparql' ? initialOptionState : null
           }
-        />
+        />,
+        <LoadProject
+            onProjectSelected={hydrateFromProject}
+            setLoadingError={setLoadingError}
+        />,
+        ]
       ),
       icon: BsCloud,
       disabled: true,
       allowedForReplace: true,
-    },
-    {
-      id: 'url',
-      name: <Trans i18nKey="global.section.loaddata.url.name"></Trans>,
-      message: <Trans i18nKey="global.section.loaddata.url.message"></Trans>,
-      loader: (
-        <UrlFetch
-          userInput={userInput}
-          setUserInput={(rawInput, source) => setUserInput(rawInput, source)}
-          setLoadingError={setLoadingError}
-          initialState={
-            initialOptionState?.type === 'url' ? initialOptionState : null
-          }
-        />
-      ),
-      icon: BsSearch,
-      disabled: false,
-      allowedForReplace: true,
-    },
-    {
-      id: 'project',
-      name: <Trans i18nKey="global.section.loaddata.project.name"></Trans>,
-      message: (
-        <Trans i18nKey="global.section.loaddata.project.message"></Trans>
-      ),
-      loader: (
-        <LoadProject
-          onProjectSelected={hydrateFromProject}
-          setLoadingError={setLoadingError}
-        />
-      ),
-      icon: BsFolder,
-      allowedForReplace: false,
     },
     {
       id: 'WMS',
@@ -184,7 +148,7 @@ function DataLoader({
       allowedForReplace: false,
     },
   ];
-  const [optionId, setOptionId] = useState('eDatos');
+  const [optionId, setOptionId] = useState(initialState);
   const selectedOption = options.filter((option) => option.id === optionId)[0];
   const { t } = useTranslation(['translation']);
 
@@ -276,73 +240,6 @@ function DataLoader({
   return (
     <>
       <Row>
-        {!userData && !dataSource?.sources && (
-          <Col
-            xs={3}
-            lg={2}
-            className="d-flex flex-column justify-content-start pl-3 pr-0 options"
-          >
-            {options
-              .filter((opt) => {
-                return (
-                  !opt.disabled &&
-                  (dataLoaderMode !== DATA_LOADER_MODE.REPLACE ||
-                    opt.allowedForReplace)
-                );
-              })
-              .map((d, i) => {
-                const classnames = [
-                  'w-100',
-                  'd-flex',
-                  'align-items-center',
-                  'user-select-none',
-                  'cursor-pointer',
-                  styles['loading-option'],
-                  d.disabled ? styles['disabled'] : null,
-                  d.id === selectedOption.id && !userDataType
-                    ? styles.active
-                    : null,
-                  userDataType ? styles.disabled : null,
-                ]
-                  .filter((c) => c !== null)
-                  .join(' ');
-                return (
-                  <div
-                    key={d.id}
-                    className={classnames}
-                    onClick={() => {
-                      setOptionId(d.id);
-                    }}
-                  >
-                    <d.icon className="w-25" />
-                    <h4 className="m-0 d-inline-block">{d.name}</h4>
-                  </div>
-                );
-              })}
-
-            {dataLoaderMode === DATA_LOADER_MODE.REPLACE && (
-              <>
-                <div className="divider mb-3 mt-0" />
-                <div
-                  className={`w-100 mb-2 d-flex justify-content-center align-items-center ${styles['start-over']} user-select-none cursor-pointer`}
-                  onClick={reloadRAW}
-                >
-                  <BsArrowRepeat className="mr-2" />
-                  <h4 className="m-0 d-inline-block">{'Reset'}</h4>
-                </div>
-
-                <div
-                  className={`w-100 d-flex justify-content-center align-items-center ${styles['start-over']} ${styles['cancel']} user-select-none cursor-pointer mb-3`}
-                  onClick={() => {
-                    cancelDataReplace();
-                  }}
-                >
-                  <h4 className="m-0 d-inline-block">{'Cancel'}</h4>
-                </div>
-              </>
-            )}
-          </Col>
-        )}
         {userData && (
           <Col
             xs={3}
@@ -413,9 +310,9 @@ function DataLoader({
             </div>
           </Col>
         )}
-        <Col xs={9} lg={10}>
+        <Col xs={10} lg={12}>
           <Row className="h-100">
-            <Col className="h-100">
+            <Col className="h-100 data-loader">
               {mainContent}
 
               {data && !parseError && get(data, 'errors', []).length === 0 && (

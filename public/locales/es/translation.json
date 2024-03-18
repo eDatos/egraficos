@@ -4,7 +4,7 @@
         "accepts": "Accepta",
         "section": {
             "loaddata": {
-                "title": "1. Cargar datos",
+                "title": "Cargar tus datos",
                 "paste": {
                     "name": "Pegar datos",
                     "message": "Copie y pegue sus datos de otras aplicaciones o sitios web. Puede usar datos tabulares (TSV, CSV, DSV) o JSON."
@@ -14,7 +14,7 @@
                     "message": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON."
                 },
                 "sample": {
-                    "name": "Probar ejemplos datos"
+                    "name": "Probar ejemplos de datos"
                 },
                 "sparql": {
                     "name" : "Consulta SPARQL"
@@ -37,7 +37,7 @@
                     "name": "Desde eDatos",
                     "message": "Seleccione operación estadística y cubo",
                     "loadButton": "Cargar Datos",
-                    "statisticalOperations": "Operaciones estadísticas",
+                    "statisticalOperations": "Selecciona operación estadística",
                     "cubes": "Cubos"
                 },
                 "wms": {
