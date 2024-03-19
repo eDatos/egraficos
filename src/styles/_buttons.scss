@@ -27,12 +27,12 @@ button.text-icon-button, button.menu-text-icon-button {
   padding: 0 $padding-10px;
   height: 30px;
   border: 1px solid $color-blue-dark-100;
-  font-size: $size-16;
+  font-size: $size-14;
   line-height: 16px;
-  width: 100px;
+  min-width: 100px;
+  width: auto;
 
   span {
-    font-size: $size-14;
     font-weight: $font-weight-300;
   }
 
@@ -43,7 +43,7 @@ button.text-icon-button, button.menu-text-icon-button {
     display: none;
   }
 
-  & > span.fa-thin {
+  & > .fa-thin {
     margin-right: 5px;
   }
 }
@@ -85,6 +85,13 @@ button.text-icon-button.btn-thin-first {
   i {
     padding-right: 5px;
   }
+}
+
+.horizontal-buttons {
+  display: inline-flex;
+  margin-bottom: 20px;
+  font-size: 14px;
+  width: auto;
 }
 
 button.text-icon-button.btn-thin-cancel {

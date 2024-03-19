@@ -107,17 +107,18 @@ h5 {
   align-items: center;
   height: 56px;
   border: none;
+  border-radius: 7px;
   &.alert-success {
-    background-color: theme-color('success');
+    background-color: $brand-success;
   }
   &.alert-secondary {
     color: var(--gray-700);
   }
   &.alert-warning {
-    background-color: theme-color('warning');
+    background-color: $severidad-mayor;
   }
   &.alert-danger {
-    background-color: theme-color('danger');
+    background-color: $brand-danger;
   }
 }
 .raw-btn {

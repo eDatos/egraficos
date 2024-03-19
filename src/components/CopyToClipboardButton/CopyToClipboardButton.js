@@ -22,26 +22,24 @@ export function CopyToClipboardButton({ content }) {
   const { t } = useTranslation();
 
   return (
-    <Button
-      variant="light"
-      className={
-        style['copy-to-clipboard-button'] +
-        ' d-flex flex-row align-items-center'
-      }
-      onClick={handleCopy}
-    >
+      <div className="horizontal-buttons ml-auto" onClick={handleCopy}>
       {pending && (
         <>
-          <IoMdCheckmarkCircle className="text-success" />
-          <span className="ml-2">{t('global.copiedclipboard')}</span>
+          <button className="text-icon-button btn-thin-default text-success" type="button">
+            <i className="fa-thin fa-copy"></i>
+            <span>{t('global.copiedclipboard').toUpperCase()}</span>
+          </button>
         </>
       )}
       {!pending && (
         <>
-          <BsClipboard />
-          <span className="ml-2">{t('global.copyclipboard')}</span>
+          <button className="text-icon-button btn-thin-default" type="button">
+            <i className="fa-thin fa-copy"></i>
+            <span>{t('global.copyclipboard').toUpperCase()}</span>
+          </button>
         </>
       )}
-    </Button>
+
+      </div>
   );
 }
