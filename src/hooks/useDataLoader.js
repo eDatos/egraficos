@@ -69,7 +69,7 @@ export default function useDataLoader() {
           return resultData;
         })
         .catch((err) => {
-          console.log('eee', err);
+          console.log('error: ', err);
         })
         .finally(() => {
           setLoading(false);

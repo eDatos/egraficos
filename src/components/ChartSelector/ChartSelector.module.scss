@@ -1,6 +1,9 @@
+@import "../../styles/variables";
+
 .thumbnail {
   background-position: center;
   background-repeat: no-repeat;
+  filter: brightness(0.6);
 }
 
 .currentChart:hover {
@@ -10,4 +13,20 @@
 .disabled {
   pointer-events: none;
   filter: grayscale(1);
+}
+
+
+.currentChart{
+  border-radius: 3px;
+  border: 1px solid $color-blue-dark-100;
+  font-weight: 400;
+}
+
+h2.chartTitle{
+  font-size: $size-14;
+}
+
+.chartText, h4{
+  font-size: $size-12;
+  font-weight: 300;
 }

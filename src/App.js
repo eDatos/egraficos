@@ -312,7 +312,6 @@ function App() {
         }
     ];
 
-    console.log('lapp.js', dataLoader)
     return (
         <div className="app">
             <Header value={i18n.language} setLogged={setLogged}/>
@@ -330,8 +329,7 @@ function App() {
                                 id="sub-navbar-tabs"
                                 activeKey={activeSubTab}
                                 onSelect={handleTabChange}
-                                className={classNames("section-tab", { "disabled-section-tab": userData })}
-
+                                className={classNames("section-tab", {"disabled-section-tab": userData})}
                             >
                                 <Tab eventKey="eDatos" title="Desde el banco de datos">
                                     {
@@ -343,7 +341,7 @@ function App() {
                                                         <DataLoader  {...dataLoader} initialState='eDatos'
                                                                      hydrateFromProject={importProject}/>
                                                     </Section>
-                                                 {/*   {showChartSelector() && (
+                                                    {showChartSelector() && (
                                                         <Section title={t('global.section.chartselection.title')}
                                                                  number={2}
                                                                  loading={loading}>
@@ -354,7 +352,7 @@ function App() {
                                                             />
                                                         </Section>
                                                     )}
-                                                    {showChartConfigurator() && (
+                                                    {/*showChartConfigurator() && (
                                                         <Section title={t('global.section.mapping.title')} number={3}
                                                                  loading={mappingLoading}>
                                                             <DataMapping
@@ -365,8 +363,8 @@ function App() {
                                                                 setMapping={setMapping}
                                                             />
                                                         </Section>
-                                                    )}
-                                                    {showChartConfigurator() && (
+                                                    )*/}
+                                                    {/*showChartConfigurator() && (
                                                         <Section title={t('global.section.customize.title')} number={4}
                                                                  loading={loading}>
                                                             <ChartPreviewWithOptions
@@ -380,8 +378,8 @@ function App() {
                                                                 setMappingLoading={setMappingLoading}
                                                             />
                                                         </Section>
-                                                    )}
-                                                    {showExportOptions() && (
+                                                    )*/}
+                                                    {/*showExportOptions() && (
                                                         <Section title={t('global.section.export.title')} number={5}
                                                                  loading={loading}>
                                                             <Exporter
@@ -400,7 +398,7 @@ function App() {
                                                                 map={map}
                                                             />
                                                         </Section>
-                                                    )}*/}
+                                                    )*/}
                                                 </>
                                             )}
                                         </div>
