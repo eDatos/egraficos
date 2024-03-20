@@ -2,8 +2,6 @@
 
 .section {
   max-width: 1400px;
-  background-color: $color-black-5;
-  height: 48px;
 }
 
 .header {
@@ -12,9 +10,10 @@
   padding: 10px 10px 10px 20px;
   align-items: center;
   gap: 10px;
-
+  background-color: #F2F2F2;
+  height: 48px;
+  margin-left: -20px;
 }
-
 
 .circle {
   width: 28px;

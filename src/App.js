@@ -352,7 +352,7 @@ function App() {
                                                             />
                                                         </Section>
                                                     )}
-                                                    {/*showChartConfigurator() && (
+                                                    {showChartConfigurator() && (
                                                         <Section title={t('global.section.mapping.title')} number={3}
                                                                  loading={mappingLoading}>
                                                             <DataMapping
@@ -363,8 +363,8 @@ function App() {
                                                                 setMapping={setMapping}
                                                             />
                                                         </Section>
-                                                    )*/}
-                                                    {/*showChartConfigurator() && (
+                                                    )}
+                                                    {showChartConfigurator() && (
                                                         <Section title={t('global.section.customize.title')} number={4}
                                                                  loading={loading}>
                                                             <ChartPreviewWithOptions
@@ -378,8 +378,8 @@ function App() {
                                                                 setMappingLoading={setMappingLoading}
                                                             />
                                                         </Section>
-                                                    )*/}
-                                                    {/*showExportOptions() && (
+                                                    )}
+                                                    {showExportOptions() && (
                                                         <Section title={t('global.section.export.title')} number={5}
                                                                  loading={loading}>
                                                             <Exporter
@@ -398,7 +398,7 @@ function App() {
                                                                 map={map}
                                                             />
                                                         </Section>
-                                                    )*/}
+                                                    )}
                                                 </>
                                             )}
                                         </div>
@@ -637,87 +637,6 @@ function App() {
                             }
                         </Tab>
                         <Tab eventKey="widgets" title="Crear Widgets">
-                            <Stepper/> {/* Utiliza el componente Stepper aquí */}
-                            {
-                                <div className="app-sections">
-                                    {logged && (
-                                        <>
-                                            <Section
-                                                title={t('global.section.loaddata.title')}
-                                                loading={loading}
-                                            >
-                                                <DataLoader {...dataLoader} initialState='eDatos'
-                                                            hydrateFromProject={importProject}/>
-                                            </Section>
-                                            {showWMSMap() && (
-                                                <Section title="WMS Map">
-                                                    <WMSMap
-                                                        sources={dataLoader.dataSource?.sources}
-                                                        setMap={setMap}
-                                                        map={map}
-                                                    />
-                                                </Section>
-                                            )}
-                                            {showChartSelector() && (
-                                                <Section title={t('global.section.chartselection.title')}>
-                                                    <ChartSelector
-                                                        availableCharts={charts}
-                                                        currentChart={currentChart}
-                                                        setCurrentChart={handleChartChange}
-                                                    />
-                                                </Section>
-                                            )}
-                                            {showChartConfigurator() && (
-                                                <Section
-                                                    title={t('global.section.mapping.title')}
-                                                    loading={mappingLoading}
-                                                >
-                                                    <DataMapping
-                                                        ref={dataMappingRef}
-                                                        dimensions={currentChart.dimensions}
-                                                        dataTypes={data.dataTypes}
-                                                        mapping={mapping}
-                                                        setMapping={setMapping}
-                                                    />
-                                                </Section>
-                                            )}
-                                            {showChartConfigurator() && (
-                                                <Section title={t('global.section.customize.title')}>
-                                                    <ChartPreviewWithOptions
-                                                        chart={currentChart}
-                                                        dataset={data.dataset}
-                                                        dataTypes={data.dataTypes}
-                                                        mapping={mapping}
-                                                        visualOptions={visualOptions}
-                                                        setVisualOptions={setVisualOptions}
-                                                        setRawViz={setRawViz}
-                                                        setMappingLoading={setMappingLoading}
-                                                    />
-                                                </Section>
-                                            )}
-                                            {showExportOptions() && (
-                                                <Section title={t('global.section.export.title')}>
-                                                    <Exporter
-                                                        rawViz={rawViz}
-                                                        exportProject={exportProject}
-                                                        userData={dataLoader.userData}
-                                                        dataSource={dataLoader.dataSource}
-                                                        chartIndex={chartIndex}
-                                                        mapping={mapping}
-                                                        visualOptions={visualOptions}
-                                                        dataTypes={data?.dataTypes}
-                                                        dimensions={currentChart.dimensions}
-                                                        locale={i18n.language}
-                                                        decimalsSeparator={dataLoader.decimalsSeparator}
-                                                        thousandsSeparator={dataLoader.thousandsSeparator}
-                                                        map={map}
-                                                    />
-                                                </Section>
-                                            )}
-                                        </>
-                                    )}
-                                </div>
-                            }
                         </Tab>
                     </Tabs>
                     <CustomChartWarnModal
