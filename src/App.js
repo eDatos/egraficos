@@ -34,8 +34,6 @@ import WMSMap from './components/WMSMap/WMSMap';
 import {defaultPalette, grayPalette} from './constants';
 import favicon from './hooks/favicon';
 import {Tab, Tabs} from "react-bootstrap";
-import Stepper from "./components/Stepper/Stepper";
-import CustomStepper from "./components/Stepper/CustomStepper";
 import {FaChartBar, FaCloudUploadAlt, FaMap, FaPalette, FaShareAlt} from "react-icons/fa";
 import classNames from 'classnames';
 
@@ -328,7 +326,7 @@ function App() {
                         className="subsection-tab"
                     >
                         <Tab eventKey="graphs" title="Crear Gráficos">
-                            <CustomStepper steps={steps}/> {
+                            {
                             <Tabs
                                 id="sub-navbar-tabs"
                                 activeKey={activeSubTab}
@@ -578,7 +576,7 @@ function App() {
                         }
                         </Tab>
                         <Tab eventKey="maps" title="Crear Mapas">
-                            <CustomStepper/>
+
                             {
                                 <div className="app-sections">
                                     {logged && (

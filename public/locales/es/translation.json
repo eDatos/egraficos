@@ -2,6 +2,7 @@
     "global": {
         "appName": "Sistema de gráficos a medida",
         "accepts": "Accepta",
+        "download": "Descargar",
         "section": {
             "loaddata": {
                 "title": "Cargar tus datos",

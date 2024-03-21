@@ -2,6 +2,7 @@
     "global": {
         "appName": "Custom graphics development system",
         "accepts": "Accepts",
+        "download": "Download",
         "section": {
             "loaddata": {
                 "title": "Load your data",

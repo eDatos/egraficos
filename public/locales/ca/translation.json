@@ -2,6 +2,7 @@
     "global": {
         "appName": "Sistema de gràfics a mida",
         "accepts": "Accepta",
+        "download": "Descarregar",
         "section": {
             "loaddata": {
                 "title": "Carregar dades",

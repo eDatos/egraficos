@@ -5,6 +5,7 @@ import ChartPreview from '../ChartPreview';
 import { mapDataInWorker } from '../../worker';
 import { WEBWORKER_ACTIVE } from '../../constants';
 
+
 const ChartPreviewWithOptions = ({
   chart,
   dataset,
