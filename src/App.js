@@ -333,7 +333,7 @@ function App() {
                                 onSelect={handleTabChange}
                                 className={classNames("section-tab", {"disabled-section-tab": userData})}
                             >
-                                <Tab eventKey="eDatos" title="Desde el banco de datos">
+                                <Tab eventKey="eDatos" title={t('global.section.loaddata.tabs.fromEdatos')}>
                                     {
                                         <div className="app-sections">
                                             {logged && (
@@ -406,7 +406,7 @@ function App() {
                                         </div>
                                     }
                                 </Tab>
-                                <Tab eventKey="files" title="Desde tus ficheros">
+                                <Tab eventKey="files" title={t('global.section.loaddata.tabs.fromFiles')}>
                                     {
                                         <div className="app-sections">
                                             {logged && (
@@ -489,7 +489,7 @@ function App() {
                                         </div>
                                     }
                                 </Tab>
-                                <Tab eventKey="project" title="Desde tus proyectos">
+                                <Tab eventKey="project" title={t('global.section.loaddata.tabs.fromProjects')}>
                                     {
                                         <div className="app-sections">
                                             {logged && (

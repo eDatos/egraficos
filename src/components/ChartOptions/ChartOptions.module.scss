@@ -130,39 +130,30 @@
 }
 */
 
+.options-group > div > .group-header {
+  background-color: $color-blue-dark-100;
+}
+
+.options-group.collapsed > div > .group-header {
+  background-color: $color-blue-dark-10;
+  h5 {
+    color:  $color-blue-dark-100;
+  }
+}
 
 .options-group {
   transition: max-height 1s ease;
   height: auto;
   overflow: visible;
-  border-top: 1px solid var(--gray-400);
-
-  .group-header {
-    height: 40px;
-    background: var(--Azul-Oscuro-100, #004678);
-
-    &:before {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-color: var(--gray-bg);
-      position: absolute;
-      left: -15px;
-      z-index: -10;
-      opacity: 0.8;
-      backdrop-filter: blur(1px);
-      transition: opacity 0.5s ease;
-    }
-
-    &:first-child {
-        border-radius: 3px 3px 0 0 !important;
-    }
-  }
+  background-color: $color-blue-dark-5;
 
   &.collapsed {
     height: 40px !important;
     overflow: hidden;
+
+    .group-header {
+      background-color: $color-blue-dark-100;
+    }
 
     .collapse-button {
       &:before {
@@ -175,11 +166,34 @@
     }
 
     .group-header {
+      height: 40px;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: var(--gray-bg);
+        position: absolute;
+        left: -15px;
+        z-index: -10;
+        opacity: 0.8;
+        backdrop-filter: blur(1px);
+        transition: opacity 0.5s ease;
+      }
+
+      &:first-child {
+        border-radius: 3px 3px 0 0 !important;
+      }
+    }
+
+    .group-header {
       &:before {
         opacity: 1;
       }
     }
   }
+
 }
 
 .collapse-button {
@@ -202,9 +216,8 @@
     height: 2px;
     border-radius: 1px;
     content: ' ';
-    background-color: white; /* Color blanco para los íconos del botón */
+    background-color: white;
     transform: rotate(180deg);
-    // transition: transform 0.65s ease-in-out;
   }
 }
 
@@ -219,8 +232,9 @@
 }
 
 .chart-options {
-  padding-left: 15px;
   border-radius: 3px 3px 0 0;
+  border: 1px solid $color-blue-dark-100;
+  font-size: 12px;
 }
 
 .label-chart-option {

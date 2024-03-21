@@ -6,6 +6,11 @@
         "section": {
             "loaddata": {
                 "title": "Carregar dades",
+                "tabs" : {
+                    "fromEdatos": "Des del banc de dades",
+                    "fromFiles": "Des dels teus fitxers",
+                    "fromProjects": "Des dels teus projectes"
+                },
                 "paste": {
                     "name": "Enganxar dades",
                     "message": "Copieu i enganxeu les dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON."

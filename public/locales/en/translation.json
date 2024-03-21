@@ -6,6 +6,11 @@
         "section": {
             "loaddata": {
                 "title": "Load your data",
+                "tabs" : {
+                    "fromEdatos": "From your data bank",
+                    "fromFiles": "From your files",
+                    "fromProjects": "From your projects"
+                },
                 "paste": {
                     "name": "Paste your data",
                     "message": "Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data."

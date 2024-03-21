@@ -6,6 +6,11 @@
         "section": {
             "loaddata": {
                 "title": "Cargar tus datos",
+                "tabs" : {
+                    "fromEdatos": "Desde el banco de datos",
+                    "fromFiles": "Desde tus ficheros",
+                    "fromProjects": "Desde tus proyectos"
+                },
                 "paste": {
                     "name": "Pegar datos",
                     "message": "Copie y pegue sus datos de otras aplicaciones o sitios web. Puede usar datos tabulares (TSV, CSV, DSV) o JSON."
