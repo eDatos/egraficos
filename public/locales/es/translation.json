@@ -27,6 +27,8 @@
                 "project": {
                     "name": "Abrir proyecto",
                     "message": "Cargar un proyecto .edatosgraphs.",
+                    "dragAndBrowseFile": "Arrastre un archivo o seleccione un archivo local",
+                    "browseFile": "Seleccionar archivo",
                     "drag": "Arrastre un archivo o",
                     "browse": "Seleccione",
                     "file": "un archivo local",
@@ -60,6 +62,14 @@
                     "remaining": "El resto de",
                     "look": "revise",
                     "fine": "bien"
+                },
+                "options": {
+                    "1": "OPCIÓN 1",
+                    "label1": "Copie y pegue sus datos de otras aplicaciones o sitios web. Puede usar datos tabulares (TSV, CSV, DSV) o JSON.",
+                    "2": "OPCIÓN 2",
+                    "label2": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON.",
+                    "3": "OPCIÓN 3",
+                    "label3": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...).\nPor favor, asegúrese de que el servidor tiene CORS habilitado."
                 }
             },
             "sampleData" : {

@@ -46,6 +46,7 @@
 }
 .nav-tabs .nav-link {
     margin-bottom: 0;
+    padding: 2px 1rem;
 }
 
 .section-tab.nav.nav-tabs, .subsection-tab.nav.nav-tabs {
@@ -53,9 +54,9 @@ align-items: center;
 width: 100%;
 }
 .section-tab.nav.nav-tabs button.nav-link, .subsection-tab.nav.nav-tabs button.nav-link {
-    font-weight: $font-weight-300;
-    color: $color-blue-dark-100;
-    /* identical to box height */
+font-weight: $font-weight-300;
+color: $color-blue-dark-100;
+/* identical to box height */
     line-height: 20px;
 }
 .section-tab.nav.nav-tabs button.nav-link:focus-visible, .subsection-tab.nav.nav-tabs button.nav-link:focus-visible {

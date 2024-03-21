@@ -112,7 +112,6 @@ function DataLoader({
                     />
                 ]
             ),
-            message: <Trans i18nKey="global.section.loaddata.paste.message"></Trans>,
             icon: BsClipboard,
             allowedForReplace: true,
         },

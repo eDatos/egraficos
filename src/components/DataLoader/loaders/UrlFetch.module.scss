@@ -1,7 +1,16 @@
+@import "../../../styles/variables";
+
 .url-input {
-  background: #ffffff;
-  border: 1px solid var(--gray-400);
-  border-radius: 1px;
   height: 40px;
   padding: 0 10px;
+}
+
+.customSelect {
+  display: flex;
+  padding: 7px;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+  border-radius: 5px;
+  border: 1px solid $color-blue-dark-100;
 }

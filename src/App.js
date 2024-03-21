@@ -317,6 +317,10 @@ function App() {
             <Header value={i18n.language} setLogged={setLogged}/>
             <div className='container'>
                 <div className='col col-12'>
+                    <div className='app-header'>
+                        <span className='app-title'>{t('global.appName')}</span>
+                        <span className='app-description'> </span>
+                    </div>
                     <Tabs
                         id="tab-menu"
                         activeKey={activeTab}
@@ -486,7 +490,6 @@ function App() {
                                             )}
                                         </div>
                                     }
-                                    <p>Contenido para Desde tus ficheros</p>
                                 </Tab>
                                 <Tab eventKey="project" title="Desde tus proyectos">
                                     {

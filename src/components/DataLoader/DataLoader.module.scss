@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .loading-option {
   height: 48px;
   margin: 0 0 8px;
@@ -86,4 +88,34 @@
   to {
     left: -100%;
   }
+}
+
+.optionsSectionTitle {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: $color-black-100;
+  border-radius: 5px;
+  background: $color-black-5;
+  display: inline-block;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.optionsSectionText {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.borderBox{
+  border: 1px solid $color-blue-dark-100;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.optionsSection{
+  margin-top: 30px;
 }

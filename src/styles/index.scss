@@ -56,6 +56,28 @@ body {
   }
 }
 
+.app-header{
+  display: flex;
+  padding: 20px;
+  min-height: 187px;
+  flex-direction: column;
+}
+
+.app-title {
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  padding-bottom: 30px;
+}
+
+.app-description{
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 26px;
+}
+
 h1 {
   font-size: 1.8461538462rem;
   font-weight: normal;

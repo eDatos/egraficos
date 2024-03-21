@@ -27,6 +27,8 @@
                 "project": {
                     "name": "Obrir projecte",
                     "messagge": "Carregar un projecte .edatosgraphs.",
+                    "dragAndBrowseFile": "Arrossegueu un fitxer o seleccioneu un fitxer local",
+                    "browseFile": "Seleccionar arxiu",
                     "drag": "Arrossegueu un fitxer o",
                     "browse": "Seleccioneu",
                     "file": "un fitxer local",
@@ -60,6 +62,14 @@
                     "remaining": "La resta de",
                     "look": "reviseu",
                     "fine": "bé"
+                },
+                "options": {
+                    "1": "OPCIÓ 1",
+                    "label1": "Copia i enganxa les teves dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON.",
+                    "2": "OPCIÓ 2",
+                    "label2": "Pot carregar dades tabulars (TSV, CSV, DSV) o JSON.",
+                    "3": "OPCIÓ 3",
+                    "label3": "Introdueix una adreça web (URL) que apunta a les dades (per exemple, un fitxer Dropbox públic, una API pública, ...).\nAssegureu-vos que el servidor té CORS activat."
                 }
             },
             "sampleData" : {
