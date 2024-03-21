@@ -573,7 +573,6 @@ function App() {
                                             )}
                                         </div>
                                     }
-                                    <p>Contenido para Desde tus proyectos</p>
                                 </Tab>
                             </Tabs>
                         }

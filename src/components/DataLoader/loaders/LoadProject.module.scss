@@ -1,10 +1,13 @@
+@import "../../../styles/variables.scss";
+
 .dropzone {
-  height: 432px;
-  border: 1px dashed var(--gray-300);
+  height: 249px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
+  border: 1px solid $color-blue-dark-100;
 }
 
 .dropzone.reject {
@@ -15,11 +18,13 @@
   border: 2px dashed var(--success);
 }
 
-.browse-button {
-  font-size: 13px;
-  line-height: 16px;
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  color: #ffffff;
-  height: 28px;
-  margin: 0 10px;
+
+  button {
+    margin-top: 10px;
+  }
 }
+

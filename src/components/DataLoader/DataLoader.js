@@ -118,16 +118,16 @@ function DataLoader({
         {
             id: 'project',
             name: <Trans i18nKey="global.section.loaddata.sparql.name"></Trans>,
-            message: 'Load data with a SparQL query',
             loader: ([
-                    <SparqlFetch
+                // TODO: Implement SparQL fetch ¿DóNDE SE USA O COMO SE LLEGA?
+                 /*   <SparqlFetch
                         userInput={userInput}
                         setUserInput={(rawInput, source) => setUserInput(rawInput, source)}
                         setLoadingError={setLoadingError}
                         initialState={
                             initialOptionState?.type === 'sparql' ? initialOptionState : null
                         }
-                    />,
+                    />,*/
                     <LoadProject
                         onProjectSelected={hydrateFromProject}
                         setLoadingError={setLoadingError}

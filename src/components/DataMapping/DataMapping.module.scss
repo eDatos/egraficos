@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .column-card {
   background-color: var(--primary);
   height: 48px;
@@ -34,12 +36,11 @@
 }
 
 .chart-dimension {
-  background-color: white;
-  border: 1px solid var(--gray-400);
   margin-bottom: 15px;
-  padding: 8px;
-  border-radius: 4px;
+  padding: 20px 10px 10px 10px;
   height: fit-content;
+  border-radius: 3px;
+  border: 1px solid $color-black-60;
 }
 
 .chart-dimension-header {
@@ -108,4 +109,39 @@
     border-color: var(--primary);
     color: var(--primary);
   }
+}
+
+
+.cardChartContent{
+  display: flex;
+  min-width: 200px;
+  flex-direction: column;
+}
+
+.cardHeader{
+  display: flex;
+  height: 48px;
+  padding: 5px 10px;
+  align-items: center;
+  border-radius: 3px 3px 0 0;
+  border-bottom: 1px solid $color-blue-dark-100;
+  background:$color-blue-dark-100;
+  color: $color-black-0;
+  margin-bottom: 5px;
+}
+
+.columnCard {
+  display: flex;
+  height: 48px;
+  padding: 5px 10px;
+  align-items: center;
+  border-radius: 3px;
+  border: 1px dashed $color-blue-5;
+  background: $color-blue-dark-5;
+  margin-bottom: 5px;
+  color: $color-blue-dark-100;
+}
+
+.is-dragging {
+  opacity: 0.5; 
 }
