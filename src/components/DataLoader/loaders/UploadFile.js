@@ -31,9 +31,9 @@ export default function UploadFile({setUserInput, setLoadingError}) {
         });
     return (
         <>
-            <div className={styles.optionsSection}>
-                <span className={styles.optionsSectionTitle}> {t('global.section.loaddata.options.2')}</span>
-                <span className={styles.optionsSectionText}> {t('global.section.loaddata.options.label2')}</span>
+            <div className={`d-flex ${styles['options-section']}`}>
+                <span className={styles['options-section-number']}> {t('global.section.loaddata.options.2')}</span>
+                <span className={styles['options-section-text']}> {t('global.section.loaddata.options.label2')}</span>
             </div>
             <div
                 className={classNames(S.dropzone, {

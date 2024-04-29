@@ -1,6 +1,6 @@
 {
     "global": {
-        "appName": "Custom graphics development system",
+        "appName": "My custom visualizations",
         "accepts": "Accepts",
         "download": "Download",
         "section": {
@@ -28,7 +28,8 @@
                 "url": {
                     "name": "From URL",
                     "message": "Enter a web address (URL) pointing to the data (e.g. a public Dropbox file, a public API, ...). Please, be sure the server is CORS-enabled.",
-                    "loadButton": "Load Data"
+                    "loadButton": "Load Data",
+                    "clearFieldsButton": "Clear fields"
                 },
                 "project": {
                     "name": "Open your project",
@@ -44,9 +45,10 @@
                 "edatos": {
                     "name": "From eDatos",
                     "message": "Select statistical operation and cube",
-                    "loadButton": "Load Data",
                     "statisticalOperations": "Statistical operations",
-                    "cubes": "Cubes"
+                    "cubes": "Cubes",
+                    "loadButton": "Load Data",
+                    "clearFieldsButton": "Clear fields"
                 },
                 "wms": {
                     "name": "From WMS server",

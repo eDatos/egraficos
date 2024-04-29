@@ -26,9 +26,9 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
   };
   return (
       <>
-        <div className={[styles['container-samples']]} >
-          <p className={[styles['title-samples']]}>{t('global.section.loaddata.sample.name')}</p>
-        </div>
+        <div className={[styles['container-samples']]}>
+          <span className={[styles['title-samples']]}>{t('global.section.loaddata.sample.name')}</span>
+        
         <Row>
           {samplesList.map((d, i) => {
             return (
@@ -40,22 +40,23 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
                     }}
                     className="d-flex flex-column"
                   >
-                    <Card.Title className="">
+                    <Card.Title>
                       <h2 className="">{t(d.name)}</h2>
-                      <h4 className="m-0">{t(d.category)}</h4>
+                      <span className="m-0">{t(d.category)}</span>
                     </Card.Title>
-                  </Card.Body>
-                  <a
+                    <a
                     href={d.sourceURL}
                     className={[styles['dataset-source']].join(' ')}
                   >
                     {t('global.section.sampleData.source')}: {d.sourceName}
                   </a>
+                  </Card.Body>
                 </Card>
               </Col>
             );
           })}
         </Row>
+        </div>
       </>
   );
 }

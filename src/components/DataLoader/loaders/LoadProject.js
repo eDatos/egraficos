@@ -2,7 +2,8 @@ import React, {useCallback} from 'react';
 import {Button} from 'react-bootstrap';
 import {useDropzone} from 'react-dropzone';
 import classNames from 'classnames';
-import S from './LoadProject.module.scss';
+import S from './UploadFile.module.scss';
+import styles from '../DataLoader.module.scss';
 import {deserializeProject} from '@rawgraphs/rawgraphs-core';
 import charts from '../../../charts';
 import {useTranslation} from 'react-i18next';
@@ -35,6 +36,10 @@ export default function LoadProject({onProjectSelected, setLoadingError}) {
             maxFiles: 1,
         });
     return (
+        <>
+        <div className={`d-flex ${styles['options-section']}`}>
+            <span className={styles['options-section-text']}> {t('global.section.loaddata.project.message')}</span>
+        </div>
         <div
             className={classNames(S.dropzone, {
                 [S.reject]: isDragReject,
@@ -56,5 +61,6 @@ export default function LoadProject({onProjectSelected, setLoadingError}) {
             {isDragAccept && <p>{t('global.section.loaddata.project.accepted')}</p>}
             {isDragReject && <p>{t('global.section.loaddata.project.rejected')}</p>}
         </div>
+        </>
     );
 }

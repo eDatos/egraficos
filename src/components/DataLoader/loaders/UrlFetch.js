@@ -53,13 +53,13 @@ export default function UrlFetch({
 
     return (
         <>
-            <div className={styles.optionsSection}>
-                <span className={styles.optionsSectionTitle}> {t('global.section.loaddata.options.3')}</span>
-                <span className={styles.optionsSectionText}> {t('global.section.loaddata.options.label3')}</span>
+            <div className={`d-flex ${styles['options-section']}`}>
+                <span className={styles['options-section-number']}> {t('global.section.loaddata.options.3')}</span>
+                <span className={styles['options-section-text']}> {t('global.section.loaddata.options.label3')}</span>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={[styles.form, "d-flex flex-column"].join(' ')}>
                 <Row>
-                    <Col xs={3} className="pt-3 mb-3">
+                    <Col xs={3}>
                         <select
                             className={classNames('custom-select', S.customSelect)}
                             value={acceptHeader}
@@ -74,14 +74,15 @@ export default function UrlFetch({
                         </select>
                     </Col>
                 </Row>
+                <span>Url</span>
                 <input
-                    className={classNames('w-100', S['url-input borderBox'])}
+                    className={classNames(S['url-input'], styles['borderBox'])}
                     value={url}
                     onChange={(e) => {
                         setUrl(e.target.value);
                     }}
                 />
-                <div className="row justify-content-start ml-auto">
+                <div className="row general-buttons">
                     <button
                         className="text-icon-button btn-thin-first"
                         disabled={!url || loading}
@@ -89,6 +90,14 @@ export default function UrlFetch({
                     >
                         <i className="fa-thin fa-cloud-arrow-up"></i>
                         {t('global.section.loaddata.url.loadButton').toUpperCase()}
+                    </button>
+                    <button
+                        className="text-icon-button btn-thin-cancel"
+                        disabled={!url || loading}
+                        type="button"
+                    >
+                        <i className="fa-thin fa-eraser"></i>
+                        {t('global.section.loaddata.url.clearFieldsButton').toUpperCase()}
                     </button>
                 </div>
             </form>

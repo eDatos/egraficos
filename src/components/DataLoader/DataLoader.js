@@ -300,50 +300,48 @@ function DataLoader({
                         </div>
                     </Col>
                 )}
-                <Col xs={10} lg={12}>
-                    <Row className="h-100">
-                        <Col className="h-100 data-loader">
-                            {mainContent}
+                <Col xs={10} lg={12} className="data-loader">
 
-                            {data && !parseError && get(data, 'errors', []).length === 0 && (
-                                <WarningMessage
-                                    variant="success"
-                                    message={
-                                        <Trans
-                                            i18nKey="global.message.loadrows.succes"
-                                            values={{
-                                                rowsnumber: data.dataset.length,
-                                                cellsnumber:
-                                                    data.dataset.length *
-                                                    Object.keys(data.dataTypes).length,
-                                            }}
-                                        ></Trans>
-                                    }
-                                />
-                            )}
+                    {mainContent}
 
-                            {parseError && (
-                                <WarningMessage
-                                    variant="danger"
-                                    message={parseError}
-                                />
-                            )}
+                    {data && !parseError && get(data, 'errors', []).length === 0 && (
+                        <WarningMessage
+                            variant="success"
+                            message={
+                                <Trans
+                                    i18nKey="global.message.loadrows.succes"
+                                    values={{
+                                        rowsnumber: data.dataset.length,
+                                        cellsnumber:
+                                            data.dataset.length *
+                                            Object.keys(data.dataTypes).length,
+                                    }}
+                                ></Trans>
+                            }
+                        />
+                    )}
 
-                            {get(data, 'errors', []).length > 0 && (
-                                <WarningMessage
-                                    variant="warning"
-                                    message={parsingErrors(data)}
-                                />
-                            )}
+                    {parseError && (
+                        <WarningMessage
+                            variant="danger"
+                            message={parseError}
+                        />
+                    )}
 
-                            {loadingError && (
-                                <WarningMessage
-                                    variant="danger"
-                                    message={loadingError}
-                                />
-                            )}
-                        </Col>
-                    </Row>
+                    {get(data, 'errors', []).length > 0 && (
+                        <WarningMessage
+                            variant="warning"
+                            message={parsingErrors(data)}
+                        />
+                    )}
+
+                    {loadingError && (
+                        <WarningMessage
+                            variant="danger"
+                            message={loadingError}
+                        />
+                    )}   
+                    
                 </Col>
             </Row>
             {replaceRequiresConfirmation && (

@@ -7,21 +7,17 @@ export default function Paste({userInput, setUserInput, setLoadingError}) {
 
     return (
         <>
-            <div>
-                <span className={styles.optionsSectionTitle}> {t('global.section.loaddata.options.1')}</span>
-                <span className={styles.optionsSectionText}> {t('global.section.loaddata.options.label1')}</span>
+            <div className={ `d-flex ${styles['options-section']}`}>
+                <span className={styles['options-section-number']}> {t('global.section.loaddata.options.1')}</span>
+                <span className={styles['options-section-text']}> {t('global.section.loaddata.options.label1')}</span>
             </div>
             <textarea
-                className={styles.borderBox}
+                className={styles['borderBox']}
                 value={userInput}
                 onChange={(e) => {
                     const str = e.target.value;
                     setUserInput(str);
                     setLoadingError(null);
-                }}
-                style={{
-                    padding: '1rem',
-                    height: '235px',
                 }}
             />
         </>

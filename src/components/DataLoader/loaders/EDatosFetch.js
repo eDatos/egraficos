@@ -5,6 +5,7 @@ import { Translation } from 'react-i18next';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { applicationConfig } from '../../ApplicationConfig/ApplicationConfig';
 import Paste from "./Paste";
+import styles from './../DataLoader.module.scss';
 
 const SelectionCombo = (props) => {
   return (
@@ -146,7 +147,7 @@ class OperationTypeahead extends React.Component {
   };
   render() {
     return (
-      <Form.Group>
+      <Form.Group controlId="operacion">
         <Form.Label>
           {this.props.t('global.section.loaddata.edatos.statisticalOperations')}
         </Form.Label>
@@ -195,12 +196,16 @@ export default class EDatosFetch extends React.Component {
       })
       .finally(() => this.setState({ loading: false }));
   };
+  handleCleanForm = (event) => {
+    //TODO
+  };
 
   render() {
     return (
       <Translation ns={'translation'}>
         {(t, { i18n }) => (
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} className={[styles.form, "d-flex flex-column"].join(' ')}
+          >
             <OperationTypeahead
               handleOnChangeOperation={this.handleOnChangeOperation}
               t={t}
@@ -214,14 +219,23 @@ export default class EDatosFetch extends React.Component {
                 language={i18n.language}
               />
             )}
-            <div className="row justify-content-start ml-auto">
+            <div class="general-buttons row">
               <button
                 className="text-icon-button btn-thin-first"
-                disabled={!this.state.url || this.state.loading}
+                disabled={!this.state.url || !this.state.operationId || this.state.loading}
                 type="submit"
               >
                 <i className="fa-thin fa-cloud-arrow-up"></i>
-                {t('global.section.loaddata.edatos.loadButton').toUpperCase()}
+                <span>{t('global.section.loaddata.edatos.loadButton').toUpperCase()}</span>
+              </button>
+              <button
+                className="text-icon-button btn-thin-cancel"
+                disabled={!this.state.url || !this.state.operationId || this.state.loading}
+                onClick={this.handleCleanForm} type="button"
+               
+              >
+                <i className="fa-thin fa-eraser"></i>
+                <span>{t('global.section.loaddata.edatos.clearFieldsButton').toUpperCase()}</span>
               </button>
             </div>
           </Form>

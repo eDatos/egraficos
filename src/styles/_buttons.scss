@@ -1,12 +1,9 @@
 .general-buttons {
-  height: 60px;
   align-items: center;
-  padding: 0 20px;
   gap: 10px;
 
   &.row {
     margin: 0;
-    margin-right: 15px;
 
     .row-large {
       flex-grow: 1;
@@ -27,10 +24,12 @@ button.text-icon-button, button.menu-text-icon-button {
   padding: 0 $padding-10px;
   height: 30px;
   border: 1px solid $color-blue-dark-100;
+  border-radius: 5px;
+  background: $color-black-0;
   font-size: $size-14;
   line-height: 16px;
-  min-width: 100px;
-  width: auto;
+  /*min-width: 100px;
+  width: auto;*/
 
   span {
     font-weight: $font-weight-300;
@@ -48,13 +47,8 @@ button.text-icon-button, button.menu-text-icon-button {
   }
 }
 
-button.text-icon-button:first-child, button.text-icon-button-btwn {
+button.text-icon-button-btwn {
   margin-right: 10px;
-  border-radius: 5px;
-}
-
-button.text-icon-button {
-  background: $color-black-0;
   border-radius: 5px;
 }
 
@@ -69,10 +63,16 @@ button.text-icon-button.btn-thin-default {
   }
 }
 
+button.text-icon-button:disabled {
+  border-color: $color-blue-dark-100 !important;
+  color: $color-blue-dark-100 !important;
+  opacity: 0.3;
+  &:hover {
+    background-color: $color-black-0 !important;
+  }
+}
+
 button.text-icon-button.btn-thin-first {
-  margin-top: 10px;
-  font-size: 14px;
-  width: auto;
   color: $color-green-100;
   border-color: $color-green-100;
 
@@ -156,10 +156,6 @@ button.btn.btn-cancel {
 div.general-buttons.row.modal-buttons {
   margin-right: 0;
   padding-right: 0;
-}
-
-div.general-buttons.row {
-  padding: 15px 20px 20px 0;
 }
 
 .btn-scnd:focus, .captcha-button:focus, .btn-scnd.focus {

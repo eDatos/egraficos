@@ -90,32 +90,52 @@
   }
 }
 
-.optionsSectionTitle {
+.options-section {
+  gap: 10px;
+  align-items: center;
+  padding: $padding-20px 0 $padding-10px;
+  color: $color-black-80;
   font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
   line-height: normal;
-  color: $color-black-100;
+}
+
+.options-section-number {
+  font-weight: 700;
   border-radius: 5px;
   background: $color-black-5;
   display: inline-block;
   padding: 5px;
-  margin-bottom: 10px;
 }
 
-.optionsSectionText {
-  font-size: 12px;
-  font-style: normal;
+.options-section-text {
   font-weight: 600;
-  line-height: normal;
 }
 
-.borderBox{
+.borderBox {
   border: 1px solid $color-blue-dark-100;
   width: 100%;
   border-radius: 5px;
+  padding: 7px;
+  
+}
+textarea.borderBox {
+  font-size: 12px;
+  line-height: 16px;
+  color: $color-black-60;
+  min-height: 249px;
+  //TODO: ver cómo quitar el borde cuando está activo?
 }
 
-.optionsSection{
-  margin-top: 30px;
+
+.form {
+  gap: 15px;
+  padding-top: 20px;
+
+  label {
+    font-family: $font-family-sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: $color-black-80;
+  }
 }

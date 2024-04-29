@@ -43,39 +43,37 @@ html {
   font-size: 13px;
 }
 body {
-  background-color: var(--gray-bg);
+  background-color: $color-black-5;
 }
 
 .app{
   min-height: 1280px;
-  background-color: $color-black-5;
 
   > .container {
-    min-height: 1280px;
+    max-width: $container-max-width;
     background-color: $color-black-0;
   }
 }
 
 .app-header{
   display: flex;
+  flex-direction: column;
+  gap: 29px;
   padding: 20px;
   min-height: 187px;
-  flex-direction: column;
 }
 
 .app-title {
   font-size: 36px;
-  font-style: normal;
   font-weight: 600;
   line-height: 28px;
-  padding-bottom: 30px;
 }
 
 .app-description{
   font-size: 16px;
-  font-style: normal;
   font-weight: 300;
   line-height: 26px;
+  max-width: $container-max-width-description;
 }
 
 h1 {
@@ -222,6 +220,10 @@ h5 {
 .custom-card {
   border-radius: 5px;
   border: 1.004px solid $color-blue-dark-100;
+
+  .card-body {
+    justify-content: center;
+  }
 
   &:hover {
     background-color: var(--primary-lighter);
