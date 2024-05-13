@@ -119,7 +119,7 @@ const ChartPreview = ({
         setRawViz(null);
     }
     return (
-        <div className={'col-8 col-xl-9'}>
+        <>
             <div
                 className={['overflow-auto', 'position-sticky'].join(' ')}
                 style={{top: 'calc(15px + var(--header-height))'}}
@@ -141,7 +141,7 @@ const ChartPreview = ({
                     opts={{renderer: visualOptions.render}}
                 />
             </div>
-        </div>
+        </>
     );
 };
 

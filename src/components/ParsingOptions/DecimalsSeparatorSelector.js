@@ -25,7 +25,7 @@ export default function DecimalsSeparatorSelector({
             <div className={styles.inputSeparator}>
                 <input
                     type="text"
-                    className="form-control text-field d-inline-block"
+                    className="form-control d-inline-block"
                     value={inputValue}
                     onChange={handleChange}
                     {...props}

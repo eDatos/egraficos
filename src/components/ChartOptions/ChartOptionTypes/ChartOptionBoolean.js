@@ -1,6 +1,8 @@
 import React from 'react';
-import { Row, Col, Form } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import styles from './../ChartOptions.module.scss';
+import classNames from 'classnames';
 
 const ChartOptionBoolean = ({
   optionId,
@@ -15,15 +17,16 @@ const ChartOptionBoolean = ({
   const { t } = useTranslation(['visualoptions']);
   return (
     show && (
-      <Row className={className}>
-        <Col xs={6} className="d-flex align-items-center">
+      <div className={className}>
+        <Col xs={6} className={styles['chart-option-label']}>
           {label}
         </Col>
-        <Form className="col-6 d-flex align-items-center">
+        <Form className="col-6">
           <Form.Check
             type="switch"
             checked={!!value}
             disabled={!isEnabled}
+            className={classNames("d-flex align-items-center", styles['chart-option-label'], styles['chart-option-check'])}
             onChange={(e) => {
               onChange(e.target.checked);
             }}
@@ -38,7 +41,7 @@ const ChartOptionBoolean = ({
             </small>
           </div>
         )}
-      </Row>
+      </div>
     )
   );
 };

@@ -105,7 +105,7 @@
                 "title": "Seleccioneu municipi"
             },
             "chartselection": {
-                "title": "2. Seleccioneu gràfic",
+                "title": "Selecciona el gràfic que necessitis",
                 "barchart": {
                     "title": "Diagrama de barres",
                     "description": "Mostra una dimensió categòrica i quantitats relacionades. Cada barra representa una categoria, l'amplada és proporcional a la dimensió quantitativa.",
@@ -172,19 +172,18 @@
                 }
             },
             "mapping": {
-                "tittle": "3. Mapejos",
+                "tittle": "Mapeja les variables al gràfic",
                 "chartvariables":{
                     "dimensions": "DIMENSIONS",
-                    "variables": "VARIABLES GRÀFIC",
                     "dropdimension" : "Arrossegueu dimensió aquí",
                     "dropanotherdimen": "Arrossegueu una altra dimensió aqu"
                 }
             },
             "customize": {
-                "tittle": "4. Personalitzar"
+                "tittle": "Personalitza el teu gràfic"
             },
             "export": {
-                "tittle": "5. Exportar"
+                "tittle": "Exporta o desa el teu gràfic"
             },
             "login": {
                 "title": "Accedir",
@@ -192,7 +191,9 @@
             }
         },
         "reset": "Reiniciar",
-        "changedata": "Canviar dades",
+        "refreshdata": "Recarregar dades",
+        "editdata": "Editar dades",
+        "maximize": "Maximitzar",
         "column": "Columna",
         "copyclipboard": "Copiar al porta-retalls",
         "copiedclipboard": "Copiat al portapals",

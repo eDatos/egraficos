@@ -1,4 +1,5 @@
 @import './fonts/fontawesome';
+@import './vendor/index.scss';
 
 // Variables override
 $grey-lightest: #f8f8f8;
@@ -31,13 +32,12 @@ $font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
   --header-height: 50px;
 }
 @import 'variables';
-// Boostrap scss
-@import '~bootstrap/scss/bootstrap';
 
 // Fonts
 @import 'fonts';
 @import 'buttons';
 @import "nav-subsection";
+@import "cards";
 
 html {
   font-size: 13px;
@@ -128,39 +128,46 @@ h5 {
   height: 56px;
   border: none;
   border-radius: 7px;
+  font-size: 14px;
   &.alert-success {
     background-color: $brand-success;
   }
+  &.alert-secondary, &.alert-danger {
+    border-radius: 5px;
+    padding: 10px;
+    height: auto;
+    font-size: 12px;
+  }
   &.alert-secondary {
-    color: var(--gray-700);
+    color: $color-black-80;
+    background: $color-black-5;
   }
   &.alert-warning {
     background-color: $severidad-mayor;
   }
   &.alert-danger {
-    background-color: $brand-danger;
+    background-color: $color-red-50;
+  }
+  &.alert-light {
+    color: $color-black-60;
+    background-color: $color-black-0;
+    padding: 20px 0px 0px 10px;
+    height: auto;
+    margin-bottom: 0;
   }
 }
-.raw-btn {
-  height: 40px;
-}
-.btn-white {
-  color: theme-color('dark');
-  background-color: white;
-  border: none;
-  border-bottom: 1px solid var(--light);
-}
+
 .raw-dropdown {
-  height: 40px;
+  
   .dropdown-toggle {
     text-align: left;
-    height: 100%;
+    gap: 10px;
+
     &::after {
-      right: 8px;
-      bottom: calc(50% - 1px);
-      position: absolute;
+      display: none;
     }
   }
+
   .dropdown-menu {
     max-height: 40vh;
     overflow-y: auto;
@@ -194,13 +201,7 @@ h5 {
     }
   }
 }
-.raw-select {
-  height: 40px;
-  color: theme-color('dark');
-  background-color: white;
-  border: none;
-  border-bottom: 1px solid var(--light);
-}
+
 .raw-modal {
   .modal-content {
     background-color: var(--gray-bg);
@@ -212,7 +213,7 @@ h5 {
     justify-content: flex-start;
   }
 }
-.truncate-160px {
+.truncate-160px span {
   max-width: 160px;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -223,6 +224,7 @@ h5 {
 
   .card-body {
     justify-content: center;
+    gap: 5px;
   }
 
   &:hover {
@@ -269,4 +271,12 @@ h5 {
 
 .col.col-12, .container{
   padding: 0;
+}
+
+.py-top-10 {
+  padding-top: 10px;
+}
+
+.py-top-20 {
+  padding-top: 20px;
 }

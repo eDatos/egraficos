@@ -1,13 +1,6 @@
 @import '../../styles/variables';
 
-.div-samples {
-  padding: 10px;
-  &:nth-child(3n) {
-    padding-right: 15px;
-  }
-  &:nth-child(3n +1) {
-    padding-left: 15px;
-  }
+div.card-sample {
 
   h2 {
     font-size: 12px;

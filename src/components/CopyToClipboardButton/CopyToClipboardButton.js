@@ -22,7 +22,7 @@ export function CopyToClipboardButton({ content }) {
   const { t } = useTranslation();
 
   return (
-      <div className="horizontal-buttons ml-auto" onClick={handleCopy}>
+      <div className="" onClick={handleCopy}>
       {pending && (
         <>
           <button className="text-icon-button btn-thin-default text-success" type="button">

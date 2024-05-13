@@ -240,15 +240,14 @@ function DataLoader({
         <>
             <Row>
                 {userData && (
-                    <Col xs={10} lg={12} className="d-flex flex-column justify-content-start pl-3 pr-0 options">
-                        <div className='row-large justify-content-start'>
-                            <div className="horizontal-buttons ml-auto" onClick={reloadRAW} >
-                                <button className="text-icon-button btn-thin-cancel" type="button" >
-                                    <i className="fa-thin fa-arrow-rotate-right"></i>
-                                    <span>{t('global.reset').toUpperCase()}</span>
-                                </button>
-                            </div>
-                            <div className="horizontal-buttons ml-auto" onClick={() => {
+                    <Col xs={10} lg={12} className='d-flex flex-column py-top-20'>
+                        <div className='general-buttons row buttons-container'>
+                            <button className="text-icon-button btn-thin-cancel" type="button" onClick={reloadRAW}>
+                                <i className="fa-thin fa-arrow-rotate-right"></i>
+                                <span>{t('global.reset').toUpperCase()}</span>
+                            </button>
+
+                            <button className="text-icon-button btn-thin-default" type="button" onClick={() => {
                                 setInitialOptionState(dataSource);
                                 const dataSourceIndex = options.findIndex(
                                     (opt) => opt.id === dataSource?.type
@@ -256,12 +255,25 @@ function DataLoader({
                                 setOptionId(options[Math.max(dataSourceIndex, 0)].id);
                                 startDataReplace();
                             }}>
-                                <button className="text-icon-button btn-thin-default" type="button">
-                                    <i className="fa-thin fa-rotate"></i>
-                                    <span>{t('global.changedata').toUpperCase()}</span>
-                                </button>
-                            </div>
+                                <i className="fa-thin fa-rotate"></i>
+                                <span>{t('global.refreshdata').toUpperCase()}</span>
+                            </button>
+
+                            <button className="text-icon-button btn-thin-default" type="button" onClick={() => {
+                                //TODO
+                            }}>
+                                <i className="fa-thin fa-edit"></i>
+                                <span>{t('global.editdata').toUpperCase()}</span>
+                            </button>
+                            
                             {copyToClipboardButton}
+
+                            <button className="text-icon-button btn-thin-default" type="button" onClick={() => {
+                                //TODO
+                            }}>
+                                <i className="fa-thin fa-arrow-up-right-and-arrow-down-left-from-center"></i>
+                                <span>{t('global.maximize').toUpperCase()}</span>
+                            </button>
                         </div>
 
                         <ParsingOptions
@@ -306,7 +318,7 @@ function DataLoader({
 
                     {data && !parseError && get(data, 'errors', []).length === 0 && (
                         <WarningMessage
-                            variant="success"
+                            variant="light"
                             message={
                                 <Trans
                                     i18nKey="global.message.loadrows.succes"

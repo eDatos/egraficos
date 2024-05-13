@@ -5,7 +5,7 @@ export const metadata = {
   name: 'global.section.chartselection.halfdonutchart.title',
   id: 'halfdonutchart',
   thumbnail,
-  icon,
+  icon: "fa-rainbow",
   categories: ['categories.proportions'],
   description: 'global.section.chartselection.halfdonutchart.description',
   code: '',

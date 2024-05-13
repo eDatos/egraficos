@@ -52,6 +52,12 @@ button.text-icon-button-btwn {
   border-radius: 5px;
 }
 
+.btn-white {
+  color: $color-black-100;
+  background-color: white;
+  border: none;
+}
+
 button.text-icon-button.btn-thin-default {
   color: $color-blue-dark-100;
   border-color: $color-blue-dark-100;
@@ -302,7 +308,7 @@ span.pi-search, body .ui-tree .ui-tree-filter-container .ui-tree-filter-icon {
     border: 1px solid $color-blue-dark-100 !important;
   }
 
-  .custom-switch .custom-control-label::after, input[type=checkbox] {
+  .custom-switch .custom-control-label::after {
     top: 11px;
     background-color: $color-black-0;
     border: 1px solid $color-blue-dark-100 !important;

@@ -1,6 +1,6 @@
 {
     "separator": {
-        "title" : "OPCIONES ANÁLISIS DE DATOS",
+        "title" : "ESTRUCTURA DE LOS DATOS",
         "column" :  {
             "name": "Separador columna"
         },
@@ -11,10 +11,10 @@
             "name": "Separador decimales"
         }   
     },
-    "datelocale":"Fecha Local",
+    "datelocale":"Fecha local",
     "refreshdata": "Recargar datos desde url",
     "datatransform": {
-        "title": "TRANSFORMACIÓN DATOS",
+        "title": "TRANSFORMAR LOS DATOS",
         "stack": "Agrupar"
     },
     "datamismatch": {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import ChartOptions from '../ChartOptions';
 import ChartPreview from '../ChartPreview';
 import { mapDataInWorker } from '../../worker';
@@ -58,15 +58,18 @@ const ChartPreviewWithOptions = ({
 
   return (
     <Row>
-      <ChartOptions
-        chart={chart}
-        dataset={dataset}
-        mapping={mapping}
-        dataTypes={dataTypes}
-        visualOptions={visualOptions}
-        setVisualOptions={setVisualOptions}
-        error={error}
-      />
+      <Col xs={4} xl={3} className='py-top-20'>
+        <ChartOptions
+          chart={chart}
+          dataset={dataset}
+          mapping={mapping}
+          dataTypes={dataTypes}
+          visualOptions={visualOptions}
+          setVisualOptions={setVisualOptions}
+          error={error}
+        />
+      </Col>
+      <Col xs={8} xl={9} className='py-top-20'>
       <ChartPreview
         chart={chart}
         dataset={dataset}
@@ -76,6 +79,7 @@ const ChartPreviewWithOptions = ({
         setError={setError}
         setRawViz={setRawViz}
       />
+      </Col>
     </Row>
   );
 };

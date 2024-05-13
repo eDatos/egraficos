@@ -5,7 +5,7 @@ export const metadata = {
   name: 'global.section.chartselection.linechart.title',
   id: 'linechart',
   thumbnail,
-  icon,
+  icon: "fa-chart-line",
   categories: ['categories.timeseries', 'categories.correlations'],
   description: 'global.section.chartselection.linechart.description',
   code: '',

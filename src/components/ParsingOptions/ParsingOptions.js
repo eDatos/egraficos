@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Button} from 'react-bootstrap';
+import {Row, Col, Button, Table} from 'react-bootstrap';
 import SeparatorSelector from './SeparatorSelector';
 import ThousandsSeparatorSelector from './ThousandsSeparatorSelector';
 import DecimalsSeparatorSelector from './DecimalsSeparatorSelector';
@@ -33,68 +33,62 @@ export default function ParsingOptions(props) {
     };
 
     return (
+        <>
         <Row>
-            <Col className={styles.parsingOptions}>
-                <div className={styles.inlineContainer}>
-                    <b className={styles.separatorContainer}>{t('separator.title')}</b>
-                    {props.userDataType === 'csv' && (
-                        <SeparatorSelector
-                            title={t('separator.column.name')}
-                            value={props.separator}
-                            onChange={(nextSeparator) => props.setSeparator(nextSeparator)}
-                        />
-                    )}
-                    <ThousandsSeparatorSelector
-                        title={t('separator.thousands.name')}
-                        value={props.thousandsSeparator}
-                        onChange={(nextSeparator) =>
-                            props.setThousandsSeparator(nextSeparator)
-                        }
-                    />
-                    <DecimalsSeparatorSelector
-                        title={t('separator.decimals.name')}
-                        value={props.decimalsSeparator}
-                        onChange={(nextSeparator) =>
-                            props.setDecimalsSeparator(nextSeparator)
-                        }
-                    />
-
-                    <DateLocaleSelector
-                        title={t('datelocale')}
-                        value={props.locale}
-                        onChange={(nextLocale) => props.setLocale(nextLocale)}
-                    />
-
-                    {get(dataRefreshWorkers, get(props.dataSource, 'type', ''), null) && (
-                        <Button
-                            color="primary"
-                            className={styles['refresh-button']}
-                            onClick={() => refreshData()}
-                        >
-                            <BsArrowRepeat className="mr-2"/>
-                            {t(
-                                get(
-                                    dataRefreshCaptions,
-                                    get(props.dataSource, 'type', ''),
-                                    'Refresh data'
-                                )
-                            )}
-                        </Button>
-                    )}
-                </div>
-
-                <div className={styles.inlineContainer}>
-                    <b className={styles.datatransformContainer}>{t('datatransform.title')}</b>
-                    <StackSelector
-                        title={t('datatransform.stack')}
-                        value={props.stackDimension}
-                        list={props.dimensions}
-                        onChange={(nextStackDimension) =>
-                            props.setStackDimension(nextStackDimension)
-                        }
-                    />
-                </div>
+            <Col>
+                <Table bordered hover className={styles.customTable}>
+                    <thead>
+                        <tr className={styles.headerContainer}>
+                            <th colSpan={4}>{t('separator.title')}</th>
+                            <th>{t('datatransform.title')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className={styles.bodyContainer}>
+                            <td>
+                                {props.userDataType === 'csv' && (
+                                    <SeparatorSelector
+                                        title={t('separator.column.name')}
+                                        value={props.separator}
+                                        onChange={(nextSeparator) => props.setSeparator(nextSeparator)}
+                                    />
+                                )}
+                            </td>
+                            <td>
+                                <ThousandsSeparatorSelector
+                                    title={t('separator.thousands.name')}
+                                    value={props.thousandsSeparator}
+                                    onChange={(nextSeparator) => props.setThousandsSeparator(nextSeparator)}
+                                />
+                            </td>
+                            <td>
+                                <DecimalsSeparatorSelector
+                                    title={t('separator.decimals.name')}
+                                    value={props.decimalsSeparator}
+                                    onChange={(nextSeparator) => props.setDecimalsSeparator(nextSeparator)}
+                                />
+                            </td>
+                            <td>
+                                <DateLocaleSelector
+                                    title={t('datelocale')}
+                                    value={props.locale}
+                                    onChange={(nextLocale) => props.setLocale(nextLocale)}
+                                />
+                            </td>
+                            <td>
+                                <StackSelector
+                                    title={t('datatransform.stack')}
+                                    value={props.stackDimension}
+                                    list={props.dimensions}
+                                    onChange={(nextStackDimension) =>
+                                    props.setStackDimension(nextStackDimension)}
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
+                </Table>
             </Col>
         </Row>
+        </>
     );
 }

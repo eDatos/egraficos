@@ -32,7 +32,7 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
         <Row>
           {samplesList.map((d, i) => {
             return (
-              <Col xs={12} lg={4} xl={4} key={i} className={[styles['div-samples']].join(' ')}>
+              <Col xs={12} lg={4} xl={4} key={i} className={`custom-card-container ${styles['card-sample']}`}>
                 <Card className="custom-card cursor-pointer h-100">
                   <Card.Body
                     onClick={() => {

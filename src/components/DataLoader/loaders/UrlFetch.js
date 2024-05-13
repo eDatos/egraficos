@@ -1,5 +1,6 @@
 import React, {useCallback, useState} from 'react';
-import {Col, Row} from 'react-bootstrap';
+import {Col, Row, Form} from 'react-bootstrap';
+import FormSelect from 'react-bootstrap/FormSelect'
 import classNames from 'classnames';
 import S from './UrlFetch.module.scss';
 import {useTranslation} from 'react-i18next';
@@ -57,11 +58,11 @@ export default function UrlFetch({
                 <span className={styles['options-section-number']}> {t('global.section.loaddata.options.3')}</span>
                 <span className={styles['options-section-text']}> {t('global.section.loaddata.options.label3')}</span>
             </div>
-            <form onSubmit={handleSubmit} className={[styles.form, "d-flex flex-column"].join(' ')}>
+            <form onSubmit={handleSubmit} className={[styles.form, "d-flex flex-column py-top-10"].join(' ')}>
                 <Row>
                     <Col xs={3}>
-                        <select
-                            className={classNames('custom-select', S.customSelect)}
+                    <Form.Select
+                            
                             value={acceptHeader}
                             onChange={(event) => setAcceptHeader(event.target.value)}
                         >
@@ -71,12 +72,12 @@ export default function UrlFetch({
                             <option key="tsv" value="text/tab-separated-values">
                                 text/tab-separated-values
                             </option>
-                        </select>
+                            </Form.Select>
                     </Col>
                 </Row>
                 <span>Url</span>
                 <input
-                    className={classNames(S['url-input'], styles['borderBox'])}
+                    className={classNames("form-control", styles['borderBox'])}
                     value={url}
                     onChange={(e) => {
                         setUrl(e.target.value);

@@ -204,8 +204,8 @@ export default class EDatosFetch extends React.Component {
     return (
       <Translation ns={'translation'}>
         {(t, { i18n }) => (
-          <Form onSubmit={this.handleSubmit} className={[styles.form, "d-flex flex-column"].join(' ')}
-          >
+          <Form onSubmit={this.handleSubmit} className={[styles.form, "d-flex flex-column py-top-20"].join(' ')}
+          ref={ form => this.messageForm = form }>
             <OperationTypeahead
               handleOnChangeOperation={this.handleOnChangeOperation}
               t={t}

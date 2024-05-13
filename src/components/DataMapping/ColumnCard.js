@@ -35,7 +35,7 @@ const ColumnCard = ({
   return (
     <div
       ref={drag}
-      className={classNames('column-card', styles.columnCard, { 'is-dragging': isDragging })}
+      className={classNames(styles['column-card'], { 'is-dragging': isDragging })}
     >
       <DataTypeIcon className={styles['data-type-icon']} />
       <span className={styles['column-title']}>{dimensionName}</span>

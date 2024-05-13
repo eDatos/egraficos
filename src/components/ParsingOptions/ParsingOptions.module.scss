@@ -36,34 +36,64 @@
 }
 
 .separator-preview {
-  font-family: var(--font-family-monospace);
-  background-color: var(--gray-200);
-  color: var(--gray-900);
+  font-family: $font-family-sans-serif;
+  background-color: $color-black-15;
+  color: $color-black-60;
   width: 16px;
   height: 16px;
   display: inline-block;
   text-align: center;
-  border-radius: 4px;
-  margin-right: 4px;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 
-.separatorContainer, .datatransformContainer {
-  display: flex;
-  height: 28px;
-  padding: 5px 10px;
-  justify-content: space-between;
-  align-items: center;
-  flex-shrink: 0;
-  background: $color-blue-dark-25;
-  border-bottom: 1px solid $color-black-0;
-  color: $color-black-0;
-  font-size: $size-14;
+.customTable {
+  border-bottom: 0;
+  margin: 20px 0;
+
+  tr.headerContainer, .datatransformContainer {
+    
+    th {
+      border-top: 0;
+      padding: 5px 10px;
+      background: $color-blue-dark-25;
+      border-bottom: 1px solid $color-black-0;; 
+      height: 28px;
+      color: $color-black-0;
+      font-size: $size-14;
+      font-weight: 400;
+      &:first-child {
+        border-radius: 5px 0 0 0;
+        border-right: 1px solid black;
+      }
+      &:last-child {
+        min-width: calc($container-max-width/4);
+        border-radius: 0 5px 0 0;
+      }
+    }
+  }
+
+  tr.bodyContainer {
+    td {
+      border-top: 0;
+      vertical-align: middle;
+      padding: 5px 10px;
+      border-right: 1px solid $color-black-0;
+      border-bottom: 1px solid $color-black-0;
+      height: 48px;
+      background: $color-blue-dark-5;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
 }
 
-.separatorContainer {
+.headerContainer {
   border-radius: 5px 0 0 0;
-  border-right: 1px solid $color-black-0;
 
 }
 
@@ -72,18 +102,13 @@
 }
 
 .horizontalSeparator {
-  display: inline-flex;
-  margin-bottom: 20px;
-  font-size: $size-10;
-  width: auto;
-  height: 48px;
-  padding: 5px 10px;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
-  border-top: 1px solid $color-black-0;
-  border-right: 1px solid $color-black-0;
-  border-bottom: 1px solid $color-black-0;
+  gap: 10px;
+  
+  font-size: $size-10;
+  font-weight: 300;
   background: $color-blue-dark-5;
 }
 
@@ -99,20 +124,19 @@
   color: $color-blue-dark-100;
 }
 
-.inputSeparator{
+/*.inputSeparator{  //TODO ver si se puede eliminar
   display: flex;
   align-items: center;
-}
+}*/
 
 .inputSeparator button , .inputSeparator input{
+  gap: 5px;
   min-width: 95px;
-  height: 30px;
-  padding: 7px;
   justify-content: space-between;
-  align-items: flex-start;
-  flex-shrink: 0;
-  border-radius: 5px;
-  border: 1px solid $color-black-60;
   background: $color-black-0;
   font-size: $size-10;
+  font-weight: 400;
+  i {
+    color: $color-blue-dark-100;
+  }
 }

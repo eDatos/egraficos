@@ -1,0 +1,27 @@
+@import '../variables.scss';
+//input
+$input-font-size:               0.75rem; // 12px
+$input-padding-y:               0.438rem; // 7px
+$input-padding-x:               0.438rem; // 7px
+$input-height:                  30px;
+
+$input-border-color:            $color-black-60;
+$input-border-width:            1px;
+$input-border-radius:           5px;
+$input-color:                   $color-black-60;
+$input-placeholder-color:       $color-black-40;
+$input-focus-border-color:      none;
+$input-focus-box-shadow:        none;
+$link-hover-decoration:         none;
+
+//select custom-select
+$custom-select-height:          30px;
+$custom-select-color:           $color-black-60;
+$custom-select-border-color:    $color-black-60;
+$custom-select-border-radius:   5px;
+$custom-select-focus-border-color:  none;
+$custom-select-focus-box-shadow:    none;
+$custom-select-background:      none;
+
+// Boostrap scss
+@import '~bootstrap/scss/bootstrap';

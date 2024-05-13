@@ -177,10 +177,12 @@ function DataMapping({dataTypes, dimensions, mapping, setMapping}, ref) {
         <DndProvider backend={HTML5Backend}>
             <Row>
                 <Col xs={3}>
-                    <div className={styles.cardChartContent}>
-                        <h5 className={classNames("text-uppercase", styles.cardHeader)}>
+                    <div className={classNames(styles.cardChartContent, "py-top-20")}>
+                        <div className={classNames(styles['column-card'], styles['header'])}>
+                        <span>
                             {t('global.section.mapping.chartvariables.dimensions').toUpperCase()}
-                        </h5>
+                        </span>
+                        </div>
                         {map(dataTypes, (dataType, columnName) => {
                             return (
                                 <ColumnCard
@@ -194,8 +196,8 @@ function DataMapping({dataTypes, dimensions, mapping, setMapping}, ref) {
                         })}
                     </div>
                 </Col>
-                <Col>
-                    <Row style={{top: 'calc(var(--header-height) + 16px)'}}>
+                <Col className="py-top-20">
+                    <Row>
                         {dimensions.map((d) => {
                             return (
                                 <ChartDimensionCard
