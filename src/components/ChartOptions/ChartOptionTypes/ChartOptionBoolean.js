@@ -22,17 +22,24 @@ const ChartOptionBoolean = ({
           {label}
         </Col>
         <Form className="col-6">
-          <Form.Check
-            type="switch"
-            checked={!!value}
+          <Form.Check 
+            type="checkbox"
             disabled={!isEnabled}
-            className={classNames("d-flex align-items-center", styles['chart-option-label'], styles['chart-option-check'])}
-            onChange={(e) => {
-              onChange(e.target.checked);
-            }}
-            id={optionId}
-            label={value ? t('yes') : t('no')}
-          />
+            className="d-flex align-items-center custom-control custom-checkbox" 
+            id={optionId}>
+              <Form.Check.Input
+                type="checkbox"
+                checked={!!value}
+                className="custom-control-input"
+                onChange={(e) => {
+                  onChange(e.target.checked);
+                }}
+              />
+              <Form.Check.Label 
+                className={classNames(styles['chart-option-label'], "custom-control-label px-0")}>
+                  {value ? t('yes') : t('no')}
+              </Form.Check.Label>
+            </Form.Check>
         </Form>
         {error && (
           <div className="col-12">

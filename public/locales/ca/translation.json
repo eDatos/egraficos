@@ -3,6 +3,7 @@
         "appName": "Les meves visualitzacions a mida",
         "accepts": "Accepta",
         "download": "Descarregar",
+        "save": "Guardar",
         "section": {
             "loaddata": {
                 "title": "Carrega les teves dades",
@@ -183,7 +184,8 @@
                 "tittle": "Personalitza el teu gràfic"
             },
             "export": {
-                "tittle": "Exporta o desa el teu gràfic"
+                "tittle": "Exporta o desa el teu gràfic",
+                "dynamicWidget": "Generar widget dinàmic amb càrrega de dades per url"
             },
             "login": {
                 "title": "Accedir",

@@ -51,8 +51,8 @@ const ChartOptionColorScaleDefault = ({
 
   return (
     <>
-      <label className={[style['chart-option'], 'row'].join(' ')}>
-        <Col xs={6} className="d-flex align-items-center">
+      <div className={props.className}>
+        <Col xs={6} className={style['chart-option-label']}>
           {t('color')}
         </Col>
         <Col xs={6}>
@@ -61,7 +61,7 @@ const ChartOptionColorScaleDefault = ({
             onChange={handleChangeDefaultColor}
           />
         </Col>
-      </label>
+      </div>
     </>
   );
 };

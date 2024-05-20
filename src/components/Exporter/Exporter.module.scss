@@ -8,27 +8,8 @@
   border-radius: 3px;
   background: $color-blue-dark-5;
   margin-bottom: 20px;
-  width: 100%;
+  gap: 10px;
 }
 
-.inputContainer {
-  display: contents;
 
-  input {
-    display: flex;
-    height: 30px;
-    padding: 7px;
-    align-items: center;
-    gap: 5px;
-    flex: 1 0 0;
-    border-radius: 5px;
-    border: 1px solid var(--Negro-60, #666);
-    background: var(--Blanco, #FFF);
-  }
-}
 
-.borderBox{
-  border: 1px solid $color-blue-dark-100;
-  width: 100%;
-  border-radius: 5px;
-}

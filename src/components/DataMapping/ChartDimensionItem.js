@@ -6,7 +6,7 @@ import { BsX } from 'react-icons/bs';
 import { useDrag, useDrop } from 'react-dnd';
 import get from 'lodash/get';
 import { AGGREGATIONS_LABELS } from '../../constants';
-import { CustomToggle } from '../CustomDropdownToggle/CustomToggle';
+import { CustomToggle } from '../CustomDropdown/CustomDropdownToggle';
 
 export default function ChartDimensionItem({
   draggingColumn,

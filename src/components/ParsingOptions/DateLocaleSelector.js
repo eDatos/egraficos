@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import {Dropdown} from 'react-bootstrap';
 import {localeList} from '../../constants';
-import { CustomToggle } from '../CustomDropdownToggle/CustomToggle';
+import { CustomToggle } from '../CustomDropdown/CustomDropdownToggle';
 import styles from "./ParsingOptions.module.scss";
 
 export default function DateLocaleSelector({

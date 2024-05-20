@@ -289,15 +289,6 @@ span.pi-search, body .ui-tree .ui-tree-filter-container .ui-tree-filter-icon {
     height: 8rem;
   }
 
-  .custom-control-label {
-    padding-top: 7px;
-  }
-
-  .custom-control-input {
-    position: unset;
-    width: 5%;
-  }
-
   .custom-control-input:focus ~ .custom-control-label::before {
     box-shadow: unset;
   }
@@ -312,11 +303,6 @@ span.pi-search, body .ui-tree .ui-tree-filter-container .ui-tree-filter-icon {
     top: 11px;
     background-color: $color-black-0;
     border: 1px solid $color-blue-dark-100 !important;
-  }
-
-  .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $color-blue-dark-100;
-    border-color: $color-blue-dark-100;;
   }
 
   .ui-inputswitch-checked:checked ~ .custom-control-label::before {

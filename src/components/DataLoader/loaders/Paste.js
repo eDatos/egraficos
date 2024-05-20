@@ -12,7 +12,7 @@ export default function Paste({userInput, setUserInput, setLoadingError}) {
                 <span className={styles['options-section-text']}> {t('global.section.loaddata.options.label1')}</span>
             </div>
             <textarea
-                className={styles['borderBox']}
+                className="form-control"
                 value={userInput}
                 onChange={(e) => {
                     const str = e.target.value;

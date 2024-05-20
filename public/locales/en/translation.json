@@ -3,6 +3,7 @@
         "appName": "My custom visualizations",
         "accepts": "Accepts",
         "download": "Download",
+        "save": "Save",
         "section": {
             "loaddata": {
                 "title": "Load your data",
@@ -183,7 +184,8 @@
                 "tittle": "Customize  your chart"
             },
             "export": {
-                "tittle": "Export or save your graph"
+                "tittle": "Export or save your graph",
+                "dynamicWidget": "Generate dynamic widget with data loading by url"
             },
             "login": {
                 "title": "Login",

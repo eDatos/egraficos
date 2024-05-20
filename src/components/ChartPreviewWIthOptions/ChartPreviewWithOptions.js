@@ -58,7 +58,7 @@ const ChartPreviewWithOptions = ({
 
   return (
     <Row>
-      <Col xs={4} xl={3} className='py-top-20'>
+      <Col xs={4} xl={3} className='py-top-20 py-bottom-10'>
         <ChartOptions
           chart={chart}
           dataset={dataset}

@@ -1,15 +1,17 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Dropdown, DropdownButton, Form, InputGroup} from 'react-bootstrap';
+import { Row, Col, Dropdown, Form } from 'react-bootstrap';
 import uuid from 'react-uuid';
+import { CustomToggle } from '../CustomDropdown/CustomDropdownButton';
 import styles from './Exporter.module.scss';
 import {useTranslation} from "react-i18next";
 import {t} from "i18next";
+import classNames from 'classnames';
 
 
 function downloadBlob(url, filename) {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const {t, i18n} = useTranslation('translation');
+    //const {t, i18n} = useTranslation('translation');
     // Create a new anchor element
     const a = document.createElement('a');
     a.href = url;
@@ -63,7 +65,7 @@ export default function Exporter({
     const handleOnChangeDynamicLoadWidget = () => {
         setDynamicLoadWidget(!dynamicLoadWidget);
     };
-    const downloadViz = useCallback(() => {
+    const downloadViz = useCallback((currentFormat) => {
         switch (currentFormat) {
             case 'svg':
                 download(`${currentFile}.svg`, 'svg');
@@ -181,43 +183,49 @@ export default function Exporter({
 
     return (
         <>
-            <div className="row">
-                <div className={styles.exportContent}>
-                    <div className={`col col-sm-3 ${styles.inputContainer}`}>
-                        <InputGroup className="raw-input-group">
-                            <input
-                                type="text"
-                                className="form-control text-field"
-                                value={currentFile}
-                                onChange={(e) => setCurrentFile(e.target.value)}
-                            ></input>
-
-                            <DropdownButton
-                                as={InputGroup.Append}
-                                title={`.${currentFormat}`}
-                                id="input-group-dropdown-1"
-                                className="raw-dropdown"
+            <Row>
+                <Col xs={6} xl={12} className="py-top-20">
+                    <div className={`${styles.exportContent}`}>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={currentFile}
+                            onChange={(e) => setCurrentFile(e.target.value)}
+                        ></input>
+                        <Dropdown className="raw-dropdown button" align="end">
+                            <Dropdown.Toggle as={CustomToggle}
+                                className=" text-icon-button btn-thin-default d-flex align-items-center"
                             >
+                                {t('global.download').toUpperCase()}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu align="end">
                                 {exportFormats.map((d) => {
                                     return (
-                                        <Dropdown.Item key={d} onClick={() => setCurrentFormat(d)}>
-                                            .{d}
+                                        <Dropdown.Item 
+                                            as="button" 
+                                            key={d} 
+                                            onClick={() => {
+                                                setCurrentFormat(d);
+                                                downloadViz(d);
+                                            }}>
+                                            Formato {d.toUpperCase()}
                                         </Dropdown.Item>
                                     );
                                 })}
-                            </DropdownButton>
-                        </InputGroup>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    
+                        {currentFormat !== 'widget' && (
+                            <div>
+                                <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button" onClick={downloadViz}>
+                                    <i className="fa-thin fa-save"></i>
+                                    <span>{t('global.save').toUpperCase()}</span>
+                                </button>
+                            </div>
+                        )}
                     </div>
-                    {currentFormat !== 'widget' && (
-                        <div className="col col-sm-2">
-                            <button className="text-icon-button btn-thin-default" type="button" onClick={downloadViz}>
-                                <i className="fa-thin fa-download"></i>
-                                <span>{t('global.download').toUpperCase()}</span>
-                            </button>
-                        </div>
-                    )}
-                </div>
-            </div>
+                </Col>
+            </Row>
             {currentFormat === 'widget' &&
                 dataSource.url &&
                 dataSource.type !== 'wms' && (
@@ -225,11 +233,21 @@ export default function Exporter({
                         <div className="col col-sm-12">
                             <Form.Check
                                 id="dynamicLoadWidget"
-                                label="Generar widget dinámico con carga de datos por url"
-                                type="switch"
-                                checked={dynamicLoadWidget}
-                                onChange={handleOnChangeDynamicLoadWidget}
-                            />
+                                type="checkbox"
+                                className="d-flex align-items-center custom-control custom-checkbox" 
+                            >
+                                <Form.Check.Input
+                                    checked={dynamicLoadWidget}
+                                    className="custom-control-input"
+                                    onChange={() => {
+                                        handleOnChangeDynamicLoadWidget();
+                                    }}
+                                />
+                                <Form.Check.Label 
+                                    className={classNames("custom-control-label")}>
+                                        {t('global.section.export.dynamicWidget')}
+                                </Form.Check.Label>
+                            </Form.Check>
                         </div>
                     </div>
                 )}
@@ -238,11 +256,7 @@ export default function Exporter({
                     <div className="col cos-sm-12">
             <textarea
                 value={getWidget(dataSource.type !== 'wms' ? 'egraph' : 'wms')}
-                className={styles.borderBox}
-                style={{
-                    padding: '1rem',
-                    height: '235px',
-                }}
+                className="form-control"
                 readOnly
             />
                     </div>

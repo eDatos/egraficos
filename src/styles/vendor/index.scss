@@ -14,14 +14,19 @@ $input-focus-border-color:      none;
 $input-focus-box-shadow:        none;
 $link-hover-decoration:         none;
 
-//select custom-select
-$custom-select-height:          30px;
-$custom-select-color:           $color-black-60;
-$custom-select-border-color:    $color-black-60;
-$custom-select-border-radius:   5px;
-$custom-select-focus-border-color:  none;
-$custom-select-focus-box-shadow:    none;
-$custom-select-background:      none;
+$input-disabled-bg:             $color-black-5;
+
+
+//custom-checkbox
+$custom-checkbox-indicator-border-radius:           4px;
+$custom-control-indicator-checked-border-color:     $color-black-60;
+$custom-checkbox-indicator-indeterminate-bg:        $color-black-0;
+$custom-control-indicator-border-color:             $color-black-60;
+$custom-control-indicator-checked-color:            $color-blue-dark-100;
+$custom-control-indicator-checked-bg:               $color-black-0;
+$custom-control-indicator-active-bg:                $color-black-0;
+$custom-control-indicator-active-border-color:      $color-black-60;
+
 
 // Boostrap scss
 @import '~bootstrap/scss/bootstrap';

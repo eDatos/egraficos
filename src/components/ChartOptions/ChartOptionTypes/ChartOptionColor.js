@@ -28,8 +28,9 @@ const ChartOptionColor = ({
   }
 
   return (
-    <label className={`{props.className + ${styles.chartOptionColor} ' row'}`}>
-      <Col xs={6} className="d-flex align-items-center">
+    <div className={props.className}>
+
+      <Col xs={6} className={styles['chart-option-label']}>
         {label}
       </Col>
       <Col xs={6}>
@@ -44,7 +45,7 @@ const ChartOptionColor = ({
           <i>{error}</i>
         </small>
       )}
-    </label>
+    </div>
   );
 };
 

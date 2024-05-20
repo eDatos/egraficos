@@ -3,6 +3,7 @@
         "appName": "Mis visualizaciones a medida",
         "accepts": "Accepta",
         "download": "Descargar",
+        "save": "Guardar",
         "section": {
             "loaddata": {
                 "title": "Carga tus datos",
@@ -183,7 +184,8 @@
                 "title": "Personaliza tu gráfico"
             },
             "export": {
-                "title": "Exporta o guarda tu gráfico"
+                "title": "Exporta o guarda tu gráfico",
+                "dynamicWidget": "Generar widget dinámico con carga de datos por url"
             },
             "login": {
                 "title": "Acceder",

@@ -114,16 +114,6 @@
 .borderBox {
   border: 1px solid $color-blue-dark-100;
 }
-textarea.borderBox {
-  font-size: 12px;
-  line-height: 16px;
-  color: $color-black-60;
-  min-height: 249px;
-  width: 100%;
-  border-radius: 5px;
-  padding: 7px;
-  //TODO: ver cómo quitar el borde cuando está activo?
-}
 
 
 .form {

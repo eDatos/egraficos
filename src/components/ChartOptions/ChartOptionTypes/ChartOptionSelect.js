@@ -1,7 +1,8 @@
 import React from 'react';
-import {  Col } from 'react-bootstrap';
+import { Col, Dropdown } from 'react-bootstrap';
 import isObject from 'lodash/isObject';
 import { useTranslation } from 'react-i18next';
+import { CustomToggle } from '../../CustomDropdown/CustomDropdownToggle';
 import styles from './../ChartOptions.module.scss';
 
 const ChartOptionSelect = ({
@@ -20,28 +21,32 @@ const ChartOptionSelect = ({
         {label}
       </Col>
       <Col xs={6}>
-        <select
-          className="custom-select"
-          value={value ?? defaultValue}
-          onChange={(e) => {
-            const stringValue = e.target.value;
-            const value =
-              props.type === 'number' ? Number(stringValue) : stringValue;
-            onChange(value);
-          }}
-        >
-          {options.map((option) =>
-            isObject(option) ? (
-              <option key={option.value} value={option.value}>
-                {t(option.label)}
-              </option>
-            ) : (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            )
-          )}
-        </select>
+        <Dropdown className="raw-dropdown">
+          <Dropdown.Toggle as={CustomToggle}
+            className="d-flex align-items-center justify-content-between form-control"
+          >
+            <span>{t(value) ?? t(defaultValue)}</span>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            {Object.values(options).map((option) => {
+              let key;
+              isObject(option) ? key=option.value : key=option;
+              return (
+                <Dropdown.Item
+                  key={key}
+                  onClick={() => {
+                    const stringValue = key;
+                    const value =
+                      props.type === 'number' ? Number(stringValue) : stringValue;
+                    onChange(value);
+                  }}
+                >
+                  {t(option?.label)}
+                </Dropdown.Item>
+              );
+            })}
+          </Dropdown.Menu>
+        </Dropdown>
         {error && (
           <small>
             <i>{error}</i>

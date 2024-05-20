@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import {Dropdown} from 'react-bootstrap';
 import {separatorsLabels} from '../../constants';
 import {useTranslation} from 'react-i18next';
-import { CustomToggle } from '../CustomDropdownToggle/CustomToggle';
+import { CustomToggle } from '../CustomDropdown/CustomDropdownToggle';
 import styles from './ParsingOptions.module.scss';
 
 export default function SeparatorSelector({

@@ -5,6 +5,7 @@ import ChartOptionColorScaleDefault from './ChartOptionColorScaleDefault';
 const ChartOptionColorScaleWrapper = ({
   value,
   onChange,
+  className,
   default: defaultValue,
   mappingValue,
   colorDataType,
@@ -22,6 +23,7 @@ const ChartOptionColorScaleWrapper = ({
           onChange={onChange}
           defaultValue={defaultValue}
           value={value}
+          className={className}
         />
       )}
       {hasAnyMapping && (
@@ -33,6 +35,7 @@ const ChartOptionColorScaleWrapper = ({
           colorDataType={colorDataType}
           colorDataset={colorDataset}
           onChange={onChange}
+          className={className}
         />
       )}
     </>

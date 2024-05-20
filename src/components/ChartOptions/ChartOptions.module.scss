@@ -211,10 +211,6 @@
   margin: 0;
   height: 48px !important;
   border-bottom: none !important;
-
-  .scheme-preview {
-    width: 100%;
-  }
 }
 
 .chart-options {
@@ -226,11 +222,6 @@
   color: $color-black-0;
   font-size: 14px;
   font-weight: 300;
-}
-
-.chartOptionColor {
-  border-bottom: 1px solid var(--Azul-Oscuro-10, #CCDAE4);
-  background: var(--Azul-Oscuro-5, #E5ECF1);
 }
 
 
@@ -247,24 +238,29 @@
     background: $color-blue-dark-5;
     border-bottom: 1px solid $color-blue-5;
 
-    .chart-option-label {
-      font-weight: 300;
-      font-size: 12px;
-      color: $color-blue-dark-100;
-      padding-left: 10px;
-      padding-right: 0;
-      &.small {
-        font-size: 10px;
-        color: $color-black-80;
-      }
-    }
     
     input {
       font-size: 10px;
     }
 
-    .chart-option-check {
-      gap: 10px;
+    &.color-swatch {
+      height: 38px;
+    
+      .color-scale-item {
+        padding-right: 0;
+      }
+    }
+  }
+  
+  .chart-option .chart-option-label, .color-swatches-list .chart-option-label {
+    font-weight: 300;
+    font-size: 12px;
+    color: $color-blue-dark-100;
+    padding-left: 10px;
+    padding-right: 0;
+    &.small {
+      font-size: 10px;
+      color: $color-black-80;
     }
   }
 }
