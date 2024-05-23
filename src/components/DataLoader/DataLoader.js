@@ -92,13 +92,13 @@ function DataLoader({
             loader: ([
                     <Paste
                         userInput={userInput}
-                        setUserInput={(rawInput) => setUserInput(rawInput)}
+                        setUserInput={(rawInput) => setUserInput(rawInput, { type: 'paste' })}
                         setLoadingError={setLoadingError}
                     />,
                     <UploadFile
                         userInput={userInput}
                         setUserInput={(rawInput) =>
-                            setUserInput(rawInput)
+                            setUserInput(rawInput, { type: 'upload' })
                         }
                         setLoadingError={setLoadingError}
                     />,
@@ -141,7 +141,6 @@ function DataLoader({
         {
             id: 'WMS',
             name: <Trans i18nKey="global.section.loaddata.wms.name"></Trans>,
-            message: <Trans i18nKey="global.section.loaddata.wms.message"></Trans>,
             loader: <WMSFetch setDataSource={setDataSource}/>,
             icon: BsMap,
             allowedForReplace: false,
