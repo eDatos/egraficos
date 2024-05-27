@@ -5,7 +5,8 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Typeahead, TypeaheadInputMulti } from 'react-bootstrap-typeahead';
 import Token from '../WMSMap/Token';
-import { BsXCircle } from 'react-icons/bs';
+import styles from '../DataLoader/DataLoader.module.scss';
+import classNames from 'classnames';
 
 const SelectionLayerCombo = (props) => {
   const { t } = useTranslation(['translation']);
@@ -17,7 +18,6 @@ const SelectionLayerCombo = (props) => {
       const newSelected = props.selectedLayers.slice();
       newSelected.splice(dragIndex, 1);
       newSelected.splice(hoverIndex, 0, item);
-
       props.onChange(newSelected);
     },
     [props]
@@ -31,8 +31,9 @@ const SelectionLayerCombo = (props) => {
           multiple
           onChange={props.onChange}
           options={props.layers}
-          placeholder={t('global.section.wmslayerselection.title')}
+          placeholder={t('global.section.wmslayerselection.configuration.placeholder')}
           style={styleMap}
+          className={props.className}
           renderInput={(inputProps, childProps) => (
             <TypeaheadInputMulti
               {...inputProps}
@@ -64,6 +65,7 @@ const SelectionStyle = ({
   selectedLayers,
   setSelectedLayers,
   index,
+  className
 }) => {
   const [styleSelected, setStyleSelected] = useState([]);
   const { t } = useTranslation(['translation']);
@@ -89,10 +91,10 @@ const SelectionStyle = ({
   };
   return (
     <>
-      <Card.Subtitle className="mt-3 mb-2">
-        <b>{t('global.section.wmslayerselection.style.title')}: </b>
+      <Form.Label className={classNames(styles['lighter'], "mt-3")}>
+       {t('global.section.wmslayerselection.style.title')}: 
         {layer.Title}
-      </Card.Subtitle>
+      </Form.Label>
       <Typeahead
         clearButton
         id="select-style"
@@ -102,47 +104,70 @@ const SelectionStyle = ({
         options={options}
         placeholder={t('global.section.wmslayerselection.style.placeholder')}
         selected={styleSelected}
+        className={className}
       />
-      <Card.Body>
-        <Row>
-          <Form.Check
-            disabled={styleSelected.length === 0}
-            id="showLegend"
-            className="mr-4"
-            label={t('global.section.wmslayerselection.style.legend')}
-            type="switch"
-            checked={layer.showLegend}
-            onChange={() => {
-              let newSelectedLayers = [...selectedLayers];
-              layer.showLegend = !layer.showLegend;
-              newSelectedLayers[index] = layer;
-              setSelectedLayers(newSelectedLayers);
-            }}
-          />
-          <Form.Check
-            disabled={styleSelected.length === 0}
-            id="showLayerName"
-            className="mr-4"
-            label={t('global.section.wmslayerselection.style.showlayer')}
-            type="switch"
-            checked={layer.showLayerName}
-            onChange={handleShowLayerNameChange}
-          />
-          <Form.Check
-            disabled={styleSelected.length !== 1 || !layer.showLayerName}
-            id="hideStyleName"
-            label={t('global.section.wmslayerselection.style.hidestyle')}
-            type="switch"
-            checked={layer.hideStyleName}
-            onChange={() => {
-              let newSelectedLayers = [...selectedLayers];
-              layer.hideStyleName = !layer.hideStyleName;
-              newSelectedLayers[index] = layer;
-              setSelectedLayers(newSelectedLayers);
-            }}
-          />
+        <Row className='mt-3'>
+          <div className="col d-flex align-items-center">
+            <Form.Check
+              id="showLegend"
+              className="mr-4 custom-control custom-checkbox"
+              type="checkbox"
+            >
+              <Form.Check.Input
+                disabled={styleSelected.length === 0}
+                checked={layer.showLegend}
+                className="custom-control-input"
+                onChange={() => {
+                  let newSelectedLayers = [...selectedLayers];
+                  layer.showLegend = !layer.showLegend;
+                  newSelectedLayers[index] = layer;
+                  setSelectedLayers(newSelectedLayers);
+                }}
+              />
+              <Form.Check.Label
+                className={classNames("custom-control-label", styles['lighter'])}>
+                  {t('global.section.wmslayerselection.style.legend')}
+              </Form.Check.Label>
+            </Form.Check>
+            <Form.Check
+              id="showLayerName"
+              className="mr-4 custom-control custom-checkbox"
+              type="checkbox"
+            >
+              <Form.Check.Input
+                disabled={styleSelected.length === 0}
+                checked={layer.showLayerName}
+                className="custom-control-input"
+                onChange={handleShowLayerNameChange}
+              />
+              <Form.Check.Label
+                className={classNames("custom-control-label", styles['lighter'])}>
+                  {t('global.section.wmslayerselection.style.showlayer')}
+              </Form.Check.Label>
+            </Form.Check>
+            <Form.Check
+              id="hideStyleName"
+              className="mr-4 custom-control custom-checkbox"
+              type="checkbox"
+            >
+              <Form.Check.Input
+                disabled={styleSelected.length !== 1 || !layer.showLayerName}
+                checked={layer.hideStyleName}
+                className="custom-control-input"
+                onChange={() => {
+                  let newSelectedLayers = [...selectedLayers];
+                  layer.hideStyleName = !layer.hideStyleName;
+                  newSelectedLayers[index] = layer;
+                  setSelectedLayers(newSelectedLayers);
+                }}
+              />
+              <Form.Check.Label
+                className={classNames("custom-control-label", styles['lighter'])}>
+                  {t('global.section.wmslayerselection.style.hidestyle')}
+              </Form.Check.Label>
+            </Form.Check>
+          </div>
         </Row>
-      </Card.Body>
     </>
   );
 };
@@ -155,7 +180,7 @@ function LayersOptionCard({
   index,
   onRemove,
 }) {
-  const styles = selectedLayers.flatMap((layer) => [
+  const LayerStyles = selectedLayers.flatMap((layer) => [
     {
       [layer.Name]: Object.fromEntries(
         Object.entries(layer).filter(
@@ -169,24 +194,26 @@ function LayersOptionCard({
       ),
     },
   ]);
+  const { t } = useTranslation(['translation']);
 
   return (
-    <Card className="mt-3" bg="Primary">
-      <Card.Header className="d-flex justify-content-between">
-        {title}
-        <BsXCircle onClick={() => onRemove(index)}>Delete</BsXCircle>
+    <Card className="mt-3">
+      <Card.Header className="d-flex align-items-center justify-content-between">
+        <span className='title'>{title}</span>
+        <i className="fa-solid fa-circle-x" onClick={() => onRemove(index)}></i>
       </Card.Header>
-      <Card.Body>
-        <Card.Title> Configuración de capas</Card.Title>
-        <Form>
+      <Card.Body className='px-3'>
+        <Form className={classNames(styles["form"], "")}>
+        <Form.Label className={styles['lighter']}>{t('global.section.wmslayerselection.configuration.title')}</Form.Label>
           <SelectionLayerCombo
             index={index}
             layers={layers}
             selectedLayers={selectedLayers}
             onChange={setSelectedLayers}
+            className="custom-multiselect"
           />
           {selectedLayers.map((layer, index) => {
-            const options = styles
+            const options = LayerStyles
               .filter((o) => o[layer.Name])
               .flatMap((o) => o[layer.Name])
               .reduce(
@@ -207,6 +234,7 @@ function LayersOptionCard({
                     selectedLayers={selectedLayers}
                     setSelectedLayers={setSelectedLayers}
                     index={index}
+                    className="custom-multiselect"
                   />
                 )}
               </React.Fragment>

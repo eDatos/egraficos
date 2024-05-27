@@ -51,11 +51,6 @@
                     "loadButton": "Load Data",
                     "clearFieldsButton": "Clear fields"
                 },
-                "wms": {
-                    "name": "From WMS server",
-                    "message": "Enter a web address (URL) from WMS server",
-                    "loadButton": "Load WMS"
-                },
                 "types": {
                     "number": "Number",
                     "string": "String",
@@ -92,11 +87,21 @@
                 "sample8": "Accommodated travelers according to main nationalities and events. Canary Islands. 2022.",
                 "source": "Source"
             },
+            "loadLayers": {
+                "title": "Load layers",
+                "name": "From WMS server",
+                "message": "Enter a web address (URL) of the WMS server you want to work with",
+                "loadWmsButton": "Load WMS",
+                "addWmsButton": "Add WMS"
+            },
             "wmslayerselection": {
-                "title": "Choose layers",
-                "style":  {
-                    "placeholder": "Select style...",
+                "configuration": {
+                    "title": "Layer settings",
+                    "placeholder": "Choose layers"
+                },
+                "style": {
                     "title": "Select style for layer",
+                    "placeholder": "Select styles",
                     "legend": "Show legend",
                     "showlayer": "Show layer name",
                     "hidestyle": "Hide style name"
@@ -184,8 +189,13 @@
                 "tittle": "Customize  your chart"
             },
             "export": {
-                "tittle": "Export or save your graph",
-                "dynamicWidget": "Generate dynamic widget with data loading by url"
+                "graph": {
+                    "tittle": "Export or save your graph",
+                    "dynamicWidget": "Generate dynamic widget with data loading by url"
+                },
+                "map": {
+                    "title": "Export or save your map"
+                }
             },
             "login": {
                 "title": "Login",

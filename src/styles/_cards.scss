@@ -7,3 +7,23 @@
     padding-left: 15px;
   }
 }
+
+.card-header {
+  .title {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  i {
+    cursor: pointer;
+  }
+}
+
+.card-title {
+  .title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: $color-black-80;
+  }
+}

@@ -272,6 +272,27 @@ textarea.form-control {
     background-color: var(--primary-lighter);
   }
 }
+
+.custom-multiselect {
+  .rbt-input-multi {
+    border-color: $color-blue-dark-100;
+    &.focus{
+      border-color: $color-blue-dark-100;
+      box-shadow: none;
+    }
+
+    .rbt-input-wrapper {
+      gap: 5px; //
+
+      .rbt-token {
+        background: $color-blue-10;
+        border-radius: 5px;
+        color: $color-blue-dark-100;
+      }
+    }
+  }
+}
+
 .cursorpointer,
 .cursor-pointer {
   cursor: pointer;

@@ -51,11 +51,6 @@
                     "loadButton": "Carregar dades",
                     "clearFieldsButton": "Esborrar camps"
                 },
-                "wms": {
-                    "name": "Des d'un servidor WMS",
-                    "message": "Introduïu una adreça web (URL) del servidor WMS",
-                    "loadButton": "Carregar WMS"
-                },
                 "types": {
                     "number": "Número",
                     "string": "Corda",
@@ -92,11 +87,21 @@
                 "sample8": "Viatgers allotjats segons principals nacionalitats i esdeveniments. Canàries. 2022.",
                 "source": "Font"
             },
+            "loadLayers": {
+                "title": "Carregar capes",
+                "name": "Des d'un servidor WMS",
+                "message": "Introduïu una adreça web (URL) del servidor WMS amb què voleu treballar",
+                "loadWmsButton": "Carregar WMS",
+                "addWmsButton": "Afegir WMS"
+            },
             "wmslayerselection": {
-                "title": "Seleccioneu capes",
-                "style":  {
-                    "placeholder": "Seleccioneu l'estil...",
+                "configuration": {
+                    "title": "Configuració de capes",
+                    "placeholder": "Seleccioneu capes"
+                },
+                "style": {
                     "title": "Seleccioneu l'estil per a la capa",
+                    "placeholder": "Seleccioneu estils",
                     "legend": "Mostra llegenda",
                     "showlayer": "Mostra nom de capa",
                     "hidestyle": "Oculta nom de l'estil"
@@ -184,8 +189,13 @@
                 "tittle": "Personalitza el teu gràfic"
             },
             "export": {
-                "tittle": "Exporta o desa el teu gràfic",
-                "dynamicWidget": "Generar widget dinàmic amb càrrega de dades per url"
+                "graph": {
+                    "tittle": "Exporta o desa el teu gràfic",
+                    "dynamicWidget": "Generar widget dinàmic amb càrrega de dades per url"
+                },
+                "map": {
+                    "title": "Exporta o desa el teu mapa"
+                }
             },
             "login": {
                 "title": "Accedir",

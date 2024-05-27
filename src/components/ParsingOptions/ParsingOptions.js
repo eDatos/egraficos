@@ -39,21 +39,21 @@ export default function ParsingOptions(props) {
                 <Table bordered hover className={styles.customTable}>
                     <thead>
                         <tr className={styles.headerContainer}>
-                            <th colSpan={4}>{t('separator.title')}</th>
+                            <th colSpan={props.userDataType === 'csv'? 4 : 3}>{t('separator.title')}</th>
                             <th>{t('datatransform.title')}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr className={styles.bodyContainer}>
-                            <td>
-                                {props.userDataType === 'csv' && (
+                            {props.userDataType === 'csv' && (
+                                <td>
                                     <SeparatorSelector
                                         title={t('separator.column.name')}
                                         value={props.separator}
                                         onChange={(nextSeparator) => props.setSeparator(nextSeparator)}
                                     />
-                                )}
-                            </td>
+                                </td>
+                            )}
                             <td>
                                 <ThousandsSeparatorSelector
                                     title={t('separator.thousands.name')}

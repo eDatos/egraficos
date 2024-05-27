@@ -1,10 +1,9 @@
 import React, {useCallback, useState} from 'react';
-import {Col, Row, Form} from 'react-bootstrap';
-import FormSelect from 'react-bootstrap/FormSelect'
-import classNames from 'classnames';
-import S from './UrlFetch.module.scss';
+import { Col, Row, Form, Dropdown } from 'react-bootstrap';
+import { CustomToggle } from '../../CustomDropdown/CustomDropdownToggle';
 import {useTranslation} from 'react-i18next';
 import styles from "../DataLoader.module.scss";
+import classNames from 'classnames';
 
 export async function fetchData(source, acceptHeader = 'text/csv') {
     const response = await fetch(source.url, {
@@ -24,6 +23,7 @@ export default function UrlFetch({
     const [acceptHeader, setAcceptHeader] = useState('text/csv');
     const [loading, setLoading] = useState(false);
     const {t} = useTranslation(['translation']);
+    const options = ['text/csv', 'text/tab-separated-values'];
 
     const fetchUrl = useCallback(
         async (url) => {
@@ -61,28 +61,37 @@ export default function UrlFetch({
             <form onSubmit={handleSubmit} className={[styles.form, "d-flex flex-column py-top-10"].join(' ')}>
                 <Row>
                     <Col xs={3}>
-                    <Form.Select
-                            
-                            value={acceptHeader}
-                            onChange={(event) => setAcceptHeader(event.target.value)}
-                        >
-                            <option key="csv" value="text/csv">
-                                Text/csv
-                            </option>
-                            <option key="tsv" value="text/tab-separated-values">
-                                text/tab-separated-values
-                            </option>
-                            </Form.Select>
+                        <Dropdown className="raw-dropdown">
+                            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components" 
+                                            className={classNames(styles['borderBox'], "d-flex align-items-center justify-content-between form-control")}
+                            >
+                                <span>{acceptHeader}</span>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {Object.values(options).map((option) => {
+                                    return (
+                                        <Dropdown.Item key={option} onClick={() => {
+                                            setAcceptHeader(option)}}>
+                                            {option}
+                                        </Dropdown.Item>
+                                    );
+                                })}
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Col>
                 </Row>
-                <span>Url</span>
-                <input
-                    className={classNames("form-control", styles['borderBox'])}
-                    value={url}
-                    onChange={(e) => {
-                        setUrl(e.target.value);
-                    }}
-                />
+                <Row>
+                    <Col xs={12}>
+                        <Form.Label className={styles['lighter']}>Url</Form.Label>
+                        <input
+                            className={classNames("form-control", styles['borderBox'])}
+                            value={url}
+                            onChange={(e) => {
+                                setUrl(e.target.value);
+                            }}
+                        />
+                    </Col>
+                </Row>
                 <div className="row general-buttons">
                     <button
                         className="text-icon-button btn-thin-first"

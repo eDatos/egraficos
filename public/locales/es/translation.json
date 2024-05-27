@@ -51,11 +51,6 @@
                     "loadButton": "Cargar Datos",
                     "clearFieldsButton": "Limpiar campos"
                 },
-                "wms": {
-                    "name": "Desde un servidor WMS",
-                    "message": "Introduzca una dirección web (URL) del servidor WMS",
-                    "loadButton": "Cargar WMS"
-                },
                 "types": {
                     "number": "Número",
                     "string": "Cadena",
@@ -92,11 +87,21 @@
                 "sample8": "Viajeros alojados según principales nacionalidades y eventos. Canarias. 2022.",
                 "source": "Fuente"
             },
+            "loadLayers": {
+                "title": "Cargar capas",
+                "name": "Desde un servidor WMS",
+                "message": "Introduzca una dirección web (URL) del servidor WMS con el que quiere trabajar",
+                "loadWmsButton": "Cargar WMS",
+                "addWmsButton": "Añadir WMS"
+            },
             "wmslayerselection": {
-                "title": "Seleccione capas",
-                "style":  {
-                    "placeholder": "Selecciona estilo...",
+                "configuration": {
+                    "title": "Configuración de capas",
+                    "placeholder": "Seleccione capas"
+                },
+                "style": {
                     "title": "Selecciona estilo para capa",
+                    "placeholder": "Seleccione estilos",
                     "legend": "Mostrar leyenda",
                     "showlayer": "Mostrar nombre de capa",
                     "hidestyle": "Ocultar nombre de estilo"
@@ -184,8 +189,13 @@
                 "title": "Personaliza tu gráfico"
             },
             "export": {
-                "title": "Exporta o guarda tu gráfico",
-                "dynamicWidget": "Generar widget dinámico con carga de datos por url"
+                "graph": {
+                    "title": "Exporta o guarda tu gráfico",
+                    "dynamicWidget": "Generar widget dinámico con carga de datos por url"
+                },
+                "map": {
+                    "title": "Exporta o guarda tu mapa"
+                }
             },
             "login": {
                 "title": "Acceder",

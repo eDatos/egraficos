@@ -43,7 +43,7 @@ button.text-icon-button, button.menu-text-icon-button {
   }
 
   & > .fa-thin {
-    margin-right: 5px;
+    padding-right: 5px;
   }
 }
 
@@ -86,10 +86,6 @@ button.text-icon-button.btn-thin-first {
     color: $color-green-100;
     background-color: $color-green-25;
     border-color: $color-green-100;
-  }
-
-  i {
-    padding-right: 5px;
   }
 }
 

@@ -382,7 +382,7 @@ function App() {
                                                         </Section>
                                                     )}
                                                     {showExportOptions() && !showWMSMap() && (
-                                                        <Section title={t('global.section.export.title')} number={5}
+                                                        <Section title={t('global.section.export.graph.title')} number={5}
                                                                  loading={loading}>
                                                             <Exporter
                                                                 rawViz={rawViz}
@@ -420,7 +420,9 @@ function App() {
                                                                     hydrateFromProject={importProject}/>
                                                     </Section>
                                                     {showChartSelector() && (
-                                                        <Section title={t('global.section.chartselection.title')}>
+                                                        <Section 
+                                                            title={t('global.section.chartselection.title')}
+                                                            number={2}>
                                                             <ChartSelector
                                                                 availableCharts={charts}
                                                                 currentChart={currentChart}
@@ -432,6 +434,7 @@ function App() {
                                                         <Section
                                                             title={t('global.section.mapping.title')}
                                                             loading={mappingLoading}
+                                                            number={3}
                                                         >
                                                             <DataMapping
                                                                 ref={dataMappingRef}
@@ -443,7 +446,9 @@ function App() {
                                                         </Section>
                                                     )}
                                                     {showChartConfigurator() && (
-                                                        <Section title={t('global.section.customize.title')}>
+                                                        <Section 
+                                                            title={t('global.section.customize.title')}
+                                                            number={4}>
                                                             <ChartPreviewWithOptions
                                                                 chart={currentChart}
                                                                 dataset={data.dataset}
@@ -457,7 +462,9 @@ function App() {
                                                         </Section>
                                                     )}
                                                     {showExportOptions() && !showWMSMap() &&  (
-                                                        <Section title={t('global.section.export.title')}>
+                                                        <Section 
+                                                            title={t('global.section.export.graph.title')}
+                                                            number={5}>
                                                             <Exporter
                                                                 rawViz={rawViz}
                                                                 exportProject={exportProject}
@@ -494,7 +501,9 @@ function App() {
                                                                     hydrateFromProject={importProject}/>
                                                     </Section>
                                                     {showChartSelector() && (
-                                                        <Section title={t('global.section.chartselection.title')}>
+                                                        <Section 
+                                                            title={t('global.section.chartselection.title')}
+                                                            number={2}>
                                                             <ChartSelector
                                                                 availableCharts={charts}
                                                                 currentChart={currentChart}
@@ -505,6 +514,7 @@ function App() {
                                                     {showChartConfigurator() && (
                                                         <Section
                                                             title={t('global.section.mapping.title')}
+                                                            number={3}
                                                             loading={mappingLoading}
                                                         >
                                                             <DataMapping
@@ -517,7 +527,9 @@ function App() {
                                                         </Section>
                                                     )}
                                                     {showChartConfigurator() && (
-                                                        <Section title={t('global.section.customize.title')}>
+                                                        <Section 
+                                                            title={t('global.section.customize.title')}
+                                                            number={4}>
                                                             <ChartPreviewWithOptions
                                                                 chart={currentChart}
                                                                 dataset={data.dataset}
@@ -531,7 +543,9 @@ function App() {
                                                         </Section>
                                                     )}
                                                     {showExportOptions() && !showWMSMap() && (
-                                                        <Section title={t('global.section.export.title')}>
+                                                        <Section 
+                                                            title={t('global.section.export.graph.title')}
+                                                            number={5}>
                                                             <Exporter
                                                                 rawViz={rawViz}
                                                                 exportProject={exportProject}
@@ -558,30 +572,32 @@ function App() {
                         }
                         </Tab>
                         <Tab eventKey="maps" title="Crear Mapas">
-
                             {
                                 <div className="app-sections">
                                     {logged && (
                                         <>
+                                        {showWMSMap() && (
+                                                <Section title={t('global.section.loadLayers.title')}
+                                                    number={1}>
+                                                    <WMSMap
+                                                        sources={dataLoader.dataSource?.sources}
+                                                        setMap={setMap}
+                                                    />
+                                                </Section>
+                                            )}
                                             <Section
-                                                title={t('global.section.loaddata.title')}
+                                                title={ !showWMSMap() ?  t('global.section.loadLayers.title') : ''}
                                                 number={1}
                                                 loading={loading}
                                             >
                                                 <DataLoader {...dataLoader} initialState='WMS'
                                                             hydrateFromProject={importProject}/>
                                             </Section>
-                                            {showWMSMap() && (
-                                                <Section title="WMS Map">
-                                                    <WMSMap
-                                                        sources={dataLoader.dataSource?.sources}
-                                                        setMap={setMap}
-                                                        map={map}
-                                                    />
-                                                </Section>
-                                            )}
+                                            
                                             {showExportOptions() && (
-                                                <Section title={t('global.section.export.title')}>
+                                                <Section 
+                                                    title={t('global.section.export.map.title')}
+                                                    number={2}>
                                                     <Exporter
                                                         rawViz={rawViz}
                                                         exportProject={exportProject}

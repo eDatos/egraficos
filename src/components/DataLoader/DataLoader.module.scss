@@ -125,5 +125,19 @@
     font-size: 14px;
     line-height: 19px;
     color: $color-black-80;
+
+    &.lighter {
+      font-weight: 400;
+    }
+  }
+}
+
+.layer-loaded {
+  margin-top: 20px;
+  background: $color-black-5;
+  padding: 20px 20px 20px 10px;
+  border-radius: 10px;
+  label {
+    font-size: 18px;
   }
 }

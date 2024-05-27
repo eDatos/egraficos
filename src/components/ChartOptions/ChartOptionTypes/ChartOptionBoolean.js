@@ -24,10 +24,10 @@ const ChartOptionBoolean = ({
         <Form className="col-6">
           <Form.Check 
             type="checkbox"
-            disabled={!isEnabled}
             className="d-flex align-items-center custom-control custom-checkbox" 
             id={optionId}>
               <Form.Check.Input
+                disabled={!isEnabled}
                 type="checkbox"
                 checked={!!value}
                 className="custom-control-input"

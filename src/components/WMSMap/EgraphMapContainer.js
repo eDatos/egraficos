@@ -5,6 +5,7 @@ import BingTileLayer from './BingTileLayer';
 import 'leaflet/dist/leaflet.css';
 import Legend from './Legend';
 import { applicationConfig } from '../ApplicationConfig/ApplicationConfig';
+import styles from './WMSMap.module.scss';
 
 export default function EgraphMapContainer(props) {
   const styleMap = { width: '100%', height: '80vh' };
@@ -36,6 +37,7 @@ export default function EgraphMapContainer(props) {
       zoom={props.zoom}
       scrollWheelZoom={false}
       style={styleMap}
+      className={styles['map-border']}
       ref={props.setMap}
     >
       {bingKey && accessToken && (
