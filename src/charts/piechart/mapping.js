@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core';
 import { white } from '../../constants';
 import { legend, toolbox } from '../baseChartOptions';
+import { formatNumber } from '../utils/parseUtils';
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   // define aggregators
@@ -87,22 +88,18 @@ export function getChartOptions(
   const labelValue = (visualOptions, value, percent, locale) => {
     let percentValue =
       (visualOptions.halfDonut ? percent * 2 : percent).toFixed(1) + '%';
-    const valueFormat = Intl.NumberFormat(locale, {
-      notation: visualOptions.valuesFormat,
-    });
+    const valueFormat = formatNumber(value, visualOptions.valuesFormat, locale);
     switch (visualOptions.showValueAndPercentage) {
       case 'both':
-        return `${valueFormat.format(value)}${
-          visualOptions.units
-        } - ${percentValue}`;
+        return `${valueFormat}${visualOptions.units} - ${percentValue}`;
       case 'percentage':
         return percentValue;
       default:
-        return valueFormat.format(value) + visualOptions.units;
+        return valueFormat + visualOptions.units;
     }
   };
 
-  const data = (item, visualOptions) => {
+  const data = (item) => {
     const arcs = Object.entries(item)
       .flatMap(([key, value]) => (value > 0 ? { name: key, value } : []))
       .sort((a, b) => {
@@ -169,7 +166,7 @@ export function getChartOptions(
         focus: 'series',
         blurScope: 'coordinateSystem',
       },
-      data: data(resultMap, visualOptions),
+      data: data(resultMap),
       top: visualOptions.marginTop,
       left: visualOptions.marginLeft,
       right: visualOptions.marginRight,

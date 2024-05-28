@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import uuid from 'react-uuid';
 
 function downloadBlob(url, filename) {
@@ -52,6 +53,7 @@ export default function Exporter({
   const [dynamicLoadWidget, setDynamicLoadWidget] = useState(true);
   const [position, setPosition] = useState(() => map?.getCenter());
   const [mapZoom, setMapZoom] = useState(() => map?.getZoom());
+  const { t } = useTranslation(['translation']);
 
   const handleOnChangeDynamicLoadWidget = () => {
     setDynamicLoadWidget(!dynamicLoadWidget);
@@ -205,7 +207,7 @@ export default function Exporter({
               className="btn btn-primary btn-block raw-btn"
               onClick={downloadViz}
             >
-              Download
+              {t('global.section.export.download')}
             </button>
           </div>
         )}

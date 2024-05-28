@@ -1,16 +1,17 @@
 export function colorDomain(data, mapping) {
-  let domain = '';
+  let names = '';
   if (data && mapping.series?.value?.length > 0) {
-    domain = data
+    names = data
       .flatMap((item) =>
         item[mapping.arcs.value] > 0 ? item[mapping.series.value] : []
       )
       .filter((value, index, self) => self.indexOf(value) === index);
   } else {
-    domain = mapping.arcs.value;
+    names = mapping.arcs.value;
   }
+  const zeroPad = (num, places) => String(num).padStart(places, '0');
   return {
-    domain,
+    domain: names.map((e, index) => `${zeroPad(index + 1, 2)}`),
     type: 'number',
   };
 }

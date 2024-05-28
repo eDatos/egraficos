@@ -28,8 +28,10 @@ export const format = (data, patternFormat, locale, type) => {
         .locale(locale)
         .format(dateParsersPatterns[patternFormat]);
     case 'number':
+      const notation = patternFormat ?? 'standard';
       return new Intl.NumberFormat(locale, {
-        notation: patternFormat ?? 'standard',
+        notation: notation,
+        useGrouping: true,
       }).format(data);
     default:
       return data;

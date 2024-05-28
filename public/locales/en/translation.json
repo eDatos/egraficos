@@ -166,7 +166,8 @@
                 "tittle": "4. Customize"
             },
             "export": {
-                "tittle": "5. Export"
+                "tittle": "5. Export",
+                "download": "Download"
             },
             "login": {
                 "title": "Login",
