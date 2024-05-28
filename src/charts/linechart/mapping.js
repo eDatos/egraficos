@@ -95,7 +95,7 @@ const getYAxis = (visualOptions, name, locale) => {
       rotate: visualOptions.showYaxisLabelsRotate,
       fontSize: visualOptions.showYaxisLabelsFontSize,
       formatter: (value) => {
-        return format(value, visualOptions.yAxisFormat, locale, 'number');
+        return formatNumber(value, visualOptions.yAxisFormat, locale);
       },
     },
   };
