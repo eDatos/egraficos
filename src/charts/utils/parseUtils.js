@@ -29,13 +29,10 @@ export const format = (data, patternFormat, locale, type) => {
         .format(dateParsersPatterns[patternFormat]);
     case 'number':
       const notation = patternFormat ?? 'standard';
-      //Existe un bug con el locale 'es' que no añade separador de miles cuando se trata de 4 dígitos
-      return new Intl.NumberFormat(
-        locale === 'es' && notation === 'standard' ? 'de' : locale,
-        {
-          notation: notation,
-        }
-      ).format(data);
+      return new Intl.NumberFormat(locale, {
+        notation: notation,
+        useGrouping: true,
+      }).format(data);
     default:
       return data;
   }
