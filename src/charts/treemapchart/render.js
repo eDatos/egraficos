@@ -1,10 +1,12 @@
 export function colorDomain(data, mapping) {
   let names = '';
   if (data && mapping.hierarchy?.value && mapping.hierarchy.value?.length > 0) {
+    const sizeDimension = mapping.size?.value[0];
     names = [];
     data.forEach((element) => {
       let value = element[mapping.hierarchy.value[0]];
-      if (names.indexOf(value) === -1) {
+      const size = sizeDimension ? element[sizeDimension] : 1;
+      if (names.indexOf(value) === -1 && size > 0) {
         names.push(value);
       }
     });
