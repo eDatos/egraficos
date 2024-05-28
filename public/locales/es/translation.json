@@ -87,7 +87,7 @@
                 "title": "Seleccione municipio"
             },
             "chartselection": {
-                "title": "2. Seleccione gráfico",
+                "title": "2. Seleccionar gráfico",
                 "barchart": {
                     "title": "Diagrama de barras",
                     "description": "Muestra una dimensión categórica y cantidades relacionadas. Cada barra representa una categoría, el ancho es proporcional a la dimensión cuantitativa.",
@@ -154,7 +154,7 @@
                 }
             },
             "mapping": {
-                "title": "3. Mapeo",
+                "title": "3. Mapear",
                 "chartvariables":{
                     "dimensions": "DIMENSIONES",
                     "variables": "VARIABLES GRÁFICO",
@@ -166,7 +166,8 @@
                 "title": "4. Personalizar"
             },
             "export": {
-                "title": "5. Exportar"
+                "title": "5. Exportar",
+                "download": "Descargar"
             },
             "login": {
                 "title": "Acceder",

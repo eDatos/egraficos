@@ -166,7 +166,8 @@
                 "tittle": "4. Personalitzar"
             },
             "export": {
-                "tittle": "5. Exportar"
+                "tittle": "5. Exportar",
+                "download": "Descarregar"
             },
             "login": {
                 "title": "Accedir",

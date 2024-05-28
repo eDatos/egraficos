@@ -2,6 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import useDebounce from '../../hooks/useDebounce';
 import WarningMessage from '../WarningMessage';
 import ReactEcharts from 'echarts-for-react';
+import * as echarts from 'echarts';
+import LangES from './i18n/LangES';
+import LangESCa from './i18n/LangES-ca';
+
 import { useTranslation } from 'react-i18next';
 
 const ChartPreview = ({
@@ -16,6 +20,8 @@ const ChartPreview = ({
   const domRef = useRef(null);
   const vizOptionsDebounced = useDebounce(visualOptions, 200);
   const { t, i18n } = useTranslation();
+  echarts.registerLocale('es', LangES);
+  echarts.registerLocale('ca', LangESCa);
   useEffect(() => {
     setError(null);
 
@@ -137,7 +143,7 @@ const ChartPreview = ({
           height: visualOptions.height,
           backgroundColor: visualOptions.background,
         }}
-        opts={{ renderer: visualOptions.render }}
+        opts={{ renderer: visualOptions.render, locale: i18n.language }}
       />
     </div>
   );
