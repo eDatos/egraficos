@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Button, Table} from 'react-bootstrap';
+import {Row, Col, Table} from 'react-bootstrap';
 import SeparatorSelector from './SeparatorSelector';
 import ThousandsSeparatorSelector from './ThousandsSeparatorSelector';
 import DecimalsSeparatorSelector from './DecimalsSeparatorSelector';
@@ -7,7 +7,6 @@ import DateLocaleSelector from './DateLocaleSelector';
 import StackSelector from './StackSelector';
 
 import styles from './ParsingOptions.module.scss';
-import {BsArrowRepeat} from 'react-icons/bs';
 import {get} from 'lodash';
 import {fetchData as fetchDataFromUrl} from '../DataLoader/loaders/UrlFetch';
 import {fetchData as fetchDataFromSparql} from '../DataLoader/loaders/SparqlFetch';

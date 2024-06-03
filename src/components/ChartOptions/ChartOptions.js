@@ -1,5 +1,5 @@
 import React, {useCallback, useState, useMemo} from 'react';
-import {Row, Col} from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import {
     getOptionsConfig,
     getContainerOptions,

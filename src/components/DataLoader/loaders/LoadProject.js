@@ -1,5 +1,4 @@
 import React, {useCallback} from 'react';
-import {Button} from 'react-bootstrap';
 import {useDropzone} from 'react-dropzone';
 import classNames from 'classnames';
 import S from './UploadFile.module.scss';

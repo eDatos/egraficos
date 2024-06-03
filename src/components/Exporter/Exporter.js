@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import { Row, Col, Dropdown, Form } from 'react-bootstrap';
+import { Col, Dropdown, Form } from 'react-bootstrap';
 import uuid from 'react-uuid';
 import { CustomToggle } from '../CustomDropdown/CustomDropdownButton';
 import {useTranslation} from "react-i18next";

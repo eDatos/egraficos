@@ -1,9 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { BsClipboard } from 'react-icons/bs';
-import { IoMdCheckmarkCircle } from 'react-icons/io';
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
-import style from './style.module.css';
 import { useTranslation } from 'react-i18next';
 
 export function CopyToClipboardButton({ content }) {

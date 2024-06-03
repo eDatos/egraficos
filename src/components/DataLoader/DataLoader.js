@@ -1,23 +1,11 @@
 import {get} from 'lodash';
 import React, {useCallback, useState} from 'react';
 import {Col, Row} from 'react-bootstrap';
-import {
-    BsArrowCounterclockwise,
-    BsArrowRepeat,
-    BsClipboard,
-    BsCloud,
-    BsFolder,
-    BsGift,
-    BsMap,
-    BsSearch,
-    BsUpload,
-} from 'react-icons/bs';
 import {DATA_LOADER_MODE} from '../../hooks/useDataLoader';
 import DataGrid from '../DataGrid/DataGrid';
 import DataSamples from '../DataSamples/DataSamples';
 import JsonViewer from '../JsonViewer';
 import ParsingOptions from '../ParsingOptions';
-import styles from './DataLoader.module.scss';
 import LoadProject from './loaders/LoadProject';
 import Paste from './loaders/Paste';
 import UploadFile from './loaders/UploadFile';
@@ -84,7 +72,6 @@ function DataLoader({
                     />,
                 ]
             ),
-            icon: BsCloud,
             allowedForReplace: true,
         },
         {
@@ -113,7 +100,6 @@ function DataLoader({
                     />
                 ]
             ),
-            icon: BsClipboard,
             allowedForReplace: true,
         },
         {
@@ -135,7 +121,6 @@ function DataLoader({
                     />,
                 ]
             ),
-            icon: BsCloud,
             disabled: true,
             allowedForReplace: true,
         },
@@ -143,7 +128,6 @@ function DataLoader({
             id: 'WMS',
             name: <Trans i18nKey="global.section.loaddata.wms.name"></Trans>,
             loader: <WMSFetch setDataSource={setDataSource}/>,
-            icon: BsMap,
             allowedForReplace: false,
         },
     ];
