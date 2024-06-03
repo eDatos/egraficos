@@ -1,4 +1,3 @@
-import icon from './barchart.svg';
 import thumbnail from './barchart_thumb.svg';
 
 export const metadata = {

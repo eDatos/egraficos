@@ -1,4 +1,3 @@
-import icon from './halfdonut.svg';
 import thumbnail from './halfdonut_thumb.svg';
 
 export const metadata = {

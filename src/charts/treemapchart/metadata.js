@@ -1,4 +1,3 @@
-import icon from './treemapchart.svg';
 import thumbnail from './treemapchart_thumb.svg';
 
 export const metadata = {

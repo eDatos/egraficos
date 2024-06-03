@@ -1,4 +1,3 @@
-import icon from './piechart.svg';
 import thumbnail from './piechart_thumb.svg';
 
 export const metadata = {

@@ -1,4 +1,3 @@
-import icon from './stackedbarchart.svg';
 import thumbnail from './stackedbarchart_thumb.svg';
 
 export const metadata = {
