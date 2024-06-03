@@ -200,9 +200,9 @@ export default class EDatosFetch extends React.Component {
       })
       .finally(() => this.setState({ loading: false }));
   };
-  handleCleanForm = (event) => {
-    //TODO
-  };
+  /*handleCleanForm = (event) => {
+    //TODO nueva funcionalidad (en siguiente fase)
+  };*/
 
   render() {
     return (
@@ -232,15 +232,15 @@ export default class EDatosFetch extends React.Component {
                 <i className="fa-thin fa-cloud-arrow-up"></i>
                 <span>{t('global.section.loaddata.edatos.loadButton').toUpperCase()}</span>
               </button>
-              <button
+              {/*<button
                 className="text-icon-button btn-thin-cancel"
                 disabled={!this.state.url || !this.state.operationId || this.state.loading}
-                onClick={this.handleCleanForm} type="button"
+                onClick={//TODO this.handleCleanForm} type="button"
                
               >
                 <i className="fa-thin fa-eraser"></i>
                 <span>{t('global.section.loaddata.edatos.clearFieldsButton').toUpperCase()}</span>
-              </button>
+          </button>*/}
             </div>
           </Form>
         )

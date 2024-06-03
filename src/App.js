@@ -622,8 +622,9 @@ function App() {
                                 </div>
                             }
                         </Tab>
-                        <Tab eventKey="widgets" title="Crear Widgets">
-                        </Tab>
+                        {/*<Tab eventKey="widgets" title="Crear Widgets">
+                            //TODO nueva funcionalidad (en siguiente fase)
+                        </Tab>*/}
                     </Tabs>
                     <CustomChartWarnModal
                         toConfirmCustomChart={toConfirmCustomChart}

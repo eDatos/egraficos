@@ -262,21 +262,21 @@ function DataLoader({
                                 <span>{t('global.refreshdata').toUpperCase()}</span>
                             </button>
 
-                            <button className="text-icon-button btn-thin-default" type="button" onClick={() => {
-                                //TODO
+                            {/*<button className="text-icon-button btn-thin-default" type="button" onClick={() => {
+                                //TODO nueva funcionalidad (en siguiente fase)
                             }}>
                                 <i className="fa-thin fa-edit"></i>
                                 <span>{t('global.editdata').toUpperCase()}</span>
-                            </button>
+                            </button>*/}
                             
                             {copyToClipboardButton}
 
-                            <button className="text-icon-button btn-thin-default" type="button" onClick={() => {
-                                //TODO
+                            {/*<button className="text-icon-button btn-thin-default" type="button" onClick={() => {
+                                //TODO nueva funcionalidad (en siguiente fase)
                             }}>
                                 <i className="fa-thin fa-arrow-up-right-and-arrow-down-left-from-center"></i>
                                 <span>{t('global.maximize').toUpperCase()}</span>
-                            </button>
+                            </button>*/}
                         </div>
 
                         <ParsingOptions

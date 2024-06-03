@@ -101,14 +101,14 @@ export default function UrlFetch({
                         <i className="fa-thin fa-cloud-arrow-up"></i>
                         {t('global.section.loaddata.url.loadButton').toUpperCase()}
                     </button>
-                    <button
+                    {/*<button
                         className="text-icon-button btn-thin-cancel"
                         disabled={!url || loading}
-                        type="button"
+                        type="button" onClick={ //TODO nueva funcionalidad (en siguiente fase) }
                     >
                         <i className="fa-thin fa-eraser"></i>
                         {t('global.section.loaddata.url.clearFieldsButton').toUpperCase()}
-                    </button>
+                    </button>*/}
                 </div>
             </form>
         </>

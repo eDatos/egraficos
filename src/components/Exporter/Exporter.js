@@ -263,17 +263,17 @@ export default function Exporter({
                                     <span>{t('global.download').toUpperCase()}</span>
                                 </button>
                             )}
-                            {currentFormat.format === 'widget' && (
+                            {/*currentFormat.format === 'widget' && (
                                 
-                                <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button">
+                                <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button" onClick={//TODO nueva funcionalidad (en siguiente fase)}>
                                 <i className="fa-thin fa-copy"></i>
                                 <span>{t('global.copyclipboard').toUpperCase()}</span>
                               </button>
-                            )}
-                            <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button">
+                            )*/}
+                            {/*<button className="text-icon-button btn-thin-default d-flex align-items-center" type="button" onClick={//TODO nueva funcionalidad (en siguiente fase)}>
                                 <i className="fa-thin fa-save"></i>
                                 <span>{t('global.save').toUpperCase()}</span>
-                            </button>
+                            </button>*/}
                         </div>
                     </Col>
                 )}
