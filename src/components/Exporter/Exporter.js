@@ -13,7 +13,6 @@ import classNames from 'classnames';
 function downloadBlob(url, filename) {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    //const {t, i18n} = useTranslation('translation');
     // Create a new anchor element
     const a = document.createElement('a');
     a.href = url;
