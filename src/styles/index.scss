@@ -200,6 +200,10 @@ h5 {
       color: $color-black-0;
       font-weight: 600;
       border: 2px solid $color-blue-dark-100;
+
+      i::before {
+        font-weight: 600;
+      }
     }
 
    .dropdown-menu {
@@ -227,6 +231,16 @@ h5 {
       border-radius: 3px;
       padding: 3px 3px 3px 5px;
       color: $color-black-100;
+      img{
+        filter: brightness(0.2);
+      }
+    }
+   }
+   i, img {
+    padding-right: 5px;
+    &:before {
+      width: 16px;
+      display: block;
     }
    }
   }
@@ -258,6 +272,11 @@ textarea.form-control {
 .custom-card {
   border-radius: 5px;
   border: 1.004px solid $color-blue-dark-100;
+  color: $color-black-80;
+
+  .image {
+    color: $color-blue-dark-100
+  }
 
   .card-body {
     justify-content: center;
@@ -265,11 +284,14 @@ textarea.form-control {
   }
 
   &:hover {
-    background-color: var(--primary-lighter);
+    background-color: $color-blue-10;
   }
   &.active {
-    border-color: var(--primary);
-    background-color: var(--primary-lighter);
+    background-color: $color-blue-dark-100;
+    color: $color-black-0;
+    .image {
+      color: $color-black-0;
+    }
   }
 }
 
@@ -291,6 +313,26 @@ textarea.form-control {
       }
     }
   }
+  i {
+    color: $color-blue-dark-100;
+  }
+}
+
+.custom-input-select {
+  .rbt-input-main {
+    border-color: $color-blue-dark-100;
+  }
+  i {
+    color: $color-blue-dark-100;
+  }
+}
+
+.input-dropdown-icon {
+  bottom: 0;
+  padding: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .cursorpointer,

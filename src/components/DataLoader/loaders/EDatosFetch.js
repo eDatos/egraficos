@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { applicationConfig } from '../../ApplicationConfig/ApplicationConfig';
-import Paste from "./Paste";
+import { CustomDropdownIcon } from '../../CustomDropdown/CustomDropdownIcon'
 import styles from './../DataLoader.module.scss';
 
 const SelectionCombo = (props) => {
@@ -15,7 +15,9 @@ const SelectionCombo = (props) => {
       onChange={props.onChange}
       options={props.options}
       placeholder={props.placeholder}
-    />
+      className={props.className}>
+        { <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" /> }
+      </Typeahead>
   );
 };
 
@@ -89,6 +91,7 @@ class DataSetTypeahead extends React.Component {
           name="name"
           options={this.state.collection}
           onChange={this.onChange}
+          className="custom-input-select"
         />
       </Form.Group>
     );
@@ -156,6 +159,7 @@ class OperationTypeahead extends React.Component {
           name="name"
           options={this.state.collection}
           onChange={this.onChange}
+          className="custom-input-select"
         />
       </Form.Group>
     );

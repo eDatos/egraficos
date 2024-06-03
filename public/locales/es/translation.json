@@ -195,6 +195,12 @@
                 },
                 "map": {
                     "title": "Exporta o guarda tu mapa"
+                },
+                "formats": {
+                    "title": "Formato",
+                    "edatosgraphs": "Formato edatosgraphs",
+                    "svg": "Formato svg",
+                    "widget": "Formato widget"
                 }
             },
             "login": {

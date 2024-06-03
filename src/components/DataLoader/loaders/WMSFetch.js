@@ -5,6 +5,7 @@ import { Translation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
 import LayersOptionCard from '../../LayersOptionCard/LayersOptionCard';
+import { ResetButton } from './../../ResetButton';
 import styles from './../DataLoader.module.scss';
 
 export default class WMSFetch extends React.Component {
@@ -171,13 +172,7 @@ export default class WMSFetch extends React.Component {
                     
                 </button>
                 {this.state.sources.length > 0 && (
-                  <button
-                    className="text-icon-button btn-thin-cancel"
-                     type="button"
-                  >
-                    <i className="fa-thin fa-arrow-rotate-right"></i>
-                    <span>{t('global.reset').toUpperCase()}</span>
-                  </button>
+                  <ResetButton />
                 )}
               </div>
             </Form>

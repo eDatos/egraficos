@@ -42,7 +42,7 @@ button.text-icon-button, button.menu-text-icon-button {
     display: none;
   }
 
-  & > .fa-thin {
+  & > .fa-thin:not(:last-child) {
     padding-right: 5px;
   }
 }

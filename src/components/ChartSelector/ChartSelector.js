@@ -12,7 +12,7 @@ function ChartSelector({availableCharts, currentChart, setCurrentChart}) {
             <Row>
                 <Col xs={3} className={styles.currentChartContainer}>
                     {currentChart && (
-                        <Card className={styles.currentChart}>
+                        <Card className={classNames(styles.currentChart, "custom-card")}>
                             <Card.Img variant="top" src={currentChart.metadata.thumbnail}/>
                             <Card.Body>
                                 <Card.Title>
@@ -45,7 +45,7 @@ function ChartSelector({availableCharts, currentChart, setCurrentChart}) {
                                             }
                                         )}
                                     >
-                                        <div className={`h-100 py-3 ${styles.thumbnail}`}>
+                                        <div className={`h-100 py-3 image ${styles.thumbnail}`}>
                                             <i className={`fa-thin ${d.metadata.icon}`}></i>
                                         </div>
                                         <Card.Body className="px-3 py-3 d-flex flex-column">
@@ -63,9 +63,6 @@ function ChartSelector({availableCharts, currentChart, setCurrentChart}) {
                                 </Col>
                             );
                         })}
-                        <Col xs={4} className={`p-3`}>
-                        //TODO: quitar?
-                        </Col>
                     </Row>
                 </Col>
             </Row>

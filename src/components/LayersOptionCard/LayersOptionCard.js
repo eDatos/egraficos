@@ -5,6 +5,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Typeahead, TypeaheadInputMulti } from 'react-bootstrap-typeahead';
 import Token from '../WMSMap/Token';
+import { CustomDropdownIcon } from '../CustomDropdown/CustomDropdownIcon';
 import styles from '../DataLoader/DataLoader.module.scss';
 import classNames from 'classnames';
 
@@ -52,8 +53,9 @@ const SelectionLayerCombo = (props) => {
               ))}
             </TypeaheadInputMulti>
           )}
-          selected={props.selectedLayers}
-        />
+          selected={props.selectedLayers}>
+            { <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" /> }
+        </Typeahead>
       </Form.Group>
     </DndProvider>
   );
@@ -96,7 +98,6 @@ const SelectionStyle = ({
         {layer.Title}
       </Form.Label>
       <Typeahead
-        clearButton
         id="select-style"
         labelKey="styleTitle"
         multiple
@@ -105,7 +106,9 @@ const SelectionStyle = ({
         placeholder={t('global.section.wmslayerselection.style.placeholder')}
         selected={styleSelected}
         className={className}
-      />
+      >
+         { <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" /> }
+      </Typeahead>
         <Row className='mt-3'>
           <div className="col d-flex align-items-center">
             <Form.Check

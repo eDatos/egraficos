@@ -113,6 +113,9 @@
 
 .borderBox {
   border: 1px solid $color-blue-dark-100;
+  i {
+    color: $color-blue-dark-100;
+  }
 }
 
 
@@ -141,3 +144,18 @@
     font-size: 18px;
   }
 }
+
+.export-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 5px 20px 0px;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+
+  .file {
+    display: flex;
+    gap: 10px;
+  }
+}
+

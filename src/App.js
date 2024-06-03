@@ -54,6 +54,7 @@ function App() {
     const [activeSubTab, setActiveSubTab] = useState('eDatos');
 
     const handleTabChange = (tab) => {
+        resetDataLoader();
         setActiveSubTab(tab);
     };
 
@@ -86,6 +87,7 @@ function App() {
         dataSource,
         loading,
         hydrateFromSavedProject,
+        resetDataLoader
     } = dataLoader;
 
     /* From here on, we deal with viz state */
@@ -322,7 +324,7 @@ function App() {
                     <Tabs
                         id="tab-menu"
                         activeKey={activeTab}
-                        onSelect={(key) => setActiveTab(key)}
+                        onSelect={(key) => {setActiveTab(key); resetDataLoader();}}
                         className="subsection-tab"
                     >
                         <Tab eventKey="graphs" title="Crear Gráficos">

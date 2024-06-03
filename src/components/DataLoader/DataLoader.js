@@ -31,6 +31,7 @@ import {CopyToClipboardButton} from '../CopyToClipboardButton';
 import {Trans, useTranslation} from 'react-i18next';
 import EDatosFetch from './loaders/EDatosFetch';
 import WMSFetch from './loaders/WMSFetch';
+import { ResetButton } from '../ResetButton';
 
 function DataLoader({
                         userInput,
@@ -231,8 +232,14 @@ function DataLoader({
         window.location.replace(window.location.pathname);
     }, []);
 
+    resetDataLoader={reloadRAW}
+
     const copyToClipboardButton = !!userData ? (
         <CopyToClipboardButton content={tsvFormat(userData)}/>
+    ) : null;
+
+    const resetButton = !!userData ? (
+        <ResetButton />
     ) : null;
 
     return (
@@ -241,10 +248,7 @@ function DataLoader({
                 {userData && (
                     <Col xs={10} lg={12} className='d-flex flex-column py-top-20'>
                         <div className='general-buttons row buttons-container'>
-                            <button className="text-icon-button btn-thin-cancel" type="button" onClick={reloadRAW}>
-                                <i className="fa-thin fa-arrow-rotate-right"></i>
-                                <span>{t('global.reset').toUpperCase()}</span>
-                            </button>
+                            {resetButton}
 
                             <button className="text-icon-button btn-thin-default" type="button" onClick={() => {
                                 setInitialOptionState(dataSource);
@@ -292,23 +296,6 @@ function DataLoader({
                             onDataRefreshed={(rawInput) => setUserInput(rawInput, dataSource)}
                         />
 
-                    </Col>
-                )}
-                {!userData && dataSource?.sources && (
-                    <Col
-                        xs={3}
-                        lg={2}
-                        className="d-flex flex-column justify-content-start pl-3 pr-0 options"
-                    >
-                        <div
-                            className={`w-100 mb-2 d-flex justify-content-center align-items-center ${styles['start-over']} user-select-none cursor-pointer`}
-                            onClick={reloadRAW}
-                        >
-                            <BsArrowRepeat className="mr-2"/>
-                            <h4 className="m-0 d-inline-block">
-                                <Trans i18nKey="global.reset"></Trans>
-                            </h4>
-                        </div>
                     </Col>
                 )}
                 <Col xs={10} lg={12} className="data-loader">

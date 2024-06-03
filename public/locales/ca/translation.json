@@ -195,6 +195,12 @@
                 },
                 "map": {
                     "title": "Exporta o desa el teu mapa"
+                },
+                "formats": {
+                    "title": "Format",
+                    "edatosgraphs": "Format edatosgraphs",
+                    "svg": "Format svg",
+                    "widget": "Format widget"
                 }
             },
             "login": {

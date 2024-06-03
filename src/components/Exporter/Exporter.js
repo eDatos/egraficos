@@ -2,9 +2,11 @@ import React, {useCallback, useEffect, useState} from 'react';
 import { Row, Col, Dropdown, Form } from 'react-bootstrap';
 import uuid from 'react-uuid';
 import { CustomToggle } from '../CustomDropdown/CustomDropdownButton';
-import styles from './Exporter.module.scss';
 import {useTranslation} from "react-i18next";
+import svg from '../../icons/svgicon/iconosvg_blanco.svg';
+import svgSelected from '../../icons/svgicon/iconosvg_azul.svg';
 import {t} from "i18next";
+import styles from '../DataLoader/DataLoader.module.scss';
 import classNames from 'classnames';
 
 
@@ -56,7 +58,7 @@ export default function Exporter({
     );
 
     const [exportFormats, setExportFormats] = useState(['edatosgraphs']);
-    const [currentFormat, setCurrentFormat] = useState('edatosgraphs');
+    const [currentFormat, setCurrentFormat] = useState(null);
     const [currentFile, setCurrentFile] = useState('viz');
     const [dynamicLoadWidget, setDynamicLoadWidget] = useState(true);
     const [position, setPosition] = useState(() => map?.getCenter());
@@ -65,8 +67,8 @@ export default function Exporter({
     const handleOnChangeDynamicLoadWidget = () => {
         setDynamicLoadWidget(!dynamicLoadWidget);
     };
-    const downloadViz = useCallback((currentFormat) => {
-        switch (currentFormat) {
+    const downloadViz = useCallback(() => {
+        switch (currentFormat.format) {
             case 'svg':
                 download(`${currentFile}.svg`, 'svg');
                 break;
@@ -150,17 +152,19 @@ export default function Exporter({
     }
 
     useEffect(() => {
+        const baseExportFormat = [{format: "widget", text: "global.section.export.formats.widget", icon: "fa-code"}]
         if (dataSource.type !== 'wms') {
-            const baseExportFormats = ['edatosgraphs', 'widget'];
+            const baseExportFormats = [...baseExportFormat, 
+                {format: "edatosgraphs", text: "global.section.export.formats.edatosgraphs", icon: "fa-square-poll-vertical"}];
             const newExportFormats =
                 visualOptions.render === 'svg'
-                    ? [...baseExportFormats, 'svg']
+                    ? [...baseExportFormats, 
+                        {format: "svg", text: 'global.section.export.formats.svg', icon: [svg, svgSelected]}]
                     : [...baseExportFormats, 'png'];
             setExportFormats(newExportFormats);
-            setCurrentFormat(newExportFormats[0]);
         } else {
-            setExportFormats(['widget']);
-            setCurrentFormat('widget');
+            setExportFormats(baseExportFormat);
+            setCurrentFormat(baseExportFormat[0]);
         }
     }, [visualOptions.render, dataSource.type]);
 
@@ -182,54 +186,44 @@ export default function Exporter({
     }, [map, onMapMove, onMapZoom]);
 
     return (
-        <>
-            <Row>
-                <Col xs={6} xl={12} className="py-top-20">
-                    <div className={`${styles.exportContent}`}>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={currentFile}
-                            onChange={(e) => setCurrentFile(e.target.value)}
-                        ></input>
-                        <Dropdown className="raw-dropdown button" align="end">
-                            <Dropdown.Toggle as={CustomToggle}
-                                className=" text-icon-button btn-thin-default d-flex align-items-center"
-                            >
-                                {t('global.download').toUpperCase()}
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu align="end">
-                                {exportFormats.map((d) => {
-                                    return (
-                                        <Dropdown.Item 
-                                            as="button" 
-                                            key={d} 
-                                            onClick={() => {
-                                                setCurrentFormat(d);
-                                                downloadViz(d);
-                                            }}>
-                                            Formato {d.toUpperCase()}
-                                        </Dropdown.Item>
-                                    );
-                                })}
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    
-                        {currentFormat !== 'widget' && (
-                            <div>
-                                <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button" onClick={downloadViz}>
-                                    <i className="fa-thin fa-save"></i>
-                                    <span>{t('global.save').toUpperCase()}</span>
-                                </button>
-                            </div>
-                        )}
-                    </div>
+            <div className={classNames(styles['export-content'])}>
+                <Col xl={12} className={styles['file']}>
+                    <input
+                        type="text"
+                        className={classNames(styles['borderBox'], "form-control")}
+                        value={currentFile}
+                        onChange={(e) => setCurrentFile(e.target.value)}
+                    ></input>
+                    <Dropdown className="raw-dropdown button" align="end">
+                        <Dropdown.Toggle as={CustomToggle}
+                            className="text-icon-button btn-thin-default d-flex align-items-center"
+                        >
+                            {currentFormat ? 
+                               currentFormat.format !== 'svg' ? <><i className={classNames(currentFormat.icon, "fa-thin")}></i>{t(currentFormat.text).toUpperCase()}</>
+                               : <><img src={currentFormat.icon[1]}></img>{t(currentFormat.text).toUpperCase()}</>
+                                : t('global.section.export.formats.title').toUpperCase()}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu align="end">
+                            {exportFormats.map((d) => {
+                                return (
+                                    <Dropdown.Item className='d-flex align-items-center'
+                                        as="button" 
+                                        key={d.value} 
+                                        onClick={() => {
+                                            setCurrentFormat(d);
+                                        }}>
+                                            {d.format !== 'svg' ? <i className={classNames(d.icon, "fa-thin")}></i> : <img src={d.icon[0]}></img> }
+                                            <span>{t(d.text).toUpperCase()}</span>
+                                    </Dropdown.Item>
+                                );
+                            })}
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Col>
-            </Row>
-            {currentFormat === 'widget' &&
-                dataSource.url &&
-                dataSource.type !== 'wms' && (
-                    <div className="row">
+
+                {currentFormat?.format === 'widget' &&
+                    dataSource.url &&
+                    dataSource.type !== 'wms' && (
                         <div className="col col-sm-12">
                             <Form.Check
                                 id="dynamicLoadWidget"
@@ -249,19 +243,43 @@ export default function Exporter({
                                 </Form.Check.Label>
                             </Form.Check>
                         </div>
+                )}
+
+                {currentFormat?.format === 'widget' && (
+                    <div className="col cos-sm-12">
+                        <textarea
+                            value={getWidget(dataSource.type !== 'wms' ? 'egraph' : 'wms')}
+                            className="form-control"
+                            readOnly
+                        />
                     </div>
                 )}
-            {currentFormat === 'widget' && (
-                <div className="row">
-                    <div className="col cos-sm-12">
-            <textarea
-                value={getWidget(dataSource.type !== 'wms' ? 'egraph' : 'wms')}
-                className="form-control"
-                readOnly
-            />
-                    </div>
-                </div>
-            )}
-        </>
+
+                {currentFormat  && (
+                    <Col xs={6} xl={12}>
+                        <div className='general-buttons row'>
+                            {currentFormat.format !== 'widget' && (
+                                <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button" onClick={downloadViz}>
+                                    <i className="fa-thin fa-download"></i>
+                                    <span>{t('global.download').toUpperCase()}</span>
+                                </button>
+                            )}
+                            {currentFormat.format === 'widget' && (
+                                
+                                <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button">
+                                <i className="fa-thin fa-copy"></i>
+                                <span>{t('global.copyclipboard').toUpperCase()}</span>
+                              </button>
+                            )}
+                            <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button">
+                                <i className="fa-thin fa-save"></i>
+                                <span>{t('global.save').toUpperCase()}</span>
+                            </button>
+                        </div>
+                    </Col>
+                )}
+
+            </div>
+
     );
 }
