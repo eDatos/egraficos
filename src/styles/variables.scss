@@ -224,8 +224,8 @@ $padding-15px: 15px;
 $padding-20px: 20px;
 
 $container-max-width: 1280px;
-$container-2columns-max-width: calc(1280px / 2 - 3 * #{$padding-10px});
-$empty-td-container-width: calc(1280px-max-widths / 4 + #{$padding-10px});
+$container-2columns-max-width: calc($container-max-width / 2 - 3 * $padding-10px);
+$empty-td-container-width: calc($container-max-width / 4 + $padding-10px);
 $container-max-width-description: calc(2 * ($container-max-width - 2 * $padding-20px) / 3);
 
 $scroll-width-default: 8px;
