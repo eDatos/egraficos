@@ -1,30 +1,31 @@
 {
     "global": {
         "appName": "Mis visualizaciones a medida",
-        "accepts": "Accepta",
+        "accepts": "Acepta",
         "download": "Descargar",
         "save": "Guardar",
         "section": {
             "loaddata": {
                 "title": "Carga tus datos",
                 "tabs" : {
-                    "fromEdatos": "Desde el banco de datos",
-                    "fromFiles": "Desde tus ficheros",
-                    "fromProjects": "Desde tus proyectos"
+                    "createGraphs": {
+                        "title": "Crear gráficos",
+                        "fromEdatos": "Desde el banco de datos",
+                        "fromFiles": "Desde tus ficheros",
+                        "fromProjects": "Desde tus proyectos"
+                    },
+                    "createMaps": {
+                        "title": "Crear mapas"
+                    }
                 },
                 "paste": {
-                    "name": "Pegar datos",
                     "message": "Copie y pegue sus datos de otras aplicaciones o sitios web. Puede usar datos tabulares (TSV, CSV, DSV) o JSON."
                 },
                 "upload": {
-                    "name": "Subir datos",
                     "message": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON."
                 },
                 "sample": {
                     "name": "Probar ejemplos de datos"
-                },
-                "sparql": {
-                    "name" : "Consulta SPARQL"
                 },
                 "url": {
                     "name": "Desde URL",
@@ -33,7 +34,6 @@
                     "clearFieldsButton": "Limpiar campos"
                 },
                 "project": {
-                    "name": "Abrir proyecto",
                     "message": "Cargar un proyecto .edatosgraphs.",
                     "dragAndBrowseFile": "Arrastre un archivo o seleccione un archivo local",
                     "browseFile": "Seleccionar archivo",
@@ -44,7 +44,6 @@
                     "rejected": "Algunos ficheros han sido rechazados"
                 },
                 "edatos": {
-                    "name": "Desde eDatos",
                     "message": "Seleccione operación estadística y cubo",
                     "statisticalOperations": "Selecciona operación estadística",
                     "cubes": "Cubos",
@@ -89,7 +88,6 @@
             },
             "loadLayers": {
                 "title": "Cargar capas",
-                "name": "Desde un servidor WMS",
                 "message": "Introduzca una dirección web (URL) del servidor WMS con el que quiere trabajar",
                 "loadWmsButton": "Cargar WMS",
                 "addWmsButton": "Añadir WMS"

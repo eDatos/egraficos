@@ -8,23 +8,24 @@
             "loaddata": {
                 "title": "Load your data",
                 "tabs" : {
-                    "fromEdatos": "From your data bank",
-                    "fromFiles": "From your files",
-                    "fromProjects": "From your projects"
+                    "createGraphs": {
+                        "title": "Create graphs",
+                        "fromEdatos": "From your data bank",
+                        "fromFiles": "From your files",
+                        "fromProjects": "From your projects"
+                    },
+                    "createMaps": {
+                        "title": "Create maps"
+                    }
                 },
                 "paste": {
-                    "name": "Paste your data",
                     "message": "Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data."
                 },
                 "upload": {
-                    "name": "Upload your data",
                     "message": "You can load tabular (TSV, CSV, DSV) or JSON data."
                 },
                 "sample": {
                     "name": "Try our data samples"
-                },
-                "sparql": {
-                    "name" : "SPARQL query"
                 },
                 "url": {
                     "name": "From URL",
@@ -33,7 +34,6 @@
                     "clearFieldsButton": "Clear fields"
                 },
                 "project": {
-                    "name": "Open your project",
                     "message": "Load a .edatosgraphs project.",
                     "dragAndBrowseFile": "Drag or browse a file here",
                     "browseFile": "Browse a file",
@@ -44,7 +44,6 @@
                     "rejected": "Some files will be rejected"
                 },
                 "edatos": {
-                    "name": "From eDatos",
                     "message": "Select statistical operation and cube",
                     "statisticalOperations": "Statistical operations",
                     "cubes": "Cubes",
@@ -89,7 +88,6 @@
             },
             "loadLayers": {
                 "title": "Load layers",
-                "name": "From WMS server",
                 "message": "Enter a web address (URL) of the WMS server you want to work with",
                 "loadWmsButton": "Load WMS",
                 "addWmsButton": "Add WMS"

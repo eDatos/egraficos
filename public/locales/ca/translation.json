@@ -8,23 +8,24 @@
             "loaddata": {
                 "title": "Carrega les teves dades",
                 "tabs" : {
-                    "fromEdatos": "Des del banc de dades",
-                    "fromFiles": "Des dels teus fitxers",
-                    "fromProjects": "Des dels teus projectes"
+                    "createGraphs": {
+                        "title": "Crear gràfics",
+                        "fromEdatos": "Des del banc de dades",
+                        "fromFiles": "Des dels teus fitxers",
+                        "fromProjects": "Des dels teus projectes"
+                    },
+                    "createMaps": {
+                        "title": "Crear mapes"
+                    }
                 },
                 "paste": {
-                    "name": "Enganxar dades",
                     "message": "Copieu i enganxeu les dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON."
                 },
                 "upload": {
-                    "name": "Pujar dades",
                     "message": "Podeu carregar dades tabulars (TSV, CSV, DSV) o JSON."
                 },
                 "sample": {
                     "name": "Provar exemples de dades"
-                },
-                "sparql": {
-                    "name" : "Consulta SPARQL"
                 },
                 "url": {
                     "name": "Des de URL",
@@ -33,7 +34,6 @@
                     "clearFieldsButton": "Esborrar camps"
                 },
                 "project": {
-                    "name": "Obrir projecte",
                     "messagge": "Carregar un projecte .edatosgraphs.",
                     "dragAndBrowseFile": "Arrossegueu un fitxer o seleccioneu un fitxer local",
                     "browseFile": "Seleccionar arxiu",
@@ -44,7 +44,6 @@
                     "rejected": "Alguns els fitxers han estat rebutjats"
                 },
                 "edatos": {
-                    "name": "Des eDatos",
                     "message": "Seleccioneu operació estadística i cub",
                     "statisticalOperations": "Selecciona operació estadística",
                     "cubes": "Cubs",
@@ -89,7 +88,6 @@
             },
             "loadLayers": {
                 "title": "Carregar capes",
-                "name": "Des d'un servidor WMS",
                 "message": "Introduïu una adreça web (URL) del servidor WMS amb què voleu treballar",
                 "loadWmsButton": "Carregar WMS",
                 "addWmsButton": "Afegir WMS"

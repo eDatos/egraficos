@@ -237,7 +237,7 @@ export default function Exporter({
                                 />
                                 <Form.Check.Label 
                                     className={classNames("custom-control-label")}>
-                                        {t('global.section.export.dynamicWidget')}
+                                        {t('global.section.export.graph.dynamicWidget')}
                                 </Form.Check.Label>
                             </Form.Check>
                         </div>

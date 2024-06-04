@@ -60,7 +60,6 @@ function DataLoader({
     const options = [
         {
             id: 'eDatos',
-            name: <Trans i18nKey="global.section.loaddata.edatos.name"></Trans>,
             loader: ([
                     <EDatosFetch
                         setUserInput={(rawInput, source) => setUserInput(rawInput, source)}
@@ -75,7 +74,6 @@ function DataLoader({
         },
         {
             id: 'files',
-            name: <Trans i18nKey="global.section.loaddata.paste.name"></Trans>,
             loader: ([
                     <Paste
                         userInput={userInput}
@@ -103,7 +101,6 @@ function DataLoader({
         },
         {
             id: 'project',
-            name: <Trans i18nKey="global.section.loaddata.sparql.name"></Trans>,
             loader: 
                     <LoadProject
                         onProjectSelected={hydrateFromProject}
@@ -114,7 +111,6 @@ function DataLoader({
         },
         {
             id: 'WMS',
-            name: <Trans i18nKey="global.section.loaddata.wms.name"></Trans>,
             loader: <WMSFetch setDataSource={setDataSource}/>,
             allowedForReplace: false,
         },

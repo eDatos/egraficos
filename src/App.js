@@ -298,7 +298,7 @@ function App() {
                         onSelect={(key) => {setActiveTab(key); resetDataLoader();}}
                         className="subsection-tab"
                     >
-                        <Tab eventKey="graphs" title="Crear Gráficos">
+                        <Tab eventKey="graphs" title={t('global.section.loaddata.tabs.createGraphs.title')}>
                             {
                             <Tabs
                                 id="sub-navbar-tabs"
@@ -306,7 +306,7 @@ function App() {
                                 onSelect={handleTabChange}
                                 className={classNames("section-tab", {"disabled-section-tab": userData})}
                             >
-                                <Tab eventKey="eDatos" title={t('global.section.loaddata.tabs.fromEdatos')}>
+                                <Tab eventKey="eDatos" title={t('global.section.loaddata.tabs.createGraphs.fromEdatos')}>
                                     {
                                         <div className="app-sections">
                                             {logged && (
@@ -379,7 +379,7 @@ function App() {
                                         </div>
                                     }
                                 </Tab>
-                                <Tab eventKey="files" title={t('global.section.loaddata.tabs.fromFiles')}>
+                                <Tab eventKey="files" title={t('global.section.loaddata.tabs.createGraphs.fromFiles')}>
                                     {
                                         <div className="app-sections">
                                             {logged && (
@@ -460,7 +460,7 @@ function App() {
                                         </div>
                                     }
                                 </Tab>
-                                <Tab eventKey="project" title={t('global.section.loaddata.tabs.fromProjects')}>
+                                <Tab eventKey="project" title={t('global.section.loaddata.tabs.createGraphs.fromProjects')}>
                                     {
                                         <div className="app-sections">
                                             {logged && (
@@ -544,7 +544,7 @@ function App() {
                             </Tabs>
                         }
                         </Tab>
-                        <Tab eventKey="maps" title="Crear Mapas">
+                        <Tab eventKey="maps" title={t('global.section.loaddata.tabs.createMaps.title')}>
                             {
                                 <div className="app-sections">
                                     {logged && (
