@@ -67,8 +67,8 @@ $istac-gray-dark: #434b52;
 
 $navbar-content-height: 30px;
 $navbar-padding-y: 5px;
-// $navbar-height: $navbar-content-height + ($navbar-padding-y) * 2;
-$navbar-height: 42px; // TODO: sincronizar con el navbar de bootstrap
+/* $navbar-height: $navbar-content-height + ($navbar-padding-y) * 2; */
+$navbar-height: 42px; /* TODO: sincronizar con el navbar de bootstrap */
 $nav-link-padding: $navbar-padding-y 1em;
 
 $font-weight-light: 300;
@@ -82,7 +82,7 @@ $nav-shadow: 0 3px 3px $grey-light;
 
 $side-menu-width: 240px;
 
-// Bootstrap
+/* Bootstrap */
 $gray-lightest: $grey-lightest;
 $gray-lighter: $grey-light;
 $gray-light: $grey-medium;
@@ -181,7 +181,7 @@ $input-line-height: 1.25;
 $tooltip-color: $grey-darkest;
 $tooltip-bg: $color-black-0;
 $tooltip-arrow-color: $grey-medium;
-// end bootstrap
+/* end bootstrap */
 $page-padding: 36px;
 $page-padding-left: $page-padding * 2;
 $page-padding-right: $page-padding;

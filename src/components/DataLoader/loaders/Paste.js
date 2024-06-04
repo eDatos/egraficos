@@ -3,7 +3,7 @@ import styles from '../DataLoader.module.scss';
 import {useTranslation} from "react-i18next";
 
 export default function Paste({userInput, setUserInput, setLoadingError}) {
-    const {t, i18n} = useTranslation('translation');
+    const {t} = useTranslation('translation');
 
     return (
         <>

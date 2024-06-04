@@ -34,7 +34,6 @@ import WMSMap from './components/WMSMap/WMSMap';
 import {defaultPalette, grayPalette} from './constants';
 import favicon from './hooks/favicon';
 import {Tab, Tabs} from "react-bootstrap";
-import {FaChartBar, FaCloudUploadAlt, FaMap, FaPalette, FaShareAlt} from "react-icons/fa";
 import classNames from 'classnames';
 
 //Custom colors
@@ -283,34 +282,6 @@ function App() {
     const showExportOptions = useCallback(() => {
         return ((data && rawViz) || map) && dataLoader.dataSource;
     }, [data, rawViz, map, dataLoader.dataSource]);
-
-    const steps = [
-        {
-            title: 'Cargar datos',
-            content: <div>Escoger grafico</div>,
-            icon: <FaCloudUploadAlt/>
-        },
-        {
-            title: 'Escoger gráfico',
-            content: <div>Escoger grafico</div>,
-            icon: <FaChartBar/>
-        },
-        {
-            title: 'Mapear',
-            content: <div>Mapear</div>,
-            icon: <FaMap/>
-        },
-        {
-            title: 'Personalizar',
-            content: <div>Personalizar</div>,
-            icon: <FaPalette/>
-        },
-        {
-            title: 'Exportar',
-            content: <div>Exportar</div>,
-            icon: <FaShareAlt/>
-        }
-    ];
 
     return (
         <div className="app">

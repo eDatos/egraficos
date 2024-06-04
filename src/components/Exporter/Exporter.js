@@ -2,7 +2,6 @@ import React, {useCallback, useEffect, useState} from 'react';
 import { Col, Dropdown, Form } from 'react-bootstrap';
 import uuid from 'react-uuid';
 import { CustomToggle } from '../CustomDropdown/CustomDropdownButton';
-import {useTranslation} from "react-i18next";
 import svg from '../../icons/svgicon/iconosvg_blanco.svg';
 import svgSelected from '../../icons/svgicon/iconosvg_azul.svg';
 import {t} from "i18next";
@@ -199,7 +198,7 @@ export default function Exporter({
                         >
                             {currentFormat ? 
                                currentFormat.format !== 'svg' ? <><i className={classNames(currentFormat.icon, "fa-thin")}></i>{t(currentFormat.text).toUpperCase()}</>
-                               : <><img src={currentFormat.icon[1]}></img>{t(currentFormat.text).toUpperCase()}</>
+                               : <><img alt="" src={currentFormat.icon[1]}></img>{t(currentFormat.text).toUpperCase()}</>
                                 : t('global.section.export.formats.title').toUpperCase()}
                         </Dropdown.Toggle>
                         <Dropdown.Menu align="end">
@@ -211,7 +210,7 @@ export default function Exporter({
                                         onClick={() => {
                                             setCurrentFormat(d);
                                         }}>
-                                            {d.format !== 'svg' ? <i className={classNames(d.icon, "fa-thin")}></i> : <img src={d.icon[0]}></img> }
+                                            {d.format !== 'svg' ? <i className={classNames(d.icon, "fa-thin")}></i> : <img alt="" src={d.icon[0]}></img> }
                                             <span>{t(d.text).toUpperCase()}</span>
                                     </Dropdown.Item>
                                 );
