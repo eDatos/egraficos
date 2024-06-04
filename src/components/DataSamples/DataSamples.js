@@ -25,14 +25,22 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
     setLoadingError(null);
   };
   return (
-      <>
-        <div className={[styles['container-samples']]}>
-          <span className={[styles['title-samples']]}>{t('global.section.loaddata.sample.name')}</span>
-        
+    <>
+      <div className={[styles['container-samples']]}>
+        <span className={[styles['title-samples']]}>
+          {t('global.section.loaddata.sample.name')}
+        </span>
+
         <Row>
           {samplesList.map((d, i) => {
             return (
-              <Col xs={12} lg={4} xl={4} key={i} className={`custom-card-container ${styles['card-sample']}`}>
+              <Col
+                xs={12}
+                lg={4}
+                xl={4}
+                key={i}
+                className={`custom-card-container ${styles['card-sample']}`}
+              >
                 <Card className="custom-card cursor-pointer h-100">
                   <Card.Body
                     onClick={() => {
@@ -45,18 +53,18 @@ export default function DataSamples({ onSampleReady, setLoadingError }) {
                       <span className="m-0">{t(d.category)}</span>
                     </Card.Title>
                     <a
-                    href={d.sourceURL}
-                    className={[styles['dataset-source']].join(' ')}
-                  >
-                    {t('global.section.sampleData.source')}: {d.sourceName}
-                  </a>
+                      href={d.sourceURL}
+                      className={[styles['dataset-source']].join(' ')}
+                    >
+                      {t('global.section.sampleData.source')}: {d.sourceName}
+                    </a>
                   </Card.Body>
                 </Card>
               </Col>
             );
           })}
         </Row>
-        </div>
-      </>
+      </div>
+    </>
   );
 }

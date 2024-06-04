@@ -21,7 +21,8 @@ const ColorSchemesDropDown = ({
 }) => {
   return (
     <Dropdown className="raw-dropdown">
-      <Dropdown.Toggle as={CustomToggle}
+      <Dropdown.Toggle
+        as={CustomToggle}
         className="d-flex align-items-center justify-content-between form-control"
         disabled={!colorDataType}
       >

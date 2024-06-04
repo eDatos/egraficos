@@ -379,14 +379,18 @@ const ChartOptionColorScale = ({
   return hasAnyMapping ? (
     <>
       <div className={props.className}>
-        <Col xs={5} className={classNames(styles['chart-option-label'], "nowrap")}>
+        <Col
+          xs={5}
+          className={classNames(styles['chart-option-label'], 'nowrap')}
+        >
           {t('colorScale')}
         </Col>
         <Col xs={7}>
           <Dropdown className="raw-dropdown">
-          <Dropdown.Toggle as={CustomToggle}
-            className="d-flex align-items-center justify-content-between form-control"
-            disabled={!colorDataType}
+            <Dropdown.Toggle
+              as={CustomToggle}
+              className="d-flex align-items-center justify-content-between form-control"
+              disabled={!colorDataType}
             >
               <span>{get(SCALES_LABELS, scaleType, scaleType)}</span>
             </Dropdown.Toggle>
@@ -408,7 +412,10 @@ const ChartOptionColorScale = ({
 
       {/* Color scheme */}
       <div className={props.className}>
-        <Col xs={5} className={classNames(styles['chart-option-label'], "nowrap")}>
+        <Col
+          xs={5}
+          className={classNames(styles['chart-option-label'], 'nowrap')}
+        >
           {t('colorScheme')}
         </Col>
         <Col xs={7}>
@@ -431,61 +438,61 @@ const ChartOptionColorScale = ({
           {userValues.map((userValue, i) => (
             <div
               key={i}
-              className={[
-                props.className,
-                styles['color-swatch'],
-              ].join(' ')}
+              className={[props.className, styles['color-swatch']].join(' ')}
             >
-              <Col xs={6} className={classNames(styles['color-scale-item'], "d-flex")}>
-               
-                  {scaleType === 'ordinal' &&
-                    get(userValue, 'domain') !== undefined && (
-                      <span
-                        className={classNames(styles['chart-option-label'], "nowrap text-truncate")}
-                        title={userValue.domain && userValue.domain.toString()}
-                      >
-                        {userValue.domain === ''
-                          ? '[empty string]'
-                          : userValue.domain.toString()}
-                      </span>
-                    )}
-                  {scaleType !== 'ordinal' && (
-                    <>
-                      <span className="nowrap">
-                        {i === 0
-                          ? 'Start'
-                          : i === userValues.length - 1
-                          ? 'End'
-                          : 'Middle'}
-                      </span>
-                      <input
-                        disabled={locked}
-                        type={getValueType(userValue.userDomain)}
-                        className="form-control text-field"
-                        value={getDatePickerValue(userValue)}
-                        onChange={(e) => {
-                          if (colorDataType === 'date') {
-                            setUserValueDomain(i, new Date(e.target.value));
-                          } else {
-                            setUserValueDomain(i, e.target.value);
-                          }
-                        }}
-                      ></input>
-                    </>
+              <Col
+                xs={6}
+                className={classNames(styles['color-scale-item'], 'd-flex')}
+              >
+                {scaleType === 'ordinal' &&
+                  get(userValue, 'domain') !== undefined && (
+                    <span
+                      className={classNames(
+                        styles['chart-option-label'],
+                        'nowrap text-truncate'
+                      )}
+                      title={userValue.domain && userValue.domain.toString()}
+                    >
+                      {userValue.domain === ''
+                        ? '[empty string]'
+                        : userValue.domain.toString()}
+                    </span>
                   )}
-                  </Col>
-                  <Col xs={6}>
-                    <InilineColorPicker
-                      color={userValue.userRange}
-                      onChange={(color) => {
-                        setUserValueRange(i, color);
+                {scaleType !== 'ordinal' && (
+                  <>
+                    <span className="nowrap">
+                      {i === 0
+                        ? 'Start'
+                        : i === userValues.length - 1
+                        ? 'End'
+                        : 'Middle'}
+                    </span>
+                    <input
+                      disabled={locked}
+                      type={getValueType(userValue.userDomain)}
+                      className="form-control text-field"
+                      value={getDatePickerValue(userValue)}
+                      onChange={(e) => {
+                        if (colorDataType === 'date') {
+                          setUserValueDomain(i, new Date(e.target.value));
+                        } else {
+                          setUserValueDomain(i, e.target.value);
+                        }
                       }}
-                      presetPalette={presetPalette}
-                    />
-                  </Col>
-                </div>
-              
-          
+                    ></input>
+                  </>
+                )}
+              </Col>
+              <Col xs={6}>
+                <InilineColorPicker
+                  color={userValue.userRange}
+                  onChange={(color) => {
+                    setUserValueRange(i, color);
+                  }}
+                  presetPalette={presetPalette}
+                />
+              </Col>
+            </div>
           ))}
           <Row>
             <Col className="d-flex justify-content-end">

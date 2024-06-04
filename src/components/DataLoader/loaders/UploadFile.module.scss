@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.scss';
 
 .dropzone {
   height: 249px;
@@ -18,7 +18,6 @@
   border: 2px dashed var(--success);
 }
 
-
 .contentWrapper {
   display: flex;
   flex-direction: column;
@@ -32,4 +31,3 @@
     color: $color-black-80;
   }
 }
-

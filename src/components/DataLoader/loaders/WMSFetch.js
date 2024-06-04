@@ -141,21 +141,25 @@ export default class WMSFetch extends React.Component {
       <Translation ns={'translation'}>
         {(t) => (
           <>
-            <Form onSubmit={this.handleSubmit} className={classNames(styles["form"], "d-flex flex-column py-top-20",
-              this.state.sources.length > 0 ? styles['layer-loaded']
-              : ''
-            )}>
+            <Form
+              onSubmit={this.handleSubmit}
+              className={classNames(
+                styles['form'],
+                'd-flex flex-column py-top-20',
+                this.state.sources.length > 0 ? styles['layer-loaded'] : ''
+              )}
+            >
               <Form.Group>
                 <Form.Label>
                   {t('global.section.loadLayers.message')}
                 </Form.Label>
-              <input
-                className={classNames("form-control", styles['borderBox'])}
-                value={this.state.url}
-                onChange={(event) => {
-                  this.setState({ url: event.target.value });
-                }}
-              />
+                <input
+                  className={classNames('form-control', styles['borderBox'])}
+                  value={this.state.url}
+                  onChange={(event) => {
+                    this.setState({ url: event.target.value });
+                  }}
+                />
               </Form.Group>
               <div className="general-buttons row">
                 <button
@@ -165,15 +169,16 @@ export default class WMSFetch extends React.Component {
                 >
                   <i className="fa-thin fa-cloud-arrow-up"></i>
                   <span>
-                    {this.state.sources.length > 0 ? 
-                    t('global.section.loadLayers.addWmsButton').toUpperCase() : 
-                    t('global.section.loadLayers.loadWmsButton').toUpperCase()}
-                  </span> 
-                    
+                    {this.state.sources.length > 0
+                      ? t(
+                          'global.section.loadLayers.addWmsButton'
+                        ).toUpperCase()
+                      : t(
+                          'global.section.loadLayers.loadWmsButton'
+                        ).toUpperCase()}
+                  </span>
                 </button>
-                {this.state.sources.length > 0 && (
-                  <ResetButton />
-                )}
+                {this.state.sources.length > 0 && <ResetButton />}
               </div>
             </Form>
             {this.state.sources.map((source, index) => (

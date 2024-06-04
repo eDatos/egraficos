@@ -22,7 +22,8 @@ const ChartOptionSelect = ({
       </Col>
       <Col xs={6}>
         <Dropdown className="raw-dropdown">
-          <Dropdown.Toggle as={CustomToggle}
+          <Dropdown.Toggle
+            as={CustomToggle}
             className="d-flex align-items-center justify-content-between form-control"
           >
             <span>{t(value) ?? t(defaultValue)}</span>
@@ -30,14 +31,16 @@ const ChartOptionSelect = ({
           <Dropdown.Menu>
             {Object.values(options).map((option) => {
               let key;
-              isObject(option) ? key=option.value : key=option;
+              isObject(option) ? (key = option.value) : (key = option);
               return (
                 <Dropdown.Item
                   key={key}
                   onClick={() => {
                     const stringValue = key;
                     const value =
-                      props.type === 'number' ? Number(stringValue) : stringValue;
+                      props.type === 'number'
+                        ? Number(stringValue)
+                        : stringValue;
                     onChange(value);
                   }}
                 >

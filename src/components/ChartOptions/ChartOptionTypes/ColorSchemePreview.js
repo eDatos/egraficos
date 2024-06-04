@@ -14,7 +14,7 @@ const ColorSchemePreview = ({ label, scale, numSamples = 150 }) => {
     }
   }
   return (
-    <div className= "w-100">
+    <div className="w-100">
       {label && (
         <div style={{ marginBottom: 2 }}>
           {get(COLOR_SCHEMES_LABELS, label, label)}

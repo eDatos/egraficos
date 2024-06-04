@@ -159,7 +159,8 @@ export default function ChartDimensionItem({
       <span className={styles['column-title']}>{columnId}</span>
       {dimension.aggregation && (
         <Dropdown className="d-inline-block ml-2 raw-dropdown">
-          <Dropdown.Toggle as={CustomToggle}
+          <Dropdown.Toggle
+            as={CustomToggle}
             className="d-flex align-items-center btn-white"
           >
             {get(AGGREGATIONS_LABELS, relatedAggregation, relatedAggregation)}
@@ -177,7 +178,7 @@ export default function ChartDimensionItem({
         </Dropdown>
       )}
       <button
-        className={classnames("ml-2", styles['remove-assigned'])}
+        className={classnames('ml-2', styles['remove-assigned'])}
         type="button"
         onClick={() => onDeleteItem(index)}
       >

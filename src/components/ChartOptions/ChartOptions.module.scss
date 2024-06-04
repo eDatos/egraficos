@@ -1,8 +1,8 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .options-group.collapsed > div > .group-header {
   h5 {
-    color:  $color-blue-dark-100;
+    color: $color-blue-dark-100;
   }
 }
 
@@ -19,7 +19,7 @@
   }
   .collapse-button {
     font-size: 14px;
-    color:  $color-black-0;
+    color: $color-black-0;
   }
 
   &.collapsed {
@@ -30,25 +30,21 @@
       color: $color-blue-dark-100;
     }
 
-    &:last-child{
+    &:last-child {
       border-bottom: 0;
-      border-radius: 0  0 5px 5px;
+      border-radius: 0 0 5px 5px;
     }
 
     .group-header {
       border-bottom: 1px solid $color-blue-dark-5;
       background-color: $color-blue-dark-5;
-      
     }
 
     .collapse-button {
-      color:  $color-blue-dark-100;
+      color: $color-blue-dark-100;
     }
 
-    
-
     .group-header {
-      
       &:before {
         display: block;
         width: 100%;
@@ -63,7 +59,7 @@
       }
 
       &:first-child {
-        border-radius: 3px 3px 0 0 !important;  //no está haciendo efecto, pero no sé si es necesario aún
+        border-radius: 3px 3px 0 0 !important; //no está haciendo efecto, pero no sé si es necesario aún
       }
     }
 
@@ -73,7 +69,6 @@
       }
     }
   }
-
 }
 
 .color-scheme-dropdown-item {
@@ -93,35 +88,33 @@
   font-weight: 300;
 }
 
-
 .chart-options {
-  
   .chart-option {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 5px 0;
-    
+
     height: 48px;
     background: $color-blue-dark-5;
     border-bottom: 1px solid $color-blue-5;
 
-    
     input {
       font-size: 10px;
     }
 
     &.color-swatch {
       height: 38px;
-    
+
       .color-scale-item {
         padding-right: 0;
       }
     }
   }
-  
-  .chart-option .chart-option-label, .color-swatches-list .chart-option-label {
+
+  .chart-option .chart-option-label,
+  .color-swatches-list .chart-option-label {
     font-weight: 300;
     font-size: 12px;
     color: $color-blue-dark-100;

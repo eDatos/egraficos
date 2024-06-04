@@ -1,7 +1,7 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .section {
-  padding : 20px 20px 0;
+  padding: 20px 20px 0;
 }
 
 .header {
@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid $color-black-100
+  border: 1px solid $color-black-100;
 }
 
 .circleContent {
@@ -37,7 +37,7 @@
 
 .title {
   color: $color-black-100;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-size: 18px;
   font-weight: 600;
 }

@@ -9,13 +9,13 @@ function WMSMap(props) {
   const zoom = 8;
   return (
     <Row>
-      <Col className='py-top-20'>
+      <Col className="py-top-20">
         <EgraphMapContainer
           center={center}
           zoom={zoom}
           setMap={props.setMap}
           sources={props.sources}
-          />
+        />
       </Col>
     </Row>
   );

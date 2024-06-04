@@ -188,7 +188,11 @@ const ChartDimensionCard = ({
 
   return (
     <Col xs={6} lg={4} xl={4}>
-      <div className={styles['chart-dimension'] + ' user-select-none d-flex flex-column'}>
+      <div
+        className={
+          styles['chart-dimension'] + ' user-select-none d-flex flex-column'
+        }
+      >
         {/* This is the card header */}
         <div
           className={`d-flex flex-row justify-content-between align-items-center ${styles['chart-dimension-header']}`}

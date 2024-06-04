@@ -4,7 +4,7 @@ export const metadata = {
   name: 'global.section.chartselection.stackedbarchart.title',
   id: 'stackedbar',
   thumbnail,
-  icon: "fa-chart-candlestick",
+  icon: 'fa-chart-candlestick',
   categories: ['categories.correlations', 'categories.proportions'],
   description: 'global.section.chartselection.stackedbarchart.description',
   code: '',

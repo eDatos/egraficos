@@ -20,7 +20,8 @@ div.row-large > button.text-icon-button-dialog {
   margin-right: 0;
 }
 
-button.text-icon-button, button.menu-text-icon-button {
+button.text-icon-button,
+button.menu-text-icon-button {
   padding: 0 $padding-10px;
   height: 30px;
   border: 1px solid $color-blue-dark-100;
@@ -62,7 +63,8 @@ button.text-icon-button.btn-thin-default {
   color: $color-blue-dark-100;
   border-color: $color-blue-dark-100;
 
-  &:hover, &:not(:disabled):not(.disabled):active {
+  &:hover,
+  &:not(:disabled):not(.disabled):active {
     color: $color-blue-dark-100;
     background-color: $color-blue-25;
     border-color: $color-blue-dark-100;
@@ -82,7 +84,8 @@ button.text-icon-button.btn-thin-first {
   color: $color-green-100;
   border-color: $color-green-100;
 
-  &:hover, &:not(:disabled):not(.disabled):active {
+  &:hover,
+  &:not(:disabled):not(.disabled):active {
     color: $color-green-100;
     background-color: $color-green-25;
     border-color: $color-green-100;
@@ -100,7 +103,8 @@ button.text-icon-button.btn-thin-cancel {
   color: $color-red-100;
   border-color: $color-red-100;
 
-  &:hover, &:not(:disabled):not(.disabled):active {
+  &:hover,
+  &:not(:disabled):not(.disabled):active {
     color: $color-red-100;
     background-color: $color-red-25;
     border-color: $color-red-100;
@@ -124,7 +128,8 @@ button.btn.btn-first {
   background-color: $color-green-100;
   border-color: $color-green-100;
 
-  &:hover, &:not(:disabled):not(.disabled):active {
+  &:hover,
+  &:not(:disabled):not(.disabled):active {
     color: $color-black-0;
     background-color: $color-green-50;
     border-color: $color-green-50;
@@ -136,7 +141,8 @@ button.btn.btn-scnd {
   background-color: $color-blue-dark-100;
   border-color: $color-blue-dark-100;
 
-  &:hover, &:not(:disabled):not(.disabled):active {
+  &:hover,
+  &:not(:disabled):not(.disabled):active {
     color: $color-black-0;
     background-color: $color-blue-dark-50;
     border-color: $color-blue-dark-50;
@@ -148,7 +154,8 @@ button.btn.btn-cancel {
   background-color: $color-red-100;
   border-color: $color-red-100;
 
-  &:hover, &:not(:disabled):not(.disabled):active {
+  &:hover,
+  &:not(:disabled):not(.disabled):active {
     color: $color-black-0;
     background-color: $color-red-50;
     border-color: $color-red-50;
@@ -160,7 +167,9 @@ div.general-buttons.row.modal-buttons {
   padding-right: 0;
 }
 
-.btn-scnd:focus, .captcha-button:focus, .btn-scnd.focus {
+.btn-scnd:focus,
+.captcha-button:focus,
+.btn-scnd.focus {
   background-color: $color-blue-dark-50;
   border-color: $color-blue-dark-50;
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
@@ -171,7 +180,8 @@ button.btn-scnd:disabled {
   border-color: $color-black-40 !important;
 }
 
-button.btn.btn-link, button.btn-default {
+button.btn.btn-link,
+button.btn-default {
   padding-right: 0;
   font-weight: unset;
   font-size: $size-12;
@@ -191,7 +201,6 @@ a.btn.btn-link {
   font-size: $size-14;
   padding-left: 5px;
   padding-bottom: 13px;
-
 }
 
 .calendar {
@@ -228,7 +237,9 @@ a.btn.btn-link {
     }
   }
 
-  button.ui-button:enabled:active, button.ui-button:enabled:hover, button.ui-button:enabled:focus {
+  button.ui-button:enabled:active,
+  button.ui-button:enabled:hover,
+  button.ui-button:enabled:focus {
     background-color: transparent;
     border-color: transparent;
     box-shadow: 0 0 0.1rem rgba(0, 0, 0, 1);
@@ -239,11 +250,15 @@ a.btn.btn-link {
   }
 }
 
-span.pi-search, body .ui-tree .ui-tree-filter-container .ui-tree-filter-icon {
+span.pi-search,
+body .ui-tree .ui-tree-filter-container .ui-tree-filter-icon {
   color: $color-blue-dark-50;
 }
 
-.fa-folder-plus:before, .fa-folder-minus:before, .fa-cubes:before, .pi.pi-caret-down:before, {
+.fa-folder-plus:before,
+.fa-folder-minus:before,
+.fa-cubes:before,
+.pi.pi-caret-down:before {
   color: $color-blue-dark-100;
   font-size: 20px;
   display: flex;
@@ -261,10 +276,13 @@ span.pi-search, body .ui-tree .ui-tree-filter-container .ui-tree-filter-icon {
   color: $color-blue-dark-100;
 }
 
-
 .app {
-
-  .ui-tree .ui-tree-container .ui-treenode .ui-treenode-content .ui-chkbox .ui-chkbox-icon {
+  .ui-tree
+    .ui-tree-container
+    .ui-treenode
+    .ui-treenode-content
+    .ui-chkbox
+    .ui-chkbox-icon {
     margin: 0;
     font-size: 19px;
     border-radius: 2px;
@@ -315,17 +333,12 @@ span.pi-search, body .ui-tree .ui-tree-filter-container .ui-tree-filter-icon {
     background-color: $color-black-0;
   }
 
-
   body .ui-inputtext-focus {
     border-color: $color-black-0;
   }
-
 
   .btn-scnd:focus {
     background-color: $color-blue-dark-100;
     border-color: $color-blue-dark-100;
   }
 }
-
-
-

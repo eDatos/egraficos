@@ -4,7 +4,6 @@ import InilineColorPicker from '../../InlineColorPicker';
 import ChartOptionSelect from './ChartOptionSelect';
 import styles from '../ChartOptions.module.scss';
 
-
 const ChartOptionColor = ({
   value,
   error,
@@ -29,7 +28,6 @@ const ChartOptionColor = ({
 
   return (
     <div className={props.className}>
-
       <Col xs={6} className={styles['chart-option-label']}>
         {label}
       </Col>

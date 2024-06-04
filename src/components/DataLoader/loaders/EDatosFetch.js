@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { applicationConfig } from '../../ApplicationConfig/ApplicationConfig';
-import { CustomDropdownIcon } from '../../CustomDropdown/CustomDropdownIcon'
+import { CustomDropdownIcon } from '../../CustomDropdown/CustomDropdownIcon';
 import styles from './../DataLoader.module.scss';
 
 const SelectionCombo = (props) => {
@@ -15,9 +15,12 @@ const SelectionCombo = (props) => {
       onChange={props.onChange}
       options={props.options}
       placeholder={props.placeholder}
-      className={props.className}>
-        { <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" /> }
-      </Typeahead>
+      className={props.className}
+    >
+      {
+        <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" />
+      }
+    </Typeahead>
   );
 };
 
@@ -208,8 +211,11 @@ export default class EDatosFetch extends React.Component {
     return (
       <Translation ns={'translation'}>
         {(t, { i18n }) => (
-          <Form onSubmit={this.handleSubmit} className={[styles.form, "d-flex flex-column py-top-20"].join(' ')}
-          ref={ form => this.messageForm = form }>
+          <Form
+            onSubmit={this.handleSubmit}
+            className={[styles.form, 'd-flex flex-column py-top-20'].join(' ')}
+            ref={(form) => (this.messageForm = form)}
+          >
             <OperationTypeahead
               handleOnChangeOperation={this.handleOnChangeOperation}
               t={t}
@@ -226,11 +232,17 @@ export default class EDatosFetch extends React.Component {
             <div class="general-buttons row">
               <button
                 className="text-icon-button btn-thin-first"
-                disabled={!this.state.url || !this.state.operationId || this.state.loading}
+                disabled={
+                  !this.state.url ||
+                  !this.state.operationId ||
+                  this.state.loading
+                }
                 type="submit"
               >
                 <i className="fa-thin fa-cloud-arrow-up"></i>
-                <span>{t('global.section.loaddata.edatos.loadButton').toUpperCase()}</span>
+                <span>
+                  {t('global.section.loaddata.edatos.loadButton').toUpperCase()}
+                </span>
               </button>
               {/*<button
                 className="text-icon-button btn-thin-cancel"
@@ -243,8 +255,7 @@ export default class EDatosFetch extends React.Component {
           </button>*/}
             </div>
           </Form>
-        )
-        }
+        )}
       </Translation>
     );
   }

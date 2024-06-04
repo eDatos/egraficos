@@ -1,7 +1,6 @@
 @import '../../styles/variables';
 
 div.card-sample {
-
   h2 {
     font-size: 12px;
     font-weight: $font-weight-400;
@@ -9,7 +8,8 @@ div.card-sample {
     letter-spacing: -0.24px;
     color: $color-black-80;
   }
-  span, a {
+  span,
+  a {
     font-size: 10px;
     font-weight: $font-weight-300;
     line-height: 14.061px;
@@ -20,15 +20,13 @@ div.card-sample {
   }
 }
 
-div.container-samples{
+div.container-samples {
   padding-top: $padding-20px;
   font-family: $font-family-sans-serif;
   color: $color-black-80;
 
-  span.title-samples{
+  span.title-samples {
     font-size: 14px;
     font-weight: $font-weight-600;
   }
-
 }
-
