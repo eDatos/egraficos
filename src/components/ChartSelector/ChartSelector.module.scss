@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .thumbnail {
   color: $color-blue-dark-100;
@@ -22,7 +22,6 @@
   filter: grayscale(1);
 }
 
-
 .currentChart {
   border-radius: 3px;
   border: 1px solid $color-blue-dark-100;
@@ -34,12 +33,12 @@ span.chartTitle {
   color: $color-black-80;
 }
 
-.chartText, h4 {
+.chartText,
+h4 {
   font-size: $size-12;
   font-weight: 300;
   color: $color-black-80;
 }
-
 
 .custom-card .card-body {
   gap: 5px;

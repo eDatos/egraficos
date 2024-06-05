@@ -1,41 +1,39 @@
 @import '../variables.scss';
 //input
-$input-font-size:               0.75rem; // 12px
-$input-padding-y:               0.438rem; // 7px
-$input-padding-x:               0.438rem; // 7px
-$input-height:                  30px;
+$input-font-size: 0.75rem; // 12px
+$input-padding-y: 0.438rem; // 7px
+$input-padding-x: 0.438rem; // 7px
+$input-height: 30px;
 
-$input-border-color:            $color-black-60;
-$input-border-width:            1px;
-$input-border-radius:           5px;
-$input-color:                   $color-black-60;
-$input-placeholder-color:       $color-black-40;
-$input-focus-border-color:      none;
-$input-focus-box-shadow:        none;
-$link-hover-decoration:         none;
+$input-border-color: $color-black-60;
+$input-border-width: 1px;
+$input-border-radius: 5px;
+$input-color: $color-black-60;
+$input-placeholder-color: $color-black-40;
+$input-focus-border-color: none;
+$input-focus-box-shadow: none;
+$link-hover-decoration: none;
 
-$input-disabled-bg:             $color-black-5;
-
+$input-disabled-bg: $color-black-5;
 
 //custom-checkbox
-$custom-checkbox-indicator-border-radius:           4px;
-$custom-control-indicator-checked-border-color:     $color-black-60;
-$custom-checkbox-indicator-indeterminate-bg:        $color-black-0;
-$custom-control-indicator-border-color:             $color-black-60;
-$custom-control-indicator-checked-color:            $color-blue-dark-100;
-$custom-control-indicator-checked-bg:               $color-black-0;
-$custom-control-indicator-active-bg:                $color-black-0;
-$custom-control-indicator-active-border-color:      $color-black-60;
-$custom-control-label-disabled-color:               $color-black-40;
+$custom-checkbox-indicator-border-radius: 4px;
+$custom-control-indicator-checked-border-color: $color-black-60;
+$custom-checkbox-indicator-indeterminate-bg: $color-black-0;
+$custom-control-indicator-border-color: $color-black-60;
+$custom-control-indicator-checked-color: $color-blue-dark-100;
+$custom-control-indicator-checked-bg: $color-black-0;
+$custom-control-indicator-active-bg: $color-black-0;
+$custom-control-indicator-active-border-color: $color-black-60;
+$custom-control-label-disabled-color: $color-black-40;
 
 //cards
-$card-border-radius:            10px;
-$card-inner-border-radius:      8px;
-$card-cap-bg:                   $color-blue-dark-100;
-$card-cap-color:                $color-black-0;
-$card-spacer-y:                 5px;
-$card-spacer-x:                 10px;
-
+$card-border-radius: 10px;
+$card-inner-border-radius: 8px;
+$card-cap-bg: $color-blue-dark-100;
+$card-cap-color: $color-black-0;
+$card-spacer-y: 5px;
+$card-spacer-x: 10px;
 
 // Boostrap scss
 @import '~bootstrap/scss/bootstrap';
