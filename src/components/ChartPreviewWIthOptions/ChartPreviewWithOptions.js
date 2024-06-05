@@ -68,7 +68,7 @@ const ChartPreviewWithOptions = ({
           error={error}
         />
       </Col>
-      <Col xs={8} xl={9} className="py-top-20">
+      <Col xs={8} xl={9} className="py-top-20 px-left-20">
         <ChartPreview
           chart={chart}
           dataset={dataset}

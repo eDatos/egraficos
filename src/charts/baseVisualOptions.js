@@ -7,7 +7,7 @@ export const baseVisualOptions = {
   },
   width: {
     type: 'number',
-    default: 1000,
+    default: 900,
     container: 'width',
     group: 'artboard',
   },
