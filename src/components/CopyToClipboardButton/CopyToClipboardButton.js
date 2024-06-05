@@ -1,9 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { BsClipboard } from 'react-icons/bs';
-import { IoMdCheckmarkCircle } from 'react-icons/io';
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
-import style from './style.module.css';
 import { useTranslation } from 'react-i18next';
 
 export function CopyToClipboardButton({ content }) {
@@ -22,26 +18,22 @@ export function CopyToClipboardButton({ content }) {
   const { t } = useTranslation();
 
   return (
-    <Button
-      variant="light"
-      className={
-        style['copy-to-clipboard-button'] +
-        ' d-flex flex-row align-items-center'
-      }
-      onClick={handleCopy}
-    >
-      {pending && (
-        <>
-          <IoMdCheckmarkCircle className="text-success" />
-          <span className="ml-2">{t('global.copiedclipboard')}</span>
-        </>
-      )}
-      {!pending && (
-        <>
-          <BsClipboard />
-          <span className="ml-2">{t('global.copyclipboard')}</span>
-        </>
-      )}
-    </Button>
+    <div className="" onClick={handleCopy}>
+      <button
+        className={
+          pending
+            ? 'text-icon-button btn-thin-default text-success'
+            : 'text-icon-button btn-thin-default'
+        }
+        type="button"
+      >
+        <i className="fa-thin fa-copy"></i>
+        <span>
+          {pending
+            ? t('global.copiedclipboard').toUpperCase()
+            : t('global.copyclipboard').toUpperCase()}
+        </span>
+      </button>
+    </div>
   );
 }

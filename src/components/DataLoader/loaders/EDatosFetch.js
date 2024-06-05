@@ -4,6 +4,8 @@ import { Form } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { applicationConfig } from '../../ApplicationConfig/ApplicationConfig';
+import { CustomDropdownIcon } from '../../CustomDropdown/CustomDropdownIcon';
+import styles from './../DataLoader.module.scss';
 
 const SelectionCombo = (props) => {
   return (
@@ -13,7 +15,12 @@ const SelectionCombo = (props) => {
       onChange={props.onChange}
       options={props.options}
       placeholder={props.placeholder}
-    />
+      className={props.className}
+    >
+      {
+        <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" />
+      }
+    </Typeahead>
   );
 };
 
@@ -87,6 +94,7 @@ class DataSetTypeahead extends React.Component {
           name="name"
           options={this.state.collection}
           onChange={this.onChange}
+          className="custom-input-select"
         />
       </Form.Group>
     );
@@ -145,7 +153,7 @@ class OperationTypeahead extends React.Component {
   };
   render() {
     return (
-      <Form.Group>
+      <Form.Group controlId="operacion">
         <Form.Label>
           {this.props.t('global.section.loaddata.edatos.statisticalOperations')}
         </Form.Label>
@@ -154,6 +162,7 @@ class OperationTypeahead extends React.Component {
           name="name"
           options={this.state.collection}
           onChange={this.onChange}
+          className="custom-input-select"
         />
       </Form.Group>
     );
@@ -194,12 +203,19 @@ export default class EDatosFetch extends React.Component {
       })
       .finally(() => this.setState({ loading: false }));
   };
+  /*handleCleanForm = (event) => {
+    //TODO nueva funcionalidad (en siguiente fase)
+  };*/
 
   render() {
     return (
       <Translation ns={'translation'}>
         {(t, { i18n }) => (
-          <Form onSubmit={this.handleSubmit}>
+          <Form
+            onSubmit={this.handleSubmit}
+            className={[styles.form, 'd-flex flex-column py-top-20'].join(' ')}
+            ref={(form) => (this.messageForm = form)}
+          >
             <OperationTypeahead
               handleOnChangeOperation={this.handleOnChangeOperation}
               t={t}
@@ -213,14 +229,30 @@ export default class EDatosFetch extends React.Component {
                 language={i18n.language}
               />
             )}
-            <div className="text-right">
+            <div class="general-buttons row">
               <button
-                className="btn btn-sm btn-success mt-3"
-                disabled={!this.state.url || this.state.loading}
+                className="text-icon-button btn-thin-first"
+                disabled={
+                  !this.state.url ||
+                  !this.state.operationId ||
+                  this.state.loading
+                }
                 type="submit"
               >
-                {t('global.section.loaddata.edatos.loadButton')}
+                <i className="fa-thin fa-cloud-arrow-up"></i>
+                <span>
+                  {t('global.section.loaddata.edatos.loadButton').toUpperCase()}
+                </span>
               </button>
+              {/*<button
+                className="text-icon-button btn-thin-cancel"
+                disabled={!this.state.url || !this.state.operationId || this.state.loading}
+                onClick={//TODO this.handleCleanForm} type="button"
+               
+              >
+                <i className="fa-thin fa-eraser"></i>
+                <span>{t('global.section.loaddata.edatos.clearFieldsButton').toUpperCase()}</span>
+          </button>*/}
             </div>
           </Form>
         )}

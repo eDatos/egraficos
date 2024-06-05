@@ -15,6 +15,8 @@ import uniqueId from 'lodash/uniqueId';
 import arrayInsert from 'array-insert';
 import { getDefaultDimensionAggregation } from '@rawgraphs/rawgraphs-core';
 import { useTranslation } from 'react-i18next';
+import styles from './DataMapping.module.scss';
+import classNames from 'classnames';
 
 function removeIndex(mapping, i) {
   let nextConfig;
@@ -174,26 +176,31 @@ function DataMapping({ dataTypes, dimensions, mapping, setMapping }, ref) {
     <DndProvider backend={HTML5Backend}>
       <Row>
         <Col xs={3}>
-          <h5 className="text-uppercase">
-            {t('global.section.mapping.chartvariables.dimensions')}
-          </h5>
-          {map(dataTypes, (dataType, columnName) => {
-            return (
-              <ColumnCard
-                key={columnName}
-                dimensionName={columnName}
-                dimensionType={dataType}
-                commitLocalMapping={commitLocalMapping}
-                rollbackLocalMapping={rollbackLocalMapping}
-              />
-            );
-          })}
+          <div className={classNames(styles.cardChartContent, 'py-top-20')}>
+            <div
+              className={classNames(styles['column-card'], styles['header'])}
+            >
+              <span>
+                {t(
+                  'global.section.mapping.chartvariables.dimensions'
+                ).toUpperCase()}
+              </span>
+            </div>
+            {map(dataTypes, (dataType, columnName) => {
+              return (
+                <ColumnCard
+                  key={columnName}
+                  dimensionName={columnName}
+                  dimensionType={dataType}
+                  commitLocalMapping={commitLocalMapping}
+                  rollbackLocalMapping={rollbackLocalMapping}
+                />
+              );
+            })}
+          </div>
         </Col>
-        <Col>
-          <h5 className="text-uppercase">
-            {t('global.section.mapping.chartvariables.variables')}
-          </h5>
-          <Row style={{ top: 'calc(var(--header-height) + 16px)' }}>
+        <Col className="py-top-20">
+          <Row>
             {dimensions.map((d) => {
               return (
                 <ChartDimensionCard

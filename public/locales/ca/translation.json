@@ -1,32 +1,42 @@
 {
     "global": {
-        "appName": "Sistema de gràfics a mida",
+        "appName": "Les meves visualitzacions a mida",
         "accepts": "Accepta",
+        "download": "Descarregar",
+        "save": "Guardar",
         "section": {
             "loaddata": {
-                "title": "1. Carregar dades",
+                "title": "Carrega les teves dades",
+                "tabs" : {
+                    "createGraphs": {
+                        "title": "Crear gràfics",
+                        "fromEdatos": "Des del banc de dades",
+                        "fromFiles": "Des dels teus fitxers",
+                        "fromProjects": "Des dels teus projectes"
+                    },
+                    "createMaps": {
+                        "title": "Crear mapes"
+                    }
+                },
                 "paste": {
-                    "name": "Enganxar dades",
                     "message": "Copieu i enganxeu les dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON."
                 },
                 "upload": {
-                    "name": "Pujar dades",
                     "message": "Podeu carregar dades tabulars (TSV, CSV, DSV) o JSON."
                 },
                 "sample": {
-                    "name": "Provar exemples dades"
-                },
-                "sparql": {
-                    "name" : "Consulta SPARQL"
+                    "name": "Provar exemples de dades"
                 },
                 "url": {
                     "name": "Des de URL",
                     "message": "Introduïu una adreça web (URL) que apunti a les dades (per exemple, un fitxer públic de Dropbox, una API pública, ...). Assegureu-vos que el servidor té CORS habilitat.",
-                    "loadButton": "Carregar dades"
+                    "loadButton": "Carregar dades",
+                    "clearFieldsButton": "Esborrar camps"
                 },
                 "project": {
-                    "name": "Obrir projecte",
                     "messagge": "Carregar un projecte .edatosgraphs.",
+                    "dragAndBrowseFile": "Arrossegueu un fitxer o seleccioneu un fitxer local",
+                    "browseFile": "Seleccionar arxiu",
                     "drag": "Arrossegueu un fitxer o",
                     "browse": "Seleccioneu",
                     "file": "un fitxer local",
@@ -34,16 +44,11 @@
                     "rejected": "Alguns els fitxers han estat rebutjats"
                 },
                 "edatos": {
-                    "name": "Des eDatos",
                     "message": "Seleccioneu operació estadística i cub",
+                    "statisticalOperations": "Selecciona operació estadística",
+                    "cubes": "Cubs",
                     "loadButton": "Carregar dades",
-                    "statisticalOperations": "Operacions estadístiques",
-                    "cubes": "Cubs"
-                },
-                "wms": {
-                    "name": "Des d'un servidor WMS",
-                    "message": "Introduïu una adreça web (URL) del servidor WMS",
-                    "loadButton": "Carregar WMS"
+                    "clearFieldsButton": "Esborrar camps"
                 },
                 "types": {
                     "number": "Número",
@@ -60,6 +65,14 @@
                     "remaining": "La resta de",
                     "look": "reviseu",
                     "fine": "bé"
+                },
+                "options": {
+                    "1": "OPCIÓ 1",
+                    "label1": "Copia i enganxa les teves dades d'altres aplicacions o llocs web. Podeu utilitzar dades tabulars (TSV, CSV, DSV) o JSON.",
+                    "2": "OPCIÓ 2",
+                    "label2": "Pot carregar dades tabulars (TSV, CSV, DSV) o JSON.",
+                    "3": "OPCIÓ 3",
+                    "label3": "Introdueix una adreça web (URL) que apunta a les dades (per exemple, un fitxer Dropbox públic, una API pública, ...).\nAssegureu-vos que el servidor té CORS activat."
                 }
             },
             "sampleData" : {
@@ -73,11 +86,20 @@
                 "sample8": "Viatgers allotjats segons principals nacionalitats i esdeveniments. Canàries. 2022.",
                 "source": "Font"
             },
+            "loadLayers": {
+                "title": "Carregar capes",
+                "message": "Introduïu una adreça web (URL) del servidor WMS amb què voleu treballar",
+                "loadWmsButton": "Carregar WMS",
+                "addWmsButton": "Afegir WMS"
+            },
             "wmslayerselection": {
-                "title": "Seleccioneu capes",
-                "style":  {
-                    "placeholder": "Seleccioneu l'estil...",
+                "configuration": {
+                    "title": "Configuració de capes",
+                    "placeholder": "Seleccioneu capes"
+                },
+                "style": {
                     "title": "Seleccioneu l'estil per a la capa",
+                    "placeholder": "Seleccioneu estils",
                     "legend": "Mostra llegenda",
                     "showlayer": "Mostra nom de capa",
                     "hidestyle": "Oculta nom de l'estil"
@@ -87,7 +109,7 @@
                 "title": "Seleccioneu municipi"
             },
             "chartselection": {
-                "title": "2. Seleccioneu gràfic",
+                "title": "Selecciona el gràfic que necessitis",
                 "barchart": {
                     "title": "Diagrama de barres",
                     "description": "Mostra una dimensió categòrica i quantitats relacionades. Cada barra representa una categoria, l'amplada és proporcional a la dimensió quantitativa.",
@@ -154,20 +176,30 @@
                 }
             },
             "mapping": {
-                "tittle": "3. Mapejos",
+                "tittle": "Mapeja les variables al gràfic",
                 "chartvariables":{
                     "dimensions": "DIMENSIONS",
-                    "variables": "VARIABLES GRÀFIC",
                     "dropdimension" : "Arrossegueu dimensió aquí",
                     "dropanotherdimen": "Arrossegueu una altra dimensió aqu"
                 }
             },
             "customize": {
-                "tittle": "4. Personalitzar"
+                "tittle": "Personalitza el teu gràfic"
             },
             "export": {
-                "tittle": "5. Exportar",
-                "download": "Descarregar"
+                "graph": {
+                    "tittle": "Exporta o desa el teu gràfic",
+                    "dynamicWidget": "Generar widget dinàmic amb càrrega de dades per url"
+                },
+                "map": {
+                    "title": "Exporta o desa el teu mapa"
+                },
+                "formats": {
+                    "title": "Format",
+                    "edatosgraphs": "Format edatosgraphs",
+                    "svg": "Format svg",
+                    "widget": "Format widget"
+                }
             },
             "login": {
                 "title": "Accedir",
@@ -175,7 +207,9 @@
             }
         },
         "reset": "Reiniciar",
-        "changedata": "Canviar dades",
+        "refreshdata": "Recarregar dades",
+        "editdata": "Editar dades",
+        "maximize": "Maximitzar",
         "column": "Columna",
         "copyclipboard": "Copiar al porta-retalls",
         "copiedclipboard": "Copiat al portapals",

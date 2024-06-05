@@ -5,6 +5,7 @@ import { getTypeName } from '@rawgraphs/rawgraphs-core';
 import { useDrag } from 'react-dnd';
 
 import styles from './DataMapping.module.scss';
+import classNames from 'classnames';
 
 const ColumnCard = ({
   dimensionName,
@@ -34,9 +35,9 @@ const ColumnCard = ({
   return (
     <div
       ref={drag}
-      className={`column-card ${styles['column-card']} ${
-        isDragging ? 'is-dragging' : ''
-      }`}
+      className={classNames(styles['column-card'], {
+        'is-dragging': isDragging,
+      })}
     >
       <DataTypeIcon className={styles['data-type-icon']} />
       <span className={styles['column-title']}>{dimensionName}</span>

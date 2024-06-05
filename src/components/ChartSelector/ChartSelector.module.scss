@@ -1,6 +1,16 @@
+@import "../../styles/variables";
+
 .thumbnail {
-  background-position: center;
-  background-repeat: no-repeat;
+  color: $color-blue-dark-100;
+  font-size: 36px;
+  padding-left: 16px;
+}
+
+.currentChartContainer {
+  padding: 20px 10px 0;
+  &:first-child {
+    padding-left: 15px;
+  }
 }
 
 .currentChart:hover {
@@ -10,4 +20,27 @@
 .disabled {
   pointer-events: none;
   filter: grayscale(1);
+}
+
+
+.currentChart {
+  border-radius: 3px;
+  border: 1px solid $color-blue-dark-100;
+}
+
+span.chartTitle {
+  font-size: $size-14;
+  font-weight: 400;
+  color: $color-black-80;
+}
+
+.chartText, h4 {
+  font-size: $size-12;
+  font-weight: 300;
+  color: $color-black-80;
+}
+
+
+.custom-card .card-body {
+  gap: 5px;
 }

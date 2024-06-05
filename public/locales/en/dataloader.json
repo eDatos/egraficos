@@ -1,6 +1,6 @@
 {
     "separator": {
-        "title" : "DATA PARSING OPTIONS",
+        "title" : "DATA STRUCTURE",
         "column" :  {
             "name": "Column separator"
         },
@@ -11,10 +11,10 @@
             "name": "Decimals separators"
         }   
     },
-    "datelocale":"Date Locale",
+    "datelocale":"Date locale",
     "refreshdata": "Refresh data from url",
     "datatransform": {
-        "title": "DATA TRANSFORMATION",
+        "title": "TRANSFORM DATA",
         "stack": "Stack on"
     },
     "datamismatch": {

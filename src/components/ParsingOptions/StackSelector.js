@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { Trans } from 'react-i18next';
+import { CustomToggle } from '../CustomDropdown/CustomDropdownToggle';
+import styles from './ParsingOptions.module.scss';
 
 export default function StackSelector({
   title,
@@ -19,31 +21,36 @@ export default function StackSelector({
   );
 
   return (
-    <div className="option">
-      {title}
-      <Dropdown className="d-inline-block raw-dropdown">
-        <Dropdown.Toggle
-          variant="white"
-          className="truncate-160px"
-          disabled={list.length === 0}
-        >
-          {value ? value : <Trans i18nKey="global.column"></Trans>}
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          {value && (
-            <Dropdown.Item onClick={() => handleChange(null)}>
-              {'Do not stack'}
-            </Dropdown.Item>
-          )}
-          {Object.keys(list).map((d) => {
-            return (
-              <Dropdown.Item key={d} onClick={() => handleChange(d)}>
-                {d}
+    <div className={styles.horizontalSeparator}>
+      <span className={styles.labelSeparator}>{title}</span>
+      <div className={styles.inputSeparator}>
+        <Dropdown className="raw-dropdown">
+          <Dropdown.Toggle
+            as={CustomToggle}
+            id="dropdown-custom-components"
+            className="d-flex align-items-center truncate-160px form-control"
+            disabled={list.length === 0}
+          >
+            <span>
+              {value ? value : <Trans i18nKey="global.column"></Trans>}
+            </span>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            {value && (
+              <Dropdown.Item onClick={() => handleChange(null)}>
+                {'Do not stack'}
               </Dropdown.Item>
-            );
-          })}
-        </Dropdown.Menu>
-      </Dropdown>
+            )}
+            {Object.keys(list).map((d) => {
+              return (
+                <Dropdown.Item key={d} onClick={() => handleChange(d)}>
+                  {d}
+                </Dropdown.Item>
+              );
+            })}
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
     </div>
   );
 }

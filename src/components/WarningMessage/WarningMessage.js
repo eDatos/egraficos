@@ -13,7 +13,7 @@ function WarningMessage({
   return (
     <Alert
       variant={variant}
-      className="my-2 d-flex flex-row justify-content-between align-items-center"
+      className="d-flex flex-row justify-content-between align-items-center"
     >
       {message}
       {action}

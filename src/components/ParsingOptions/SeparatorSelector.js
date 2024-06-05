@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { separatorsLabels } from '../../constants';
 import { useTranslation } from 'react-i18next';
-
+import { CustomToggle } from '../CustomDropdown/CustomDropdownToggle';
 import styles from './ParsingOptions.module.scss';
 
 export default function SeparatorSelector({
@@ -44,28 +44,30 @@ export default function SeparatorSelector({
 
   return (
     <>
-      <div className="option">
-        {title}
-        <Dropdown className="d-inline-block raw-dropdown">
-          <Dropdown.Toggle
-            variant="white"
-            className="d-flex justify-content-start align-items-center text-truncate"
-          >
-            {formatValue(inputValue)}
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            {Object.keys(separatorsLabels).map((key) => {
-              return (
-                <Dropdown.Item
-                  key={separatorsLabels[key]}
-                  onClick={() => handleChange(key)}
-                >
-                  {formatValue(key)}
-                </Dropdown.Item>
-              );
-            })}
-          </Dropdown.Menu>
-        </Dropdown>
+      <div className={styles.horizontalSeparator}>
+        <span className={styles.labelSeparator}>{title}</span>
+        <div className={styles.inputSeparator}>
+          <Dropdown className="raw-dropdown">
+            <Dropdown.Toggle
+              as={CustomToggle}
+              className="d-flex align-items-center text-truncate form-control"
+            >
+              {formatValue(inputValue)}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {Object.keys(separatorsLabels).map((key) => {
+                return (
+                  <Dropdown.Item
+                    key={separatorsLabels[key]}
+                    onClick={() => handleChange(key)}
+                  >
+                    {formatValue(key)}
+                  </Dropdown.Item>
+                );
+              })}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
       </div>
     </>
   );

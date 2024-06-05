@@ -1,23 +1,29 @@
 import React from 'react';
+import styles from '../DataLoader.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export default function Paste({ userInput, setUserInput, setLoadingError }) {
+  const { t } = useTranslation('translation');
+
   return (
-    <textarea
-      value={userInput}
-      onChange={(e) => {
-        const str = e.target.value;
-        setUserInput(str);
-        setLoadingError(null);
-      }}
-      style={{
-        backgroundColor: 'white',
-        border: '1px solid lightgrey',
-        borderRadius: 4,
-        width: '100%',
-        padding: '1rem',
-        minHeight: '250px',
-        height: '40vh',
-      }}
-    />
+    <>
+      <div className={`d-flex ${styles['options-section']}`}>
+        <span className={styles['options-section-number']}>
+          {t('global.section.loaddata.options.1')}
+        </span>
+        <span className={styles['options-section-text']}>
+          {t('global.section.loaddata.options.label1')}
+        </span>
+      </div>
+      <textarea
+        className="form-control"
+        value={userInput}
+        onChange={(e) => {
+          const str = e.target.value;
+          setUserInput(str);
+          setLoadingError(null);
+        }}
+      />
+    </>
   );
 }

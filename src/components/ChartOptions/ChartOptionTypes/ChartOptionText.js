@@ -1,6 +1,7 @@
 import React from 'react';
 import ChartOptionSelect from './ChartOptionSelect';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import styles from './../ChartOptions.module.scss';
 
 const ChartOptionText = ({
   value,
@@ -24,13 +25,13 @@ const ChartOptionText = ({
     );
   }
   return (
-    <Row className={props.className}>
-      <Col xs={6} className="d-flex align-items-center">
+    <div className={props.className}>
+      <Col xs={6} className={styles['chart-option-label']}>
         {label}
       </Col>
       <Col xs={6}>
         <input
-          className="w-100 form-control text-field"
+          className="form-control"
           type="text"
           value={value ?? ''}
           step={props.step}
@@ -46,7 +47,7 @@ const ChartOptionText = ({
           </small>
         )}
       </Col>
-    </Row>
+    </div>
   );
 };
 

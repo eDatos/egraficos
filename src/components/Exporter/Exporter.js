@@ -1,9 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
+import { Col, Dropdown, Form } from 'react-bootstrap';
 import uuid from 'react-uuid';
+import { CustomToggle } from '../CustomDropdown/CustomDropdownButton';
+import { CopyToClipboardButton } from '../CopyToClipboardButton';
+import svg from '../../icons/svgicon/iconosvg_blanco.svg';
+import svgSelected from '../../icons/svgicon/iconosvg_azul.svg';
+import { t } from 'i18next';
+import styles from '../DataLoader/DataLoader.module.scss';
+import classNames from 'classnames';
 
 function downloadBlob(url, filename) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   // Create a new anchor element
   const a = document.createElement('a');
   a.href = url;
@@ -48,18 +55,17 @@ export default function Exporter({
   );
 
   const [exportFormats, setExportFormats] = useState(['edatosgraphs']);
-  const [currentFormat, setCurrentFormat] = useState('edatosgraphs');
+  const [currentFormat, setCurrentFormat] = useState(null);
   const [currentFile, setCurrentFile] = useState('viz');
   const [dynamicLoadWidget, setDynamicLoadWidget] = useState(true);
   const [position, setPosition] = useState(() => map?.getCenter());
   const [mapZoom, setMapZoom] = useState(() => map?.getZoom());
-  const { t } = useTranslation(['translation']);
 
   const handleOnChangeDynamicLoadWidget = () => {
     setDynamicLoadWidget(!dynamicLoadWidget);
   };
   const downloadViz = useCallback(() => {
-    switch (currentFormat) {
+    switch (currentFormat.format) {
       case 'svg':
         download(`${currentFile}.svg`, 'svg');
         break;
@@ -143,17 +149,37 @@ export default function Exporter({
   }
 
   useEffect(() => {
+    const baseExportFormat = [
+      {
+        format: 'widget',
+        text: 'global.section.export.formats.widget',
+        icon: 'fa-code',
+      },
+    ];
     if (dataSource.type !== 'wms') {
-      const baseExportFormats = ['edatosgraphs', 'widget'];
+      const baseExportFormats = [
+        ...baseExportFormat,
+        {
+          format: 'edatosgraphs',
+          text: 'global.section.export.formats.edatosgraphs',
+          icon: 'fa-square-poll-vertical',
+        },
+      ];
       const newExportFormats =
         visualOptions.render === 'svg'
-          ? [...baseExportFormats, 'svg']
+          ? [
+              ...baseExportFormats,
+              {
+                format: 'svg',
+                text: 'global.section.export.formats.svg',
+                icon: [svg, svgSelected],
+              },
+            ]
           : [...baseExportFormats, 'png'];
       setExportFormats(newExportFormats);
-      setCurrentFormat(newExportFormats[0]);
     } else {
-      setExportFormats(['widget']);
-      setCurrentFormat('widget');
+      setExportFormats(baseExportFormat);
+      setCurrentFormat(baseExportFormat[0]);
     }
   }, [visualOptions.render, dataSource.type]);
 
@@ -175,77 +201,115 @@ export default function Exporter({
   }, [map, onMapMove, onMapZoom]);
 
   return (
-    <>
-      <div className="row">
-        <div className="col col-sm-3">
-          <InputGroup className="mb-3 raw-input-group">
-            <input
-              type="text"
-              className="form-control text-field"
-              value={currentFile}
-              onChange={(e) => setCurrentFile(e.target.value)}
-            ></input>
-            <DropdownButton
-              as={InputGroup.Append}
-              title={`.${currentFormat}`}
-              id="input-group-dropdown-1"
-              className="raw-dropdown"
-            >
-              {exportFormats.map((d) => {
-                return (
-                  <Dropdown.Item key={d} onClick={() => setCurrentFormat(d)}>
-                    .{d}
-                  </Dropdown.Item>
-                );
-              })}
-            </DropdownButton>
-          </InputGroup>
-        </div>
-        {currentFormat !== 'widget' && (
-          <div className="col col-sm-2">
-            <button
-              className="btn btn-primary btn-block raw-btn"
-              onClick={downloadViz}
-            >
-              {t('global.section.export.download')}
-            </button>
-          </div>
-        )}
-      </div>
-      {currentFormat === 'widget' &&
+    <div className={classNames(styles['export-content'])}>
+      <Col xl={12} className={styles['file']}>
+        <input
+          type="text"
+          className={classNames(styles['borderBox'], 'form-control')}
+          value={currentFile}
+          onChange={(e) => setCurrentFile(e.target.value)}
+        ></input>
+        <Dropdown className="raw-dropdown button" align="end">
+          <Dropdown.Toggle
+            as={CustomToggle}
+            className="text-icon-button btn-thin-default d-flex align-items-center"
+          >
+            {currentFormat ? (
+              currentFormat.format !== 'svg' ? (
+                <>
+                  <i className={classNames(currentFormat.icon, 'fa-thin')}></i>
+                  {t(currentFormat.text).toUpperCase()}
+                </>
+              ) : (
+                <>
+                  <img alt="" src={currentFormat.icon[1]}></img>
+                  {t(currentFormat.text).toUpperCase()}
+                </>
+              )
+            ) : (
+              t('global.section.export.formats.title').toUpperCase()
+            )}
+          </Dropdown.Toggle>
+          <Dropdown.Menu align="end">
+            {exportFormats.map((d) => {
+              return (
+                <Dropdown.Item
+                  className="d-flex align-items-center"
+                  as="button"
+                  key={d.value}
+                  onClick={() => {
+                    setCurrentFormat(d);
+                  }}
+                >
+                  {d.format !== 'svg' ? (
+                    <i className={classNames(d.icon, 'fa-thin')}></i>
+                  ) : (
+                    <img alt="" src={d.icon[0]}></img>
+                  )}
+                  <span>{t(d.text).toUpperCase()}</span>
+                </Dropdown.Item>
+              );
+            })}
+          </Dropdown.Menu>
+        </Dropdown>
+      </Col>
+
+      {currentFormat?.format === 'widget' &&
         dataSource.url &&
         dataSource.type !== 'wms' && (
-          <div className="row">
-            <div className="col col-sm-12">
-              <Form.Check
-                id="dynamicLoadWidget"
-                label="Generar widget dinámico con carga de datos por url"
-                type="switch"
+          <div className="col col-sm-12">
+            <Form.Check
+              id="dynamicLoadWidget"
+              type="checkbox"
+              className="d-flex align-items-center custom-control custom-checkbox"
+            >
+              <Form.Check.Input
                 checked={dynamicLoadWidget}
-                onChange={handleOnChangeDynamicLoadWidget}
+                className="custom-control-input"
+                onChange={() => {
+                  handleOnChangeDynamicLoadWidget();
+                }}
               />
-            </div>
+              <Form.Check.Label className={classNames('custom-control-label')}>
+                {t('global.section.export.graph.dynamicWidget')}
+              </Form.Check.Label>
+            </Form.Check>
           </div>
         )}
-      {currentFormat === 'widget' && (
-        <div className="row">
-          <div className="col cos-sm-12">
-            <textarea
-              value={getWidget(dataSource.type !== 'wms' ? 'egraph' : 'wms')}
-              style={{
-                backgroundColor: 'white',
-                border: '1px solid lightgrey',
-                borderRadius: 4,
-                width: '100%',
-                padding: '1rem',
-                minHeight: '250px',
-                height: '40vh',
-              }}
-              readOnly
-            />
-          </div>
+
+      {currentFormat?.format === 'widget' && (
+        <div className="col cos-sm-12">
+          <textarea
+            value={getWidget(dataSource.type !== 'wms' ? 'egraph' : 'wms')}
+            className="form-control"
+            readOnly
+          />
         </div>
       )}
-    </>
+
+      {currentFormat && (
+        <Col xs={6} xl={12}>
+          <div className="general-buttons row">
+            {currentFormat.format !== 'widget' && (
+              <button
+                className="text-icon-button btn-thin-default d-flex align-items-center"
+                type="button"
+                onClick={downloadViz}
+              >
+                <i className="fa-thin fa-download"></i>
+                <span>{t('global.download').toUpperCase()}</span>
+              </button>
+            )}
+            {currentFormat.format === 'widget' && (
+                <CopyToClipboardButton content={getWidget(dataSource.type)}/>
+            )}
+            {/*<button className="text-icon-button btn-thin-default d-flex align-items-center" type="button" onClick={//TODO nueva funcionalidad (en siguiente fase)}>
+                                <i className="fa-thin fa-save"></i>
+                                <span>{t('global.save').toUpperCase()}</span>
+                            </button>*/}
+          </div>
+        </Col>
+      )}
+    </div>
   );
 }

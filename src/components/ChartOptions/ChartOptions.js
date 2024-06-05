@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useMemo } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import {
   getOptionsConfig,
   getContainerOptions,
@@ -239,7 +239,7 @@ const ChartOptions = ({
   }, [mapping, optionsConfig, visualOptions]);
 
   return (
-    <div className={[styles['chart-options'], 'col-4', 'col-xl-3'].join(' ')}>
+    <div className={[styles['chart-options']].join(' ')}>
       {map(optionsDefinitionsByGroup, (options, groupName) => {
         return (
           <div
@@ -250,24 +250,35 @@ const ChartOptions = ({
               collapseStatus[groupName] ? styles['collapsed'] : '',
             ].join(' ')}
           >
-            <Row>
-              <Col
-                className={`d-flex justify-content-between align-items-center ${styles['group-header']}`}
+            <Col
+              className={`d-flex justify-content-between align-items-center ${styles['group-header']}`}
+            >
+              <h5
+                className={`text-uppercase m-0 ${styles['label-chart-option']}`}
               >
-                <h5 className="text-uppercase m-0">{t(groupName)}</h5>
-                <span
-                  className={[styles['collapse-button'], 'cursor-pointer'].join(
-                    ' '
-                  )}
-                  onClick={() =>
-                    setCollapseStatus({
-                      ...collapseStatus,
-                      [groupName]: !collapseStatus[groupName],
-                    })
-                  }
-                ></span>
-              </Col>
-            </Row>
+                {t(groupName)}
+              </h5>
+              <span
+                className={[styles['collapse-button'], 'cursor-pointer'].join(
+                  ' '
+                )}
+                onClick={() =>
+                  setCollapseStatus({
+                    ...collapseStatus,
+                    [groupName]: !collapseStatus[groupName],
+                  })
+                }
+              >
+                <i
+                  className={[
+                    collapseStatus[groupName]
+                      ? 'fa-thin fa-chevron-down'
+                      : 'fa-thin fa-chevron-up',
+                  ].join(' ')}
+                ></i>
+              </span>
+            </Col>
+
             {map(options, (def, optionId) => {
               // repeated options: notice that value is set to a default if undefined
               // this is caused by changes in shapes of the mapping object
@@ -330,12 +341,19 @@ const ChartOptions = ({
               );
             })}
             {groupName === 'artboard' && visualOptions.showLegend && (
-              <p className="small">
-                {t('global.message.sizeoutput.part1', { ns: 'translation' })}{' '}
-                {containerOptions?.width}
-                px * {containerOptions?.height}px{' '}
-                {t('global.message.sizeoutput.part2', { ns: 'translation' })}
-              </p>
+              <div className={styles['chart-option']}>
+                <div
+                  className={[
+                    styles['chart-option-label'],
+                    styles['small'],
+                  ].join(' ')}
+                >
+                  {t('global.message.sizeoutput.part1', { ns: 'translation' })}{' '}
+                  {containerOptions?.width}
+                  px * {containerOptions?.height}px{' '}
+                  {t('global.message.sizeoutput.part2', { ns: 'translation' })}
+                </div>
+              </div>
             )}
           </div>
         );

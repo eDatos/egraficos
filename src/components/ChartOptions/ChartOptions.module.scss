@@ -1,92 +1,68 @@
-.chart-options {
-  .chart-option {
-    margin: 8px -15px;
-    height: 40px;
-    &.color-swatch {
-      margin: 0px -15px;
-      &:first-child {
-        .color-scale-item {
-          border-radius: 4px 4px 0 0;
-        }
-      }
-      &:last-child {
-        .color-scale-item {
-          border-radius: 0px 0px 4px 4px;
-          border: none;
-        }
-      }
-      &.ordinal {
-        .color-scale-item {
-          > * {
-            width: 50%;
-            flex-grow: 1;
-            padding: 0;
-            border: none;
-            background: none;
-            font-size: 1rem;
-          }
-        }
-      }
-      &.not-ordinal {
-        margin-bottom: 8px;
-        .color-scale-item {
-          border: none;
-          background-color: transparent;
-          padding: 0;
-          display: flex;
-          justify-content: space-between;
-          > * {
-            width: 30%;
-          }
-        }
-      }
-      .color-scale-item {
-        background-color: white;
-        display: flex;
-        align-items: center;
-        border: none;
-        border-bottom: 1px solid var(--gray-200);
-        height: 100%;
-        padding: 0 8px;
-      }
-    }
-  }
-  .color-swatches-list {
-    margin: 8px 0;
+@import '../../styles/variables.scss';
+
+.options-group.collapsed > div > .group-header {
+  h5 {
+    color: $color-blue-dark-100;
   }
 }
+
 .options-group {
-  transition: max-height 1s ease;
   height: auto;
   overflow: visible;
-  border-top: 1px solid var(--gray-400);
+  border-bottom: 1px solid $color-blue-dark-5;
+
   .group-header {
-    height: 40px;
-    &:before {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-color: var(--gray-bg);
-      position: absolute;
-      left: -15px;
-      z-index: -10;
-      opacity: 0.8;
-      backdrop-filter: blur(1px);
-      transition: opacity 0.5s ease;
-    }
+    padding: 5px 10px;
+    height: 28px;
+    background: $color-blue-dark-100;
+    border-bottom: 1px solid $color-blue-5;
   }
+  .collapse-button {
+    font-size: 14px;
+    color: $color-black-0;
+  }
+
   &.collapsed {
-    height: 40px !important;
+    height: 28px !important;
     overflow: hidden;
+
+    .label-chart-option {
+      color: $color-blue-dark-100;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+      border-radius: 0 0 5px 5px;
+    }
+
+    .group-header {
+      border-bottom: 1px solid $color-blue-dark-5;
+      background-color: $color-blue-dark-5;
+    }
+
     .collapse-button {
+      color: $color-blue-dark-100;
+    }
+
+    .group-header {
       &:before {
-        transform: rotate(0deg);
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: var(--gray-bg);
+        position: absolute;
+        left: -15px;
+        z-index: -10;
+        opacity: 0.8;
+        backdrop-filter: blur(1px);
+        transition: opacity 0.5s ease;
       }
-      &:after {
-        transform: rotate(-90deg);
+
+      &:first-child {
+        border-radius: 3px 3px 0 0 !important; //no está haciendo efecto, pero no sé si es necesario aún
       }
     }
+
     .group-header {
       &:before {
         opacity: 1;
@@ -94,35 +70,59 @@
     }
   }
 }
-.collapse-button {
-  background-color: var(--gray-400);
-  width: 24px;
-  height: 24px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  justify-items: center;
-  align-items: center;
-  border-radius: 50%;
-  &:before,
-  &:after {
-    display: block;
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    width: 8px;
-    height: 2px;
-    border-radius: 1px;
-    content: ' ';
-    background-color: black;
-    transform: rotate(180deg);
-    // transition: transform 0.65s ease-in-out;
-  }
-}
+
 .color-scheme-dropdown-item {
   margin: 0;
   height: 48px !important;
   border-bottom: none !important;
-  .scheme-preview {
-    width: 100%;
+}
+
+.chart-options {
+  border: 1px solid $color-blue-dark-100;
+  border-radius: 5px;
+}
+
+.label-chart-option {
+  color: $color-black-0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.chart-options {
+  .chart-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+
+    height: 48px;
+    background: $color-blue-dark-5;
+    border-bottom: 1px solid $color-blue-5;
+
+    input {
+      font-size: 10px;
+    }
+
+    &.color-swatch {
+      height: 38px;
+
+      .color-scale-item {
+        padding-right: 0;
+      }
+    }
+  }
+
+  .chart-option .chart-option-label,
+  .color-swatches-list .chart-option-label {
+    font-weight: 300;
+    font-size: 12px;
+    color: $color-blue-dark-100;
+    padding-left: 10px;
+    padding-right: 0;
+    &.small {
+      font-size: 10px;
+      color: $color-black-80;
+    }
   }
 }

@@ -10,28 +10,38 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
   return (
     <>
       <Row>
-        <Col xs={3} className="pt-3">
+        <Col xs={3} className={styles.currentChartContainer}>
           {currentChart && (
-            <Card className={styles.currentChart}>
+            <Card className={classNames(styles.currentChart, 'custom-card')}>
               <Card.Img variant="top" src={currentChart.metadata.thumbnail} />
               <Card.Body>
-                <Card.Title className="m-0">
-                  <h2 className="m-0">{t(currentChart.metadata.name)}</h2>
+                <Card.Title>
+                  <span className={styles.chartTitle}>
+                    {t(currentChart.metadata.name).toUpperCase()}
+                  </span>
                 </Card.Title>
                 <Card.Subtitle className="m-0">
-                  <h4 className="mb-2">{currentChart.metadata.category}</h4>
+                  <span className={styles.chartSubtitle}>
+                    {currentChart.metadata.category}
+                  </span>
                 </Card.Subtitle>
-                <Card.Text>{t(currentChart.metadata.description)}</Card.Text>
+                <Card.Text className={styles.chartText}>
+                  {t(currentChart.metadata.description)}
+                </Card.Text>
               </Card.Body>
             </Card>
           )}
         </Col>
-        <Col>
+        <Col className="py-top-10">
           <Row>
             {charts.map((d, i) => {
               const categories = d.metadata.categories.map((s) => t(s));
               return (
-                <Col xs={4} key={'chart-' + i} className={`p-3`}>
+                <Col
+                  xs={4}
+                  key={'chart-' + i}
+                  className={`custom-card-container `}
+                >
                   <Card
                     onClick={() => {
                       setCurrentChart(d);
@@ -44,26 +54,26 @@ function ChartSelector({ availableCharts, currentChart, setCurrentChart }) {
                       }
                     )}
                   >
-                    <div
-                      className={`h-100 w-25 ${styles.thumbnail}`}
-                      style={{ backgroundImage: `url("${d.metadata.icon}")` }}
-                    ></div>
-                    <Card.Body className="w-75 px-2 py-3">
+                    <div className={`h-100 py-3 image ${styles.thumbnail}`}>
+                      <i className={`fa-thin ${d.metadata.icon}`}></i>
+                    </div>
+                    <Card.Body className="px-3 py-3 d-flex flex-column">
                       <Card.Title className="m-0">
-                        <h2 className="m-0">{t(d.metadata.name)}</h2>
+                        <span className={styles.chartTitle}>
+                          {t(d.metadata.name)}
+                        </span>
                       </Card.Title>
                       <Card.Subtitle className="m-0">
-                        <h4 className="m-0">
+                        <span className={styles.chartText}>
                           {categories.join(', ').charAt(0).toUpperCase() +
                             categories.join(', ').slice(1)}
-                        </h4>
+                        </span>
                       </Card.Subtitle>
                     </Card.Body>
                   </Card>
                 </Col>
               );
             })}
-            <Col xs={4} className={`p-3`}></Col>
           </Row>
         </Col>
       </Row>

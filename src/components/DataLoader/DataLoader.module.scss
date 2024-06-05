@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .loading-option {
   height: 48px;
   margin: 0 0 8px;
@@ -17,53 +19,9 @@
     border-color: var(--primary);
     opacity: 1;
   }
-  &:last-child {
-    // align-self: flex-end;
-    // &:hover {
-    //   background-color: var(--warning-lighter);
-    // }
-    // &:active,
-    // &.active {
-    //   border-color: var(--warning);
-    //   background-color: var(--warning-lighter);
-    // }
-  }
-  // &:last-child, &.separated {
-  //   position: relative;
-  //   &::before {
-  //     content:' ';
-  //     border-top: 1px solid var(--gray-400);
-  //     width: 100%;
-  //     position: absolute;
-  //     top: -8px;
-  //   }
-  // }
-}
-
-.start-over {
-  height: 48px;
-  text-align: center;
-  background-color: var(--gray-400);
-  mix-blend-mode: normal;
-  border: 1px solid var(--gray-400);
-  box-sizing: border-box;
-  border-radius: 4px;
-  &.cancel {
-    background: none;
-    // text-decoration: underline;
-    border: none;
-    transition: background-color 0.35s ease;
-    h4 {
-      border-bottom: 1px solid var(--gray-700);
-    }
-    &:hover {
-      background-color: var(--gray-400);
-    }
-  }
 }
 
 .loading-component {
-  // border: 1px solid var(--primary);
   border-radius: 4px;
   color: var(--primary);
   display: flex;
@@ -107,5 +65,73 @@
   }
   to {
     left: -100%;
+  }
+}
+
+.options-section {
+  gap: 10px;
+  align-items: center;
+  padding: $padding-20px 0 $padding-10px;
+  color: $color-black-80;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.options-section-number {
+  font-weight: 700;
+  border-radius: 5px;
+  background: $color-black-5;
+  display: inline-block;
+  padding: 5px;
+}
+
+.options-section-text {
+  font-weight: 600;
+}
+
+.borderBox {
+  border: 1px solid $color-blue-dark-100;
+  i {
+    color: $color-blue-dark-100;
+  }
+}
+
+.form {
+  gap: 15px;
+
+  label {
+    font-family: $font-family-sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: $color-black-80;
+
+    &.lighter {
+      font-weight: 400;
+    }
+  }
+}
+
+.layer-loaded {
+  margin-top: 20px;
+  background: $color-black-5;
+  padding: 20px 20px 20px 10px;
+  border-radius: 10px;
+  label {
+    font-size: 18px;
+  }
+}
+
+.export-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 5px 20px 0px;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+
+  .file {
+    display: flex;
+    gap: 10px;
   }
 }

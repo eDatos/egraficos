@@ -1,25 +1,23 @@
-.parsingOptions {
-  // display: flex;
-  // justify-content: space-between;
-  // margin-bottom: 8px;
+@import './../../styles/variables';
 
+.parsingOptions {
   b {
     font-weight: 500;
   }
 
-  input {
-    width: 40px;
-    height: 40px;
-    margin-left: 8px;
-  }
   :global .dropdown {
     margin-left: 8px;
+
+    .dropdown-item:hover {
+      background-color: $color-blue-25;
+      border-radius: 15px;
+    }
     button {
       padding-right: 24px;
       height: 40px;
-      width: 108px;
     }
   }
+
   :global .option {
     display: flex;
     justify-content: space-between;
@@ -38,13 +36,106 @@
 }
 
 .separator-preview {
-  font-family: var(--font-family-monospace);
-  background-color: var(--gray-200);
-  color: var(--gray-900);
+  font-family: $font-family-sans-serif;
+  background-color: $color-black-15;
+  color: $color-black-60;
   width: 16px;
   height: 16px;
   display: inline-block;
   text-align: center;
-  border-radius: 4px;
-  margin-right: 4px;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.customTable {
+  border-bottom: 0;
+  margin: 20px 0;
+
+  tr.headerContainer,
+  .datatransformContainer {
+    th {
+      border-top: 0;
+      padding: 5px 10px;
+      background: $color-blue-dark-25;
+      border-bottom: 1px solid $color-black-0;
+      height: 28px;
+      color: $color-black-0;
+      font-size: $size-14;
+      font-weight: 400;
+      &:first-child {
+        border-radius: 5px 0 0 0;
+        border-right: 1px solid black;
+      }
+      &:last-child {
+        min-width: calc($container-max-width/4);
+        border-radius: 0 5px 0 0;
+      }
+    }
+  }
+
+  tr.bodyContainer {
+    td {
+      border-top: 0;
+      vertical-align: middle;
+      padding: 5px 10px;
+      border-right: 1px solid $color-black-0;
+      border-bottom: 1px solid $color-black-0;
+      height: 48px;
+      background: $color-blue-dark-5;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+}
+
+.headerContainer {
+  border-radius: 5px 0 0 0;
+}
+
+.datatransformContainer {
+  border-radius: 0 5px 0 0;
+}
+
+.horizontalSeparator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  font-size: $size-10;
+  font-weight: 300;
+  background: $color-blue-dark-5;
+}
+
+.inlineContainer {
+  display: inline-block;
+
+  > div {
+    min-width: 220px;
+  }
+}
+
+.labelSeparator {
+  color: $color-blue-dark-100;
+}
+
+/*.inputSeparator{  //TODO ver si se puede eliminar
+  display: flex;
+  align-items: center;
+}*/
+
+.inputSeparator button,
+.inputSeparator input {
+  gap: 5px;
+  min-width: 95px;
+  justify-content: space-between;
+  background: $color-black-0;
+  font-size: $size-10;
+  font-weight: 400;
+  i {
+    color: $color-blue-dark-100;
+  }
 }

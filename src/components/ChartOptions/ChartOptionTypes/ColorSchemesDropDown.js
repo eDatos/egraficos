@@ -6,6 +6,7 @@ import {
   getColorDomain,
   getPresetScale,
 } from '@rawgraphs/rawgraphs-core';
+import { CustomToggle } from '../../CustomDropdown/CustomDropdownToggle';
 import styles from '../ChartOptions.module.scss';
 
 const ColorSchemesDropDown = ({
@@ -19,11 +20,10 @@ const ColorSchemesDropDown = ({
   currentFinalScale,
 }) => {
   return (
-    <Dropdown className="d-inline-block raw-dropdown w-100">
+    <Dropdown className="raw-dropdown">
       <Dropdown.Toggle
-        variant="white"
-        className="w-100"
-        style={{ paddingRight: 24 }}
+        as={CustomToggle}
+        className="d-flex align-items-center justify-content-between form-control"
         disabled={!colorDataType}
       >
         {currentFinalScale && <ColorSchemePreview scale={currentFinalScale} />}

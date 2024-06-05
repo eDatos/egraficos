@@ -1,3 +1,6 @@
+@import './fonts/fontawesome';
+@import './vendor/index.scss';
+
 // Variables override
 $grey-lightest: #f8f8f8;
 $body-bg: #f5f8fa;
@@ -29,18 +32,49 @@ $font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
   --header-height: 50px;
 }
 @import 'variables';
-// Boostrap scss
-@import '~bootstrap/scss/bootstrap';
 
 // Fonts
 @import 'fonts';
+@import 'buttons';
+@import 'nav-subsection';
+@import 'cards';
 
 html {
   font-size: 13px;
 }
 body {
-  background-color: var(--gray-bg);
+  background-color: $color-black-5;
 }
+
+.app {
+  min-height: 1280px;
+
+  > .container {
+    max-width: $container-max-width;
+    background-color: $color-black-0;
+  }
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  padding: 20px;
+}
+
+.app-title {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.app-description {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 26px;
+  max-width: $container-max-width-description;
+}
+
 h1 {
   font-size: 1.8461538462rem;
   font-weight: normal;
@@ -92,39 +126,46 @@ h5 {
   align-items: center;
   height: 56px;
   border: none;
+  border-radius: 7px;
+  font-size: 14px;
   &.alert-success {
-    background-color: theme-color('success');
+    background-color: $brand-success;
+  }
+  &.alert-secondary,
+  &.alert-danger {
+    border-radius: 5px;
+    padding: 10px;
+    height: auto;
+    font-size: 12px;
   }
   &.alert-secondary {
-    color: var(--gray-700);
+    color: $color-black-80;
+    background: $color-black-5;
   }
   &.alert-warning {
-    background-color: theme-color('warning');
+    background-color: $severidad-mayor;
   }
   &.alert-danger {
-    background-color: theme-color('danger');
+    background-color: $color-red-50;
+  }
+  &.alert-light {
+    color: $color-black-60;
+    background-color: $color-black-0;
+    padding: 20px 0px 0px 10px;
+    height: auto;
+    margin-bottom: 0;
   }
 }
-.raw-btn {
-  height: 40px;
-}
-.btn-white {
-  color: theme-color('dark');
-  background-color: white;
-  border: none;
-  border-bottom: 1px solid var(--light);
-}
+
 .raw-dropdown {
-  height: 40px;
   .dropdown-toggle {
-    text-align: left;
-    height: 100%;
+    gap: 5px;
+
     &::after {
-      right: 8px;
-      bottom: calc(50% - 1px);
-      position: absolute;
+      display: none;
     }
   }
+
   .dropdown-menu {
     max-height: 40vh;
     overflow-y: auto;
@@ -150,21 +191,66 @@ h5 {
       }
     }
   }
-}
-.raw-input-group {
-  .raw-dropdown {
-    button {
-      padding-right: 3rem;
+  &.button.show {
+    .dropdown-toggle {
+      background-color: $color-blue-dark-100;
+      border-radius: 5px 5px 0 0;
+      color: $color-black-0;
+      font-weight: 600;
+      border: 2px solid $color-blue-dark-100;
+
+      i::before {
+        font-weight: 600;
+      }
+    }
+
+    .dropdown-menu {
+      background-color: $color-blue-dark-100;
+      border-radius: 5px 0 5px 5px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      padding: 10px;
+      margin-top: 0;
+      border: none;
+      &.dropdown-menu-end {
+        position: absolute;
+        inset: -5px -1px auto auto;
+        transform: translate(0px, 35px);
+      }
+    }
+    .dropdown-item {
+      height: 26px;
+      padding: 3px;
+      border-bottom: none;
+      background-color: $color-blue-dark-100;
+      color: $color-black-0;
+      font-size: 14px;
+      &:hover {
+        background: $color-blue-25;
+        border-radius: 3px;
+        padding: 3px 3px 3px 5px;
+        color: $color-black-100;
+        img {
+          filter: brightness(0.2);
+        }
+      }
+    }
+    i,
+    img {
+      padding-right: 5px;
+      &:before {
+        width: 16px;
+        display: block;
+      }
     }
   }
 }
-.raw-select {
-  height: 40px;
-  color: theme-color('dark');
-  background-color: white;
-  border: none;
-  border-bottom: 1px solid var(--light);
+
+textarea.form-control {
+  border: 1px solid $color-blue-dark-100;
+  line-height: 16px;
+  min-height: 249px;
 }
+
 .raw-modal {
   .modal-content {
     background-color: var(--gray-bg);
@@ -176,21 +262,77 @@ h5 {
     justify-content: flex-start;
   }
 }
-.truncate-160px {
+.truncate-160px span {
   max-width: 160px;
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
 .custom-card {
-  border-radius: 4px;
+  border-radius: 5px;
+  border: 1.004px solid $color-blue-dark-100;
+  color: $color-black-80;
+
+  .image {
+    color: $color-blue-dark-100;
+  }
+
+  .card-body {
+    justify-content: center;
+    gap: 5px;
+  }
+
   &:hover {
-    background-color: var(--primary-lighter);
+    background-color: $color-blue-10;
   }
   &.active {
-    border-color: var(--primary);
-    background-color: var(--primary-lighter);
+    background-color: $color-blue-dark-100;
+    color: $color-black-0;
+    .image {
+      color: $color-black-0;
+    }
   }
 }
+
+.custom-multiselect {
+  .rbt-input-multi {
+    border-color: $color-blue-dark-100;
+    &.focus {
+      border-color: $color-blue-dark-100;
+      box-shadow: none;
+    }
+
+    .rbt-input-wrapper {
+      gap: 5px; //
+
+      .rbt-token {
+        background: $color-blue-10;
+        border-radius: 5px;
+        color: $color-blue-dark-100;
+      }
+    }
+  }
+  i {
+    color: $color-blue-dark-100;
+  }
+}
+
+.custom-input-select {
+  .rbt-input-main {
+    border-color: $color-blue-dark-100;
+  }
+  i {
+    color: $color-blue-dark-100;
+  }
+}
+
+.input-dropdown-icon {
+  bottom: 0;
+  padding: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 .cursorpointer,
 .cursor-pointer {
   cursor: pointer;
@@ -223,4 +365,25 @@ h5 {
   border-radius: 10px;
   width: 9px;
   height: 9px;
+}
+
+.col.col-12,
+.container {
+  padding: 0;
+}
+
+.py-top-10 {
+  padding-top: 10px;
+}
+
+.py-top-20 {
+  padding-top: 20px;
+}
+
+.py-bottom-10 {
+  padding-bottom: 10px;
+}
+
+input:disabled {
+  border: 1px solid $color-black-20;
 }

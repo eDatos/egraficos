@@ -6,6 +6,7 @@ import { BsX } from 'react-icons/bs';
 import { useDrag, useDrop } from 'react-dnd';
 import get from 'lodash/get';
 import { AGGREGATIONS_LABELS } from '../../constants';
+import { CustomToggle } from '../CustomDropdown/CustomDropdownToggle';
 
 export default function ChartDimensionItem({
   draggingColumn,
@@ -141,7 +142,6 @@ export default function ChartDimensionItem({
         opacity: isDragging || draggingColumn ? 0.5 : 1,
       }}
       className={classnames(
-        'assigned-column',
         styles['column-card'],
         styles['assigned-column'],
         isValid ? styles['column-valid'] : styles['column-invalid'],
@@ -160,8 +160,8 @@ export default function ChartDimensionItem({
       {dimension.aggregation && (
         <Dropdown className="d-inline-block ml-2 raw-dropdown">
           <Dropdown.Toggle
-            variant={isValid ? 'primary' : 'danger'}
-            className="pr-5"
+            as={CustomToggle}
+            className="d-flex align-items-center btn-white"
           >
             {get(AGGREGATIONS_LABELS, relatedAggregation, relatedAggregation)}
           </Dropdown.Toggle>
@@ -178,7 +178,7 @@ export default function ChartDimensionItem({
         </Dropdown>
       )}
       <button
-        className={styles['remove-assigned']}
+        className={classnames('ml-2', styles['remove-assigned'])}
         type="button"
         onClick={() => onDeleteItem(index)}
       >

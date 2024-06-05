@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import styles from './ParsingOptions.module.scss';
 
 export default function ThousandsSeparatorSelector({
   title,
@@ -28,15 +29,17 @@ export default function ThousandsSeparatorSelector({
   );
 
   return (
-    <div className="option">
-      {title}
-      <input
-        type="text"
-        className="form-control text-field d-inline-block"
-        value={inputValue}
-        onChange={handleChange}
-        {...props}
-      />
+    <div className={styles.horizontalSeparator}>
+      <span className={styles.labelSeparator}>{title}</span>
+      <div className={styles.inputSeparator}>
+        <input
+          type="text"
+          className="form-control d-inline-block"
+          value={inputValue}
+          onChange={handleChange}
+          {...props}
+        />
+      </div>
     </div>
   );
 }

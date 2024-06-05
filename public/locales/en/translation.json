@@ -1,32 +1,42 @@
 {
     "global": {
-        "appName": "Custom graphics development system",
+        "appName": "My custom visualizations",
         "accepts": "Accepts",
+        "download": "Download",
+        "save": "Save",
         "section": {
             "loaddata": {
-                "title": "1. Load your data",
+                "title": "Load your data",
+                "tabs" : {
+                    "createGraphs": {
+                        "title": "Create graphs",
+                        "fromEdatos": "From your data bank",
+                        "fromFiles": "From your files",
+                        "fromProjects": "From your projects"
+                    },
+                    "createMaps": {
+                        "title": "Create maps"
+                    }
+                },
                 "paste": {
-                    "name": "Paste your data",
                     "message": "Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data."
                 },
                 "upload": {
-                    "name": "Upload your data",
                     "message": "You can load tabular (TSV, CSV, DSV) or JSON data."
                 },
                 "sample": {
                     "name": "Try our data samples"
                 },
-                "sparql": {
-                    "name" : "SPARQL query"
-                },
                 "url": {
                     "name": "From URL",
                     "message": "Enter a web address (URL) pointing to the data (e.g. a public Dropbox file, a public API, ...). Please, be sure the server is CORS-enabled.",
-                    "loadButton": "Load Data"
+                    "loadButton": "Load Data",
+                    "clearFieldsButton": "Clear fields"
                 },
                 "project": {
-                    "name": "Open your project",
                     "message": "Load a .edatosgraphs project.",
+                    "dragAndBrowseFile": "Drag or browse a file here",
+                    "browseFile": "Browse a file",
                     "drag": "Drag a file here or",
                     "browse": "Browse",
                     "file": "a file from your computer",
@@ -34,16 +44,11 @@
                     "rejected": "Some files will be rejected"
                 },
                 "edatos": {
-                    "name": "From eDatos",
                     "message": "Select statistical operation and cube",
-                    "loadButton": "Load Data",
                     "statisticalOperations": "Statistical operations",
-                    "cubes": "Cubes"
-                },
-                "wms": {
-                    "name": "From WMS server",
-                    "message": "Enter a web address (URL) from WMS server",
-                    "loadButton": "Load WMS"
+                    "cubes": "Cubes",
+                    "loadButton": "Load Data",
+                    "clearFieldsButton": "Clear fields"
                 },
                 "types": {
                     "number": "Number",
@@ -60,6 +65,14 @@
                     "remaining": "The remaining",
                     "look": "look",
                     "fine": "fine"
+                },
+                "options": {
+                    "1": "OPTION 1",
+                    "label1": "Copy and paste your data here.",
+                    "2": "OPTION 2",
+                    "label2": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON.",
+                    "3": "OPTION 3",
+                    "label3": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...).\nPor favor, asegúrese de que el servidor tiene CORS habilitado."
                 }
             },
             "sampleData" : {
@@ -73,11 +86,20 @@
                 "sample8": "Accommodated travelers according to main nationalities and events. Canary Islands. 2022.",
                 "source": "Source"
             },
+            "loadLayers": {
+                "title": "Load layers",
+                "message": "Enter a web address (URL) of the WMS server you want to work with",
+                "loadWmsButton": "Load WMS",
+                "addWmsButton": "Add WMS"
+            },
             "wmslayerselection": {
-                "title": "Choose layers",
-                "style":  {
-                    "placeholder": "Select style...",
+                "configuration": {
+                    "title": "Layer settings",
+                    "placeholder": "Choose layers"
+                },
+                "style": {
                     "title": "Select style for layer",
+                    "placeholder": "Select styles",
                     "legend": "Show legend",
                     "showlayer": "Show layer name",
                     "hidestyle": "Hide style name"
@@ -87,7 +109,7 @@
                 "title": "Choose municipality"
             },
             "chartselection": {
-                "title": "2. Choose a chart",
+                "title": "Choose the chart you need",
                 "barchart": {
                     "title": "Bar chart",
                     "description": "It displays a categorical dimension and related amounts. Each bar represents a category, width is proportional to the quantitative dimension.",
@@ -154,20 +176,30 @@
                 }
             },
             "mapping": {
-                "tittle": "3. Mapping",
+                "tittle": "Map the variables on the graph",
                 "chartvariables":{
                     "dimensions": "DIMENSIONS",
-                    "variables": "CHART VARIABLES",
                     "dropdimension" : "Drop dimension here",
                     "dropanotherdimen": "Drop another dimension here"
                 }
             },
             "customize": {
-                "tittle": "4. Customize"
+                "tittle": "Customize  your chart"
             },
             "export": {
-                "tittle": "5. Export",
-                "download": "Download"
+                "graph": {
+                    "tittle": "Export or save your graph",
+                    "dynamicWidget": "Generate dynamic widget with data loading by url"
+                },
+                "map": {
+                    "title": "Export or save your map"
+                },
+                "formats": {
+                    "title": "Format",
+                    "edatosgraphs": "Edatosgraphs format",
+                    "svg": "Svg format",
+                    "widget": "Widget format"
+                }
             },
             "login": {
                 "title": "Login",
@@ -175,7 +207,9 @@
             }
         },
         "reset": "Reset",
-        "changedata": "Change data",
+        "refreshdata": "Refresh data",
+        "editdata": "Edit data",
+        "maximize": "Maximize",
         "column": "Column",
         "copyclipboard": "Copy to clipboard",
         "copiedclipboard": "Copied to clipboard",

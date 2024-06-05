@@ -7,21 +7,26 @@ export default function Section(props) {
     <Container fluid className={[styles.section, props.className].join(' ')}>
       <Row>
         <Col>
-          <div className="d-flex align-items-center mb-3">
-            <h1>{props.title}</h1>
-            {props.loading && (
-              <Spinner
-                animation="border"
-                variant="primary"
-                style={{
-                  width: '2rem',
-                  height: '2rem',
-                  borderWidth: '2px',
-                  marginLeft: '2rem',
-                }}
-              />
-            )}
-          </div>
+          {props.title && (
+            <div className={[styles.header].join(' ')}>
+              <div className={styles.circle}>
+                <div className={styles.circleContent}>{props.number}</div>
+              </div>
+              <span className={styles.title}>{props.title}</span>
+              {props.loading && (
+                <Spinner
+                  animation="border"
+                  variant="primary"
+                  style={{
+                    width: '2rem',
+                    height: '2rem',
+                    borderWidth: '2px',
+                    marginLeft: '2rem',
+                  }}
+                />
+              )}
+            </div>
+          )}
 
           {props.children}
         </Col>

@@ -1,11 +1,12 @@
 import React from 'react';
 import XMLParser from 'react-xml-parser/xmlParser';
 import classNames from 'classnames';
-import S from './UrlFetch.module.scss';
 import { Translation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
 import LayersOptionCard from '../../LayersOptionCard/LayersOptionCard';
+import { ResetButton } from './../../ResetButton';
+import styles from './../DataLoader.module.scss';
 
 export default class WMSFetch extends React.Component {
   constructor(props) {
@@ -140,22 +141,44 @@ export default class WMSFetch extends React.Component {
       <Translation ns={'translation'}>
         {(t) => (
           <>
-            <Form onSubmit={this.handleSubmit}>
-              <input
-                className={classNames('w-100', S['url-input'])}
-                value={this.state.url}
-                onChange={(event) => {
-                  this.setState({ url: event.target.value });
-                }}
-              />
-              <div className="text-right">
+            <Form
+              onSubmit={this.handleSubmit}
+              className={classNames(
+                styles['form'],
+                'd-flex flex-column py-top-20',
+                this.state.sources.length > 0 ? styles['layer-loaded'] : ''
+              )}
+            >
+              <Form.Group>
+                <Form.Label>
+                  {t('global.section.loadLayers.message')}
+                </Form.Label>
+                <input
+                  className={classNames('form-control', styles['borderBox'])}
+                  value={this.state.url}
+                  onChange={(event) => {
+                    this.setState({ url: event.target.value });
+                  }}
+                />
+              </Form.Group>
+              <div className="general-buttons row">
                 <button
-                  className="btn btn-sm btn-success mt-3"
+                  className="text-icon-button btn-thin-first"
                   disabled={!this.state.url || this.state.loading}
                   type="submit"
                 >
-                  {t('global.section.loaddata.wms.loadButton')}
+                  <i className="fa-thin fa-cloud-arrow-up"></i>
+                  <span>
+                    {this.state.sources.length > 0
+                      ? t(
+                          'global.section.loadLayers.addWmsButton'
+                        ).toUpperCase()
+                      : t(
+                          'global.section.loadLayers.loadWmsButton'
+                        ).toUpperCase()}
+                  </span>
                 </button>
+                {this.state.sources.length > 0 && <ResetButton />}
               </div>
             </Form>
             {this.state.sources.map((source, index) => (

@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import classNames from 'classnames';
-import S from './UrlFetch.module.scss';
+import { Col, Row, Form, Dropdown } from 'react-bootstrap';
+import { CustomToggle } from '../../CustomDropdown/CustomDropdownToggle';
 import { useTranslation } from 'react-i18next';
+import styles from '../DataLoader.module.scss';
+import classNames from 'classnames';
 
 export async function fetchData(source, acceptHeader = 'text/csv') {
   const response = await fetch(source.url, {
@@ -22,6 +23,7 @@ export default function UrlFetch({
   const [acceptHeader, setAcceptHeader] = useState('text/csv');
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation(['translation']);
+  const options = ['text/csv', 'text/tab-separated-values'];
 
   const fetchUrl = useCallback(
     async (url) => {
@@ -51,39 +53,80 @@ export default function UrlFetch({
   );
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Row>
-        <Col xs={3} className="pt-3 mb-3">
-          <select
-            className="custom-select raw-select"
-            value={acceptHeader}
-            onChange={(event) => setAcceptHeader(event.target.value)}
-          >
-            <option key="csv" value="text/csv">
-              text/csv
-            </option>
-            <option key="tsv" value="text/tab-separated-values">
-              text/tab-separated-values
-            </option>
-          </select>
-        </Col>
-      </Row>
-      <input
-        className={classNames('w-100', S['url-input'])}
-        value={url}
-        onChange={(e) => {
-          setUrl(e.target.value);
-        }}
-      />
-      <div className="text-right">
-        <button
-          className="btn btn-sm btn-success mt-3"
-          disabled={!url || loading}
-          type="submit"
-        >
-          {t('global.section.loaddata.url.loadButton')}
-        </button>
+    <>
+      <div className={`d-flex ${styles['options-section']}`}>
+        <span className={styles['options-section-number']}>
+          {t('global.section.loaddata.options.3')}
+        </span>
+        <span className={styles['options-section-text']}>
+          {t('global.section.loaddata.options.label3')}
+        </span>
       </div>
-    </form>
+      <form
+        onSubmit={handleSubmit}
+        className={[styles.form, 'd-flex flex-column py-top-10'].join(' ')}
+      >
+        <Row>
+          <Col xs={3}>
+            <Dropdown className="raw-dropdown">
+              <Dropdown.Toggle
+                as={CustomToggle}
+                id="dropdown-custom-components"
+                className={classNames(
+                  styles['borderBox'],
+                  'd-flex align-items-center justify-content-between form-control'
+                )}
+              >
+                <span>{acceptHeader}</span>
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                {Object.values(options).map((option) => {
+                  return (
+                    <Dropdown.Item
+                      key={option}
+                      onClick={() => {
+                        setAcceptHeader(option);
+                      }}
+                    >
+                      {option}
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Form.Label className={styles['lighter']}>Url</Form.Label>
+            <input
+              className={classNames('form-control', styles['borderBox'])}
+              value={url}
+              onChange={(e) => {
+                setUrl(e.target.value);
+              }}
+            />
+          </Col>
+        </Row>
+        <div className="row general-buttons">
+          <button
+            className="text-icon-button btn-thin-first"
+            disabled={!url || loading}
+            type="submit"
+          >
+            <i className="fa-thin fa-cloud-arrow-up"></i>
+            {t('global.section.loaddata.url.loadButton').toUpperCase()}
+          </button>
+          {/*<button
+                        className="text-icon-button btn-thin-cancel"
+                        disabled={!url || loading}
+                        type="button" onClick={ //TODO nueva funcionalidad (en siguiente fase) }
+                    >
+                        <i className="fa-thin fa-eraser"></i>
+                        {t('global.section.loaddata.url.clearFieldsButton').toUpperCase()}
+                    </button>*/}
+        </div>
+      </form>
+    </>
   );
 }

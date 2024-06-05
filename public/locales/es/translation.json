@@ -1,32 +1,42 @@
 {
     "global": {
-        "appName": "Sistema de gráficos a medida",
-        "accepts": "Accepta",
+        "appName": "Mis visualizaciones a medida",
+        "accepts": "Acepta",
+        "download": "Descargar",
+        "save": "Guardar",
         "section": {
             "loaddata": {
-                "title": "1. Cargar datos",
+                "title": "Carga tus datos",
+                "tabs" : {
+                    "createGraphs": {
+                        "title": "Crear gráficos",
+                        "fromEdatos": "Desde el banco de datos",
+                        "fromFiles": "Desde tus ficheros",
+                        "fromProjects": "Desde tus proyectos"
+                    },
+                    "createMaps": {
+                        "title": "Crear mapas"
+                    }
+                },
                 "paste": {
-                    "name": "Pegar datos",
                     "message": "Copie y pegue sus datos de otras aplicaciones o sitios web. Puede usar datos tabulares (TSV, CSV, DSV) o JSON."
                 },
                 "upload": {
-                    "name": "Subir datos",
                     "message": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON."
                 },
                 "sample": {
-                    "name": "Probar ejemplos datos"
-                },
-                "sparql": {
-                    "name" : "Consulta SPARQL"
+                    "name": "Probar ejemplos de datos"
                 },
                 "url": {
                     "name": "Desde URL",
                     "message": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...). Por favor, asegúrese de que el servidor tiene CORS habilitado.",
-                    "loadButton": "Cargar Datos"
+                    "loadButton": "Cargar Datos",
+                    "clearFieldsButton": "Limpiar campos"
                 },
                 "project": {
-                    "name": "Abrir proyecto",
                     "message": "Cargar un proyecto .edatosgraphs.",
+                    "dragAndBrowseFile": "Arrastre un archivo o seleccione un archivo local",
+                    "browseFile": "Seleccionar archivo",
                     "drag": "Arrastre un archivo o",
                     "browse": "Seleccione",
                     "file": "un archivo local",
@@ -34,16 +44,11 @@
                     "rejected": "Algunos ficheros han sido rechazados"
                 },
                 "edatos": {
-                    "name": "Desde eDatos",
                     "message": "Seleccione operación estadística y cubo",
+                    "statisticalOperations": "Selecciona operación estadística",
+                    "cubes": "Cubos",
                     "loadButton": "Cargar Datos",
-                    "statisticalOperations": "Operaciones estadísticas",
-                    "cubes": "Cubos"
-                },
-                "wms": {
-                    "name": "Desde un servidor WMS",
-                    "message": "Introduzca una dirección web (URL) del servidor WMS",
-                    "loadButton": "Cargar WMS"
+                    "clearFieldsButton": "Limpiar campos"
                 },
                 "types": {
                     "number": "Número",
@@ -60,6 +65,14 @@
                     "remaining": "El resto de",
                     "look": "revise",
                     "fine": "bien"
+                },
+                "options": {
+                    "1": "OPCIÓN 1",
+                    "label1": "Copie y pegue sus datos de otras aplicaciones o sitios web. Puede usar datos tabulares (TSV, CSV, DSV) o JSON.",
+                    "2": "OPCIÓN 2",
+                    "label2": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON.",
+                    "3": "OPCIÓN 3",
+                    "label3": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...).\nPor favor, asegúrese de que el servidor tiene CORS habilitado."
                 }
             },
             "sampleData" : {
@@ -73,11 +86,20 @@
                 "sample8": "Viajeros alojados según principales nacionalidades y eventos. Canarias. 2022.",
                 "source": "Fuente"
             },
+            "loadLayers": {
+                "title": "Cargar capas",
+                "message": "Introduzca una dirección web (URL) del servidor WMS con el que quiere trabajar",
+                "loadWmsButton": "Cargar WMS",
+                "addWmsButton": "Añadir WMS"
+            },
             "wmslayerselection": {
-                "title": "Seleccione capas",
-                "style":  {
-                    "placeholder": "Selecciona estilo...",
+                "configuration": {
+                    "title": "Configuración de capas",
+                    "placeholder": "Seleccione capas"
+                },
+                "style": {
                     "title": "Selecciona estilo para capa",
+                    "placeholder": "Seleccione estilos",
                     "legend": "Mostrar leyenda",
                     "showlayer": "Mostrar nombre de capa",
                     "hidestyle": "Ocultar nombre de estilo"
@@ -87,7 +109,7 @@
                 "title": "Seleccione municipio"
             },
             "chartselection": {
-                "title": "2. Seleccionar gráfico",
+                "title": "Escoge el gráfico que necesites",
                 "barchart": {
                     "title": "Diagrama de barras",
                     "description": "Muestra una dimensión categórica y cantidades relacionadas. Cada barra representa una categoría, el ancho es proporcional a la dimensión cuantitativa.",
@@ -154,20 +176,30 @@
                 }
             },
             "mapping": {
-                "title": "3. Mapear",
+                "title": "Mapea las variables en el gráfico",
                 "chartvariables":{
                     "dimensions": "DIMENSIONES",
-                    "variables": "VARIABLES GRÁFICO",
                     "dropdimension" : "Arrastre dimensión aquí",
                     "dropanotherdimen": "Arrastre otra dimensión aquí"
                 }
             },
             "customize": {
-                "title": "4. Personalizar"
+                "title": "Personaliza tu gráfico"
             },
             "export": {
-                "title": "5. Exportar",
-                "download": "Descargar"
+                "graph": {
+                    "title": "Exporta o guarda tu gráfico",
+                    "dynamicWidget": "Generar widget dinámico con carga de datos por url"
+                },
+                "map": {
+                    "title": "Exporta o guarda tu mapa"
+                },
+                "formats": {
+                    "title": "Formato",
+                    "edatosgraphs": "Formato edatosgraphs",
+                    "svg": "Formato svg",
+                    "widget": "Formato widget"
+                }
             },
             "login": {
                 "title": "Acceder",
@@ -175,7 +207,9 @@
             }
         },
         "reset": "Reiniciar",
-        "changedata": "Cambiar datos",
+        "refreshdata": "Recargar datos",
+        "editdata": "Editar datos",
+        "maximize": "Maximizar",
         "column": "Columna",
         "copyclipboard": "Copiar al portapapeles",
         "copiedclipboard": "Copiado al portapales",

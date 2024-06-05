@@ -88,11 +88,11 @@ export const baseVisualOptions = {
     group: 'artboard',
     options: [
       {
-        label: 'Svg',
+        label: 'svg',
         value: 'svg',
       },
       {
-        label: 'Canvas',
+        label: 'canvas',
         value: 'canvas',
       },
     ],

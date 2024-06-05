@@ -5,8 +5,8 @@ import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts';
 import LangES from './i18n/LangES';
 import LangESCa from './i18n/LangES-ca';
-
 import { useTranslation } from 'react-i18next';
+import styles from './ChartPreview.module.scss';
 
 const ChartPreview = ({
   chart,
@@ -22,6 +22,7 @@ const ChartPreview = ({
   const { t, i18n } = useTranslation();
   echarts.registerLocale('es', LangES);
   echarts.registerLocale('ca', LangESCa);
+
   useEffect(() => {
     setError(null);
 
@@ -124,7 +125,7 @@ const ChartPreview = ({
     setRawViz(null);
   }
   return (
-    <div className={'col-8 col-xl-9'}>
+    <>
       <div
         className={['overflow-auto', 'position-sticky'].join(' ')}
         style={{ top: 'calc(15px + var(--header-height))' }}
@@ -134,18 +135,19 @@ const ChartPreview = ({
         )}
         <div ref={domRef}>{/* Don't put content in this <div /> */}</div>
       </div>
-      <ReactEcharts
-        option={options}
-        className="echarts-for-echarts"
-        ref={domRef}
-        style={{
-          width: visualOptions.width,
-          height: visualOptions.height,
-          backgroundColor: visualOptions.background,
-        }}
-        opts={{ renderer: visualOptions.render, locale: i18n.language }}
-      />
-    </div>
+      <div className={styles.echartsForEcharts}>
+        <ReactEcharts
+          option={options}
+          className="echarts-for-echarts"
+          ref={domRef}
+          style={{
+            height: visualOptions.height,
+            backgroundColor: visualOptions.background,
+          }}
+          opts={{ renderer: visualOptions.render, locale: i18n.language }}
+        />
+      </div>
+    </>
   );
 };
 
