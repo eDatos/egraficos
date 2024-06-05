@@ -229,7 +229,7 @@ export default class EDatosFetch extends React.Component {
                 language={i18n.language}
               />
             )}
-            <div class="general-buttons row">
+            <div className="general-buttons row">
               <button
                 className="text-icon-button btn-thin-first"
                 disabled={
