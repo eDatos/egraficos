@@ -18,24 +18,22 @@ export function CopyToClipboardButton({ content }) {
   const { t } = useTranslation();
 
   return (
-      <div className="" onClick={handleCopy}>
-      {pending && (
-        <>
-          <button className="text-icon-button btn-thin-default text-success" type="button">
-            <i className="fa-thin fa-copy"></i>
-            <span>{t('global.copiedclipboard').toUpperCase()}</span>
-          </button>
-        </>
-      )}
-      {!pending && (
-        <>
-          <button className="text-icon-button btn-thin-default" type="button">
-            <i className="fa-thin fa-copy"></i>
-            <span>{t('global.copyclipboard').toUpperCase()}</span>
-          </button>
-        </>
-      )}
-
-      </div>
+    <div className="" onClick={handleCopy}>
+      <button
+        className={
+          pending
+            ? 'text-icon-button btn-thin-default text-success'
+            : 'text-icon-button btn-thin-default'
+        }
+        type="button"
+      >
+        <i className="fa-thin fa-copy"></i>
+        <span>
+          {pending
+            ? t('global.copiedclipboard').toUpperCase()
+            : t('global.copyclipboard').toUpperCase()}
+        </span>
+      </button>
+    </div>
   );
 }

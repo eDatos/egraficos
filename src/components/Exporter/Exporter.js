@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Col, Dropdown, Form } from 'react-bootstrap';
 import uuid from 'react-uuid';
 import { CustomToggle } from '../CustomDropdown/CustomDropdownButton';
+import { CopyToClipboardButton } from '../CopyToClipboardButton';
 import svg from '../../icons/svgicon/iconosvg_blanco.svg';
 import svgSelected from '../../icons/svgicon/iconosvg_azul.svg';
 import { t } from 'i18next';
@@ -299,13 +300,9 @@ export default function Exporter({
                 <span>{t('global.download').toUpperCase()}</span>
               </button>
             )}
-            {/*currentFormat.format === 'widget' && (
-                                
-                                <button className="text-icon-button btn-thin-default d-flex align-items-center" type="button" onClick={//TODO nueva funcionalidad (en siguiente fase)}>
-                                <i className="fa-thin fa-copy"></i>
-                                <span>{t('global.copyclipboard').toUpperCase()}</span>
-                              </button>
-                            )*/}
+            {currentFormat.format === 'widget' && (
+                <CopyToClipboardButton content={getWidget(dataSource.type)}/>
+            )}
             {/*<button className="text-icon-button btn-thin-default d-flex align-items-center" type="button" onClick={//TODO nueva funcionalidad (en siguiente fase)}>
                                 <i className="fa-thin fa-save"></i>
                                 <span>{t('global.save').toUpperCase()}</span>
