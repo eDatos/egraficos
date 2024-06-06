@@ -17,6 +17,8 @@
     "legendOrient": "Legend orient",
     "legendMarginRight": "Legend Margin(Right)",
     "legendMarginTop": "Legend Margin(Top)",
+    "legendTextSize": "Legend fontsize", 
+    "legendItemSize": "Legend item size %", 
     "showToolbox": "Show Toolbox",
     "render": "Render",
     "barsOrientation": "Bars orientation",
