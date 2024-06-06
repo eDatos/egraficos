@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Col, Row, Form, Dropdown } from 'react-bootstrap';
 import { CustomToggle } from '../../CustomDropdown/CustomDropdownToggle';
+import { LoadDataButton } from '../../LoadDataButton';
 import { useTranslation } from 'react-i18next';
 import styles from '../DataLoader.module.scss';
 import classNames from 'classnames';
@@ -109,14 +110,7 @@ export default function UrlFetch({
           </Col>
         </Row>
         <div className="row general-buttons">
-          <button
-            className="text-icon-button btn-thin-first"
-            disabled={!url || loading}
-            type="submit"
-          >
-            <i className="fa-thin fa-cloud-arrow-up"></i>
-            {t('global.section.loaddata.url.loadButton').toUpperCase()}
-          </button>
+          <LoadDataButton disabled={!url || loading} />
           {/*<button
                         className="text-icon-button btn-thin-cancel"
                         disabled={!url || loading}

@@ -5,6 +5,7 @@ import { Translation } from 'react-i18next';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { applicationConfig } from '../../ApplicationConfig/ApplicationConfig';
 import { CustomDropdownIcon } from '../../CustomDropdown/CustomDropdownIcon';
+import { LoadDataButton } from '../../LoadDataButton';
 import styles from './../DataLoader.module.scss';
 
 const SelectionCombo = (props) => {
@@ -229,21 +230,14 @@ export default class EDatosFetch extends React.Component {
                 language={i18n.language}
               />
             )}
-            <div class="general-buttons row">
-              <button
-                className="text-icon-button btn-thin-first"
+            <div className="general-buttons row">
+              <LoadDataButton
                 disabled={
                   !this.state.url ||
                   !this.state.operationId ||
                   this.state.loading
                 }
-                type="submit"
-              >
-                <i className="fa-thin fa-cloud-arrow-up"></i>
-                <span>
-                  {t('global.section.loaddata.edatos.loadButton').toUpperCase()}
-                </span>
-              </button>
+              />
               {/*<button
                 className="text-icon-button btn-thin-cancel"
                 disabled={!this.state.url || !this.state.operationId || this.state.loading}

@@ -1,7 +1,6 @@
 @import '../../styles/variables';
 
 .thumbnail {
-  color: $color-blue-dark-100;
   font-size: 36px;
   padding-left: 16px;
 }
@@ -30,14 +29,12 @@
 span.chartTitle {
   font-size: $size-14;
   font-weight: 400;
-  color: $color-black-80;
 }
 
 .chartText,
 h4 {
   font-size: $size-12;
   font-weight: 300;
-  color: $color-black-80;
 }
 
 .custom-card .card-body {

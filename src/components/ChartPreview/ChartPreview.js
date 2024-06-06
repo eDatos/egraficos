@@ -141,6 +141,8 @@ const ChartPreview = ({
           className="echarts-for-echarts"
           ref={domRef}
           style={{
+            width: visualOptions.width,
+            maxWidth: 900,
             height: visualOptions.height,
             backgroundColor: visualOptions.background,
           }}

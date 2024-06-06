@@ -13,9 +13,9 @@ export const CustomToggle = React.forwardRef(
       {children}
 
       {className.search('show') !== -1 ? (
-        <i class="fa-thin fa-chevron-up"></i>
+        <i className="fa-thin fa-chevron-up"></i>
       ) : (
-        <i class="fa-thin fa-chevron-down"></i>
+        <i className="fa-thin fa-chevron-down"></i>
       )}
     </button>
   )

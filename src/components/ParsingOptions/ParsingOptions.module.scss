@@ -49,6 +49,7 @@
 }
 
 .customTable {
+  border-top: 0;
   border-bottom: 0;
   margin: 20px 0;
 
@@ -65,7 +66,7 @@
       font-weight: 400;
       &:first-child {
         border-radius: 5px 0 0 0;
-        border-right: 1px solid black;
+        border-right: 1px solid $color-black-0;
       }
       &:last-child {
         min-width: calc($container-max-width/4);

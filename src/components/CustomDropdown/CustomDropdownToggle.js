@@ -11,7 +11,7 @@ export const CustomToggle = React.forwardRef(
       }}
     >
       {children}
-      <i class="fa-thin fa-chevron-down"></i>
+      <i className="fa-thin fa-chevron-down"></i>
     </button>
   )
 );
