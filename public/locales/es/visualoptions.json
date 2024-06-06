@@ -17,6 +17,8 @@
     "legendOrient": "Leyenda: Orientación",
     "legendMarginRight": "Leyenda: Margen(Derecho)",
     "legendMarginTop": "Leyenda: Margen(Superior)",
+    "legendTextSize": "Leyenda: Tamaño de texto", 
+    "legendItemSize": "Leyenda: % Tamaño de item", 
     "showToolbox": "Mostrar Herramientas",
     "render": "Visualización",
     "barsOrientation": "Orientación de las barras",

@@ -78,6 +78,22 @@ export const baseVisualOptions = {
       showLegend: false,
     },
   },
+  legendTextSize: {
+    type: 'number',
+    default: 12,
+    group: 'artboard',
+    disabled: {
+      showLegend: false,
+    },
+  },
+  legendItemSize: {
+    type: 'number',
+    default: 100,
+    group: 'artboard',
+    disabled: {
+      showLegend: false,
+    },
+  },
   showToolbox: {
     type: 'boolean',
     default: true,

@@ -6,6 +6,11 @@ export const legend = (visualOptions) => {
     right: visualOptions.legendMarginRight,
     top: visualOptions.legendMarginTop,
     icon: 'rect',
+    textStyle: {
+      fontSize: visualOptions.legendTextSize,
+    },
+    itemWidth: (25 * visualOptions.legendItemSize) / 100,
+    itemHeight: (14 * visualOptions.legendItemSize) / 100,
   };
 };
 
