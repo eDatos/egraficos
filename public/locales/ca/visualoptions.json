@@ -17,6 +17,8 @@
     "legendOrient": "Llegenda: Orientació",
     "legendMarginRight": "Marge(Dret) de la llegenda",
     "legendMarginTop": "Marge(Superior) de la llegenda",
+    "legendTextSize": "Llegenda: Mida de text", 
+    "legendItemSize": "Llegenda: % Mida d'ítem", 
     "showToolbox": "Mostra Eines",
     "render": "Visualització",
     "barsOrientation": "Orientació de les barres",
