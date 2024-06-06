@@ -30,7 +30,6 @@
                 "url": {
                     "name": "From URL",
                     "message": "Enter a web address (URL) pointing to the data (e.g. a public Dropbox file, a public API, ...). Please, be sure the server is CORS-enabled.",
-                    "loadButton": "Load Data",
                     "clearFieldsButton": "Clear fields"
                 },
                 "project": {
@@ -47,7 +46,6 @@
                     "message": "Select statistical operation and cube",
                     "statisticalOperations": "Statistical operations",
                     "cubes": "Cubes",
-                    "loadButton": "Load Data",
                     "clearFieldsButton": "Clear fields"
                 },
                 "types": {
@@ -73,7 +71,8 @@
                     "label2": "Puede cargar datos tabulares (TSV, CSV, DSV) o JSON.",
                     "3": "OPTION 3",
                     "label3": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...).\nPor favor, asegúrese de que el servidor tiene CORS habilitado."
-                }
+                },
+                "loadButton": "Load data"
             },
             "sampleData" : {
                 "sample1": "Proportion of people who have completed studies or training in the last four weeks according to age groups. Canary Islands. 2022.",

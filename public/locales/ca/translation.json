@@ -30,7 +30,6 @@
                 "url": {
                     "name": "Des de URL",
                     "message": "Introduïu una adreça web (URL) que apunti a les dades (per exemple, un fitxer públic de Dropbox, una API pública, ...). Assegureu-vos que el servidor té CORS habilitat.",
-                    "loadButton": "Carregar dades",
                     "clearFieldsButton": "Esborrar camps"
                 },
                 "project": {
@@ -47,7 +46,6 @@
                     "message": "Seleccioneu operació estadística i cub",
                     "statisticalOperations": "Selecciona operació estadística",
                     "cubes": "Cubs",
-                    "loadButton": "Carregar dades",
                     "clearFieldsButton": "Esborrar camps"
                 },
                 "types": {
@@ -73,7 +71,8 @@
                     "label2": "Pot carregar dades tabulars (TSV, CSV, DSV) o JSON.",
                     "3": "OPCIÓ 3",
                     "label3": "Introdueix una adreça web (URL) que apunta a les dades (per exemple, un fitxer Dropbox públic, una API pública, ...).\nAssegureu-vos que el servidor té CORS activat."
-                }
+                },
+                "loadButton": "Carregar dades"
             },
             "sampleData" : {
                 "sample1": "Proporció de persones que han finalitzat estudis o formació en les últimes quatre setmanes segons grups d'edat. Illes Canàries. 2022.",
