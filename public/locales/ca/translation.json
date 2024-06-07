@@ -28,7 +28,6 @@
                     "name": "Provar exemples de dades"
                 },
                 "url": {
-                    "name": "Des de URL",
                     "message": "Introduïu una adreça web (URL) que apunti a les dades (per exemple, un fitxer públic de Dropbox, una API pública, ...). Assegureu-vos que el servidor té CORS habilitat.",
                     "clearFieldsButton": "Esborrar camps"
                 },
@@ -43,7 +42,6 @@
                     "rejected": "Alguns els fitxers han estat rebutjats"
                 },
                 "edatos": {
-                    "message": "Seleccioneu operació estadística i cub",
                     "statisticalOperations": "Selecciona operació estadística",
                     "cubes": "Cubs",
                     "clearFieldsButton": "Esborrar camps"
