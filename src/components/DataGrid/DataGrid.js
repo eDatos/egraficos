@@ -220,7 +220,13 @@ function HeaderRenderer({ ...props }) {
   );
 }
 
-function createColumns(userDataSet, dataTypes, containerEl, coerceTypes) {
+function createColumns(
+  userDataSet,
+  dataTypes,
+  containerEl,
+  coerceTypes,
+  locale
+) {
   if (!userDataSet || !dataTypes) {
     return [];
   }
@@ -252,7 +258,9 @@ function createColumns(userDataSet, dataTypes, containerEl, coerceTypes) {
       formatter: ({ row }) => {
         return (
           <div className={classNames({ [S['has-error']]: row?._errors?.[k] })}>
-            {row[k]?.toString()}
+            {dataTypes[k] === 'number' || dataTypes[k]?.type === 'number'
+              ? Intl.NumberFormat(locale).format(row[k])
+              : row[k]?.toString()}
           </div>
         );
       },
@@ -268,13 +276,15 @@ export default function DataGrid({
   coerceTypes,
   onDataUpdate,
 }) {
+  const { i18n } = useTranslation();
   const keyedErrors = useMemo(() => keyBy(errors, 'row'), [errors]);
   const containerEl = useRef();
   const columns = createColumns(
     userDataset,
     dataTypes,
     containerEl,
-    coerceTypes
+    coerceTypes,
+    i18n.language
   );
   const [sortColumns, setSortColumns] = useState([]);
   const onSortColumnsChange = useCallback((sortColumns) => {

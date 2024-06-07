@@ -11,9 +11,7 @@ export function LoadDataButton({ disabled }) {
       type="submit"
     >
       <i className="fa-thin fa-cloud-arrow-up"></i>
-      <span>
-        {t('global.section.loaddata.loadButton').toUpperCase()}
-      </span>
+      <span>{t('global.section.loaddata.loadButton').toUpperCase()}</span>
     </button>
   );
 }

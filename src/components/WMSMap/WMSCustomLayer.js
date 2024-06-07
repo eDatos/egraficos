@@ -8,7 +8,8 @@ const WMSCustomLayer = ({ layer, url, style, identify }) => {
   const layerName = layer['Name'];
   var MySource = WMS.Source.extend({
     showFeatureInfo: function (latlng, info) {
-      if (!this._map || !info) {
+      var emptyBody = info?.match(/<body>\s*<\/body>/);
+      if (!this._map || !info || (emptyBody && emptyBody.length > 0)) {
         return;
       }
       if (this._map._popup?.isOpen()) {

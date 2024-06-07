@@ -173,6 +173,7 @@ export function getChartOptions(
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {
+      show: visualOptions.showTooltip,
       trigger: 'axis',
     }, //añadir a las opciones
     toolbox: toolbox(visualOptions.showToolbox),

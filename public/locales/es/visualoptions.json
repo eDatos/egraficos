@@ -16,7 +16,7 @@
     "legendWidth": "Leyenda: Ancho",
     "legendOrient": "Leyenda: Orientación",
     "legendMarginRight": "Leyenda: Margen(Derecho)",
-    "legendMarginTop": "Leyenda: Margen(Superior)",
+    "legendMarginBottom": "Leyenda: Margen(Inferior)",
     "legendTextSize": "Leyenda: Tamaño de texto", 
     "legendItemSize": "Leyenda: % Tamaño de item", 
     "showToolbox": "Mostrar Herramientas",
@@ -118,5 +118,6 @@
     "yes": "Sí",
     "no": "No",
     "reverseOrder": "Orden inverso",
-    "smooth": "Suavizar"
+    "smooth": "Suavizar",
+    "showTooltip": "Mostrar descripción emergente"
 }
