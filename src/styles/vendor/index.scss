@@ -35,5 +35,14 @@ $card-cap-color: $color-black-0;
 $card-spacer-y: 5px;
 $card-spacer-x: 10px;
 
+//dropdown-menu
+$dropdown-border-width: 0px;
+$dropdown-border-radius: 5px;
+$dropdown-link-hover-bg: $color-blue-25; 
+$dropdown-link-hover-color: $color-blue-dark-100;
+$dropdown-link-color: $color-blue-dark-100;
+$dropdown-item-padding-y: 0;
+$dropdown-item-padding-x: 5px;
+
 // Boostrap scss
 @import '~bootstrap/scss/bootstrap';

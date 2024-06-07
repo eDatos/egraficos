@@ -169,11 +169,10 @@ h5 {
   .dropdown-menu {
     max-height: 40vh;
     overflow-y: auto;
-    padding: 0;
-    border: none;
+    padding: 5px;
     z-index: 1030;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid var(--light);
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+    width: 100%;
     .dropdown-header {
       padding: 0 8px;
       height: 24px;
@@ -182,12 +181,13 @@ h5 {
       border-bottom: 1px solid var(--light);
     }
     .dropdown-item {
-      height: 40px;
-      padding: 0 8px;
+      height: 26px;
+      font-weight: 400;
+      font-size: 10px;
       display: flex;
       align-items: center;
-      &:not(:last-child) {
-        border-bottom: 1px solid var(--light);
+      &:hover {
+        border-radius: 8px;
       }
     }
   }
@@ -206,11 +206,11 @@ h5 {
 
     .dropdown-menu {
       background-color: $color-blue-dark-100;
-      border-radius: 5px 0 5px 5px;
+      border-top-right-radius: 0;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       padding: 10px;
       margin-top: 0;
-      border: none;
+      width: unset;
       &.dropdown-menu-end {
         position: absolute;
         inset: -5px -1px auto auto;
@@ -218,9 +218,7 @@ h5 {
       }
     }
     .dropdown-item {
-      height: 26px;
       padding: 3px;
-      border-bottom: none;
       background-color: $color-blue-dark-100;
       color: $color-black-0;
       font-size: 14px;
