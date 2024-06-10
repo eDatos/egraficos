@@ -6,6 +6,7 @@ import Papa from 'papaparse';
 import { applicationConfig } from '../ApplicationConfig/ApplicationConfig';
 
 function Municipalities(props) {
+  //TODO: ver si el selector de municipos para los mapas se borra o no
   const { t } = useTranslation(['translation']);
   const [municipalities, setMunicipalities] = useState([]);
   useEffect(() => {
