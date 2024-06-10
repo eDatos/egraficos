@@ -259,7 +259,7 @@ function createColumns(
         return (
           <div className={classNames({ [S['has-error']]: row?._errors?.[k] })}>
             {dataTypes[k] === 'number' || dataTypes[k]?.type === 'number'
-              ? Intl.NumberFormat(locale).format(row[k])
+              ? Intl.NumberFormat(locale, { useGrouping: true }).format(row[k])
               : row[k]?.toString()}
           </div>
         );
