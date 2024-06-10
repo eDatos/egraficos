@@ -28,7 +28,6 @@
                     "name": "Try our data samples"
                 },
                 "url": {
-                    "name": "From URL",
                     "message": "Enter a web address (URL) pointing to the data (e.g. a public Dropbox file, a public API, ...). Please, be sure the server is CORS-enabled.",
                     "clearFieldsButton": "Clear fields"
                 },
@@ -43,7 +42,6 @@
                     "rejected": "Some files will be rejected"
                 },
                 "edatos": {
-                    "message": "Select statistical operation and cube",
                     "statisticalOperations": "Statistical operations",
                     "cubes": "Cubes",
                     "clearFieldsButton": "Clear fields"

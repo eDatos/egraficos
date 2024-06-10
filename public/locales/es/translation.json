@@ -28,7 +28,6 @@
                     "name": "Probar ejemplos de datos"
                 },
                 "url": {
-                    "name": "Desde URL",
                     "message": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...). Por favor, asegúrese de que el servidor tiene CORS habilitado.",
                     "clearFieldsButton": "Limpiar campos"
                 },
@@ -43,7 +42,6 @@
                     "rejected": "Algunos ficheros han sido rechazados"
                 },
                 "edatos": {
-                    "message": "Seleccione operación estadística y cubo",
                     "statisticalOperations": "Selecciona operación estadística",
                     "cubes": "Cubos",
                     "clearFieldsButton": "Limpiar campos"
