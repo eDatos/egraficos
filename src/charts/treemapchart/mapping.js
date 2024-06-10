@@ -141,7 +141,9 @@ export const getChartOptions = function (
     },
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
-    tooltip: {},
+    tooltip: {
+      show: visualOptions.showTooltip,
+    },
     grid: grid(visualOptions),
     toolbox: toolbox(visualOptions.showToolbox),
     series: getSeries(

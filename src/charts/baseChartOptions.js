@@ -4,7 +4,7 @@ export const legend = (visualOptions) => {
     width: visualOptions.legendWidth,
     orient: visualOptions.legendOrient,
     right: visualOptions.legendMarginRight,
-    top: visualOptions.legendMarginTop,
+    bottom: visualOptions.legendMarginBottom,
     icon: 'rect',
     textStyle: {
       fontSize: visualOptions.legendTextSize,
