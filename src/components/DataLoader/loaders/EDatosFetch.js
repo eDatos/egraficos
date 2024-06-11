@@ -18,9 +18,7 @@ const SelectionCombo = (props) => {
       placeholder={props.placeholder}
       className={props.className}
     >
-      {
-        <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" />
-      }
+      {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
     </Typeahead>
   );
 };
