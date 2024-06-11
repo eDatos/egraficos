@@ -22,6 +22,7 @@ const WMSCustomLayer = ({ layer, url, style, identify }) => {
         });
       }
     },
+    onRemove: function () {},
   });
 
   useEffect(() => {
