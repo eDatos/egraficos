@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { Form } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
@@ -9,6 +9,7 @@ import { LoadDataButton } from '../../LoadDataButton';
 import styles from './../DataLoader.module.scss';
 
 const SelectionCombo = (props) => {
+  const ref = useRef(null);
   return (
     <Typeahead
       id={props.id}
@@ -17,6 +18,7 @@ const SelectionCombo = (props) => {
       options={props.options}
       placeholder={props.placeholder}
       className={props.className}
+      ref={ref}
     >
       {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
     </Typeahead>
@@ -169,6 +171,7 @@ class OperationTypeahead extends React.Component {
 }
 
 export default class EDatosFetch extends React.Component {
+  operationTypeahead = React.createRef(OperationTypeahead);
   constructor(props) {
     super(props);
     this.state = {
@@ -202,9 +205,11 @@ export default class EDatosFetch extends React.Component {
       })
       .finally(() => this.setState({ loading: false }));
   };
-  /*handleCleanForm = (event) => {
-    //TODO nueva funcionalidad (en siguiente fase)
-  };*/
+  handleCleanForm = (event) => {
+    this.setState({ operationId: null });
+    this.setState({ url: '' });
+    this.operationTypeahead.setState({ value: '' });
+  };
 
   render() {
     return (
@@ -219,6 +224,7 @@ export default class EDatosFetch extends React.Component {
               handleOnChangeOperation={this.handleOnChangeOperation}
               t={t}
               language={i18n.language}
+              ref={(ref) => (this.operationTypeahead = ref)}
             />
             {this.state.operationId && (
               <DataSetTypeahead
@@ -236,15 +242,23 @@ export default class EDatosFetch extends React.Component {
                   this.state.loading
                 }
               />
-              {/*<button
+              <button
                 className="text-icon-button btn-thin-cancel"
-                disabled={!this.state.url || !this.state.operationId || this.state.loading}
-                onClick={//TODO this.handleCleanForm} type="button"
-               
+                disabled={
+                  !this.state.url ||
+                  !this.state.operationId ||
+                  this.state.loading
+                }
+                onClick={this.handleCleanForm}
+                type="button"
               >
                 <i className="fa-thin fa-eraser"></i>
-                <span>{t('global.section.loaddata.edatos.clearFieldsButton').toUpperCase()}</span>
-          </button>*/}
+                <span>
+                  {t(
+                    'global.section.loaddata.edatos.clearFieldsButton'
+                  ).toUpperCase()}
+                </span>
+              </button>
             </div>
           </Form>
         )}
