@@ -1,10 +1,6 @@
 @import './../../styles/variables';
 
 .parsingOptions {
-  b {
-    font-weight: 500;
-  }
-
   :global .dropdown {
     margin-left: 8px;
 
@@ -36,7 +32,6 @@
 }
 
 .separator-preview {
-  font-family: $font-family-sans-serif;
   background-color: $color-black-15;
   color: $color-black-60;
   width: 16px;

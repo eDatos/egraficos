@@ -57,9 +57,7 @@ const SelectionLayerCombo = (props) => {
           )}
           selected={props.selectedLayers}
         >
-          {
-            <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" />
-          }
+          {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
         </Typeahead>
       </Form.Group>
     </DndProvider>
@@ -111,9 +109,7 @@ const SelectionStyle = ({
         selected={styleSelected}
         className={className}
       >
-        {
-          <CustomDropdownIcon className="input-dropdown-icon fa-thin fa-chevron-down" />
-        }
+        {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
       </Typeahead>
       <Row className="mt-3">
         <div className="col d-flex align-items-center">

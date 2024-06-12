@@ -38,7 +38,7 @@ export default function StackSelector({
           <Dropdown.Menu>
             {value && (
               <Dropdown.Item onClick={() => handleChange(null)}>
-                {'Do not stack'}
+                {<Trans i18nKey="global.column"></Trans>}
               </Dropdown.Item>
             )}
             {Object.keys(list).map((d) => {
