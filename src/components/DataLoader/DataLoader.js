@@ -219,7 +219,7 @@ function DataLoader({
   return (
     <>
       <FullScreen handle={handle}>
-        <Row>
+        <Row className="main-content">
           {userData && (
             <Col xs={10} lg={12} className="d-flex flex-column py-top-20">
               <div className="general-buttons row buttons-container">
