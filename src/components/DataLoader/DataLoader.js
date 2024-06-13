@@ -223,7 +223,7 @@ function DataLoader({
               {resetButton}
               {get(dataRefreshWorkers, get(dataSource, 'type', ''), null) && (
                 <button
-                  className="text-icon-button btn-thin-default"
+                  className="text-icon-button btn-thin-first"
                   type="button"
                   onClick={refreshData}
                 >
@@ -231,13 +231,6 @@ function DataLoader({
                   <span>{t('global.refreshdata').toUpperCase()}</span>
                 </button>
               )}
-
-              {/*<button className="text-icon-button btn-thin-default" type="button" onClick={() => {
-                                //TODO nueva funcionalidad (en siguiente fase)
-                            }}>
-                                <i className="fa-thin fa-edit"></i>
-                                <span>{t('global.editdata').toUpperCase()}</span>
-                            </button>*/}
 
               {copyToClipboardButton}
 
