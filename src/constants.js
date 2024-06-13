@@ -116,6 +116,7 @@ export const COLOR_SCHEMES_LABELS = {
   interpolateSpectral: 'Spectral discrete',
   defaultPalette: 'defaultPalette',
   grayPalette: 'grayPalette',
+  bluePalette: 'bluePalette'
 };
 
 export const white = '#FFFFFF';
@@ -150,11 +151,29 @@ export const defaultPalette = [
   '#E5ECF1',
 ];
 export const grayPalette = [
+  '#000000',
   '#333333',
   '#666666',
   '#999999',
   '#CCCCCC',
+  '#D9D9D9',
+  '#E6E6E6',
+  '#EDECEC',
   '#F2F2F2',
+];
+
+export const bluePalette = [
+  '#004678',
+  '#04729C',
+  '#4D7EA0',
+  '#99B5C9',
+  '#CCDAE4',
+  '#E5ECF1',
+  '#009BD7',
+  '#66C3E7',
+  '#B2E1F3',
+  '#D8F0F9',
+  '#EBF7FC'
 ];
 
 export const sexPalette = [
