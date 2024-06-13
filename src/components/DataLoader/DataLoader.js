@@ -20,6 +20,7 @@ import WMSFetch from './loaders/WMSFetch';
 import { ResetButton } from '../ResetButton';
 import { fetchData as fetchDataFromUrl } from './loaders/UrlFetch';
 import { fetchData as fetchDataFromSparql } from './loaders/SparqlFetch';
+import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 
 function DataLoader({
   userInput,
@@ -55,6 +56,7 @@ function DataLoader({
   hydrateFromProject,
   initialState,
 }) {
+  const handle = useFullScreenHandle();
   const [loadingError, setLoadingError] = useState();
   const dataRefreshWorkers = {
     url: fetchDataFromUrl,
@@ -216,89 +218,108 @@ function DataLoader({
 
   return (
     <>
-      <Row>
-        {userData && (
-          <Col xs={10} lg={12} className="d-flex flex-column py-top-20">
-            <div className="general-buttons row buttons-container">
-              {resetButton}
-              {get(dataRefreshWorkers, get(dataSource, 'type', ''), null) && (
-                <button
-                  className="text-icon-button btn-thin-first"
-                  type="button"
-                  onClick={refreshData}
-                >
-                  <i className="fa-thin fa-rotate"></i>
-                  <span>{t('global.refreshdata').toUpperCase()}</span>
-                </button>
-              )}
+      <FullScreen handle={handle}>
+        <Row>
+          {userData && (
+            <Col xs={10} lg={12} className="d-flex flex-column py-top-20">
+              <div className="general-buttons row buttons-container">
+                {resetButton}
+                {get(dataRefreshWorkers, get(dataSource, 'type', ''), null) && (
+                  <button
+                    className="text-icon-button btn-thin-first"
+                    type="button"
+                    onClick={refreshData}
+                  >
+                    <i className="fa-thin fa-rotate"></i>
+                    <span>{t('global.refreshdata').toUpperCase()}</span>
+                  </button>
+                )}
 
-              {copyToClipboardButton}
+                {copyToClipboardButton}
 
-              {/*<button className="text-icon-button btn-thin-default" type="button" onClick={() => {
-                                //TODO nueva funcionalidad (en siguiente fase)
-                            }}>
-                                <i className="fa-thin fa-arrow-up-right-and-arrow-down-left-from-center"></i>
-                                <span>{t('global.maximize').toUpperCase()}</span>
-                            </button>*/}
-            </div>
+                {!handle.active && (
+                  <button
+                    className="text-icon-button btn-thin-default"
+                    type="button"
+                    onClick={handle.enter}
+                  >
+                    <i className="fa-thin fa-arrow-up-right-and-arrow-down-left-from-center"></i>
+                    <span>{t('global.maximize').toUpperCase()}</span>
+                  </button>
+                )}
+                {handle.active && (
+                  <button
+                    className="text-icon-button btn-thin-default"
+                    type="button"
+                    onClick={handle.exit}
+                  >
+                    <i className="fa-thin fa-arrow-down-left-and-arrow-up-right-to-center"></i>
+                    <span>{t('global.minimize').toUpperCase()}</span>
+                  </button>
+                )}
+              </div>
 
-            <ParsingOptions
-              locale={locale}
-              setLocale={setLocale}
-              separator={separator}
-              setSeparator={setSeparator}
-              thousandsSeparator={thousandsSeparator}
-              setThousandsSeparator={setThousandsSeparator}
-              decimalsSeparator={decimalsSeparator}
-              setDecimalsSeparator={setDecimalsSeparator}
-              dimensions={data ? unstackedColumns || data.dataTypes : []}
-              stackDimension={stackDimension}
-              setStackDimension={handleStackOperation}
-              userDataType={userDataType}
-              dataSource={dataSource}
-              onDataRefreshed={(rawInput) => setUserInput(rawInput, dataSource)}
-            />
+              <ParsingOptions
+                locale={locale}
+                setLocale={setLocale}
+                separator={separator}
+                setSeparator={setSeparator}
+                thousandsSeparator={thousandsSeparator}
+                setThousandsSeparator={setThousandsSeparator}
+                decimalsSeparator={decimalsSeparator}
+                setDecimalsSeparator={setDecimalsSeparator}
+                dimensions={data ? unstackedColumns || data.dataTypes : []}
+                stackDimension={stackDimension}
+                setStackDimension={handleStackOperation}
+                userDataType={userDataType}
+                dataSource={dataSource}
+                onDataRefreshed={(rawInput) =>
+                  setUserInput(rawInput, dataSource)
+                }
+              />
+            </Col>
+          )}
+          <Col xs={10} lg={12} className="data-loader">
+            {mainContent}
+
+            {data && !parseError && get(data, 'errors', []).length === 0 && (
+              <WarningMessage
+                variant="light"
+                message={
+                  <Trans
+                    i18nKey="global.message.loadrows.succes"
+                    values={{
+                      rowsnumber: data.dataset.length,
+                      cellsnumber:
+                        data.dataset.length *
+                        Object.keys(data.dataTypes).length,
+                    }}
+                  ></Trans>
+                }
+              />
+            )}
+
+            {parseError && (
+              <WarningMessage variant="danger" message={parseError} />
+            )}
+
+            {get(data, 'errors', []).length > 0 && (
+              <WarningMessage variant="warning" message={parsingErrors(data)} />
+            )}
+
+            {loadingError && (
+              <WarningMessage variant="danger" message={loadingError} />
+            )}
           </Col>
+        </Row>
+        {replaceRequiresConfirmation && (
+          <DataMismatchModal
+            replaceRequiresConfirmation={replaceRequiresConfirmation}
+            commitDataReplace={commitDataReplace}
+            cancelDataReplace={cancelDataReplace}
+          />
         )}
-        <Col xs={10} lg={12} className="data-loader">
-          {mainContent}
-
-          {data && !parseError && get(data, 'errors', []).length === 0 && (
-            <WarningMessage
-              variant="light"
-              message={
-                <Trans
-                  i18nKey="global.message.loadrows.succes"
-                  values={{
-                    rowsnumber: data.dataset.length,
-                    cellsnumber:
-                      data.dataset.length * Object.keys(data.dataTypes).length,
-                  }}
-                ></Trans>
-              }
-            />
-          )}
-
-          {parseError && (
-            <WarningMessage variant="danger" message={parseError} />
-          )}
-
-          {get(data, 'errors', []).length > 0 && (
-            <WarningMessage variant="warning" message={parsingErrors(data)} />
-          )}
-
-          {loadingError && (
-            <WarningMessage variant="danger" message={loadingError} />
-          )}
-        </Col>
-      </Row>
-      {replaceRequiresConfirmation && (
-        <DataMismatchModal
-          replaceRequiresConfirmation={replaceRequiresConfirmation}
-          commitDataReplace={commitDataReplace}
-          cancelDataReplace={cancelDataReplace}
-        />
-      )}
+      </FullScreen>
     </>
   );
 }
