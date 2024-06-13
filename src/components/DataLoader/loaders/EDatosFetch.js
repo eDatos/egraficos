@@ -8,20 +8,19 @@ import { CustomDropdownIcon } from '../../CustomDropdown/CustomDropdownIcon';
 import { LoadDataButton } from '../../LoadDataButton';
 import styles from './../DataLoader.module.scss';
 
-const SelectionCombo = (props) => {
-  return (
-    <Typeahead
-      id={props.id}
-      labelKey={props.name}
-      onChange={props.onChange}
-      options={props.options}
-      placeholder={props.placeholder}
-      className={props.className}
-    >
-      {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
-    </Typeahead>
-  );
-};
+const SelectionCombo = React.forwardRef((props, ref) => (
+  <Typeahead
+    id={props.id}
+    labelKey={props.name}
+    onChange={props.onChange}
+    options={props.options}
+    placeholder={props.placeholder}
+    className={props.className}
+    ref={ref}
+  >
+    {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
+  </Typeahead>
+));
 
 class DataSetTypeahead extends React.Component {
   constructor(props) {
@@ -162,6 +161,7 @@ class OperationTypeahead extends React.Component {
           options={this.state.collection}
           onChange={this.onChange}
           className="custom-input-select"
+          ref={this.props.selectionComboRef}
         />
       </Form.Group>
     );
@@ -176,6 +176,7 @@ export default class EDatosFetch extends React.Component {
       operationId: null,
       loading: false,
     };
+    this.selectionComboRef = React.createRef();
   }
   handleOnChangeOperation = (operationId) => {
     this.setState({ operationId: operationId });
@@ -202,9 +203,11 @@ export default class EDatosFetch extends React.Component {
       })
       .finally(() => this.setState({ loading: false }));
   };
-  /*handleCleanForm = (event) => {
-    //TODO nueva funcionalidad (en siguiente fase)
-  };*/
+  handleCleanForm = (event) => {
+    this.setState({ operationId: null });
+    this.setState({ url: '' });
+    this.selectionComboRef.current?.clear();
+  };
 
   render() {
     return (
@@ -219,6 +222,7 @@ export default class EDatosFetch extends React.Component {
               handleOnChangeOperation={this.handleOnChangeOperation}
               t={t}
               language={i18n.language}
+              selectionComboRef={this.selectionComboRef}
             />
             {this.state.operationId && (
               <DataSetTypeahead
@@ -236,15 +240,23 @@ export default class EDatosFetch extends React.Component {
                   this.state.loading
                 }
               />
-              {/*<button
+              <button
                 className="text-icon-button btn-thin-cancel"
-                disabled={!this.state.url || !this.state.operationId || this.state.loading}
-                onClick={//TODO this.handleCleanForm} type="button"
-               
+                disabled={
+                  !this.state.url ||
+                  !this.state.operationId ||
+                  this.state.loading
+                }
+                onClick={this.handleCleanForm}
+                type="button"
               >
                 <i className="fa-thin fa-eraser"></i>
-                <span>{t('global.section.loaddata.edatos.clearFieldsButton').toUpperCase()}</span>
-          </button>*/}
+                <span>
+                  {t(
+                    'global.section.loaddata.edatos.clearFieldsButton'
+                  ).toUpperCase()}
+                </span>
+              </button>
             </div>
           </Form>
         )}
