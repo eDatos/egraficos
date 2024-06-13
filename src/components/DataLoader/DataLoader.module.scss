@@ -1,5 +1,11 @@
 @import '../../styles/variables.scss';
 
+:global .fullscreen-enabled .main-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  background: white;
+}
+
 .loading-option {
   height: 48px;
   margin: 0 0 8px;
