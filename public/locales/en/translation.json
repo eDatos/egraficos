@@ -207,6 +207,7 @@
         "refreshdata": "Refresh data",
         "editdata": "Edit data",
         "maximize": "Maximize",
+        "minimize": "Minimize",
         "column": "Column",
         "copyclipboard": "Copy to clipboard",
         "copiedclipboard": "Copied to clipboard",
