@@ -7,7 +7,7 @@
     "@craco/craco": "^7.1.0",
     "@fontsource/open-sans": "^5.0.12",
     "@fontsource/roboto": "^5.0.1",
-    "@fortawesome/fontawesome-pro": "file:public/repository/npm/fontawesome-pro/fortawesome-fontawesome-pro-6.4.0.tgz",
+    "@fortawesome/fontawesome-pro": "file:public/repository/npm/fontawesome-pro/fortawesome-fontawesome-pro-6.5.2.tgz",
     "@rawgraphs/rawgraphs-core": "^1.0.0-beta.16",
     "@rdfjs-elements/sparql-editor": "^0.1.6",
     "@testing-library/jest-dom": "^4.2.4",
