@@ -1,8 +1,10 @@
 import React from 'react';
 import { COLOR_SCHEMES_LABELS } from '../../../constants';
 import get from 'lodash/get';
+import { useTranslation } from 'react-i18next';
 
 const ColorSchemePreview = ({ label, scale, numSamples = 150 }) => {
+  const { t } = useTranslation(['visualoptions']);
   let samples;
   if (scale.ticks) {
     samples = scale.ticks(numSamples);
@@ -17,7 +19,7 @@ const ColorSchemePreview = ({ label, scale, numSamples = 150 }) => {
     <div className="w-100">
       {label && (
         <div style={{ marginBottom: 2 }}>
-          {get(COLOR_SCHEMES_LABELS, label, label)}
+          {t(get(COLOR_SCHEMES_LABELS, label, label))}
         </div>
       )}
       <div className="d-flex">

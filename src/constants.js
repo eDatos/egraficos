@@ -114,8 +114,8 @@ export const COLOR_SCHEMES_LABELS = {
   schemeCategory10: 'Categorical 10',
   interpolateTurbo: 'Turbo discrete',
   interpolateSpectral: 'Spectral discrete',
-  defaultPalette: 'Default palette',
-  grayPalette: 'Gray palette',
+  defaultPalette: 'defaultPalette',
+  grayPalette: 'grayPalette',
 };
 
 export const white = '#FFFFFF';

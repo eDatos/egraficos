@@ -119,5 +119,8 @@
     "no": "No",
     "reverseOrder": "Orden inverso",
     "smooth": "Suavizar",
-    "showTooltip": "Mostrar descripción emergente"
+    "showTooltip": "Mostrar descripción emergente",
+    "defaultPalette": "Paleta por defecto",
+    "grayPalette": "Paleta de grises",
+    "bluePalette": "Paleta de azules"
 }
