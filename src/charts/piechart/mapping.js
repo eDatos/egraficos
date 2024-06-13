@@ -185,6 +185,7 @@ export function getChartOptions(
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {
+      show: visualOptions.showTooltip,
       formatter: function (params) {
         var colorSpan = (color) =>
           '<span class="tooltip-circle" style="background-color:' +

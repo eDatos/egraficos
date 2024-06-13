@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { Form } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
@@ -8,22 +8,19 @@ import { CustomDropdownIcon } from '../../CustomDropdown/CustomDropdownIcon';
 import { LoadDataButton } from '../../LoadDataButton';
 import styles from './../DataLoader.module.scss';
 
-const SelectionCombo = (props) => {
-  const ref = useRef(null);
-  return (
-    <Typeahead
-      id={props.id}
-      labelKey={props.name}
-      onChange={props.onChange}
-      options={props.options}
-      placeholder={props.placeholder}
-      className={props.className}
-      ref={ref}
-    >
-      {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
-    </Typeahead>
-  );
-};
+const SelectionCombo = React.forwardRef((props, ref) => (
+  <Typeahead
+    id={props.id}
+    labelKey={props.name}
+    onChange={props.onChange}
+    options={props.options}
+    placeholder={props.placeholder}
+    className={props.className}
+    ref={ref}
+  >
+    {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
+  </Typeahead>
+));
 
 class DataSetTypeahead extends React.Component {
   constructor(props) {
@@ -164,6 +161,7 @@ class OperationTypeahead extends React.Component {
           options={this.state.collection}
           onChange={this.onChange}
           className="custom-input-select"
+          ref={this.props.selectionComboRef}
         />
       </Form.Group>
     );
@@ -171,7 +169,6 @@ class OperationTypeahead extends React.Component {
 }
 
 export default class EDatosFetch extends React.Component {
-  operationTypeahead = React.createRef(OperationTypeahead);
   constructor(props) {
     super(props);
     this.state = {
@@ -179,6 +176,7 @@ export default class EDatosFetch extends React.Component {
       operationId: null,
       loading: false,
     };
+    this.selectionComboRef = React.createRef();
   }
   handleOnChangeOperation = (operationId) => {
     this.setState({ operationId: operationId });
@@ -208,7 +206,7 @@ export default class EDatosFetch extends React.Component {
   handleCleanForm = (event) => {
     this.setState({ operationId: null });
     this.setState({ url: '' });
-    this.operationTypeahead.setState({ value: '' });
+    this.selectionComboRef.current?.clear();
   };
 
   render() {
@@ -224,7 +222,7 @@ export default class EDatosFetch extends React.Component {
               handleOnChangeOperation={this.handleOnChangeOperation}
               t={t}
               language={i18n.language}
-              ref={(ref) => (this.operationTypeahead = ref)}
+              selectionComboRef={this.selectionComboRef}
             />
             {this.state.operationId && (
               <DataSetTypeahead

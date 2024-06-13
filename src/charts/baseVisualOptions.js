@@ -70,9 +70,9 @@ export const baseVisualOptions = {
       showLegend: false,
     },
   },
-  legendMarginTop: {
+  legendMarginBottom: {
     type: 'number',
-    default: 570,
+    default: 10,
     group: 'artboard',
     disabled: {
       showLegend: false,
@@ -95,6 +95,11 @@ export const baseVisualOptions = {
     },
   },
   showToolbox: {
+    type: 'boolean',
+    default: true,
+    group: 'artboard',
+  },
+  showTooltip: {
     type: 'boolean',
     default: true,
     group: 'artboard',

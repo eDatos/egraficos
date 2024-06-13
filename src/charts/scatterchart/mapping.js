@@ -116,7 +116,9 @@ export const getChartOptions = function (
     },
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
-    tooltip: {},
+    tooltip: {
+      show: visualOptions.showTooltip,
+    },
     toolbox: toolbox(visualOptions.showToolbox),
     grid: grid(visualOptions),
     xAxis: getAxis(

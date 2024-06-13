@@ -3,6 +3,10 @@
   block-size: 425px;
 }
 
+:global .fullscreen-enabled .rdg {
+  block-size: 80vh;
+}
+
 .data-type-selector {
   background-color: #fff;
   min-width: 140px;

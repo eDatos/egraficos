@@ -322,6 +322,7 @@ export const getChartOptions = function (
     legend: legend(visualOptions),
     backgroundColor: visualOptions.background,
     tooltip: {
+      show: visualOptions.showTooltip,
       axisPointer: {
         type: 'shadow',
       },

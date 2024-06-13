@@ -16,7 +16,7 @@
     "legendWidth": "Legend width",
     "legendOrient": "Legend orient",
     "legendMarginRight": "Legend Margin(Right)",
-    "legendMarginTop": "Legend Margin(Top)",
+    "legendMarginBottom": "Legend Margin(Bottom)",
     "legendTextSize": "Legend fontsize", 
     "legendItemSize": "Legend item size %", 
     "showToolbox": "Show Toolbox",
@@ -118,5 +118,6 @@
     "yes": "Yes",
     "no": "No",
     "reverseOrder": "Reverse order",
-    "smooth": "Smooth"
+    "smooth": "Smooth",
+    "showTooltip": "Show Tooltip"
 }
