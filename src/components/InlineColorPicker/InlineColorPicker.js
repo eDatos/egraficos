@@ -31,7 +31,7 @@ export default function InlineColorPicker({
   disabled,
   presetPalette,
 }) {
-  const { t } = useTranslation(['visualOptions']);
+  const { t } = useTranslation(['visualoptions']);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const color = maybeColor ?? '#000000'; // Same as <input type='color' />
   const presetPalettes = [
