@@ -45,7 +45,7 @@ const getSeries = (
         },
         emphasis: {
           itemStyle: {
-            borderColor: grayPalette[2],
+            borderColor: grayPalette[1],
           },
         },
       },
