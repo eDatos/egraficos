@@ -48,8 +48,8 @@ colorPresets.ordinal = {
   },
   bluePalette: {
     value: bluePalette,
-    label: 'Blue Palette'
-  }
+    label: 'Blue Palette',
+  },
 };
 
 function App() {
