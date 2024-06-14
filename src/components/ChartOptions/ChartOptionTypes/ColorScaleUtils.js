@@ -7,12 +7,12 @@ import {
   BsUnlockFill,
 } from 'react-icons/bs';
 
-function ResetBtn({ resetScale }) {
+function ResetBtn({ resetScale, text }) {
   return (
     <OverlayTrigger
       key="bottom"
       placement="bottom"
-      overlay={<Tooltip id={`tooltip-top`}>Reset domain</Tooltip>}
+      overlay={<Tooltip id={`tooltip-top`}>{text}</Tooltip>}
     >
       <span type="button" className="btn" onClick={resetScale}>
         <BsArrowCounterclockwise width="16" height="16" />
@@ -21,12 +21,12 @@ function ResetBtn({ resetScale }) {
   );
 }
 
-function InvertBtn({ invertScale }) {
+function InvertBtn({ invertScale, text }) {
   return (
     <OverlayTrigger
       key="bottom"
       placement="bottom"
-      overlay={<Tooltip id={`tooltip-top`}>Invert</Tooltip>}
+      overlay={<Tooltip id={`tooltip-top`}>{text}</Tooltip>}
     >
       <span type="button" className="btn" onClick={invertScale}>
         <BsArrowLeftRight width="16" height="16" />

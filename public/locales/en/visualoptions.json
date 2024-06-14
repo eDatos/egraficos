@@ -119,5 +119,12 @@
     "no": "No",
     "reverseOrder": "Reverse order",
     "smooth": "Smooth",
-    "showTooltip": "Show Tooltip"
+    "showTooltip": "Show Tooltip",
+    "defaultPalette": "Default Palette",
+    "sexPalette": "Sex Palette",
+    "islandPalette": "Islands Palette",
+    "grayPalette": "Grays",
+    "bluePalette": "Blues",
+    "resetDomain": "Reset domain",
+    "invert": "Invert"
 }

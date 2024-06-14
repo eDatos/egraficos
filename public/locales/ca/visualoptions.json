@@ -119,5 +119,12 @@
     "no": "No",
     "reverseOrder": "Ordre invers",
     "smooth": "Suavitzar",
-    "showTooltip": "Mostra descripció emergent"
+    "showTooltip": "Mostra descripció emergent",
+    "defaultPalette": "Paleta per defecte",
+    "sexPalette": "Paleta de sexos",
+    "islandPalette": "Paleta de islas",
+    "grayPalette": "Grisos",
+    "bluePalette": "Blaus",    
+    "resetDomain": "Restablir el domini",
+    "invert": "Invertir"
 }

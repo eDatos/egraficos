@@ -31,19 +31,25 @@ import CustomChartWarnModal from './components/CustomChartWarnModal';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import WMSMap from './components/WMSMap/WMSMap';
-import { defaultPalette, grayPalette } from './constants';
+import { defaultPalette, islandPalette, sexPalette } from './constants';
 import favicon from './hooks/favicon';
 import { Tab, Tabs } from 'react-bootstrap';
 import classNames from 'classnames';
 
 //Custom colors
-colorPresets.ordinal.defaultPalette = {
-  value: defaultPalette,
-  label: 'Default Palette',
-};
-colorPresets.ordinal.grayPalette = {
-  value: grayPalette,
-  label: 'Gray Palette',
+colorPresets.ordinal = {
+  defaultPalette: {
+    value: defaultPalette.map((e) => e.color),
+    label: 'Default Palette',
+  },
+  sexPalette: {
+    value: sexPalette.map((e) => e.color),
+    label: 'Sex Palette',
+  },
+  islandPalette: {
+    value: islandPalette.map((e) => e.color),
+    label: 'Island Palette',
+  },
 };
 
 function App() {
