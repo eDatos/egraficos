@@ -23,16 +23,16 @@ dateFormats['YYYY-MMM'] = '%Y-M%m';
 //Custom colors
 colorPresets.ordinal = {
   defaultPalette: {
-    value: defaultPalette,
+    value: defaultPalette.map((e) => e.color),
     label: 'Default Palette',
   },
-  grayPalette: {
-    value: grayPalette,
-    label: 'Gray Palette',
+  sexPalette: {
+    value: sexPalette.map((e) => e.color),
+    label: 'Sex Palette',
   },
-  bluePalette: {
-    value: bluePalette,
-    label: 'Blue Palette',
+  islandPalette: {
+    value: islandPalette.map((e) => e.color),
+    label: 'Island Palette',
   },
 };
 

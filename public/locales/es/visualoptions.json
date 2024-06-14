@@ -121,6 +121,10 @@
     "smooth": "Suavizar",
     "showTooltip": "Mostrar descripción emergente",
     "defaultPalette": "Paleta por defecto",
-    "grayPalette": "Paleta de grises",
-    "bluePalette": "Paleta de azules"
+    "sexPalette": "Paleta de sexos",
+    "islandPalette": "Paleta de islas",
+    "grayPalette": "Grises",
+    "bluePalette": "Azules",
+    "resetDomain": "Restablecer dominio",
+    "invert": "Invertir"
 }

@@ -121,6 +121,10 @@
     "smooth": "Smooth",
     "showTooltip": "Show Tooltip",
     "defaultPalette": "Default Palette",
-    "grayPalette": "Gray Palette",
-    "bluePalette": "Blue Palette"
+    "sexPalette": "Sex Palette",
+    "islandPalette": "Islands Palette",
+    "grayPalette": "Grays",
+    "bluePalette": "Blues",
+    "resetDomain": "Reset domain",
+    "invert": "Invert"
 }
