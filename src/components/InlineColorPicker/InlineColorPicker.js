@@ -10,19 +10,19 @@ import {
 } from '../../constants';
 import { useTranslation } from 'react-i18next';
 
-function getPaletteWithDescription(presetPalette) {
+function getPaletteWithDescription(presetPalette) {  
   if (!presetPalette) {
-    return ['TRANSPARENT', ...defaultPalette];
+    return defaultPalette;
   }
   const sPresetPalette = JSON.stringify(presetPalette);
   if (JSON.stringify(sexPalette.map((e) => e.color)) === sPresetPalette) {
-    return ['TRANSPARENT', ...sexPalette];
+    return sexPalette;
   } else if (
     JSON.stringify(islandPalette.map((e) => e.color)) === sPresetPalette
   ) {
-    return ['TRANSPARENT', ...islandPalette];
+    return islandPalette;
   }
-  return ['TRANSPARENT', ...defaultPalette];
+  return defaultPalette;
 }
 
 export default function InlineColorPicker({
@@ -38,7 +38,7 @@ export default function InlineColorPicker({
     {
       name: '',
       value: presetPalette
-        ? getPaletteWithDescription(presetPalette)
+        ? ['TRANSPARENT', ...getPaletteWithDescription(presetPalette)]
         : ['TRANSPARENT', ...defaultPalette],
     },
     { name: t('grayPalette'), value: grayPalette },
