@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Col, Dropdown, Form } from 'react-bootstrap';
 import uuid from 'react-uuid';
-import { CustomToggle } from '../CustomDropdown/CustomDropdownButton';
+import { CustomToggle } from '../CustomDropdown/CustomDropdownToggle';
 import { CopyToClipboardButton } from '../CopyToClipboardButton';
-import svg from '../../icons/svgicon/iconosvg_blanco.svg';
-import svgSelected from '../../icons/svgicon/iconosvg_azul.svg';
 import { t } from 'i18next';
 import styles from '../DataLoader/DataLoader.module.scss';
 import classNames from 'classnames';
@@ -172,7 +170,7 @@ export default function Exporter({
               {
                 format: 'svg',
                 text: 'global.section.export.formats.svg',
-                icon: [svg, svgSelected],
+                icon: 'fa-file-svg',
               },
             ]
           : [...baseExportFormats, 'png'];
@@ -215,17 +213,10 @@ export default function Exporter({
             className="text-icon-button btn-thin-default d-flex align-items-center"
           >
             {currentFormat ? (
-              currentFormat.format !== 'svg' ? (
-                <>
-                  <i className={classNames(currentFormat.icon, 'fa-thin')}></i>
-                  {t(currentFormat.text).toUpperCase()}
-                </>
-              ) : (
-                <>
-                  <img alt="" src={currentFormat.icon[1]}></img>
-                  {t(currentFormat.text).toUpperCase()}
-                </>
-              )
+              <>
+                <i className={classNames(currentFormat.icon, 'fa-thin')}></i>
+                {t(currentFormat.text).toUpperCase()}
+              </>
             ) : (
               t('global.section.export.formats.title').toUpperCase()
             )}
@@ -241,11 +232,7 @@ export default function Exporter({
                     setCurrentFormat(d);
                   }}
                 >
-                  {d.format !== 'svg' ? (
-                    <i className={classNames(d.icon, 'fa-thin')}></i>
-                  ) : (
-                    <img alt="" src={d.icon[0]}></img>
-                  )}
+                  <i className={classNames(d.icon, 'fa-thin')}></i>
                   <span>{t(d.text).toUpperCase()}</span>
                 </Dropdown.Item>
               );

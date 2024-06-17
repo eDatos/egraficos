@@ -496,8 +496,8 @@ const ChartOptionColorScale = ({
           ))}
           <Row>
             <Col className="d-flex justify-content-end">
-              <ResetBtn resetScale={resetScale} />
-              <InvertBtn invertScale={invertScale} />
+              <ResetBtn resetScale={resetScale} text={t('resetDomain')} />
+              <InvertBtn invertScale={invertScale} text={t('invert')} />
               {scaleType !== 'ordinal' && (
                 <LockBtn
                   locked={locked}

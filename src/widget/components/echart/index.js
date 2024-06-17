@@ -11,18 +11,29 @@ import {
   parseDataset,
 } from '@rawgraphs/rawgraphs-core';
 import { get } from 'lodash';
-import { defaultPalette, grayPalette, localeList } from '../../../constants';
+import {
+  bluePalette,
+  defaultPalette,
+  grayPalette,
+  localeList,
+} from '../../../constants';
 
 //add custom date formats
 dateFormats['YYYY-MMM'] = '%Y-M%m';
 //Custom colors
-colorPresets.ordinal.defaultPalette = {
-  value: defaultPalette,
-  label: 'Default Palette',
-};
-colorPresets.ordinal.grayPalette = {
-  value: grayPalette,
-  label: 'Gray Palette',
+colorPresets.ordinal = {
+  defaultPalette: {
+    value: defaultPalette.map((e) => e.color),
+    label: 'Default Palette',
+  },
+  sexPalette: {
+    value: sexPalette.map((e) => e.color),
+    label: 'Sex Palette',
+  },
+  islandPalette: {
+    value: islandPalette.map((e) => e.color),
+    label: 'Island Palette',
+  },
 };
 
 const EDatosGraph = (props) => {

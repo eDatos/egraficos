@@ -175,7 +175,7 @@ CustomColorPicker.defaultProps = {
   disableAlpha: false,
   width: 200,
   styles: {},
-  presetPalettes: [{ name: '', value: defaultPalette }],
+  presetPalettes: [{ name: '', value: defaultPalette.map((e) => e.color) }],
 };
 
 export default CustomPicker(CustomColorPicker);

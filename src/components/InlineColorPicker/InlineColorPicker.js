@@ -2,12 +2,28 @@ import React, { useState } from 'react';
 import styles from './InlineColorPicker.module.scss';
 import CustomColorPicker from './CustomPicker/CustomColorPicker';
 import {
+  bluePalette,
   defaultPalette,
+  grayPalette,
   islandPalette,
   sexPalette,
-  territoryPalette,
 } from '../../constants';
 import { useTranslation } from 'react-i18next';
+
+function getPaletteWithDescription(presetPalette) {  
+  if (!presetPalette) {
+    return defaultPalette;
+  }
+  const sPresetPalette = JSON.stringify(presetPalette);
+  if (JSON.stringify(sexPalette.map((e) => e.color)) === sPresetPalette) {
+    return sexPalette;
+  } else if (
+    JSON.stringify(islandPalette.map((e) => e.color)) === sPresetPalette
+  ) {
+    return islandPalette;
+  }
+  return defaultPalette;
+}
 
 export default function InlineColorPicker({
   color: maybeColor,
@@ -15,17 +31,18 @@ export default function InlineColorPicker({
   disabled,
   presetPalette,
 }) {
-  const { t } = useTranslation(['translation']);
+  const { t } = useTranslation(['visualoptions']);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const color = maybeColor ?? '#000000'; // Same as <input type='color' />
   const presetPalettes = [
     {
       name: '',
-      value: presetPalette ? presetPalette : ['TRANSPARENT', ...defaultPalette],
+      value: presetPalette
+        ? ['TRANSPARENT', ...getPaletteWithDescription(presetPalette)]
+        : ['TRANSPARENT', ...defaultPalette],
     },
-    { name: t('palettes.sex.name'), value: sexPalette },
-    { name: t('palettes.island.name'), value: islandPalette },
-    { name: t('palettes.territory.name'), value: territoryPalette },
+    { name: t('grayPalette'), value: grayPalette },
+    { name: t('bluePalette'), value: bluePalette },
   ];
 
   return (
