@@ -160,7 +160,7 @@
                 },
                 "stackedbarchart": {
                     "title": "Stacked bar chart",
-                    "description": "It displays multiple quantitative dimensions related to categories. bars are visually stacked according to the categorical dimension, each bar represents a quantitative dimension, mapped on its height.",
+                    "description": "It displays multiple quantitative dimensions related to categories. Bars are visually stacked according to the categorical dimension, each bar represents a quantitative dimension, mapped on its height.",
                     "dimensions": {
                         "axis": "Axis",
                         "size": "Size",

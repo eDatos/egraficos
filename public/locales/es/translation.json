@@ -160,7 +160,7 @@
                 },
                 "stackedbarchart": {
                     "title": "Diagrama de barras apiladas",
-                    "description": "Muestra múltiples dimensiones cuantitativas relacionadas con categorías. las barras se apilan visualmente de acuerdo con la dimensión categórica, cada barra representa una dimensión cuantitativa, mapeada en su altura.",
+                    "description": "Muestra múltiples dimensiones cuantitativas relacionadas con categorías. Las barras se apilan visualmente de acuerdo con la dimensión categórica, cada barra representa una dimensión cuantitativa, mapeada en su altura.",
                     "dimensions": {
                         "axis": "Eje",
                         "size": "Magnitud",
@@ -210,7 +210,7 @@
         "minimize": "Minimizar",
         "column": "Columna",
         "copyclipboard": "Copiar al portapapeles",
-        "copiedclipboard": "Copiado al portapales",
+        "copiedclipboard": "Copiado al portapapeles",
         "message": {
             "loadrows": {
                 "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han sido correctamente parseadas, ahora puedes elegir un gráfico!</p>"

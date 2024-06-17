@@ -19,7 +19,7 @@ const ChartPreview = ({
 }) => {
   const domRef = useRef(null);
   const vizOptionsDebounced = useDebounce(visualOptions, 200);
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(['translation', 'dataloader']);
   echarts.registerLocale('es', LangES);
   echarts.registerLocale('ca', LangESCa);
 
@@ -90,9 +90,8 @@ const ChartPreview = ({
         mapping[variable].ids &&
         mapping[variable].ids.length > 0 &&
         !mapping[variable].isValid
-      ) {
-        const variableObj = chart.dimensions.find((d) => d.id === variable);
-        const errorMessage = `Data-type mismatch: you can’t map ${mapping[variable].mappedType}s on ${variableObj.name}.`;
+      ) {        
+        const errorMessage = `Error: ${t('datamismatch.typemismatch', { ns: 'dataloader' })}.`;
         setError({ variant: 'danger', message: errorMessage });
         setRawViz(null);
         while (domRef.current.firstChild) {

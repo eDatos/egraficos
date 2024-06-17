@@ -97,7 +97,7 @@ const SelectionStyle = ({
   return (
     <>
       <Form.Label className={classNames(styles['lighter'], 'mt-3')}>
-        {t('global.section.wmslayerselection.style.title')}:{layer.Title}
+        {t('global.section.wmslayerselection.style.title')}: {layer.Title}
       </Form.Label>
       <Typeahead
         id="select-style"
