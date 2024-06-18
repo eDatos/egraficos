@@ -15,7 +15,7 @@ const SelectionCombo = React.forwardRef((props, ref) => (
     onChange={props.onChange}
     options={props.options}
     placeholder={props.placeholder}
-    className={props.className}
+    className="raw-dropdown"
     ref={ref}
   >
     {({ isMenuShown }) => <CustomDropdownIcon isOpen={isMenuShown} />}
@@ -91,8 +91,7 @@ class DataSetTypeahead extends React.Component {
           id="cubes"
           name="name"
           options={this.state.collection}
-          onChange={this.onChange}
-          className="custom-input-select"
+          onChange={this.onChange}          
         />
       </Form.Group>
     );
@@ -159,8 +158,7 @@ class OperationTypeahead extends React.Component {
           id="operacion"
           name="name"
           options={this.state.collection}
-          onChange={this.onChange}
-          className="custom-input-select"
+          onChange={this.onChange}          
           ref={this.props.selectionComboRef}
         />
       </Form.Group>

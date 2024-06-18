@@ -222,9 +222,9 @@
         },
         "screenSizeAlert": {
             "gotIt": "¡Entendido!",
-            "header": "¡Bienvenido al Sistema de gráficos a medida!",
+            "header": "¡Bienvenido a Mis visualizaciones a medida!",
             "body": {
-                "header": "!El Sistema de gráficos a medida está diseñado para pantallas mayores!",
+                "header": "!Mis visualizaciones a medida está diseñado para pantallas mayores!",
                 "text": {
                     "1": "Redimensiona la pantalla de tu navegador o ",
                     "2": "envíe a si mismo un recordatorio ",

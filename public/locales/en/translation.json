@@ -222,9 +222,9 @@
         },
         "screenSizeAlert": {
             "gotIt": "Got it!",
-            "header": "Welcome to Custom graphics development system!",
+            "header": "Welcome to My custom visualizations!",
             "body": {
-                "header": "Custom graphics development system is designed for bigger screens!",
+                "header": "My custom visualizations is designed for bigger screens!",
                 "text": {
                     "1": "Resize your browser window or ",
                     "2": "send yourself a reminder ",

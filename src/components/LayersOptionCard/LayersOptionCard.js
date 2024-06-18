@@ -220,7 +220,7 @@ function LayersOptionCard({
             layers={layers}
             selectedLayers={selectedLayers}
             onChange={setSelectedLayers}
-            className="custom-multiselect"
+            className="custom-multiselect raw-dropdown"
           />
           {selectedLayers.map((layer, index) => {
             const options = LayerStyles.filter((o) => o[layer.Name])
@@ -243,7 +243,7 @@ function LayersOptionCard({
                     selectedLayers={selectedLayers}
                     setSelectedLayers={setSelectedLayers}
                     index={index}
-                    className="custom-multiselect"
+                    className="custom-multiselect raw-dropdown"
                   />
                 )}
               </React.Fragment>
