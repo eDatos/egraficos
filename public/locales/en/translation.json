@@ -70,7 +70,8 @@
                     "3": "OPTION 3",
                     "label3": "Introduzca una dirección web (URL) que apunte a los datos (por ejemplo, un archivo público de Dropbox, una API pública, ...).\nPor favor, asegúrese de que el servidor tiene CORS habilitado."
                 },
-                "loadButton": "Load data"
+                "loadButton": "Load data",
+                "loadingButton": "Loading data"                
             },
             "sampleData" : {
                 "sample1": "Proportion of people who have completed studies or training in the last four weeks according to age groups. Canary Islands. 2022.",
@@ -84,7 +85,7 @@
                 "source": "Source"
             },
             "loadLayers": {
-                "title": "Load layers",
+                "title": "Load and sort your layers",
                 "message": "Enter a web address (URL) of the WMS server you want to work with",
                 "loadWmsButton": "Load WMS",
                 "addWmsButton": "Add WMS"
@@ -206,6 +207,7 @@
         },
         "reset": "Reset",
         "refreshdata": "Refresh data",
+        "reloadingdata": "Reloading data",
         "editdata": "Edit data",
         "maximize": "Maximize",
         "minimize": "Minimize",

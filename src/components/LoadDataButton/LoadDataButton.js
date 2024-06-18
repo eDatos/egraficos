@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-export function LoadDataButton({ disabled }) {
+export function LoadDataButton({ disabled, loading }) {
   const { t } = useTranslation();
 
   return (
@@ -9,9 +9,16 @@ export function LoadDataButton({ disabled }) {
       className="text-icon-button btn-thin-first"
       disabled={disabled}
       type="submit"
+      loading={loading}
     >
-      <i className="fa-thin fa-cloud-arrow-up"></i>
-      <span>{t('global.section.loaddata.loadButton').toUpperCase()}</span>
+      <i
+        className={'fa-thin fa-cloud-arrow-up ' + (loading ? 'fa-spin' : '')}
+      ></i>
+      <span>
+        {loading
+          ? ' ' + t('global.section.loaddata.loadingButton').toUpperCase()
+          : t('global.section.loaddata.loadButton').toUpperCase()}
+      </span>
     </button>
   );
 }

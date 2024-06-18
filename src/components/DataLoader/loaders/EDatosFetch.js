@@ -237,6 +237,7 @@ export default class EDatosFetch extends React.Component {
                   !this.state.operationId ||
                   this.state.loading
                 }
+                loading={this.state.loading}
               />
               <button
                 className="text-icon-button btn-thin-cancel"
