@@ -87,8 +87,9 @@
   font-weight: 700;
   border-radius: 5px;
   background: $color-black-5;
-  display: block ruby;
+  display: inline-block;
   padding: 5px;
+  white-space: nowrap;
 }
 
 .options-section-text {
