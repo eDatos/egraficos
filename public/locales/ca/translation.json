@@ -32,7 +32,7 @@
                     "clearFieldsButton": "Esborrar camps"
                 },
                 "project": {
-                    "messagge": "Carregar un projecte .edatosgraphs.",
+                    "message": "Carregar un projecte .edatosgraphs.",
                     "dragAndBrowseFile": "Arrossegueu un fitxer o seleccioneu un fitxer local",
                     "browseFile": "Seleccionar arxiu",
                     "drag": "Arrossegueu un fitxer o",
@@ -160,7 +160,7 @@
                 },
                 "stackedbarchart": {
                     "title": "Diagrama de barres apilades",
-                    "description": "Mostra múltiples dimensions quantitatives relacionades amb categories. les barres s'apilen visualment segons la dimensió categòrica, cada barra representa una dimensió quantitativa, mapejada a la seva alçada.",
+                    "description": "Mostra múltiples dimensions quantitatives relacionades amb categories. Les barres s'apilen visualment segons la dimensió categòrica, cada barra representa una dimensió quantitativa, mapejada a la seva alçada.",
                     "dimensions": {
                         "axis": "Eix",
                         "size": "Mida",
@@ -210,7 +210,7 @@
         "minimize": "Minimitzar",
         "column": "Columna",
         "copyclipboard": "Copiar al porta-retalls",
-        "copiedclipboard": "Copiat al portapals",
+        "copiedclipboard": "Copiat al porta-retalls",
         "message": {
             "loadrows": {
                 "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han estat correctament parsejades, ara pots triar un gràfic!</p>"
