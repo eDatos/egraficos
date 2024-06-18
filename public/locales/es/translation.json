@@ -195,7 +195,8 @@
                     "title": "Formato",
                     "edatosgraphs": "Formato edatosgraphs",
                     "svg": "Formato svg",
-                    "widget": "Formato widget"
+                    "widget": "Formato widget",
+                    "png": "Format png"
                 }
             },
             "login": {
