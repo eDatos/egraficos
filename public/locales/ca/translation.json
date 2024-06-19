@@ -70,7 +70,8 @@
                     "3": "OPCIÓ 3",
                     "label3": "Introdueix una adreça web (URL) que apunta a les dades (per exemple, un fitxer Dropbox públic, una API pública, ...).\nAssegureu-vos que el servidor té CORS activat."
                 },
-                "loadButton": "Carregar dades"
+                "loadButton": "Carregar dades",
+                "loadingButton": "Carregant dades"                
             },
             "sampleData" : {
                 "sample1": "Proporció de persones que han finalitzat estudis o formació en les últimes quatre setmanes segons grups d'edat. Illes Canàries. 2022.",
@@ -84,7 +85,7 @@
                 "source": "Font"
             },
             "loadLayers": {
-                "title": "Carregar capes",
+                "title": "Carrega i ordena les teves capes",
                 "message": "Introduïu una adreça web (URL) del servidor WMS amb què voleu treballar",
                 "loadWmsButton": "Carregar WMS",
                 "addWmsButton": "Afegir WMS"
@@ -195,7 +196,8 @@
                     "title": "Format",
                     "edatosgraphs": "Format edatosgraphs",
                     "svg": "Format svg",
-                    "widget": "Format widget"
+                    "widget": "Format widget",
+                    "png": "Format png"
                 }
             },
             "login": {
@@ -205,6 +207,7 @@
         },
         "reset": "Reiniciar",
         "refreshdata": "Recarregar dades",
+        "reloadingdata": "Recarcant dades",
         "editdata": "Editar dades",
         "maximize": "Maximitzar",
         "minimize": "Minimitzar",

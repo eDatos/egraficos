@@ -90,8 +90,10 @@ const ChartPreview = ({
         mapping[variable].ids &&
         mapping[variable].ids.length > 0 &&
         !mapping[variable].isValid
-      ) {        
-        const errorMessage = `Error: ${t('datamismatch.typemismatch', { ns: 'dataloader' })}.`;
+      ) {
+        const errorMessage = `Error: ${t('datamismatch.typemismatch', {
+          ns: 'dataloader',
+        })}.`;
         setError({ variant: 'danger', message: errorMessage });
         setRawViz(null);
         while (domRef.current.firstChild) {

@@ -58,14 +58,17 @@ function DataLoader({
 }) {
   const handle = useFullScreenHandle();
   const [loadingError, setLoadingError] = useState();
+  const [reloading, setReloading] = useState(false);
   const dataRefreshWorkers = {
     url: fetchDataFromUrl,
     sparql: fetchDataFromSparql,
   };
   const refreshData = async () => {
+    setReloading(true);
     const dataRefreshImpl = dataRefreshWorkers[get(dataSource, 'type', '')];
     const data = await dataRefreshImpl(dataSource);
     setUserInput(data, dataSource);
+    setReloading(false);
   };
 
   const options = [
@@ -229,9 +232,18 @@ function DataLoader({
                     className="text-icon-button btn-thin-first"
                     type="button"
                     onClick={refreshData}
+                    disabled={reloading}
                   >
-                    <i className="fa-thin fa-rotate"></i>
-                    <span>{t('global.refreshdata').toUpperCase()}</span>
+                    <i
+                      className={
+                        'fa-thin fa-rotate ' + (reloading ? 'fa-spin' : '')
+                      }
+                    ></i>
+                    <span>
+                      {reloading
+                        ? ' ' + t('global.reloadingdata').toUpperCase()
+                        : t('global.refreshdata').toUpperCase()}
+                    </span>
                   </button>
                 )}
 

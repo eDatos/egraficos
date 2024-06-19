@@ -110,7 +110,7 @@ export default function UrlFetch({
           </Col>
         </Row>
         <div className="row general-buttons">
-          <LoadDataButton disabled={!url || loading} />
+          <LoadDataButton disabled={!url || loading} loading={loading} />
           {/*<button
                         className="text-icon-button btn-thin-cancel"
                         disabled={!url || loading}

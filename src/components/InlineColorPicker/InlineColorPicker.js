@@ -10,7 +10,7 @@ import {
 } from '../../constants';
 import { useTranslation } from 'react-i18next';
 
-function getPaletteWithDescription(presetPalette) {  
+function getPaletteWithDescription(presetPalette) {
   if (!presetPalette) {
     return defaultPalette;
   }

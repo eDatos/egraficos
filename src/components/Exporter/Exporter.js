@@ -71,7 +71,7 @@ export default function Exporter({
         download(`${currentFile}.png`, 'png');
         break;
       case 'edatosgraphs':
-        downloadProject(`${currentFile}.edatosgraphs`);
+        downloadProject(`${currentFile || 'viz'}.edatosgraphs`);
         break;
       default:
         break;
@@ -173,7 +173,14 @@ export default function Exporter({
                 icon: 'fa-file-svg',
               },
             ]
-          : [...baseExportFormats, 'png'];
+          : [
+              ...baseExportFormats,
+              {
+                format: 'png',
+                text: 'global.section.export.formats.png',
+                icon: 'fa-file-png',
+              },
+            ];
       setExportFormats(newExportFormats);
     } else {
       setExportFormats(baseExportFormat);

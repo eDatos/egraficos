@@ -91,7 +91,7 @@ class DataSetTypeahead extends React.Component {
           id="cubes"
           name="name"
           options={this.state.collection}
-          onChange={this.onChange}          
+          onChange={this.onChange}
         />
       </Form.Group>
     );
@@ -158,7 +158,7 @@ class OperationTypeahead extends React.Component {
           id="operacion"
           name="name"
           options={this.state.collection}
-          onChange={this.onChange}          
+          onChange={this.onChange}
           ref={this.props.selectionComboRef}
         />
       </Form.Group>
@@ -237,6 +237,7 @@ export default class EDatosFetch extends React.Component {
                   !this.state.operationId ||
                   this.state.loading
                 }
+                loading={this.state.loading}
               />
               <button
                 className="text-icon-button btn-thin-cancel"

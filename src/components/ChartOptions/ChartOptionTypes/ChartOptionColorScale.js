@@ -333,8 +333,8 @@ const ChartOptionColorScale = ({
   );
 
   const resetScale = useCallback(() => {
-    handleSetInterpolator(interpolator, userValues);
-  }, [handleSetInterpolator, interpolator, userValues]);
+    handleSetInterpolator(interpolator);
+  }, [handleSetInterpolator, interpolator]);
 
   const invertScale = useCallback(() => {
     let reversedValues = [...userValues];
@@ -494,10 +494,13 @@ const ChartOptionColorScale = ({
               </Col>
             </div>
           ))}
+
           <Row>
             <Col className="d-flex justify-content-end">
               <ResetBtn resetScale={resetScale} text={t('resetDomain')} />
-              <InvertBtn invertScale={invertScale} text={t('invert')} />
+              {userValues.length > 1 && (
+                <InvertBtn invertScale={invertScale} text={t('invert')} />
+              )}
               {scaleType !== 'ordinal' && (
                 <LockBtn
                   locked={locked}
