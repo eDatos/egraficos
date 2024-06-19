@@ -31,7 +31,12 @@ import CustomChartWarnModal from './components/CustomChartWarnModal';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import WMSMap from './components/WMSMap/WMSMap';
-import { defaultPalette, islandPalette, sexPalette } from './constants';
+import {
+  defaultPalette,
+  grayPalette2,
+  islandPalette,
+  sexPalette,
+} from './constants';
 import favicon from './hooks/favicon';
 import { Tab, Tabs } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -41,6 +46,10 @@ colorPresets.ordinal = {
   defaultPalette: {
     value: defaultPalette.map((e) => e.color),
     label: 'Default Palette',
+  },
+  grayPalette2: {
+    value: grayPalette2.map((e) => e.color),
+    label: 'Gray Palette',
   },
   sexPalette: {
     value: sexPalette.map((e) => e.color),

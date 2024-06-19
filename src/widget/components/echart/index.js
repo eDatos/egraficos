@@ -12,10 +12,11 @@ import {
 } from '@rawgraphs/rawgraphs-core';
 import { get } from 'lodash';
 import {
-  bluePalette,
   defaultPalette,
-  grayPalette,
+  grayPalette2,
+  islandPalette,
   localeList,
+  sexPalette,
 } from '../../../constants';
 
 //add custom date formats
@@ -25,6 +26,10 @@ colorPresets.ordinal = {
   defaultPalette: {
     value: defaultPalette.map((e) => e.color),
     label: 'Default Palette',
+  },
+  grayPalette2: {
+    value: grayPalette2.map((e) => e.color),
+    label: 'Gray Palette',
   },
   sexPalette: {
     value: sexPalette.map((e) => e.color),

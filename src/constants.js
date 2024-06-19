@@ -162,6 +162,16 @@ export const grayPalette = [
   { color: '#F2F2F2', title: 'palettes.gray.9' },
 ];
 
+export const grayPalette2 = [
+  { color: defaultColor, title: 'palettes.default.1' },
+  { color: '#666666', title: 'palettes.gray.3' },
+  { color: '#999999', title: 'palettes.gray.4' },
+  { color: '#CCCCCC', title: 'palettes.gray.5' },
+  { color: '#D9D9D9', title: 'palettes.gray.6' },
+  { color: '#E6E6E6', title: 'palettes.gray.7' },
+  { color: '#EDECEC', title: 'palettes.gray.8' },
+];
+
 export const bluePalette = [
   { color: '#004678', title: 'palettes.blue.1' },
   { color: '#04729C', title: 'palettes.blue.2' },
