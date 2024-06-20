@@ -4,6 +4,7 @@
         "accepts": "Accepta",
         "download": "Descarregar",
         "save": "Guardar",
+        "mandatory": "Obligatori",
         "section": {
             "loaddata": {
                 "title": "Carrega les teves dades",
@@ -216,7 +217,7 @@
         "copiedclipboard": "Copiat al porta-retalls",
         "message": {
             "loadrows": {
-                "succes": "<p><strong>{{rowsnumber}} filas </strong>({{cellsnumber}} celdas) han estat correctament parsejades, ara pots triar un gràfic!</p>"
+                "succes": "<p><strong>{{rowsnumber}} files </strong>({{cellsnumber}} cel·les) han estat correctament parsejades, ara pots triar un gràfic!</p>"
             },
             "sizeoutput": {
                 "part1": "El resultat final serà de",

@@ -239,12 +239,6 @@ function createColumns(
     ? Math.max(equalDinstribution, 170)
     : 170;
   return [
-    {
-      key: 'id',
-      name: '',
-      frozen: true,
-      width: idColumnWidth,
-    },
     ...Object.keys(dataTypes).map((k, i) => ({
       key: k,
       name: k,

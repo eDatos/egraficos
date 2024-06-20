@@ -106,11 +106,7 @@
 }
 
 :global .rdg-row {
-  font-family: var(--font-family-monospace);
-  & .rdg-cell:first-child {
-    text-align: center;
-    color: var(--gray-600);
-  }
+  font-family: var(--font-family-sans-serif);
 }
 
 :global .rdg-row:hover {
