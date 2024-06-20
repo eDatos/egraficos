@@ -174,7 +174,7 @@
                 }
             },
             "mapping": {
-                "tittle": "Mapeja les variables al gràfic",
+                "title": "Mapeja les variables al gràfic",
                 "chartvariables":{
                     "dimensions": "DIMENSIONS",
                     "dropdimension" : "Arrossegueu dimensió aquí",
@@ -182,11 +182,11 @@
                 }
             },
             "customize": {
-                "tittle": "Personalitza el teu gràfic"
+                "title": "Personalitza el teu gràfic"
             },
             "export": {
                 "graph": {
-                    "tittle": "Exporta o desa el teu gràfic",
+                    "title": "Exporta o desa el teu gràfic",
                     "dynamicWidget": "Generar widget dinàmic amb càrrega de dades per url"
                 },
                 "map": {

@@ -174,7 +174,7 @@
                 }
             },
             "mapping": {
-                "tittle": "Map the variables on the graph",
+                "title": "Map the variables on the graph",
                 "chartvariables":{
                     "dimensions": "DIMENSIONS",
                     "dropdimension" : "Drop dimension here",
@@ -182,11 +182,11 @@
                 }
             },
             "customize": {
-                "tittle": "Customize  your chart"
+                "title": "Customize  your chart"
             },
             "export": {
                 "graph": {
-                    "tittle": "Export or save your graph",
+                    "title": "Export or save your graph",
                     "dynamicWidget": "Generate dynamic widget with data loading by url"
                 },
                 "map": {
