@@ -331,7 +331,9 @@ export const getChartOptions = function (
           '<span class="tooltip-circle" style="background-color:' +
           color +
           '"></span>';
-        return `${params.seriesName}<br/>${colorSpan(params.color)} ${format(
+        return `${
+          mapping.series?.value?.length > 0 ? params.seriesName + '<br/>' : ''
+        }${colorSpan(params.color)} ${format(
           params.name,
           visualOptions.barsLabelsFormat,
           locale,
