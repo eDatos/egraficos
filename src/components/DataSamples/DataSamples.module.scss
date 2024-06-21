@@ -2,7 +2,7 @@
 
 div.card-sample {
   h2 {
-    font-size: 14px;
+    font-size: $size-14;
     font-weight: $font-weight-400;
     line-height: 18px;
     letter-spacing: -0.24px;
@@ -10,7 +10,7 @@ div.card-sample {
   }
   span,
   a {
-    font-size: 12px;
+    font-size: $size-12;
     font-weight: $font-weight-300;
     line-height: 14.061px;
   }
@@ -25,7 +25,7 @@ div.container-samples {
   padding-top: $padding-20px;
 
   span.title-samples {
-    font-size: 14px;
+    font-size: $size-14;
     font-weight: $font-weight-600;
   }
 }
