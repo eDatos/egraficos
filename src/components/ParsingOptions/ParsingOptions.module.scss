@@ -39,7 +39,7 @@
   display: inline-block;
   text-align: center;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: $size-14;
   line-height: 16px;
 }
 
@@ -53,7 +53,7 @@
     th {
       border-top: 0;
       padding: 5px 10px;
-      background: $color-blue-dark-25;
+      background: $color-blue-dark-100;
       border-bottom: 1px solid $color-black-0;
       height: 28px;
       color: $color-black-0;
@@ -64,7 +64,7 @@
         border-right: 1px solid $color-black-0;
       }
       &:last-child {
-        min-width: calc($container-max-width/4);
+        min-width: calc($container-max-width/5);
         border-radius: 0 5px 0 0;
       }
     }
@@ -101,7 +101,7 @@
   align-items: center;
   gap: 10px;
 
-  font-size: $size-10;
+  font-size: $size-12;
   font-weight: 300;
   background: $color-blue-dark-5;
 }
@@ -129,7 +129,7 @@
   min-width: 95px;
   justify-content: space-between;
   background: $color-black-0;
-  font-size: $size-10;
+  font-size: $size-12;
   font-weight: 400;
   i {
     color: $color-blue-dark-100;

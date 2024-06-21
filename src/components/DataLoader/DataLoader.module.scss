@@ -79,7 +79,7 @@
   align-items: center;
   padding: $padding-20px 0 $padding-10px;
   color: $color-black-80;
-  font-size: 14px;
+  font-size: $size-14;
   line-height: normal;
 }
 
@@ -108,7 +108,7 @@
 
   label {
     font-weight: 600;
-    font-size: 14px;
+    font-size: $size-14;
     line-height: 19px;
     color: $color-black-80;
 
@@ -124,7 +124,7 @@
   padding: 20px 20px 20px 10px;
   border-radius: 10px;
   label {
-    font-size: 18px;
+    font-size: $size-18;
   }
 }
 

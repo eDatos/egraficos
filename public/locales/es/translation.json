@@ -4,6 +4,7 @@
         "accepts": "Acepta",
         "download": "Descargar",
         "save": "Guardar",
+        "mandatory": "Obligatorio",
         "section": {
             "loaddata": {
                 "title": "Carga tus datos",

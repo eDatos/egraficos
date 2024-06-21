@@ -6,13 +6,17 @@
 
 .header {
   display: flex;
-  width: $container-max-width;
   padding: 10px 10px 10px 20px;
   align-items: center;
   gap: 10px;
   background-color: $color-black-5;
   height: 48px;
-  margin-left: -20px;
+  margin-left: -10px;
+  margin-right: -10px;
+  position: sticky;
+  z-index: 1020;
+  top: calc(20px + var(--header-height));
+  border-radius: 5px 5px 5px 5px;
 }
 
 .circle {
@@ -38,6 +42,6 @@
 .title {
   color: $color-black-100;
   font-family: 'Open Sans';
-  font-size: 18px;
+  font-size: $size-18;
   font-weight: 600;
 }

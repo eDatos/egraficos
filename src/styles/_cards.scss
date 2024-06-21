@@ -11,7 +11,7 @@
 .card-header {
   .title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: $size-18;
   }
 
   i {
@@ -22,7 +22,7 @@
 .card-title {
   .title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: $size-14;
     line-height: 24px;
     color: $color-black-80;
   }
